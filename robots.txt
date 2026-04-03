@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mizunomeru537.github.io/MizuNomeru5379/sitemap.xml
