@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="index,follow" />
+  <title>Hash Generator</title>
+  <meta name="description" content="Generate SHA-256 or SHA-1 hashes locally in the browser." />
+  <link rel="stylesheet" href="../../assets/tool.css" />
+  <link rel="stylesheet" href="../../assets/lang.css" />
+  <script defer src="../../assets/i18n.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="../../index.html" class="brand"><span class="brand-mark">⚡</span><span>도구랩</span></a>
+      <nav class="nav">
+        <a href="../../index.html">홈</a>
+        <a href="../../index.html#featured">추천 도구</a>
+        <a href="../../index.html#tools">전체 도구</a>
+        <a href="../../about.html">소개</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero"><div class="container"><div class="hero-card"><div class="pill" id="pagePill">Hash · checksum utility</div><h1 id="pageTitle">Hash Generator</h1><p id="pageDesc">Generate SHA-256 or SHA-1 hashes locally in the browser.</p></div></div></section>
+    <section class="section"><div class="container"><div class="panel">
+  <div class="control-row">
+    <button class="btn btn-primary" id="sha256Btn">SHA-256</button>
+    <button class="btn btn-secondary" id="sha1Btn">SHA-1</button>
+    <button class="btn btn-light" id="copyBtn" data-page-key="btn_copy">Copy Result</button>
+    <button class="btn btn-light" id="sampleBtn" data-page-key="btn_sample">Load Sample</button>
+  </div>
+  <div class="grid-2">
+    <div><label class="label" data-page-key="label_input">Input Text</label><textarea id="inputText" class="small-textarea"></textarea></div>
+    <div><label class="label" data-page-key="label_hash">Hash Result</label><textarea id="outputText" class="small-textarea output" readonly></textarea></div>
+  </div>
+  <div id="message" class="msg"></div>
+</div></div></section>
+  </main>
+  <script>
+    const PAGE_TEXT = {"pill": {"en": "Hash · checksum utility", "ko": "해시 · 체크섬 도구"}, "title": {"en": "Hash Generator", "ko": "해시 생성기"}, "desc": {"en": "Generate SHA-256 or SHA-1 hashes locally in the browser.", "ko": "브라우저 안에서 SHA-256 또는 SHA-1 해시를 로컬로 생성합니다."}, "btn_copy": {"en": "Copy Result", "ko": "결과 복사"}, "btn_sample": {"en": "Load Sample", "ko": "예시 넣기"}, "label_input": {"en": "Input Text", "ko": "입력 텍스트"}, "label_hash": {"en": "Hash Result", "ko": "해시 결과"}, "msg_done": {"en": "generated.", "ko": "생성 완료"}, "msg_copied": {"en": "Copied result.", "ko": "결과를 복사했습니다."}};
+    const pageT = (key) => {
+      const lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      const entry = PAGE_TEXT[key] || {};
+      return entry[lang] || entry.en || entry.ko || key;
+    };
+    function applyPageLanguage() {
+      document.documentElement.lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      document.title = pageT('title');
+      const meta = document.querySelector('meta[name="description"]');
+      if (meta) meta.setAttribute('content', pageT('desc'));
+      [['pagePill','pill'],['pageTitle','title'],['pageDesc','desc']].forEach(([id,key])=>{ const el=document.getElementById(id); if(el) el.textContent = pageT(key); });
+      document.querySelectorAll('[data-page-key]').forEach(el=>{
+        const key = el.getAttribute('data-page-key');
+        const attr = el.getAttribute('data-page-attr');
+        const val = pageT(key);
+        if(attr) el.setAttribute(attr, val); else el.textContent = val;
+      });
+      if (typeof window.onPageLangChange === 'function') window.onPageLangChange();
+    }
+    document.addEventListener('toollab:languagechange', applyPageLanguage);
+    document.addEventListener('DOMContentLoaded', applyPageLanguage);
+
+    const hgIn=document.getElementById('inputText'), hgOut=document.getElementById('outputText'), hgMsg=document.getElementById('message');
+    async function digest(algo){
+      const data=new TextEncoder().encode(hgIn.value||'');
+      const hash=await crypto.subtle.digest(algo, data);
+      const hex=Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('');
+      hgOut.value=hex; hgMsg.textContent=`${algo} ${pageT('msg_done')}`; hgMsg.className='msg ok';
+    }
+    document.getElementById('sha256Btn').addEventListener('click',()=>digest('SHA-256'));
+    document.getElementById('sha1Btn').addEventListener('click',()=>digest('SHA-1'));
+    document.getElementById('copyBtn').addEventListener('click', async ()=>{if(!hgOut.value)return; await navigator.clipboard.writeText(hgOut.value); hgMsg.textContent=pageT('msg_copied'); hgMsg.className='msg ok';});
+    document.getElementById('sampleBtn').addEventListener('click',()=>{hgIn.value='ToolLab hash sample'; hgOut.value=''; hgMsg.textContent='';});
+
+  </script>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><h4>도구랩</h4><p>브라우저에서 바로 사용하는 온라인 도구 모음.</p></div>
+      <div><h4>바로가기</h4><a href="../../index.html">홈</a><a href="../../roadmap.html">로드맵</a><a href="../../changelog.html">변경이력</a></div>
+      <div><h4>정보</h4><a href="../../about.html">소개</a><a href="../../privacy.html">개인정보처리방침</a><a href="../../contact.html">문의</a></div>
+    </div>
+  </footer>
+</body>
+</html>

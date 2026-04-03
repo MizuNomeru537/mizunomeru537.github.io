@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="index,follow" />
+  <link rel="stylesheet" href="../../assets/tool.css" />
+  <link rel="stylesheet" href="../../assets/lang.css" />
+  <script defer src="../../assets/i18n.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="../../index.html" class="brand">
+        <span class="brand-mark">⚡</span>
+        <span>도구랩</span>
+      </a>
+      <nav class="nav">
+        <a href="../../index.html">홈</a>
+        <a href="../../index.html#featured">추천 도구</a>
+        <a href="../../index.html#tools">전체 도구</a>
+        <a href="../../about.html">소개</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="pill">코드 압축 · 실제 동작</div>
+          <h1>코드 압축기</h1>
+          <p>HTML, CSS, JavaScript, JSON을 브라우저에서 바로 압축합니다. JavaScript는 Terser 브라우저 번들을 사용하고, 나머지는 기본 압축 규칙으로 처리합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="panel">
+          <div class="control-row">
+            <label>언어
+              <select id="lang">
+                <option value="javascript">JavaScript</option>
+                <option value="json">JSON</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+              </select>
+            </label>
+            <label class="checkbox"><input id="removeComments" type="checkbox" checked /> 주석 제거</label>
+            <label class="checkbox"><input id="mangleNames" type="checkbox" checked /> JS 이름 축약</label>
+            <button class="btn btn-primary" id="runBtn">압축하기</button>
+            <button class="btn btn-light" id="copyBtn">결과 복사</button>
+            <button class="btn btn-light" id="sampleBtn">예시 넣기</button>
+            <button class="btn btn-light" id="clearBtn">초기화</button>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <label class="label" for="inputCode">원본 코드</label>
+              <textarea id="inputCode" placeholder="여기에 코드를 붙여넣으세요."></textarea>
+            </div>
+            <div>
+              <label class="label" for="outputCode">압축 결과</label>
+              <textarea id="outputCode" class="output" readonly placeholder="압축 결과가 여기에 표시됩니다."></textarea>
+            </div>
+          </div>
+          <div id="message" class="msg"></div>
+        </div>
+
+        <div class="grid-3">
+          <div class="help-box"><h3>JavaScript</h3><p>Terser 브라우저 번들로 실제 minify를 수행합니다.</p></div>
+          <div class="help-box"><h3>HTML / CSS</h3><p>기본 공백 정리, 주석 제거, 불필요한 줄바꿈 제거를 수행합니다.</p></div>
+          <div class="help-box"><h3>JSON</h3><p>JSON.parse 후 공백 없이 다시 직렬화합니다.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/source-map@0.7.3/dist/source-map.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/terser/dist/bundle.min.js"></script>
+  <script>
+    const t = (key) => (window.ToolI18n ? window.ToolI18n.t(key) : key);
+    const langEl = document.getElementById('lang');
+    const inputEl = document.getElementById('inputCode');
+    const outputEl = document.getElementById('outputCode');
+    const removeCommentsEl = document.getElementById('removeComments');
+    const mangleNamesEl = document.getElementById('mangleNames');
+    const msgEl = document.getElementById('message');
+
+    const samples = {
+      javascript: `function helloUser(name) {
+  const message = 'Hello, ' + name;
+  console.log(message);
+  return message;
+}`,
+      json: `{
+  "name": "tool-lab",
+  "items": [1, 2, 3],
+  "enabled": true
+}`,
+      html: `<!-- sample -->
+<div class="box">
+  <h1> title </h1>
+  <p> hello world </p>
+</div>`,
+      css: `/* sample */
+body {
+  margin: 0;
+  padding: 0;
+}
+.box {
+  display: flex;
+  gap: 12px;
+}`
+    };
+
+    function setMessage(text, ok=false){
+      msgEl.textContent = text || '';
+      msgEl.className = ok ? 'msg ok' : 'msg';
+    }
+
+    function minifyHtml(text, removeComments){
+      let out = text;
+      if (removeComments) out = out.replace(/<!--([\s\S]*?)-->/g, '');
+      out = out.replace(/>\s+</g, '><').replace(/\s{2,}/g, ' ').trim();
+      return out;
+    }
+
+    function minifyCss(text, removeComments){
+      let out = text;
+      if (removeComments) out = out.replace(/\/\*([\s\S]*?)\*\//g, '');
+      out = out.replace(/\s*([{}:;,>])\s*/g, '$1').replace(/;}/g, '}').replace(/\s{2,}/g, ' ').trim();
+      return out;
+    }
+
+    async function runMinify(){
+      const lang = langEl.value;
+      const source = inputEl.value;
+      if (!source.trim()) {
+        setMessage(t('msg_enter_code'));
+        outputEl.value = '';
+        return;
+      }
+      try {
+        let result = '';
+        if (lang === 'json') {
+          result = JSON.stringify(JSON.parse(source));
+        } else if (lang === 'html') {
+          result = minifyHtml(source, removeCommentsEl.checked);
+        } else if (lang === 'css') {
+          result = minifyCss(source, removeCommentsEl.checked);
+        } else if (lang === 'javascript') {
+          const res = await Terser.minify(source, {
+            compress: true,
+            mangle: mangleNamesEl.checked,
+            format: { comments: !removeCommentsEl.checked }
+          });
+          if (res.error) throw res.error;
+          result = res.code || '';
+        }
+        outputEl.value = result;
+        setMessage(t('msg_minify_done'), true);
+      } catch (err) {
+        outputEl.value = '';
+        setMessage('오류\n' + (err.message || String(err)));
+      }
+    }
+
+    document.getElementById('runBtn').addEventListener('click', runMinify);
+    document.getElementById('copyBtn').addEventListener('click', async () => {
+      if (!outputEl.value) return setMessage(t('msg_no_result'));
+      await navigator.clipboard.writeText(outputEl.value);
+      setMessage(t('msg_copied'), true);
+    });
+    document.getElementById('sampleBtn').addEventListener('click', () => {
+      inputEl.value = samples[langEl.value];
+      outputEl.value = '';
+      setMessage('');
+    });
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      inputEl.value = '';
+      outputEl.value = '';
+      setMessage('');
+    });
+    langEl.addEventListener('change', () => { inputEl.value = samples[langEl.value]; outputEl.value=''; setMessage(''); });
+    inputEl.value = samples.javascript;
+  </script>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>도구랩</h4>
+        <p>브라우저에서 바로 사용하는 온라인 도구 모음.</p>
+      </div>
+      <div>
+        <h4>바로가기</h4>
+        <a href="../../index.html">홈</a>
+        <a href="../../roadmap.html">로드맵</a>
+        <a href="../../changelog.html">변경이력</a>
+      </div>
+      <div>
+        <h4>정보</h4>
+        <a href="../../about.html">소개</a>
+        <a href="../../privacy.html">개인정보처리방침</a>
+        <a href="../../contact.html">문의</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="index,follow" />
+  <title>Word Counter</title>
+  <meta name="description" content="Count characters, words, lines, and UTF-8 bytes instantly in the browser." />
+  <link rel="stylesheet" href="../../assets/tool.css" />
+  <link rel="stylesheet" href="../../assets/lang.css" />
+  <script defer src="../../assets/i18n.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="../../index.html" class="brand"><span class="brand-mark">⚡</span><span>도구랩</span></a>
+      <nav class="nav">
+        <a href="../../index.html">홈</a>
+        <a href="../../index.html#featured">추천 도구</a>
+        <a href="../../index.html#tools">전체 도구</a>
+        <a href="../../about.html">소개</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero"><div class="container"><div class="hero-card"><div class="pill" id="pagePill">Text analysis · quick stats</div><h1 id="pageTitle">Word Counter</h1><p id="pageDesc">Count characters, words, lines, and UTF-8 bytes instantly in the browser.</p></div></div></section>
+    <section class="section"><div class="container"><div class="panel">
+  <div class="control-row">
+    <button class="btn btn-primary" id="analyzeBtn" data-page-key="btn_analyze">Analyze</button>
+    <button class="btn btn-light" id="copyBtn" data-page-key="btn_copy">Copy Result</button>
+    <button class="btn btn-light" id="sampleBtn" data-page-key="btn_sample">Load Sample</button>
+    <button class="btn btn-light" id="clearBtn" data-page-key="btn_clear">Clear</button>
+  </div>
+  <label class="label" data-page-key="label_input">Input Text</label>
+  <textarea id="inputText" class="small-textarea" data-page-key="ph_input" data-page-attr="placeholder" placeholder="Paste or type your text here."></textarea>
+</div>
+<div class="panel">
+  <div class="stat-box">
+    <div class="card"><strong id="charCount">0</strong><p data-page-key="stat_chars">Characters</p></div>
+    <div class="card"><strong id="wordCount">0</strong><p data-page-key="stat_words">Words</p></div>
+    <div class="card"><strong id="lineCount">0</strong><p data-page-key="stat_lines">Lines</p></div>
+    <div class="card"><strong id="byteCount">0</strong><p data-page-key="stat_bytes">UTF-8 Bytes</p></div>
+  </div>
+  <div id="message" class="msg"></div>
+</div></div></section>
+  </main>
+  <script>
+    const PAGE_TEXT = {"pill": {"en": "Text analysis · quick stats", "ko": "텍스트 분석 · 빠른 통계"}, "title": {"en": "Word Counter", "ko": "글자수 / 단어수 세기"}, "desc": {"en": "Count characters, words, lines, and UTF-8 bytes instantly in the browser.", "ko": "브라우저에서 글자수, 단어수, 줄 수, UTF-8 바이트 수를 즉시 계산합니다."}, "btn_analyze": {"en": "Analyze", "ko": "분석하기"}, "btn_copy": {"en": "Copy Result", "ko": "결과 복사"}, "btn_sample": {"en": "Load Sample", "ko": "예시 넣기"}, "btn_clear": {"en": "Clear", "ko": "지우기"}, "label_input": {"en": "Input Text", "ko": "입력 텍스트"}, "ph_input": {"en": "Paste or type your text here.", "ko": "텍스트를 붙여 넣거나 입력하세요."}, "stat_chars": {"en": "Characters", "ko": "글자 수"}, "stat_words": {"en": "Words", "ko": "단어 수"}, "stat_lines": {"en": "Lines", "ko": "줄 수"}, "stat_bytes": {"en": "UTF-8 Bytes", "ko": "UTF-8 바이트"}, "msg_copied": {"en": "Result copied.", "ko": "결과를 복사했습니다."}};
+    const pageT = (key) => {
+      const lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      const entry = PAGE_TEXT[key] || {};
+      return entry[lang] || entry.en || entry.ko || key;
+    };
+    function applyPageLanguage() {
+      document.documentElement.lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      document.title = pageT('title');
+      const meta = document.querySelector('meta[name="description"]');
+      if (meta) meta.setAttribute('content', pageT('desc'));
+      [['pagePill','pill'],['pageTitle','title'],['pageDesc','desc']].forEach(([id,key])=>{ const el=document.getElementById(id); if(el) el.textContent = pageT(key); });
+      document.querySelectorAll('[data-page-key]').forEach(el=>{
+        const key = el.getAttribute('data-page-key');
+        const attr = el.getAttribute('data-page-attr');
+        const val = pageT(key);
+        if(attr) el.setAttribute(attr, val); else el.textContent = val;
+      });
+      if (typeof window.onPageLangChange === 'function') window.onPageLangChange();
+    }
+    document.addEventListener('toollab:languagechange', applyPageLanguage);
+    document.addEventListener('DOMContentLoaded', applyPageLanguage);
+
+    const wcInput=document.getElementById('inputText');
+    const wcMsg=document.getElementById('message');
+    function countText(){
+      const text=wcInput.value || '';
+      document.getElementById('charCount').textContent = text.length;
+      document.getElementById('wordCount').textContent = (text.trim().match(/\S+/g)||[]).length;
+      document.getElementById('lineCount').textContent = text.length ? text.split(/\r?\n/).length : 0;
+      document.getElementById('byteCount').textContent = new TextEncoder().encode(text).length;
+      wcMsg.textContent=''; wcMsg.className='msg';
+    }
+    document.getElementById('analyzeBtn').addEventListener('click', countText);
+    wcInput.addEventListener('input', countText);
+    document.getElementById('sampleBtn').addEventListener('click', ()=>{wcInput.value='ToolLab makes it easy to count words, characters, lines, and bytes.\n한 줄 더 추가합니다.'; countText();});
+    document.getElementById('clearBtn').addEventListener('click', ()=>{wcInput.value=''; countText();});
+    document.getElementById('copyBtn').addEventListener('click', async ()=>{
+      const result = [
+        `${pageT('stat_chars')}: ${document.getElementById('charCount').textContent}`,
+        `${pageT('stat_words')}: ${document.getElementById('wordCount').textContent}`,
+        `${pageT('stat_lines')}: ${document.getElementById('lineCount').textContent}`,
+        `${pageT('stat_bytes')}: ${document.getElementById('byteCount').textContent}`
+      ].join('\n');
+      await navigator.clipboard.writeText(result);
+      wcMsg.textContent=pageT('msg_copied'); wcMsg.className='msg ok';
+    });
+
+  </script>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><h4>도구랩</h4><p>브라우저에서 바로 사용하는 온라인 도구 모음.</p></div>
+      <div><h4>바로가기</h4><a href="../../index.html">홈</a><a href="../../roadmap.html">로드맵</a><a href="../../changelog.html">변경이력</a></div>
+      <div><h4>정보</h4><a href="../../about.html">소개</a><a href="../../privacy.html">개인정보처리방침</a><a href="../../contact.html">문의</a></div>
+    </div>
+  </footer>
+</body>
+</html>

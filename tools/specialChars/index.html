@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="index,follow" />
+  <link rel="stylesheet" href="../../assets/tool.css" />
+  <link rel="stylesheet" href="../../assets/lang.css" />
+  <script defer src="../../assets/i18n.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="../../index.html" class="brand">
+        <span class="brand-mark">⚡</span>
+        <span>도구랩</span>
+      </a>
+      <nav class="nav">
+        <a href="../../index.html">홈</a>
+        <a href="../../index.html#featured">추천 도구</a>
+        <a href="../../index.html#tools">전체 도구</a>
+        <a href="../../about.html">소개</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero"><div class="container"><div class="hero-card"><div class="pill">특수문자 · 즉시 복사</div><h1>특수문자표</h1><p>자주 쓰는 기호, 화살표, 괄호, 통화기호, 수학기호 등을 눌러서 바로 복사할 수 있습니다.</p></div></div></section>
+    <section class="section"><div class="container">
+      <div class="panel">
+        <div class="control-row">
+          <label>검색 <input id="search" type="text" placeholder="예: 화살표, 별, 원" /></label>
+          <button class="btn btn-light" id="clearBtn">검색 초기화</button>
+        </div>
+        <div id="groups"></div>
+        <div id="message" class="msg"></div>
+      </div>
+    </div></section>
+  </main>
+  <script>
+    const t = (key) => (window.ToolI18n ? window.ToolI18n.t(key) : key);
+    const groups = {
+      '별 / 장식': ['★','☆','✦','✧','✪','✯','✰','✲','✳','❋','❖','✿'],
+      '화살표': ['→','←','↑','↓','↔','↕','⇒','⇐','⇑','⇓','➜','➝'],
+      '괄호': ['(',')','[',']','{','}','〈','〉','《','》','「','」'],
+      '통화': ['₩','$','€','£','¥','₹','₽','₿'],
+      '수학': ['±','×','÷','≠','≈','≤','≥','∞','∑','√','∫','∂'],
+      '문장부호': ['•','·','…','※','§','¶','°','℃','℉','№','™','©'],
+      '체크 / 상태': ['✓','✔','✕','✖','☑','☐','◯','●','◆','◇','■','□'],
+      '감정 / 손': ['☺','☻','♡','♥','❤','❣','👍','👎','👏','🙏']
+    };
+    const groupsEl = document.getElementById('groups');
+    const searchEl = document.getElementById('search');
+    const msgEl = document.getElementById('message');
+    function setMessage(text, ok=false){ msgEl.textContent = text || ''; msgEl.className = ok ? 'msg ok' : 'msg'; }
+    function render(){
+      const q = searchEl.value.trim().toLowerCase();
+      groupsEl.innerHTML = '';
+      Object.entries(groups).forEach(([title, chars])=>{
+        const filtered = !q ? chars : chars.filter(ch => title.toLowerCase().includes(q) || ch.includes(q));
+        if(!filtered.length) return;
+        const panel = document.createElement('div');
+        panel.className = 'panel';
+        panel.innerHTML = `<div class="section-head"><div><h2>${title}</h2><p>클릭하면 바로 복사됩니다.</p></div></div><div class="copy-grid"></div>`;
+        const grid = panel.querySelector('.copy-grid');
+        filtered.forEach(ch => {
+          const btn = document.createElement('button');
+          btn.className = 'copy-btn';
+          btn.innerHTML = `${ch}<small>${escapeHtml(ch)}</small>`;
+          btn.addEventListener('click', async ()=>{
+            await navigator.clipboard.writeText(ch);
+            setMessage(ch + ' 복사 완료.', true);
+          });
+          grid.appendChild(btn);
+        });
+        groupsEl.appendChild(panel);
+      });
+    }
+    function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    searchEl.addEventListener('input', render);
+    document.getElementById('clearBtn').addEventListener('click', ()=>{ searchEl.value=''; render(); setMessage(''); });
+    render();
+  </script>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>도구랩</h4>
+        <p>브라우저에서 바로 사용하는 온라인 도구 모음.</p>
+      </div>
+      <div>
+        <h4>바로가기</h4>
+        <a href="../../index.html">홈</a>
+        <a href="../../roadmap.html">로드맵</a>
+        <a href="../../changelog.html">변경이력</a>
+      </div>
+      <div>
+        <h4>정보</h4>
+        <a href="../../about.html">소개</a>
+        <a href="../../privacy.html">개인정보처리방침</a>
+        <a href="../../contact.html">문의</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

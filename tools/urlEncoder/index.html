@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="index,follow" />
+  <title>URL Encoder / Decoder</title>
+  <meta name="description" content="Encode query values safely or decode encoded URLs back to readable text." />
+  <link rel="stylesheet" href="../../assets/tool.css" />
+  <link rel="stylesheet" href="../../assets/lang.css" />
+  <script defer src="../../assets/i18n.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="../../index.html" class="brand"><span class="brand-mark">⚡</span><span>도구랩</span></a>
+      <nav class="nav">
+        <a href="../../index.html">홈</a>
+        <a href="../../index.html#featured">추천 도구</a>
+        <a href="../../index.html#tools">전체 도구</a>
+        <a href="../../about.html">소개</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero"><div class="container"><div class="hero-card"><div class="pill" id="pagePill">Encoding · URL safe text</div><h1 id="pageTitle">URL Encoder / Decoder</h1><p id="pageDesc">Encode query values safely or decode encoded URLs back to readable text.</p></div></div></section>
+    <section class="section"><div class="container"><div class="panel">
+  <div class="control-row">
+    <button class="btn btn-primary" id="encodeBtn" data-page-key="btn_encode">Encode</button>
+    <button class="btn btn-secondary" id="decodeBtn" data-page-key="btn_decode">Decode</button>
+    <button class="btn btn-light" id="copyBtn" data-page-key="btn_copy">Copy Result</button>
+    <button class="btn btn-light" id="sampleBtn" data-page-key="btn_sample">Load Sample</button>
+  </div>
+  <div class="grid-2">
+    <div><label class="label" data-page-key="label_input">Input</label><textarea id="inputText" class="small-textarea"></textarea></div>
+    <div><label class="label" data-page-key="label_output">Output</label><textarea id="outputText" class="small-textarea output" readonly></textarea></div>
+  </div>
+  <div id="message" class="msg"></div>
+</div></div></section>
+  </main>
+  <script>
+    const PAGE_TEXT = {"pill": {"en": "Encoding · URL safe text", "ko": "인코딩 · URL 안전 변환"}, "title": {"en": "URL Encoder / Decoder", "ko": "URL 인코더 / 디코더"}, "desc": {"en": "Encode query values safely or decode encoded URLs back to readable text.", "ko": "쿼리 값이나 URL 문자열을 안전하게 인코딩하고 다시 읽을 수 있는 텍스트로 복원합니다."}, "btn_encode": {"en": "Encode", "ko": "인코딩"}, "btn_decode": {"en": "Decode", "ko": "디코딩"}, "btn_copy": {"en": "Copy Result", "ko": "결과 복사"}, "btn_sample": {"en": "Load Sample", "ko": "예시 넣기"}, "label_input": {"en": "Input", "ko": "입력"}, "label_output": {"en": "Output", "ko": "출력"}, "msg_encoded": {"en": "Encoded successfully.", "ko": "인코딩했습니다."}, "msg_decoded": {"en": "Decoded successfully.", "ko": "디코딩했습니다."}, "msg_invalid": {"en": "This value could not be decoded.", "ko": "이 값은 디코딩할 수 없습니다."}, "msg_copied": {"en": "Copied result.", "ko": "결과를 복사했습니다."}};
+    const pageT = (key) => {
+      const lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      const entry = PAGE_TEXT[key] || {};
+      return entry[lang] || entry.en || entry.ko || key;
+    };
+    function applyPageLanguage() {
+      document.documentElement.lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      document.title = pageT('title');
+      const meta = document.querySelector('meta[name="description"]');
+      if (meta) meta.setAttribute('content', pageT('desc'));
+      [['pagePill','pill'],['pageTitle','title'],['pageDesc','desc']].forEach(([id,key])=>{ const el=document.getElementById(id); if(el) el.textContent = pageT(key); });
+      document.querySelectorAll('[data-page-key]').forEach(el=>{
+        const key = el.getAttribute('data-page-key');
+        const attr = el.getAttribute('data-page-attr');
+        const val = pageT(key);
+        if(attr) el.setAttribute(attr, val); else el.textContent = val;
+      });
+      if (typeof window.onPageLangChange === 'function') window.onPageLangChange();
+    }
+    document.addEventListener('toollab:languagechange', applyPageLanguage);
+    document.addEventListener('DOMContentLoaded', applyPageLanguage);
+
+    const ueIn=document.getElementById('inputText'), ueOut=document.getElementById('outputText'), ueMsg=document.getElementById('message');
+    document.getElementById('encodeBtn').addEventListener('click',()=>{ueOut.value=encodeURIComponent(ueIn.value); ueMsg.textContent=pageT('msg_encoded'); ueMsg.className='msg ok';});
+    document.getElementById('decodeBtn').addEventListener('click',()=>{try{ueOut.value=decodeURIComponent(ueIn.value); ueMsg.textContent=pageT('msg_decoded'); ueMsg.className='msg ok';}catch(err){ueMsg.textContent=pageT('msg_invalid')+'\n'+err.message; ueMsg.className='msg';}});
+    document.getElementById('copyBtn').addEventListener('click', async ()=>{ if(!ueOut.value) return; await navigator.clipboard.writeText(ueOut.value); ueMsg.textContent=pageT('msg_copied'); ueMsg.className='msg ok';});
+    document.getElementById('sampleBtn').addEventListener('click',()=>{ueIn.value='https://example.com/search?q=도구랩 test&lang=ko'; ueOut.value=''; ueMsg.textContent='';});
+
+  </script>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><h4>도구랩</h4><p>브라우저에서 바로 사용하는 온라인 도구 모음.</p></div>
+      <div><h4>바로가기</h4><a href="../../index.html">홈</a><a href="../../roadmap.html">로드맵</a><a href="../../changelog.html">변경이력</a></div>
+      <div><h4>정보</h4><a href="../../about.html">소개</a><a href="../../privacy.html">개인정보처리방침</a><a href="../../contact.html">문의</a></div>
+    </div>
+  </footer>
+</body>
+</html>

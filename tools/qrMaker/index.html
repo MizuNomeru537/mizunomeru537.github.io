@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="index,follow" />
+  <link rel="stylesheet" href="../../assets/tool.css" />
+  <link rel="stylesheet" href="../../assets/lang.css" />
+  <script defer src="../../assets/i18n.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="../../index.html" class="brand">
+        <span class="brand-mark">⚡</span>
+        <span>도구랩</span>
+      </a>
+      <nav class="nav">
+        <a href="../../index.html">홈</a>
+        <a href="../../index.html#featured">추천 도구</a>
+        <a href="../../index.html#tools">전체 도구</a>
+        <a href="../../about.html">소개</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero"><div class="container"><div class="hero-card"><div class="pill">QR 생성 · 브라우저 렌더링</div><h1>QR 코드 생성기</h1><p>텍스트나 URL을 넣으면 브라우저 안에서 바로 QR 코드를 생성합니다. 크기 조절과 PNG 다운로드도 가능합니다.</p></div></div></section>
+    <section class="section"><div class="container"><div class="panel">
+      <div class="control-row">
+        <label>크기
+          <select id="size">
+            <option value="160">160px</option>
+            <option value="240" selected>240px</option>
+            <option value="320">320px</option>
+          </select>
+        </label>
+        <button class="btn btn-primary" id="generateBtn">QR 생성</button>
+        <button class="btn btn-light" id="downloadBtn">PNG 다운로드</button>
+        <button class="btn btn-light" id="sampleBtn">예시 넣기</button>
+      </div>
+      <div class="grid-2">
+        <div><label class="label">텍스트 / URL</label><textarea id="inputText" class="small-textarea"></textarea><div id="message" class="msg"></div></div>
+        <div><label class="label">QR 결과</label><div id="qrContainer" class="panel" style="padding:18px; min-height:320px; display:grid; place-items:center;"></div></div>
+      </div>
+    </div></div></section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+  <script>
+    const t = (key) => (window.ToolI18n ? window.ToolI18n.t(key) : key);
+    const inputEl = document.getElementById('inputText');
+    const sizeEl = document.getElementById('size');
+    const boxEl = document.getElementById('qrContainer');
+    const msgEl = document.getElementById('message');
+    let qr = null;
+    function setMessage(text, ok=false){ msgEl.textContent = text || ''; msgEl.className = ok ? 'msg ok' : 'msg'; }
+    function generate(){
+      const value = inputEl.value.trim();
+      if(!value) return setMessage(t('msg_enter_text_url'));
+      boxEl.innerHTML = '';
+      qr = new QRCode(boxEl, {
+        text: value,
+        width: Number(sizeEl.value),
+        height: Number(sizeEl.value),
+        colorDark: '#111827',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
+      });
+      setMessage(t('msg_qr_done'), true);
+    }
+    document.getElementById('generateBtn').addEventListener('click', generate);
+    document.getElementById('sampleBtn').addEventListener('click', ()=>{ inputEl.value = 'https://mizunomeru5379.github.io/code-tools/'; generate(); });
+    document.getElementById('downloadBtn').addEventListener('click', ()=>{
+      const canvas = boxEl.querySelector('canvas');
+      const img = boxEl.querySelector('img');
+      let href = '';
+      if(canvas) href = canvas.toDataURL('image/png');
+      else if(img) href = img.src;
+      if(!href) return setMessage(t('msg_generate_qr_first'));
+      const a = document.createElement('a');
+      a.href = href;
+      a.download = 'qrcode.png';
+      a.click();
+      setMessage(t('msg_download_start'), true);
+    });
+    inputEl.value = 'https://mizunomeru5379.github.io/code-tools/';
+    generate();
+  </script>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>도구랩</h4>
+        <p>브라우저에서 바로 사용하는 온라인 도구 모음.</p>
+      </div>
+      <div>
+        <h4>바로가기</h4>
+        <a href="../../index.html">홈</a>
+        <a href="../../roadmap.html">로드맵</a>
+        <a href="../../changelog.html">변경이력</a>
+      </div>
+      <div>
+        <h4>정보</h4>
+        <a href="../../about.html">소개</a>
+        <a href="../../privacy.html">개인정보처리방침</a>
+        <a href="../../contact.html">문의</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

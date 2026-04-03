@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="index,follow" />
+  <title>Color Converter</title>
+  <meta name="description" content="Convert HEX and RGB values, then inspect the HSL output with a live preview." />
+  <link rel="stylesheet" href="../../assets/tool.css" />
+  <link rel="stylesheet" href="../../assets/lang.css" />
+  <script defer src="../../assets/i18n.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="../../index.html" class="brand"><span class="brand-mark">⚡</span><span>도구랩</span></a>
+      <nav class="nav">
+        <a href="../../index.html">홈</a>
+        <a href="../../index.html#featured">추천 도구</a>
+        <a href="../../index.html#tools">전체 도구</a>
+        <a href="../../about.html">소개</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero"><div class="container"><div class="hero-card"><div class="pill" id="pagePill">Design utility · live preview</div><h1 id="pageTitle">Color Converter</h1><p id="pageDesc">Convert HEX and RGB values, then inspect the HSL output with a live preview.</p></div></div></section>
+    <section class="section"><div class="container"><div class="panel">
+  <div class="control-row">
+    <button class="btn btn-primary" id="convertBtn" data-page-key="btn_convert">Convert</button>
+    <button class="btn btn-light" id="sampleBtn" data-page-key="btn_sample">Load Sample</button>
+  </div>
+  <label class="label" data-page-key="label_input">HEX or RGB</label>
+  <input id="colorInput" type="text" style="width:100%" data-page-key="ph_input" data-page-attr="placeholder" placeholder="#4f46e5 or rgb(79,70,229)" />
+</div>
+<div class="panel grid-2">
+  <div><div id="previewColor" class="preview-color"></div></div>
+  <div class="table-like">
+    <div class="kv"><strong>HEX</strong><span id="hexValue"></span></div>
+    <div class="kv"><strong>RGB</strong><span id="rgbValue"></span></div>
+    <div class="kv"><strong>HSL</strong><span id="hslValue"></span></div>
+  </div>
+  <div id="message" class="msg"></div>
+</div></div></section>
+  </main>
+  <script>
+    const PAGE_TEXT = {"pill": {"en": "Design utility · live preview", "ko": "디자인 도구 · 실시간 미리보기"}, "title": {"en": "Color Converter", "ko": "색상 변환기"}, "desc": {"en": "Convert HEX and RGB values, then inspect the HSL output with a live preview.", "ko": "HEX와 RGB 값을 변환하고 HSL 결과와 미리보기 색상을 확인합니다."}, "btn_convert": {"en": "Convert", "ko": "변환하기"}, "btn_sample": {"en": "Load Sample", "ko": "예시 넣기"}, "label_input": {"en": "HEX or RGB", "ko": "HEX 또는 RGB"}, "ph_input": {"en": "#4f46e5 or rgb(79,70,229)", "ko": "#4f46e5 또는 rgb(79,70,229)"}, "msg_invalid_color": {"en": "Enter a valid HEX or RGB color.", "ko": "올바른 HEX 또는 RGB 색상을 입력하세요."}, "msg_converted": {"en": "Color converted.", "ko": "색상을 변환했습니다."}};
+    const pageT = (key) => {
+      const lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      const entry = PAGE_TEXT[key] || {};
+      return entry[lang] || entry.en || entry.ko || key;
+    };
+    function applyPageLanguage() {
+      document.documentElement.lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      document.title = pageT('title');
+      const meta = document.querySelector('meta[name="description"]');
+      if (meta) meta.setAttribute('content', pageT('desc'));
+      [['pagePill','pill'],['pageTitle','title'],['pageDesc','desc']].forEach(([id,key])=>{ const el=document.getElementById(id); if(el) el.textContent = pageT(key); });
+      document.querySelectorAll('[data-page-key]').forEach(el=>{
+        const key = el.getAttribute('data-page-key');
+        const attr = el.getAttribute('data-page-attr');
+        const val = pageT(key);
+        if(attr) el.setAttribute(attr, val); else el.textContent = val;
+      });
+      if (typeof window.onPageLangChange === 'function') window.onPageLangChange();
+    }
+    document.addEventListener('toollab:languagechange', applyPageLanguage);
+    document.addEventListener('DOMContentLoaded', applyPageLanguage);
+
+    const ccInput=document.getElementById('colorInput'), ccMsg=document.getElementById('message');
+    function rgbToHsl(r,g,b){ r/=255;g/=255;b/=255; const max=Math.max(r,g,b), min=Math.min(r,g,b); let h,s,l=(max+min)/2; if(max===min){h=s=0;} else { const d=max-min; s=l>0.5 ? d/(2-max-min) : d/(max+min); switch(max){ case r: h=(g-b)/d + (g<b ? 6:0); break; case g: h=(b-r)/d + 2; break; default: h=(r-g)/d + 4; } h/=6; } return [Math.round(h*360), Math.round(s*100), Math.round(l*100)]; }
+    function parseColor(v){ v=v.trim(); if(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(v)){ let hex=v.slice(1); if(hex.length===3) hex=hex.split('').map(x=>x+x).join(''); const r=parseInt(hex.slice(0,2),16), g=parseInt(hex.slice(2,4),16), b=parseInt(hex.slice(4,6),16); return {r,g,b}; } const m=v.match(/^rgb\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\)$/i); if(m){ const [r,g,b]=m.slice(1).map(Number); if([r,g,b].every(n=>n>=0&&n<=255)) return {r,g,b}; } return null; }
+    function convertColor(){ const parsed=parseColor(ccInput.value); if(!parsed){ ccMsg.textContent=pageT('msg_invalid_color'); ccMsg.className='msg'; return; } const {r,g,b}=parsed; const hex='#'+[r,g,b].map(n=>n.toString(16).padStart(2,'0')).join('').toUpperCase(); const hsl=rgbToHsl(r,g,b); document.getElementById('previewColor').style.background=hex; document.getElementById('hexValue').textContent=hex; document.getElementById('rgbValue').textContent=`rgb(${r}, ${g}, ${b})`; document.getElementById('hslValue').textContent=`hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`; ccMsg.textContent=pageT('msg_converted'); ccMsg.className='msg ok'; }
+    document.getElementById('convertBtn').addEventListener('click', convertColor);
+    document.getElementById('sampleBtn').addEventListener('click', ()=>{ccInput.value='#4f46e5'; convertColor();});
+
+  </script>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><h4>도구랩</h4><p>브라우저에서 바로 사용하는 온라인 도구 모음.</p></div>
+      <div><h4>바로가기</h4><a href="../../index.html">홈</a><a href="../../roadmap.html">로드맵</a><a href="../../changelog.html">변경이력</a></div>
+      <div><h4>정보</h4><a href="../../about.html">소개</a><a href="../../privacy.html">개인정보처리방침</a><a href="../../contact.html">문의</a></div>
+    </div>
+  </footer>
+</body>
+</html>

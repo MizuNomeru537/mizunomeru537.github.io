@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="index,follow" />
+  <link rel="stylesheet" href="../../assets/tool.css" />
+  <link rel="stylesheet" href="../../assets/lang.css" />
+  <script defer src="../../assets/i18n.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="../../index.html" class="brand">
+        <span class="brand-mark">⚡</span>
+        <span>도구랩</span>
+      </a>
+      <nav class="nav">
+        <a href="../../index.html">홈</a>
+        <a href="../../index.html#featured">추천 도구</a>
+        <a href="../../index.html#tools">전체 도구</a>
+        <a href="../../about.html">소개</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero"><div class="container"><div class="hero-card"><div class="pill">UUID · 실제 생성</div><h1>UUID 생성기</h1><p>브라우저의 <code>crypto.randomUUID()</code>를 우선 사용하고, 지원되지 않는 경우에는 난수 기반 대체 생성기로 UUID v4 형식 문자열을 만듭니다.</p></div></div></section>
+    <section class="section"><div class="container"><div class="panel">
+      <div class="control-row">
+        <label>개수
+          <input id="count" type="number" min="1" max="100" value="10" />
+        </label>
+        <label class="checkbox"><input id="upperCase" type="checkbox" /> 대문자</label>
+        <button class="btn btn-primary" id="generateBtn">생성</button>
+        <button class="btn btn-light" id="copyBtn">전체 복사</button>
+      </div>
+      <div class="result-box"><pre id="result"></pre></div>
+      <div id="message" class="msg"></div>
+    </div>
+    <div class="grid-3">
+      <div class="help-box"><h3>한 번에 여러 개</h3><p>최대 100개까지 한 번에 생성할 수 있습니다.</p></div>
+      <div class="help-box"><h3>복사 지원</h3><p>생성 결과 전체를 줄바꿈 상태 그대로 복사합니다.</p></div>
+      <div class="help-box"><h3>실사용 가능</h3><p>개발 테스트, 샘플 데이터, 식별자 발급용으로 바로 사용할 수 있습니다.</p></div>
+    </div></div></section>
+  </main>
+  <script>
+    const t = (key) => (window.ToolI18n ? window.ToolI18n.t(key) : key);
+    const resultEl = document.getElementById('result');
+    const countEl = document.getElementById('count');
+    const upperEl = document.getElementById('upperCase');
+    const msgEl = document.getElementById('message');
+
+    function setMessage(text, ok=false){ msgEl.textContent = text || ''; msgEl.className = ok ? 'msg ok' : 'msg'; }
+    function fallbackUuid(){
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+        const r = crypto.getRandomValues(new Uint8Array(1))[0] % 16;
+        const v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
+    function createUuid(){
+      const v = (crypto.randomUUID ? crypto.randomUUID() : fallbackUuid());
+      return upperEl.checked ? v.toUpperCase() : v;
+    }
+    function generate(){
+      const count = Math.max(1, Math.min(100, Number(countEl.value) || 1));
+      const values = Array.from({length: count}, createUuid);
+      resultEl.textContent = values.join('\n');
+      setMessage(count + t('msg_uuid_done_suffix'), true);
+    }
+    document.getElementById('generateBtn').addEventListener('click', generate);
+    document.getElementById('copyBtn').addEventListener('click', async ()=>{
+      if(!resultEl.textContent.trim()) return setMessage(t('msg_no_result'));
+      await navigator.clipboard.writeText(resultEl.textContent);
+      setMessage(t('msg_copied'), true);
+    });
+    generate();
+  </script>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>도구랩</h4>
+        <p>브라우저에서 바로 사용하는 온라인 도구 모음.</p>
+      </div>
+      <div>
+        <h4>바로가기</h4>
+        <a href="../../index.html">홈</a>
+        <a href="../../roadmap.html">로드맵</a>
+        <a href="../../changelog.html">변경이력</a>
+      </div>
+      <div>
+        <h4>정보</h4>
+        <a href="../../about.html">소개</a>
+        <a href="../../privacy.html">개인정보처리방침</a>
+        <a href="../../contact.html">문의</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

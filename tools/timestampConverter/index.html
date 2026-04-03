@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="index,follow" />
+  <title>Timestamp Converter</title>
+  <meta name="description" content="Convert Unix timestamps or readable date strings into multiple time formats." />
+  <link rel="stylesheet" href="../../assets/tool.css" />
+  <link rel="stylesheet" href="../../assets/lang.css" />
+  <script defer src="../../assets/i18n.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="../../index.html" class="brand"><span class="brand-mark">⚡</span><span>도구랩</span></a>
+      <nav class="nav">
+        <a href="../../index.html">홈</a>
+        <a href="../../index.html#featured">추천 도구</a>
+        <a href="../../index.html#tools">전체 도구</a>
+        <a href="../../about.html">소개</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero"><div class="container"><div class="hero-card"><div class="pill" id="pagePill">Time utility · Unix and date strings</div><h1 id="pageTitle">Timestamp Converter</h1><p id="pageDesc">Convert Unix timestamps or readable date strings into multiple time formats.</p></div></div></section>
+    <section class="section"><div class="container"><div class="panel">
+  <div class="control-row">
+    <button class="btn btn-primary" id="convertBtn" data-page-key="btn_convert">Convert</button>
+    <button class="btn btn-secondary" id="nowBtn" data-page-key="btn_now">Use Now</button>
+    <button class="btn btn-light" id="sampleBtn" data-page-key="btn_sample">Load Sample</button>
+  </div>
+  <label class="label" data-page-key="label_input">Unix timestamp or date string</label>
+  <input id="inputValue" type="text" style="width:100%" data-page-key="ph_input" data-page-attr="placeholder" placeholder="1712123456 or 2026-04-03 15:00" />
+</div>
+<div class="panel">
+  <div class="table-like">
+    <div class="kv"><strong data-page-key="label_detected">Detected</strong><span id="detectedValue"></span></div>
+    <div class="kv"><strong data-page-key="label_iso">ISO</strong><span id="isoValue"></span></div>
+    <div class="kv"><strong data-page-key="label_local">Local</strong><span id="localValue"></span></div>
+    <div class="kv"><strong data-page-key="label_utc">UTC</strong><span id="utcValue"></span></div>
+    <div class="kv"><strong data-page-key="label_seconds">Unix Seconds</strong><span id="secValue"></span></div>
+    <div class="kv"><strong data-page-key="label_milliseconds">Unix Milliseconds</strong><span id="msValue"></span></div>
+  </div>
+  <div id="message" class="msg"></div>
+</div></div></section>
+  </main>
+  <script>
+    const PAGE_TEXT = {"pill": {"en": "Time utility · Unix and date strings", "ko": "시간 도구 · 유닉스 타임 변환"}, "title": {"en": "Timestamp Converter", "ko": "타임스탬프 변환기"}, "desc": {"en": "Convert Unix timestamps or readable date strings into multiple time formats.", "ko": "유닉스 타임스탬프나 날짜 문자열을 여러 시간 형식으로 변환합니다."}, "btn_convert": {"en": "Convert", "ko": "변환하기"}, "btn_now": {"en": "Use Now", "ko": "현재 시각 사용"}, "btn_sample": {"en": "Load Sample", "ko": "예시 넣기"}, "label_input": {"en": "Unix timestamp or date string", "ko": "유닉스 타임 또는 날짜 문자열"}, "ph_input": {"en": "1712123456 or 2026-04-03 15:00", "ko": "1712123456 또는 2026-04-03 15:00"}, "label_detected": {"en": "Detected", "ko": "입력 판별"}, "label_iso": {"en": "ISO", "ko": "ISO"}, "label_local": {"en": "Local", "ko": "로컬 시간"}, "label_utc": {"en": "UTC", "ko": "UTC"}, "label_seconds": {"en": "Unix Seconds", "ko": "유닉스 초"}, "label_milliseconds": {"en": "Unix Milliseconds", "ko": "유닉스 밀리초"}, "msg_converted": {"en": "Converted successfully.", "ko": "변환했습니다."}, "msg_enter_value": {"en": "Enter a value first.", "ko": "먼저 값을 입력하세요."}, "msg_invalid_date": {"en": "Could not parse that value.", "ko": "값을 해석할 수 없습니다."}};
+    const pageT = (key) => {
+      const lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      const entry = PAGE_TEXT[key] || {};
+      return entry[lang] || entry.en || entry.ko || key;
+    };
+    function applyPageLanguage() {
+      document.documentElement.lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      document.title = pageT('title');
+      const meta = document.querySelector('meta[name="description"]');
+      if (meta) meta.setAttribute('content', pageT('desc'));
+      [['pagePill','pill'],['pageTitle','title'],['pageDesc','desc']].forEach(([id,key])=>{ const el=document.getElementById(id); if(el) el.textContent = pageT(key); });
+      document.querySelectorAll('[data-page-key]').forEach(el=>{
+        const key = el.getAttribute('data-page-key');
+        const attr = el.getAttribute('data-page-attr');
+        const val = pageT(key);
+        if(attr) el.setAttribute(attr, val); else el.textContent = val;
+      });
+      if (typeof window.onPageLangChange === 'function') window.onPageLangChange();
+    }
+    document.addEventListener('toollab:languagechange', applyPageLanguage);
+    document.addEventListener('DOMContentLoaded', applyPageLanguage);
+
+    const tsInput=document.getElementById('inputValue'); const tsMsg=document.getElementById('message');
+    function fillDate(date, detected){
+      document.getElementById('detectedValue').textContent = detected;
+      document.getElementById('isoValue').textContent = date.toISOString();
+      document.getElementById('localValue').textContent = date.toLocaleString();
+      document.getElementById('utcValue').textContent = date.toUTCString();
+      document.getElementById('secValue').textContent = Math.floor(date.getTime()/1000);
+      document.getElementById('msValue').textContent = date.getTime();
+      tsMsg.textContent=pageT('msg_converted'); tsMsg.className='msg ok';
+    }
+    function convert(){
+      const raw=tsInput.value.trim();
+      if(!raw){ tsMsg.textContent=pageT('msg_enter_value'); tsMsg.className='msg'; return; }
+      let date=null, detected='';
+      if(/^\d{10}$/.test(raw)){ date=new Date(Number(raw)*1000); detected='Unix seconds'; }
+      else if(/^\d{13}$/.test(raw)){ date=new Date(Number(raw)); detected='Unix milliseconds'; }
+      else { date=new Date(raw); detected='Date string'; }
+      if(isNaN(date.getTime())){ tsMsg.textContent=pageT('msg_invalid_date'); tsMsg.className='msg'; return; }
+      fillDate(date, detected);
+    }
+    document.getElementById('convertBtn').addEventListener('click', convert);
+    document.getElementById('nowBtn').addEventListener('click', ()=>{ const d=new Date(); tsInput.value=d.toISOString(); fillDate(d,'Current time');});
+    document.getElementById('sampleBtn').addEventListener('click', ()=>{ tsInput.value='1712123456'; convert();});
+
+  </script>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><h4>도구랩</h4><p>브라우저에서 바로 사용하는 온라인 도구 모음.</p></div>
+      <div><h4>바로가기</h4><a href="../../index.html">홈</a><a href="../../roadmap.html">로드맵</a><a href="../../changelog.html">변경이력</a></div>
+      <div><h4>정보</h4><a href="../../about.html">소개</a><a href="../../privacy.html">개인정보처리방침</a><a href="../../contact.html">문의</a></div>
+    </div>
+  </footer>
+</body>
+</html>
