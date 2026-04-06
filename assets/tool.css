@@ -169,28 +169,3 @@ textarea{
 .hub-card a{display:inline-flex;align-items:center;gap:8px;font-weight:800;color:#4338ca}
 @media (max-width:1000px){.hub-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:760px){.hub-grid{grid-template-columns:1fr}}
-
-
-.breadcrumb-wrap{padding:0 0 10px}
-.breadcrumb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px;box-shadow:var(--shadow);font-size:14px;color:var(--muted)}
-.breadcrumb a{color:#4338ca;font-weight:700}
-.breadcrumb-sep{color:#94a3b8}
-.utility-search{display:grid;gap:14px}
-.utility-search .search-row{display:flex;gap:12px;flex-wrap:wrap}
-.utility-search input[type="search"]{flex:1;min-width:220px;border:1px solid #d6dbe5;border-radius:14px;padding:14px 16px;font-size:15px;background:#fff}
-.utility-search .search-meta{font-size:14px;color:var(--muted)}
-.no-results{padding:16px 18px;border-radius:16px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:14px}
-.cta-strip{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;align-items:center;background:linear-gradient(135deg,#0f172a 0%, #111827 45%, #182234 100%);color:#fff;border-radius:24px;padding:24px;box-shadow:0 20px 40px rgba(17,24,39,.16)}
-.cta-strip h2{margin:0 0 8px;font-size:28px;letter-spacing:-0.8px}
-.cta-strip p{margin:0;color:#d6deea;line-height:1.75;font-size:15px}
-.cta-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-.cta-actions .btn-light{border-color:rgba(255,255,255,.18)}
-.quick-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
-.quick-links a{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:10px 14px;font-weight:700;font-size:14px}
-.kicker{display:inline-flex;align-items:center;gap:8px;background:#eef2ff;color:#4338ca;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:800;margin-bottom:12px}
-.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.info-card{background:#fbfcfe;border:1px solid var(--line);border-radius:18px;padding:16px}
-.info-card h3{margin:0 0 8px;font-size:18px}
-.info-card p{margin:0;color:var(--muted);line-height:1.7;font-size:14px}
-.center-note{text-align:center;color:var(--muted);font-size:14px;line-height:1.7;margin-top:12px}
-@media (max-width:1000px){.cta-strip,.info-grid{grid-template-columns:1fr}.cta-actions{justify-content:flex-start}}
