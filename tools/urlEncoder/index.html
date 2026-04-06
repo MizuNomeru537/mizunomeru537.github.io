@@ -45,6 +45,8 @@
     const PAGE_TEXT = {"pill": {"en": "Encoding · URL safe text", "ko": "인코딩 · URL 안전 변환"}, "title": {"en": "URL Encoder / Decoder", "ko": "URL 인코더 / 디코더"}, "desc": {"en": "Encode query values safely or decode encoded URLs back to readable text.", "ko": "쿼리 값이나 URL 문자열을 안전하게 인코딩하고 다시 읽을 수 있는 텍스트로 복원합니다."}, "btn_encode": {"en": "Encode", "ko": "인코딩"}, "btn_decode": {"en": "Decode", "ko": "디코딩"}, "btn_copy": {"en": "Copy Result", "ko": "결과 복사"}, "btn_sample": {"en": "Load Sample", "ko": "예시 넣기"}, "label_input": {"en": "Input", "ko": "입력"}, "label_output": {"en": "Output", "ko": "출력"}, "msg_encoded": {"en": "Encoded successfully.", "ko": "인코딩했습니다."}, "msg_decoded": {"en": "Decoded successfully.", "ko": "디코딩했습니다."}, "msg_invalid": {"en": "This value could not be decoded.", "ko": "이 값은 디코딩할 수 없습니다."}, "msg_copied": {"en": "Copied result.", "ko": "결과를 복사했습니다."}};
     const pageT = (key) => {
       const lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      const extra = window.ToolLangFixPageText ? window.ToolLangFixPageText('url', key, lang) : '';
+      if (extra) return extra;
       const entry = PAGE_TEXT[key] || {};
       return entry[lang] || entry.en || entry.ko || key;
     };

@@ -51,6 +51,8 @@
     const PAGE_TEXT = {"pill": {"en": "Text analysis · quick stats", "ko": "텍스트 분석 · 빠른 통계"}, "title": {"en": "Word Counter", "ko": "글자수 / 단어수 세기"}, "desc": {"en": "Count characters, words, lines, and UTF-8 bytes instantly in the browser.", "ko": "브라우저에서 글자수, 단어수, 줄 수, UTF-8 바이트 수를 즉시 계산합니다."}, "btn_analyze": {"en": "Analyze", "ko": "분석하기"}, "btn_copy": {"en": "Copy Result", "ko": "결과 복사"}, "btn_sample": {"en": "Load Sample", "ko": "예시 넣기"}, "btn_clear": {"en": "Clear", "ko": "지우기"}, "label_input": {"en": "Input Text", "ko": "입력 텍스트"}, "ph_input": {"en": "Paste or type your text here.", "ko": "텍스트를 붙여 넣거나 입력하세요."}, "stat_chars": {"en": "Characters", "ko": "글자 수"}, "stat_words": {"en": "Words", "ko": "단어 수"}, "stat_lines": {"en": "Lines", "ko": "줄 수"}, "stat_bytes": {"en": "UTF-8 Bytes", "ko": "UTF-8 바이트"}, "msg_copied": {"en": "Result copied.", "ko": "결과를 복사했습니다."}};
     const pageT = (key) => {
       const lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      const extra = window.ToolLangFixPageText ? window.ToolLangFixPageText('word', key, lang) : '';
+      if (extra) return extra;
       const entry = PAGE_TEXT[key] || {};
       return entry[lang] || entry.en || entry.ko || key;
     };

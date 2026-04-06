@@ -43,6 +43,8 @@
     const PAGE_TEXT = {"pill": {"en": "Mockup text · placeholder content", "ko": "목업 텍스트 · 더미 문장 생성"}, "title": {"en": "Lorem Ipsum Generator", "ko": "Lorem Ipsum 생성기"}, "desc": {"en": "Generate placeholder paragraphs for mockups, CMS drafts, and layout testing.", "ko": "목업, CMS 초안, 레이아웃 테스트에 쓸 더미 문단을 생성합니다."}, "label_paragraphs": {"en": "Paragraphs", "ko": "문단 수"}, "label_sentences": {"en": "Sentences per paragraph", "ko": "문단당 문장 수"}, "btn_generate": {"en": "Generate", "ko": "생성하기"}, "btn_copy": {"en": "Copy Result", "ko": "결과 복사"}, "label_result": {"en": "Generated Text", "ko": "생성된 텍스트"}, "msg_generated": {"en": "Placeholder text generated.", "ko": "더미 텍스트를 생성했습니다."}, "msg_copied": {"en": "Copied result.", "ko": "결과를 복사했습니다."}};
     const pageT = (key) => {
       const lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      const extra = window.ToolLangFixPageText ? window.ToolLangFixPageText('lorem', key, lang) : '';
+      if (extra) return extra;
       const entry = PAGE_TEXT[key] || {};
       return entry[lang] || entry.en || entry.ko || key;
     };

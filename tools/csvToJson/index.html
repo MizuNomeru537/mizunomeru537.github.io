@@ -44,6 +44,8 @@
     const PAGE_TEXT = {"pill": {"en": "Data conversion · browser only", "ko": "데이터 변환 · 브라우저 처리"}, "title": {"en": "CSV to JSON Converter", "ko": "CSV → JSON 변환기"}, "desc": {"en": "Paste CSV text and convert it into formatted JSON without sending data anywhere.", "ko": "CSV 텍스트를 붙여 넣어 외부 전송 없이 포맷된 JSON으로 변환합니다."}, "btn_convert": {"en": "Convert", "ko": "변환하기"}, "btn_copy": {"en": "Copy Result", "ko": "결과 복사"}, "btn_sample": {"en": "Load Sample", "ko": "예시 넣기"}, "label_csv": {"en": "CSV Input", "ko": "CSV 입력"}, "label_json": {"en": "JSON Output", "ko": "JSON 출력"}, "msg_need_more": {"en": "Add a header row and at least one data row.", "ko": "헤더 1줄과 데이터 1줄 이상이 필요합니다."}, "msg_converted": {"en": "CSV converted to JSON.", "ko": "CSV를 JSON으로 변환했습니다."}, "msg_error": {"en": "Conversion failed.", "ko": "변환에 실패했습니다."}, "msg_copied": {"en": "Copied JSON result.", "ko": "JSON 결과를 복사했습니다."}};
     const pageT = (key) => {
       const lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      const extra = window.ToolLangFixPageText ? window.ToolLangFixPageText('csv', key, lang) : '';
+      if (extra) return extra;
       const entry = PAGE_TEXT[key] || {};
       return entry[lang] || entry.en || entry.ko || key;
     };

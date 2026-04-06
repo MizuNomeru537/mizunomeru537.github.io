@@ -52,6 +52,8 @@
     const PAGE_TEXT = {"pill": {"en": "Time utility · Unix and date strings", "ko": "시간 도구 · 유닉스 타임 변환"}, "title": {"en": "Timestamp Converter", "ko": "타임스탬프 변환기"}, "desc": {"en": "Convert Unix timestamps or readable date strings into multiple time formats.", "ko": "유닉스 타임스탬프나 날짜 문자열을 여러 시간 형식으로 변환합니다."}, "btn_convert": {"en": "Convert", "ko": "변환하기"}, "btn_now": {"en": "Use Now", "ko": "현재 시각 사용"}, "btn_sample": {"en": "Load Sample", "ko": "예시 넣기"}, "label_input": {"en": "Unix timestamp or date string", "ko": "유닉스 타임 또는 날짜 문자열"}, "ph_input": {"en": "1712123456 or 2026-04-03 15:00", "ko": "1712123456 또는 2026-04-03 15:00"}, "label_detected": {"en": "Detected", "ko": "입력 판별"}, "label_iso": {"en": "ISO", "ko": "ISO"}, "label_local": {"en": "Local", "ko": "로컬 시간"}, "label_utc": {"en": "UTC", "ko": "UTC"}, "label_seconds": {"en": "Unix Seconds", "ko": "유닉스 초"}, "label_milliseconds": {"en": "Unix Milliseconds", "ko": "유닉스 밀리초"}, "msg_converted": {"en": "Converted successfully.", "ko": "변환했습니다."}, "msg_enter_value": {"en": "Enter a value first.", "ko": "먼저 값을 입력하세요."}, "msg_invalid_date": {"en": "Could not parse that value.", "ko": "값을 해석할 수 없습니다."}};
     const pageT = (key) => {
       const lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      const extra = window.ToolLangFixPageText ? window.ToolLangFixPageText('timestamp', key, lang) : '';
+      if (extra) return extra;
       const entry = PAGE_TEXT[key] || {};
       return entry[lang] || entry.en || entry.ko || key;
     };

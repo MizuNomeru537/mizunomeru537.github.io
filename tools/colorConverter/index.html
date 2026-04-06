@@ -49,6 +49,8 @@
     const PAGE_TEXT = {"pill": {"en": "Design utility · live preview", "ko": "디자인 도구 · 실시간 미리보기"}, "title": {"en": "Color Converter", "ko": "색상 변환기"}, "desc": {"en": "Convert HEX and RGB values, then inspect the HSL output with a live preview.", "ko": "HEX와 RGB 값을 변환하고 HSL 결과와 미리보기 색상을 확인합니다."}, "btn_convert": {"en": "Convert", "ko": "변환하기"}, "btn_sample": {"en": "Load Sample", "ko": "예시 넣기"}, "label_input": {"en": "HEX or RGB", "ko": "HEX 또는 RGB"}, "ph_input": {"en": "#4f46e5 or rgb(79,70,229)", "ko": "#4f46e5 또는 rgb(79,70,229)"}, "msg_invalid_color": {"en": "Enter a valid HEX or RGB color.", "ko": "올바른 HEX 또는 RGB 색상을 입력하세요."}, "msg_converted": {"en": "Color converted.", "ko": "색상을 변환했습니다."}};
     const pageT = (key) => {
       const lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      const extra = window.ToolLangFixPageText ? window.ToolLangFixPageText('color', key, lang) : '';
+      if (extra) return extra;
       const entry = PAGE_TEXT[key] || {};
       return entry[lang] || entry.en || entry.ko || key;
     };

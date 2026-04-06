@@ -49,6 +49,8 @@
     const PAGE_TEXT = {"pill": {"en": "Security · random generation", "ko": "보안 · 랜덤 생성"}, "title": {"en": "Password Generator", "ko": "비밀번호 생성기"}, "desc": {"en": "Generate strong random passwords with common security options.", "ko": "길이와 문자 조합 옵션을 선택해 강한 랜덤 비밀번호를 생성합니다."}, "label_length": {"en": "Length", "ko": "길이"}, "opt_upper": {"en": "Uppercase", "ko": "대문자"}, "opt_lower": {"en": "Lowercase", "ko": "소문자"}, "opt_numbers": {"en": "Numbers", "ko": "숫자"}, "opt_symbols": {"en": "Symbols", "ko": "기호"}, "btn_generate": {"en": "Generate", "ko": "생성하기"}, "btn_copy": {"en": "Copy Result", "ko": "결과 복사"}, "btn_generate_more": {"en": "Generate 5", "ko": "5개 생성"}, "label_passwords": {"en": "Passwords", "ko": "생성 결과"}, "msg_pick_one": {"en": "Pick at least one character set.", "ko": "최소 한 가지 문자 종류를 선택하세요."}, "msg_done": {"en": "Password generated.", "ko": "비밀번호를 생성했습니다."}, "msg_empty": {"en": "Nothing to copy yet.", "ko": "복사할 결과가 없습니다."}, "msg_copied": {"en": "Copied to clipboard.", "ko": "클립보드에 복사했습니다."}};
     const pageT = (key) => {
       const lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      const extra = window.ToolLangFixPageText ? window.ToolLangFixPageText('password', key, lang) : '';
+      if (extra) return extra;
       const entry = PAGE_TEXT[key] || {};
       return entry[lang] || entry.en || entry.ko || key;
     };

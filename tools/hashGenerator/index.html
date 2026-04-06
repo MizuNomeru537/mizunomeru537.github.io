@@ -45,6 +45,8 @@
     const PAGE_TEXT = {"pill": {"en": "Hash · checksum utility", "ko": "해시 · 체크섬 도구"}, "title": {"en": "Hash Generator", "ko": "해시 생성기"}, "desc": {"en": "Generate SHA-256 or SHA-1 hashes locally in the browser.", "ko": "브라우저 안에서 SHA-256 또는 SHA-1 해시를 로컬로 생성합니다."}, "btn_copy": {"en": "Copy Result", "ko": "결과 복사"}, "btn_sample": {"en": "Load Sample", "ko": "예시 넣기"}, "label_input": {"en": "Input Text", "ko": "입력 텍스트"}, "label_hash": {"en": "Hash Result", "ko": "해시 결과"}, "msg_done": {"en": "generated.", "ko": "생성 완료"}, "msg_copied": {"en": "Copied result.", "ko": "결과를 복사했습니다."}};
     const pageT = (key) => {
       const lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      const extra = window.ToolLangFixPageText ? window.ToolLangFixPageText('hash', key, lang) : '';
+      if (extra) return extra;
       const entry = PAGE_TEXT[key] || {};
       return entry[lang] || entry.en || entry.ko || key;
     };

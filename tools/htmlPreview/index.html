@@ -44,6 +44,8 @@
     const PAGE_TEXT = {"pill": {"en": "Web editor · live render", "ko": "웹 에디터 · 실시간 렌더"}, "title": {"en": "HTML Preview", "ko": "HTML 미리보기"}, "desc": {"en": "Write HTML and render the result instantly inside the browser.", "ko": "HTML 코드를 입력하고 브라우저 안에서 즉시 렌더링 결과를 확인합니다."}, "btn_preview": {"en": "Preview", "ko": "미리보기"}, "btn_sample": {"en": "Load Sample", "ko": "예시 넣기"}, "btn_copy": {"en": "Copy HTML", "ko": "HTML 복사"}, "label_html": {"en": "HTML Source", "ko": "HTML 소스"}, "label_preview": {"en": "Preview", "ko": "미리보기"}, "msg_previewed": {"en": "Preview refreshed.", "ko": "미리보기를 갱신했습니다."}, "msg_copied": {"en": "HTML copied.", "ko": "HTML을 복사했습니다."}};
     const pageT = (key) => {
       const lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      const extra = window.ToolLangFixPageText ? window.ToolLangFixPageText('htmlpreview', key, lang) : '';
+      if (extra) return extra;
       const entry = PAGE_TEXT[key] || {};
       return entry[lang] || entry.en || entry.ko || key;
     };

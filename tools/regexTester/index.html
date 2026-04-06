@@ -45,6 +45,8 @@
     const PAGE_TEXT = {"pill": {"en": "Pattern matching · live test", "ko": "패턴 매칭 · 실시간 테스트"}, "title": {"en": "Regex Tester", "ko": "정규식 테스터"}, "desc": {"en": "Try regular expressions with custom flags and inspect match results.", "ko": "플래그를 조절하며 정규식을 시험하고 매칭 결과를 바로 확인합니다."}, "label_pattern": {"en": "Pattern", "ko": "패턴"}, "ph_pattern": {"en": "e.g. [A-Z]+", "ko": "예: [A-Z]+"}, "label_flags": {"en": "Flags", "ko": "플래그"}, "btn_test": {"en": "Test", "ko": "테스트"}, "btn_sample": {"en": "Load Sample", "ko": "예시 넣기"}, "label_input": {"en": "Source Text", "ko": "원문 텍스트"}, "label_matches": {"en": "Matches", "ko": "매칭 결과"}, "msg_no_match": {"en": "No matches found.", "ko": "매칭된 결과가 없습니다."}, "msg_match_count": {"en": "matches found.", "ko": "개 매칭되었습니다."}, "msg_invalid_regex": {"en": "Invalid regular expression.", "ko": "정규식이 올바르지 않습니다."}};
     const pageT = (key) => {
       const lang = window.ToolI18n ? window.ToolI18n.getLang() : 'en';
+      const extra = window.ToolLangFixPageText ? window.ToolLangFixPageText('regex', key, lang) : '';
+      if (extra) return extra;
       const entry = PAGE_TEXT[key] || {};
       return entry[lang] || entry.en || entry.ko || key;
     };

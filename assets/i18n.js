@@ -10,6 +10,7 @@
 
   function getPageId(){
     const p = normalizePath();
+    if (/\/tools\/?(?:index\.html)?$/.test(p)) return 'toolsHub';
     if (p.endsWith('/about.html')) return 'about';
     if (p.endsWith('/privacy.html')) return 'privacy';
     if (p.endsWith('/contact.html')) return 'contact';
