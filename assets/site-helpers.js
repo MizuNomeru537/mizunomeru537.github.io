@@ -8,7 +8,31 @@ function q(sel, root){ return (root || document).querySelector(sel); }
 function qa(sel, root){ return Array.from((root || document).querySelectorAll(sel)); }
 function setText(node, value){ if(node && value != null) node.textContent = value; }
 function setAttr(node, name, value){ if(node && value != null) node.setAttribute(name, value); }
-function normPath(){ let p = location.pathname || '/'; if (p.endsWith('index.html')) p = p.slice(0, -'index.html'.length); if (!p.endsWith('/')) p += '/'; return p; }
+const ROOT_PAGE_NAMES = new Set(['about.html','contact.html','privacy.html','roadmap.html','changelog.html','404.html','index.html']);
+function normalizeSitePath(inputPath){
+  let p = (inputPath || '/').replace(/\\/g, '/');
+  if (!p.startsWith('/')) p = '/' + p;
+  const lower = p.toLowerCase();
+  const toolsIdx = lower.indexOf('/tools/');
+  if (toolsIdx >= 0) {
+    p = p.slice(toolsIdx);
+  } else {
+    const parts = p.split('/').filter(Boolean);
+    if (!parts.length) p = '/';
+    else {
+      const last = parts[parts.length - 1];
+      const lastLower = last.toLowerCase();
+      if (parts.length === 1 && !ROOT_PAGE_NAMES.has(lastLower)) p = '/';
+      else if (ROOT_PAGE_NAMES.has(lastLower)) p = lastLower === 'index.html' ? '/' : '/' + last;
+      else if (parts.length === 2 && parts[1].toLowerCase() === 'index.html') p = '/';
+      else p = '/' + last;
+    }
+  }
+  if (p.endsWith('index.html')) p = p.slice(0, -'index.html'.length);
+  if (!p.endsWith('/')) p += '/';
+  return p;
+}
+function normPath(){ return normalizeSitePath(location.pathname || '/'); }
 const PATH = normPath();
 const TOOL_BY_PATH = Object.fromEntries(TOOL_DEFS.map(d => [d.path, d]));
 function lang(){ return (window.ToolI18n && window.ToolI18n.getLang && window.ToolI18n.getLang()) || document.documentElement.lang || 'ko'; }
@@ -17,9 +41,9 @@ function L(key){ const m = COPY[key]; const l = lang(); return m ? (m[l] || m.en
 function pageTitleKey(){ if(PATH === '/') return 'index'; if(PATH === '/tools/') return 'tools'; if(PATH === '/about.html/') return 'about'; if(PATH === '/contact.html/') return 'contact'; if(PATH === '/privacy.html/') return 'privacy'; if(PATH === '/roadmap.html/') return 'roadmap'; if(PATH === '/changelog.html/') return 'changelog'; if(PATH === '/404.html/') return '404'; return ''; }
 function titleMap(key){ const m = COPY.page_titles[key]; const l = lang(); return m ? (m[l] || m.en || m.ko || Object.values(m)[0]) : ''; }
 function isToolPage(){ return PATH.startsWith('/tools/') && PATH !== '/tools/'; }
-function titleFromDef(path){ const def = TOOL_BY_PATH[path]; if(!def) return 'Tool'; const raw = trKey(def.titleKey); return (!raw || raw === def.titleKey) ? 'Tool' : raw; }
+function titleFromDef(path){ const def = TOOL_BY_PATH[path]; if(!def) return ''; const raw = trKey(def.titleKey); return (!raw || raw === def.titleKey) ? '' : raw; }
 function descFromDef(path){ const def = TOOL_BY_PATH[path]; if(!def) return ''; const raw = trKey(def.descKey); return (!raw || raw === def.descKey) ? '' : raw; }
-function toolPathFromLink(link){ try{ let p = new URL(link.getAttribute('href'), location.href).pathname; if (p.endsWith('index.html')) p = p.slice(0, -'index.html'.length); if (!p.endsWith('/')) p += '/'; return p; }catch(e){ return ''; } }
+function toolPathFromLink(link){ try{ return normalizeSitePath(new URL(link.getAttribute('href'), location.href).pathname); }catch(e){ return ''; } }
 function textFast(){ if(lang()==='ko') return '빠름'; if(lang()==='ja') return '高速'; if(lang()==='zh-TW' || lang()==='zh-CN') return '快速'; if(lang()==='fr') return 'Rapide'; if(lang()==='de') return 'Schnell'; if(lang()==='ru') return 'Быстро'; if(lang().startsWith('es')) return 'Rápido'; if(lang()==='id') return 'Cepat'; if(lang()==='ar') return 'سريع'; return 'Fast'; }
 function textFree(){ if(lang()==='ko') return '무료'; if(lang()==='ja') return '無料'; if(lang()==='zh-TW' || lang()==='zh-CN') return '免費'; if(lang()==='fr') return 'Gratuit'; if(lang()==='de') return 'Gratis'; if(lang()==='ru') return 'Бесплатно'; if(lang().startsWith('es')) return 'Gratis'; if(lang()==='id') return 'Gratis'; if(lang()==='ar') return 'مجاني'; return 'Free'; }
 function injectStyle(){
@@ -51,7 +75,7 @@ function updateMeta(){
   let title = '';
   let desc = '';
   if(isToolPage() && TOOL_BY_PATH[PATH]){
-    title = titleFromDef(PATH) + ' | ' + trKey('brand');
+    title = (titleFromDef(PATH) || trKey('brand')) + ' | ' + trKey('brand');
     desc = descFromDef(PATH) || L('home_desc');
   } else {
     title = titleMap(pageTitleKey());
@@ -86,22 +110,14 @@ function localizeHeaderFooter(){
 }
 function localizeCardsByTool(selector){
   qa(selector).forEach(card => {
-    const link = q('a', card) || card;
-    const path = toolPathFromLink(link);
-    if(!TOOL_BY_PATH[path]) return;
+    const a = q('a', card) || card;
+    const path = toolPathFromLink(a);
     const title = titleFromDef(path);
-    const desc = descFromDef(path) || q('p', card)?.textContent || '';
-    const h3 = q('h3', card); if(h3) h3.textContent = title;
-    const p = q('p', card); if(p) p.textContent = desc;
-
-    const go = q('.go', card);
-    if(go){
-      go.textContent = trKey('open_link');
-      return;
-    }
-
-    if(link && !link.classList.contains('small-btn') && !link.classList.contains('light') && !link.classList.contains('side-item')){
-      link.textContent = trKey('open_link');
+    const desc = descFromDef(path);
+    const h3 = q('h3', card); if(h3 && title) h3.textContent = title;
+    const p = q('p', card); if(p && desc) p.textContent = desc;
+    if(a && !a.classList.contains('small-btn') && !a.classList.contains('light') && !a.classList.contains('side-item')) {
+      if(a.classList.contains('hub-open') || !a.querySelector('*')) a.textContent = trKey('open_link');
     }
   });
 }
@@ -115,12 +131,7 @@ function localizeHome(){
   qa('.section-head').forEach(head => { const h = q('h2', head); if(!h) return; const txt = h.textContent.toLowerCase(); if(txt.includes('featured') || txt.includes('추천')){ h.textContent = L('featured_h2'); setText(q('p',head), L('featured_p')); } else if(txt.includes('all tools') || txt.includes('전체')){ h.textContent = L('alltools_h2'); setText(q('p',head), L('alltools_p')); } else if(txt.includes('update') || txt.includes('업데이트')){ h.textContent = L('updates_h2'); setText(q('p',head), L('updates_p')); } });
   localizeCardsByTool('#toolGrid .tool-card');
   qa('.featured-card').forEach(card => { const openA = q('.small-btn', card); const path = openA ? toolPathFromLink(openA) : ''; if(TOOL_BY_PATH[path]){ setText(q('h3', card), titleFromDef(path)); setText(q('p', card), descFromDef(path)); const badge=q('.featured-badge', card); if(badge) badge.textContent = L('featured_h2'); const links=qa('a', card); if(links[0]) links[0].textContent = trKey('open_link'); if(links[1]) links[1].textContent = L('btn_updates'); } });
-  qa('.side-item').forEach(a => {
-    const path = toolPathFromLink(a);
-    if(!TOOL_BY_PATH[path]) return;
-    setText(q('strong', a), titleFromDef(path));
-    setText(q('span', a), descFromDef(path));
-  });
+  qa('.side-item').forEach(a => { const path = toolPathFromLink(a); if(TOOL_BY_PATH[path]) setText(q('strong', a), titleFromDef(path)); });
 }
 function setupHomeSearch(){ const input=q('#toolSearch'); const btn=q('#toolSearchBtn'); if(!input || !btn) return; const go=()=>{ const v=(input.value||'').trim(); const base = PATH === '/404.html/' ? './tools/' : './tools/'; location.href = base + (v ? ('?q='+encodeURIComponent(v)) : ''); }; btn.onclick=(e)=>{e.preventDefault();go();}; input.onkeydown=(e)=>{ if(e.key==='Enter'){ e.preventDefault(); go(); } }; }
 function localizeHub(){
