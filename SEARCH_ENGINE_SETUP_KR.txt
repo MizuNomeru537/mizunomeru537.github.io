@@ -1,27 +1,29 @@
-도구랩 검색엔진 노출 설정 가이드
+도구랩 검색 유입 강화 설정 가이드
 
-기본 반영 완료
-- robots.txt 생성
-- sitemap.xml 생성
-- 각 페이지 canonical 추가
-- Open Graph / Twitter 카드 메타 추가
-- 기본 favicon / social image / manifest 추가
-- 구조화 데이터(JSON-LD) 추가
+이번 수정에서 반영한 것
+- GitHub Pages 루트 도메인 기준 URL로 canonical 전체 수정
+- robots.txt 와 sitemap.xml 을 루트 도메인 기준으로 수정
+- site.webmanifest 경로를 루트 도메인 기준으로 수정
+- /tools/ 전용 허브 페이지 추가
+- 각 도구 페이지에 SEO 설명 섹션, FAQ, 관련 도구 링크 추가
+- 각 도구 페이지 title / description / OG / Twitter 메타 강화
+- 구조화 데이터(JSON-LD) 보강
+
+현재 기준 주요 주소
+- 홈: https://mizunomeru537.github.io/
+- 전체 도구 허브: https://mizunomeru537.github.io/tools/
+- 사이트맵: https://mizunomeru537.github.io/sitemap.xml
+- robots.txt: https://mizunomeru537.github.io/robots.txt
 
 배포 후 해야 할 일
-1. 사이트를 GitHub Pages에 올립니다.
-2. Google Search Console에서 속성을 추가합니다.
-3. sitemap.xml 을 제출합니다.
-   - 제출 주소: https://mizunomeru537.github.io/MizuNomeru5379/sitemap.xml
-4. 홈(/)과 핵심 도구 몇 개를 URL 검사로 색인 요청합니다.
-5. Bing Webmaster Tools에도 같은 sitemap.xml 을 제출합니다.
+1. 이 파일들로 GitHub 저장소 내용을 덮어씁니다.
+2. 배포 완료 후 실제 사이트에서 canonical 과 sitemap 주소가 루트 도메인으로 열리는지 확인합니다.
+3. Google Search Console, Bing Webmaster Tools, 네이버 서치어드바이저에 사이트를 등록합니다.
+4. sitemap.xml 을 제출합니다.
+5. 먼저 홈, /tools/, JSON Formatter, Password Generator, QR Code Generator 페이지부터 수집 요청합니다.
 
-중요한 점
-- 현재 사이트는 GitHub Pages의 하위 경로(https://mizunomeru537.github.io/MizuNomeru5379/)에 있습니다.
-- Google의 사이트명(site name)과 검색결과 favicon은 도메인/서브도메인 단위 기준이라 하위 경로 사이트에서는 제한될 수 있습니다.
-- 검색결과에서 브랜드 노출을 더 안정적으로 가져가려면 custom domain 연결이 가장 좋습니다.
-
-추가로 추천
-- 새 도구를 만들 때마다 sitemap.xml 도 같이 갱신
-- 각 도구마다 300~700자 설명 블로그 페이지 추가
-- 한 URL에서 언어를 JS 탭으로만 바꾸는 구조보다, 나중에는 언어별 별도 URL(/en/, /ja/ 등)로 분리하면 SEO에 더 유리
+운영 팁
+- 검색 유입은 도구 수보다 페이지 품질이 더 중요합니다.
+- 유입이 붙는 도구는 예시, FAQ, 관련 링크를 계속 늘리면 더 유리합니다.
+- 새 도구를 만들 때마다 /tools/ 허브와 sitemap.xml 에도 같이 추가하세요.
+- 나중에는 언어별 별도 URL 구조를 만들면 SEO 에 더 유리합니다.
