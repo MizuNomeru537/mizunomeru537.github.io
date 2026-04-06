@@ -86,13 +86,23 @@ function localizeHeaderFooter(){
 }
 function localizeCardsByTool(selector){
   qa(selector).forEach(card => {
-    const a = q('a', card) || card;
-    const path = toolPathFromLink(a);
+    const link = q('a', card) || card;
+    const path = toolPathFromLink(link);
     if(!TOOL_BY_PATH[path]) return;
-    const title = titleFromDef(path); const desc = descFromDef(path) || q('p', card)?.textContent || '';
+    const title = titleFromDef(path);
+    const desc = descFromDef(path) || q('p', card)?.textContent || '';
     const h3 = q('h3', card); if(h3) h3.textContent = title;
     const p = q('p', card); if(p) p.textContent = desc;
-    if(a && !a.classList.contains('small-btn') && !a.classList.contains('light') && !a.classList.contains('side-item')) a.textContent = trKey('open_link');
+
+    const go = q('.go', card);
+    if(go){
+      go.textContent = trKey('open_link');
+      return;
+    }
+
+    if(link && !link.classList.contains('small-btn') && !link.classList.contains('light') && !link.classList.contains('side-item')){
+      link.textContent = trKey('open_link');
+    }
   });
 }
 function localizeHome(){
@@ -105,7 +115,12 @@ function localizeHome(){
   qa('.section-head').forEach(head => { const h = q('h2', head); if(!h) return; const txt = h.textContent.toLowerCase(); if(txt.includes('featured') || txt.includes('추천')){ h.textContent = L('featured_h2'); setText(q('p',head), L('featured_p')); } else if(txt.includes('all tools') || txt.includes('전체')){ h.textContent = L('alltools_h2'); setText(q('p',head), L('alltools_p')); } else if(txt.includes('update') || txt.includes('업데이트')){ h.textContent = L('updates_h2'); setText(q('p',head), L('updates_p')); } });
   localizeCardsByTool('#toolGrid .tool-card');
   qa('.featured-card').forEach(card => { const openA = q('.small-btn', card); const path = openA ? toolPathFromLink(openA) : ''; if(TOOL_BY_PATH[path]){ setText(q('h3', card), titleFromDef(path)); setText(q('p', card), descFromDef(path)); const badge=q('.featured-badge', card); if(badge) badge.textContent = L('featured_h2'); const links=qa('a', card); if(links[0]) links[0].textContent = trKey('open_link'); if(links[1]) links[1].textContent = L('btn_updates'); } });
-  qa('.side-item').forEach(a => { const path = toolPathFromLink(a); if(TOOL_BY_PATH[path]) setText(q('strong', a), titleFromDef(path)); });
+  qa('.side-item').forEach(a => {
+    const path = toolPathFromLink(a);
+    if(!TOOL_BY_PATH[path]) return;
+    setText(q('strong', a), titleFromDef(path));
+    setText(q('span', a), descFromDef(path));
+  });
 }
 function setupHomeSearch(){ const input=q('#toolSearch'); const btn=q('#toolSearchBtn'); if(!input || !btn) return; const go=()=>{ const v=(input.value||'').trim(); const base = PATH === '/404.html/' ? './tools/' : './tools/'; location.href = base + (v ? ('?q='+encodeURIComponent(v)) : ''); }; btn.onclick=(e)=>{e.preventDefault();go();}; input.onkeydown=(e)=>{ if(e.key==='Enter'){ e.preventDefault(); go(); } }; }
 function localizeHub(){
