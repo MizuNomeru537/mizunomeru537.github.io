@@ -12,7 +12,6 @@
   scrollbar-width:thin;
 }
 .lang-tab{
-  transition:transform .16s ease, box-shadow .22s ease, background-color .22s ease, border-color .22s ease, color .22s ease;
   border:1px solid #dbe3ef;
   background:#fff;
   color:#1f2937;
