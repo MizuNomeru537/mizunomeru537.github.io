@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<script>document.documentElement.lang='id';try{localStorage.setItem('toollab_lang','id');}catch(e){}</script>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Free Online Tools – JSON Formatter, Password Generator, QR Code Generator and More | ToolLab</title>
+<meta content="Free online tools for JSON formatting, password generation, QR code creation, HTML preview, UUID generation, text cleanup, code formatting, and more." name="description"/>
+<meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/>
+<style>
+    :root{
+      --bg:#f4f7fb; --panel:#ffffff; --text:#101826; --muted:#5b6678; --line:#e6ebf2;
+      --primary:#4f46e5; --primary-2:#7c3aed; --shadow:0 18px 40px rgba(16,24,40,.08);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Arial,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:linear-gradient(180deg,#f7f9fc 0%, #f2f5fa 100%);color:var(--text)}
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1200px, calc(100% - 32px));margin:0 auto}
+    .topbar{position:sticky;top:0;z-index:50;background:rgba(12,18,28,.84);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .topbar-inner{display:flex;align-items:center;justify-content:space-between;min-height:72px;gap:24px}
+    .brand{display:flex;align-items:center;gap:12px;color:#fff;font-weight:800;font-size:20px}
+    .brand-mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--primary),var(--primary-2));display:grid;place-items:center;color:#fff;box-shadow:0 10px 30px rgba(79,70,229,.35)}
+    .nav{display:flex;gap:10px;flex-wrap:wrap}
+    .nav a,.ghost-btn{color:#d7deea;padding:10px 14px;border-radius:999px;font-size:14px}
+    .nav a:hover,.ghost-btn:hover{background:rgba(255,255,255,.08);color:#fff}
+    .hero{padding:42px 0 20px}
+    .hero-card{border-radius:30px;background:
+      radial-gradient(circle at 15% 20%, rgba(124,58,237,.35), transparent 28%),
+      radial-gradient(circle at 85% 30%, rgba(14,165,233,.28), transparent 30%),
+      linear-gradient(135deg,#0f172a 0%, #111827 45%, #182234 100%);
+      color:#fff;padding:48px;box-shadow:0 30px 60px rgba(17,24,39,.22)}
+    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);color:#d7deea;font-size:13px;margin-bottom:18px}
+    .hero h1{margin:0 0 14px;font-size:54px;line-height:1.06;letter-spacing:-1.6px}
+    .hero p{margin:0;color:#d6deea;font-size:18px;line-height:1.7;max-width:760px}
+    .hero-actions{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+    .btn{padding:14px 18px;border-radius:16px;font-weight:700;display:inline-flex;align-items:center;gap:8px}
+    .btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;box-shadow:0 16px 32px rgba(99,102,241,.28)}
+    .btn-dark{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.08)}
+    .search-wrap{margin-top:20px;display:flex;gap:12px;align-items:center;background:#fff;border-radius:20px;padding:12px;box-shadow:var(--shadow);border:1px solid var(--line)}
+    .search-wrap input{flex:1;border:0;outline:0;font-size:16px;padding:10px 12px;background:transparent;color:var(--text)}
+    .search-btn{border:0;background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;padding:14px 18px;border-radius:16px;font-weight:700;cursor:pointer}
+    .mini-panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:18px}
+    .mini-panel h3{margin:0 0 8px;font-size:16px}
+    .mini-panel p{font-size:14px;color:#d8dfeb;margin:0;line-height:1.6}
+    .hero-side{display:grid;gap:14px}
+    .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}
+    .stat{background:rgba(255,255,255,.06);border-radius:18px;padding:14px;text-align:center}
+    .stat strong{display:block;font-size:22px;margin-bottom:4px}
+    .stat span{font-size:13px;color:#c8d2e0}
+    .ad-banner{margin:24px 0 12px;border:1px dashed #cdd6e3;background:#fff;border-radius:20px;padding:20px;text-align:center;color:#728099;box-shadow:var(--shadow)}
+    .section{padding:18px 0 10px}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:18px}
+    .section-head h2{margin:0;font-size:30px;letter-spacing:-1px}
+    .section-head p{margin:6px 0 0;color:var(--muted);font-size:15px}
+    .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+    .chip{background:#fff;border:1px solid var(--line);padding:10px 14px;border-radius:999px;color:#334155;font-size:14px}
+    .chip.active{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;border-color:transparent}
+    .featured-grid{display:grid;grid-template-columns:2fr 1fr;gap:18px;margin-bottom:16px}
+    .featured-card,.side-item,.panel,.tool-card{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}
+    .featured-card{padding:28px;position:relative;overflow:hidden}
+    .featured-badge{display:inline-block;background:#eef2ff;color:#4338ca;padding:8px 12px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:14px}
+    .featured-card h3{margin:0 0 10px;font-size:28px}
+    .featured-card p{margin:0;color:var(--muted);line-height:1.7}
+    .featured-actions{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+    .small-btn{display:inline-flex;align-items:center;gap:8px;background:#111827;color:#fff;border-radius:14px;padding:12px 14px;font-weight:700;font-size:14px}
+    .side-list{display:grid;gap:14px}
+    .side-item{padding:18px}
+    .side-item strong{display:block;margin-bottom:6px;font-size:16px}
+    .side-item span{color:var(--muted);font-size:14px;line-height:1.6}
+    .tool-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .tool-card{padding:18px;min-height:180px;display:flex;flex-direction:column;justify-content:space-between;transition:.18s ease}
+    .tool-card:hover{transform:translateY(-4px)}
+    .icon{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;color:#fff;font-size:28px}
+    .tool-card h3{margin:18px 0 8px;font-size:21px}
+    .tool-card p{margin:0 0 14px;color:var(--muted);line-height:1.6;font-size:14px}
+    .go{font-weight:700;font-size:14px}
+    .bg-indigo{background:linear-gradient(135deg,#6366f1,#8b5cf6)}
+    .bg-sky{background:linear-gradient(135deg,#0ea5e9,#38bdf8)}
+    .bg-green{background:linear-gradient(135deg,#10b981,#34d399)}
+    .bg-orange{background:linear-gradient(135deg,#f59e0b,#fbbf24)}
+    .bg-pink{background:linear-gradient(135deg,#ec4899,#f472b6)}
+    .bg-slate{background:linear-gradient(135deg,#334155,#64748b)}
+    .split{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin-top:18px}
+    .panel{padding:24px}
+    .panel h3{margin:0 0 8px;font-size:22px}
+    .panel p{margin:0 0 16px;color:var(--muted);line-height:1.7}
+    .update-list,.faq{display:grid;gap:12px}
+    .update-item,details{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:#fbfcfe}
+    .update-item strong{display:block;margin-bottom:6px;font-size:15px}
+    .update-item span,details p{color:var(--muted);font-size:14px}
+    summary{cursor:pointer;font-weight:700}
+    .footer{margin-top:34px;padding:28px 0 42px;border-top:1px solid var(--line);color:#667085}
+    .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:18px}
+    .footer h4{margin:0 0 12px;color:#0f172a;font-size:16px}
+    .footer p,.footer a{font-size:14px;line-height:1.7;color:#667085}
+    .footer a{display:block;margin-bottom:8px}
+    .copyright{margin-top:24px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:#94a3b8}
+    @media (max-width:1100px){.hero-grid,.featured-grid,.split,.footer-grid{grid-template-columns:1fr}.tool-grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:42px}}
+    @media (max-width:760px){.topbar-inner{flex-direction:column;align-items:flex-start;padding:12px 0}.hero-card{padding:28px 20px}.hero h1{font-size:34px}.search-wrap{flex-direction:column;align-items:stretch}.tool-grid,.stat-row{grid-template-columns:1fr}.section-head{flex-direction:column;align-items:flex-start}}
+  </style>
+<link href="./assets/lang.css?v=20260407-8" rel="stylesheet"/>
+<script defer="" src="./assets/i18n.js?v=20260407-8"></script>
+<script defer="" src="./assets/lang-fix.js?v=20260407-8"></script>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8492468439910779"></script>
+<meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="googlebot"/><meta content="#4f46e5" name="theme-color"/><meta content="strict-origin-when-cross-origin" name="referrer"/><link rel="canonical" href="https://mizunomeru537.github.io/id/"/><link href="./favicon.ico" rel="icon" type="image/x-icon"/><link href="./favicon-32x32.png" rel="icon" type="image/png"/><link href="./apple-touch-icon.png" rel="apple-touch-icon" type="image/png"/><link href="./site.webmanifest" rel="manifest"/><meta content="website" property="og:type"/><meta content="ToolLab" property="og:site_name"/><meta content="Free Online Tools – JSON Formatter, Password Generator, QR Code Generator and More | ToolLab" property="og:title"/><meta content="Free online tools for JSON formatting, password generation, QR code creation, HTML preview, UUID generation, text cleanup, code formatting, and more." property="og:description"/><meta content="https://mizunomeru537.github.io/" property="og:url"/><meta content="https://mizunomeru537.github.io/assets/seo-cover.png" property="og:image"/><meta content="1200" property="og:image:width"/><meta content="630" property="og:image:height"/><meta content="summary_large_image" name="twitter:card"/><meta content="Free Online Tools – JSON Formatter, Password Generator, QR Code Generator and More | ToolLab" name="twitter:title"/><meta content="Free online tools for JSON formatting, password generation, QR code creation, HTML preview, UUID generation, text cleanup, code formatting, and more." name="twitter:description"/><meta content="https://mizunomeru537.github.io/assets/seo-cover.png" name="twitter:image"/><script data-seo-jsonld="1" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://mizunomeru537.github.io/#website","url":"https://mizunomeru537.github.io/","name":"ToolLab","alternateName":["도구랩","Tool Lab"],"inLanguage":"id"},{"@type":"CollectionPage","@id":"https://mizunomeru537.github.io/#webpage","url":"https://mizunomeru537.github.io/","name":"Online Tools for Code, Text, JSON, SQL, UUID, and More | ToolLab","description":"Free online tools for code formatting, minifying, JSON and SQL formatting, UUID generation, password generation, text cleanup, conversion, QR creation, and more.","isPartOf":{"@id":"https://mizunomeru537.github.io/#website"},"inLanguage":"id"}]}</script><script data-extra-seo="1" type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "ItemList", "name": "Popular Tool Pages", "itemListElement": [{"@type": "ListItem", "position": 1, "url": "https://mizunomeru537.github.io/tools/jsonFormatter/"}, {"@type": "ListItem", "position": 2, "url": "https://mizunomeru537.github.io/tools/passwordGenerator/"}, {"@type": "ListItem", "position": 3, "url": "https://mizunomeru537.github.io/tools/qrMaker/"}, {"@type": "ListItem", "position": 4, "url": "https://mizunomeru537.github.io/tools/uuidGenerator/"}, {"@type": "ListItem", "position": 5, "url": "https://mizunomeru537.github.io/tools/htmlPreview/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Are these tools free to use?", "acceptedAnswer": {"@type": "Answer", "text": "The site is built around free browser-based tools for common development and text workflows."}}, {"@type": "Question", "name": "Do I need to install anything?", "acceptedAnswer": {"@type": "Answer", "text": "No. The main tools work directly in the browser for quick everyday tasks."}}]}]}</script><link rel="alternate" hreflang="en" href="https://mizunomeru537.github.io/en/"/>
+<link rel="alternate" hreflang="ja" href="https://mizunomeru537.github.io/ja/"/>
+<link rel="alternate" hreflang="zh-TW" href="https://mizunomeru537.github.io/zh-tw/"/>
+<link rel="alternate" hreflang="zh-CN" href="https://mizunomeru537.github.io/zh-cn/"/>
+<link rel="alternate" hreflang="fr" href="https://mizunomeru537.github.io/fr/"/>
+<link rel="alternate" hreflang="de" href="https://mizunomeru537.github.io/de/"/>
+<link rel="alternate" hreflang="ru" href="https://mizunomeru537.github.io/ru/"/>
+<link rel="alternate" hreflang="es-419" href="https://mizunomeru537.github.io/es-419/"/>
+<link rel="alternate" hreflang="es" href="https://mizunomeru537.github.io/es/"/>
+<link rel="alternate" hreflang="id" href="https://mizunomeru537.github.io/id/"/>
+<link rel="alternate" hreflang="ar" href="https://mizunomeru537.github.io/ar/"/>
+<link rel="alternate" hreflang="ko" href="https://mizunomeru537.github.io/ko/"/>
+<link rel="alternate" hreflang="x-default" href="https://mizunomeru537.github.io/en/"/>
+</head>
+<body>
+<header class="topbar">
+<div class="container topbar-inner">
+<a class="brand" href="./index.html"><span class="brand-mark">⚡</span><span>ToolLab</span></a>
+<nav class="nav">
+<a href="#featured">Featured Tools</a>
+<a href="./tools/">All Tools</a>
+<a href="#updates">Updates</a>
+</nav>
+<div class="nav-right">
+<a class="ghost-btn" href="./about.html">About</a>
+<a class="ghost-btn" href="./contact.html">Contact</a>
+</div>
+</div>
+</header>
+<main>
+<section class="hero">
+<div class="container">
+<div class="hero-card">
+<div class="hero-grid">
+<div>
+<div class="eyebrow">Free · Fast · Runs in the browser</div>
+<h1>Online tools,
+cleaner and faster</h1>
+<p>Keep your most-used utilities in one place: code formatting, minifying, JSON cleanup, SQL formatting, UUID generation, text conversion, and more.</p>
+<div class="hero-actions">
+<a class="btn btn-primary" href="./tools/">Browse tools</a>
+<a class="btn btn-dark" href="#updates">See updates</a>
+</div>
+<div class="search-wrap">
+<input id="toolSearch" placeholder="Search tools. Example: JSON, UUID, QR" type="text"/>
+<button class="search-btn" onclick="document.getElementById('tools').scrollIntoView({behavior:'smooth'})" type="button">Find Tools</button>
+</div>
+</div>
+<div class="hero-side">
+<div class="mini-panel">
+<h3>Recommended starting points</h3>
+<p>Start with the code beautifier, JSON formatter, SQL formatter, and UUID generator.</p>
+<div class="stat-row">
+<div class="stat"><strong>22</strong><span>핵심 도구</span></div>
+<div class="stat"><strong>무료</strong><span>브라우저 실행</span></div>
+<div class="stat"><strong>빠름</strong><span>즉시 사용</span></div>
+</div>
+</div>
+<div class="mini-panel">
+<h3>How this site is run</h3>
+<p>The goal is a practical tool hub that combines working utilities with clear explanations, not just pages full of ads.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="ad-banner">Ad space for responsive banner or in-feed ad</div>
+</div>
+</section>
+<section class="section" id="featured">
+<div class="container">
+<div class="section-head">
+<div>
+<h2>Featured tools</h2>
+<p>Start with the most-used utilities first.</p>
+</div>
+</div>
+<div class="chips">
+<span class="chip active">전체</span>
+<span class="chip">개발</span>
+<span class="chip">문서</span>
+<span class="chip">변환</span>
+<span class="chip">유틸리티</span>
+</div>
+<div class="featured-grid">
+<div class="featured-card">
+<span class="featured-badge">가장 많이 쓰는 기능</span>
+<h3>코드 정렬기</h3>
+<p>HTML, CSS, JavaScript, JSON 코드를 보기 좋게 정리하는 기본 도구입니다.</p>
+<div class="featured-actions">
+<a class="small-btn" href="./tools/beautifyCode/">바로 사용하기</a>
+</div>
+</div>
+<div class="side-list">
+<a class="side-item" href="./tools/jsonFormatter/"><strong>JSON 정리기</strong><span>API 응답이나 설정 파일을 보기 쉽게 정리</span></a>
+<a class="side-item" href="./tools/sqlFormatter/"><strong>SQL 포맷터</strong><span>복잡한 SQL을 읽기 좋은 형태로 자동 정리</span></a>
+<a class="side-item" href="./tools/uuidGenerator/"><strong>UUID 생성기</strong><span>랜덤 UUID를 즉시 생성하고 복사</span></a>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="tools">
+<div class="container">
+<div class="section-head">
+<div>
+<h2>전체 도구</h2>
+<p>지금은 핵심 도구 위주로 구성했고, 이후 실제 사용량 높은 것부터 계속 늘리면 됩니다.</p>
+</div>
+</div>
+<div class="tool-grid" id="toolGrid">
+<a class="tool-card" data-keywords="코드 정렬 html css js json formatter beautify prettier" href="./tools/beautifyCode/"><div class="icon bg-indigo">⌘</div><div><h3>코드 정렬</h3><p>HTML, CSS, JS, JSON 코드를 깔끔하게 정리</p></div><span class="go">열기 →</span></a>
+<a class="tool-card" data-keywords="코드 압축 minify html css js terser" href="./tools/minifyCode/"><div class="icon bg-sky">⇣</div><div><h3>코드 압축</h3><p>공백과 줄바꿈을 제거해 더 짧고 가볍게 변환</p></div><span class="go">열기 →</span></a>
+<a class="tool-card" data-keywords="json formatter pretty api 응답 정리" href="./tools/jsonFormatter/"><div class="icon bg-green">{ }</div><div><h3>JSON 정리</h3><p>복잡한 JSON 데이터를 보기 좋은 구조로 변환</p></div><span class="go">열기 →</span></a>
+<a class="tool-card" data-keywords="sql formatter query 정리 쿼리" href="./tools/sqlFormatter/"><div class="icon bg-orange">SQL</div><div><h3>SQL 정리</h3><p>긴 쿼리를 보기 편한 형태로 자동 정리</p></div><span class="go">열기 →</span></a>
+<a class="tool-card" data-keywords="uuid 생성기 guid 랜덤" href="./tools/uuidGenerator/"><div class="icon bg-pink">🔑</div><div><h3>UUID 생성기</h3><p>랜덤 UUID를 한 번에 여러 개 생성 가능</p></div><span class="go">열기 →</span></a>
+<a class="tool-card" data-keywords="base64 encode decode 변환" href="./tools/base64/"><div class="icon bg-slate">⇄</div><div><h3>Base64 변환</h3><p>텍스트를 Base64로 인코딩하거나 디코딩</p></div><span class="go">열기 →</span></a>
+<a class="tool-card" data-keywords="특수문자 기호 문자표" href="./tools/specialChars/"><div class="icon bg-sky">☆</div><div><h3>특수문자표</h3><p>자주 쓰는 기호와 특수문자를 빠르게 복사</p></div><span class="go">열기 →</span></a>
+<a class="tool-card" data-keywords="줄바꿈 공백 정리 텍스트 변환 cleaner" href="./tools/textCleaner/"><div class="icon bg-green">✎</div><div><h3>텍스트 정리</h3><p>중복 공백 제거, 줄바꿈 정리, 문장 정돈</p></div><span class="go">열기 →</span></a>
+<a class="tool-card" data-keywords="html escape unescape 소스 보기 엔티티" href="./tools/htmlEscape/"><div class="icon bg-orange">&lt;/&gt;</div><div><h3>HTML 변환</h3><p>HTML 이스케이프와 언이스케이프를 빠르게 처리</p></div><span class="go">열기 →</span></a>
+<a class="tool-card" data-keywords="diff 비교 코드 비교 텍스트 비교" href="./tools/diffCheck/"><div class="icon bg-indigo">≠</div><div><h3>문서 비교</h3><p>두 텍스트나 코드의 차이를 한눈에 비교</p></div><span class="go">열기 →</span></a>
+<a class="tool-card" data-keywords="qr barcode 생성기 qr code" href="./tools/qrMaker/"><div class="icon bg-pink">▣</div><div><h3>QR 생성기</h3><p>URL이나 텍스트를 QR 코드 이미지로 생성</p></div><span class="go">열기 →</span></a>
+<a class="tool-card" data-keywords="case convert 대문자 소문자 카멜 파스칼 스네이크" href="./tools/caseConvert/"><div class="icon bg-slate">Aa</div><div><h3>문자 케이스 변환</h3><p>camelCase, PascalCase, snake_case 등을 변환</p></div><span class="go">열기 →</span></a>
+<a class="tool-card" data-keywords="word counter 글자수 세기 text count words lines bytes" href="./tools/wordCounter/"><div class="icon bg-indigo">#</div><div><h3>Word Counter</h3><p>Count characters, words, lines, and UTF-8 bytes instantly.</p></div><span class="go">Open →</span></a>
+<a class="tool-card" data-keywords="password generator 비밀번호 생성 random secure" href="./tools/passwordGenerator/"><div class="icon bg-sky">🔐</div><div><h3>Password Generator</h3><p>Create strong passwords with length and character options.</p></div><span class="go">Open →</span></a>
+<a class="tool-card" data-keywords="url encoder decoder 인코딩 디코딩 query" href="./tools/urlEncoder/"><div class="icon bg-green">%20</div><div><h3>URL Encoder</h3><p>Encode or decode URLs and query values safely.</p></div><span class="go">Open →</span></a>
+<a class="tool-card" data-keywords="hash checksum sha256 sha1 체크섬" href="./tools/hashGenerator/"><div class="icon bg-orange">#=</div><div><h3>Hash Generator</h3><p>Generate SHA-256 and SHA-1 hashes in the browser.</p></div><span class="go">Open →</span></a>
+<a class="tool-card" data-keywords="regex tester 정규식 tester match" href="./tools/regexTester/"><div class="icon bg-pink">.*</div><div><h3>Regex Tester</h3><p>Test patterns, flags, and match results quickly.</p></div><span class="go">Open →</span></a>
+<a class="tool-card" data-keywords="timestamp unix epoch time converter 날짜 시간" href="./tools/timestampConverter/"><div class="icon bg-slate">⏱</div><div><h3>Timestamp Converter</h3><p>Convert Unix timestamps and readable date strings.</p></div><span class="go">Open →</span></a>
+<a class="tool-card" data-keywords="color converter hex rgb hsl 색상" href="./tools/colorConverter/"><div class="icon bg-sky">🎨</div><div><h3>Color Converter</h3><p>Convert HEX, RGB, and HSL with live preview.</p></div><span class="go">Open →</span></a>
+<a class="tool-card" data-keywords="lorem ipsum generator 더미 텍스트" href="./tools/loremIpsum/"><div class="icon bg-green">¶</div><div><h3>Lorem Ipsum</h3><p>Generate placeholder paragraphs for layouts and mockups.</p></div><span class="go">Open →</span></a>
+<a class="tool-card" data-keywords="html preview editor 웹 에디터 html source" href="./tools/htmlPreview/"><div class="icon bg-orange">🌐</div><div><h3>HTML Preview</h3><p>Write HTML and preview the rendered output side by side.</p></div><span class="go">Open →</span></a>
+<a class="tool-card" data-keywords="csv to json converter 엑셀 csv json" href="./tools/csvToJson/"><div class="icon bg-pink">CSV</div><div><h3>CSV → JSON</h3><p>Turn CSV text into pretty JSON right in the browser.</p></div><span class="go">Open →</span></a>
+</div>
+<div class="ad-banner" style="margin-top:20px;">광고 영역 728 x 90 또는 반응형 인피드 광고 자리</div>
+<section class="section seo-home-block"><div class="container"><div class="split"><div class="panel seo-panel"><h2>What users can do on ToolLab</h2><p>ToolLab groups common browser-based utilities in one place: JSON formatting, password generation, QR code creation, text cleanup, UUID generation, HTML preview, Base64 conversion, and other quick developer tools.</p><h3>Why this helps search and usability</h3><p>Each tool page has its own direct URL, description, FAQ block, and related links. That makes the site easier to explore and gives search engines clearer topic pages to crawl.</p><h3>Popular search intents covered here</h3><ul><li>JSON formatter online</li><li>strong password generator</li><li>QR code generator online</li><li>CSV to JSON converter</li><li>HTML preview online</li><li>Unix timestamp converter</li></ul></div><div class="panel seo-panel"><h2>Best pages to grow first</h2><p>For organic traffic, the strongest pages are usually utilities with clear search intent and repeat usage.</p><div class="related-links"><a href="./tools/jsonFormatter/">JSON Formatter →</a><a href="./tools/passwordGenerator/">Password Generator →</a><a href="./tools/qrMaker/">QR Code Generator →</a><a href="./tools/uuidGenerator/">UUID Generator →</a><a href="./tools/htmlPreview/">HTML Preview →</a></div><div class="note-box">Tip: keep adding examples, FAQs, and internal links to the tools that already match strong search queries.</div></div></div></div></section><div class="split" id="updates">
+<div class="panel">
+<h3>운영 팁</h3>
+<p>지금은 실제 사용성이 높은 도구 22개까지 확장한 상태입니다. 이후에는 비슷한 기능을 무작정 늘리기보다 검색 유입과 재방문이 잘 나오는 도구를 중심으로 더 보강하면 됩니다.</p>
+<div class="update-list">
+<div class="update-item"><strong>도구 페이지마다 별도 설명 페이지 만들기</strong><span>예: 코드 정렬이란 무엇인가, 언제 쓰는가, 예시 입력/출력, 자주 하는 실수</span></div>
+<div class="update-item"><strong>광고는 처음부터 과도하게 넣지 않기</strong><span>첫 화면은 도구 신뢰감이 더 중요하므로, 상단 1개 + 중간 1개 정도부터 시작</span></div>
+<div class="update-item"><strong>비슷한 툴 100개보다 잘 되는 툴 22개</strong><span>중복 기능을 늘리기보다 검색 유입이 잘 되는 핵심 기능을 강화하는 게 낫습니다.</span></div>
+</div>
+</div>
+<div class="panel">
+<h3>자주 묻는 질문</h3>
+<div class="faq">
+<details open=""><summary>이 도구들은 무료인가요?</summary><p>현재 구조상 기본적인 기능은 무료로 제공하는 방향으로 운영하기 좋습니다.</p></details>
+<details><summary>서버 없이 운영 가능한가요?</summary><p>코드 정렬, 문자 변환, JSON 정리 같은 기능은 대부분 정적 HTML/JS만으로도 충분히 구현 가능합니다.</p></details>
+<details><summary>광고는 어디에 넣는 게 좋나요?</summary><p>히어로 아래, 카드 그리드 중간, 하단 정보 영역 위처럼 흐름을 너무 해치지 않는 곳이 좋습니다.</p></details>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="container">
+<div class="footer-grid">
+<div><h4>ToolLab</h4><p>An online toolkit for fast development, document, and conversion work.</p></div>
+<div><h4>바로가기</h4><a href="#featured">추천 도구</a><a href="./tools/">전체 도구</a><a href="#updates">업데이트</a></div>
+<div><h4>정보</h4><a href="./about.html">소개</a><a href="./privacy.html">개인정보처리방침</a><a href="./contact.html">문의</a></div>
+<div><h4>연결</h4><a href="./roadmap.html">로드맵</a><a href="./changelog.html">변경이력</a></div>
+</div>
+<div class="copyright">© 2026 ToolLab. All rights reserved.</div>
+</div>
+</footer>
+<script>
+    const input = document.getElementById('toolSearch');
+    const cards = Array.from(document.querySelectorAll('#toolGrid .tool-card'));
+    input.addEventListener('input', function(){
+      const q = this.value.trim().toLowerCase();
+      cards.forEach(card => {
+        const text = (card.innerText + ' ' + (card.dataset.keywords || '')).toLowerCase();
+        card.style.display = !q || text.includes(q) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
