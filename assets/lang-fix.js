@@ -1002,11 +1002,14 @@
     el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls);
     clearTimeout(el._flashTimer); el._flashTimer = setTimeout(() => el.classList.remove(cls), ms || 550);
   }
-  function activateAction(el, ms){
-    if (!el) return;
+  function activateAction(el){
+    if (!el || el.classList.contains('lang-tab')) return;
+    const group = getStickyGroup(el);
+    const scope = group || document;
+    scope.querySelectorAll('.btn-action-active').forEach(node => {
+      if (node !== el) node.classList.remove('btn-action-active');
+    });
     el.classList.add('btn-action-active');
-    clearTimeout(el._activeTimer);
-    el._activeTimer = setTimeout(() => el.classList.remove('btn-action-active'), ms || 900);
   }
   function getStickySelector(){
     return '.btn,.lang-tab,.copy-btn,.related-links a,.hub-card a,.nav a,.ghost-btn,.search-btn,.small-btn,.chip,button';
@@ -1028,13 +1031,14 @@
     if (!group) return;
     group.querySelectorAll(getStickySelector()).forEach(node => {
       if (!shouldStickyManage(node, group)) return;
-      if (node !== current) node.classList.remove('btn-sticky-active','nav-current','active');
+      if (node !== current) node.classList.remove('btn-sticky-active','btn-action-active','nav-current','active');
     });
   }
   function setStickyActive(el){
     if (!el || el.classList.contains('lang-tab')) return;
     const group = getStickyGroup(el);
     if (group) clearStickyInGroup(group, el);
+    el.classList.remove('nav-current','active','btn-sticky-active','btn-action-active');
     if (group && group.matches('.nav,.nav-right')) {
       el.classList.add('nav-current');
       return;
@@ -1044,6 +1048,7 @@
       return;
     }
     el.classList.add('btn-sticky-active');
+    activateAction(el);
   }
   function normalizePath(p){
     const path = (p || '').replace(/\\/g, '/').toLowerCase();
@@ -1086,6 +1091,22 @@
       box.classList.toggle('ui-checked', !!input.checked);
     });
   }
+  function syncSingleActiveGroups(){
+    document.querySelectorAll('.control-row,.hero-actions,.featured-actions,.search-wrap,.chips,.copy-grid,.card-list,.tag-wrap,.related-links').forEach(group => {
+      const items = Array.from(group.querySelectorAll(getStickySelector())).filter(el => shouldStickyManage(el, group) && !el.classList.contains('lang-tab'));
+      if (!items.length) return;
+      if (!group.matches('.chips') && items.length >= 2) {
+        group.classList.add('single-active-group');
+        items.forEach(el => el.classList.add('single-active-item'));
+      }
+      let current = items.find(el => el.classList.contains('btn-sticky-active') || el.classList.contains('btn-action-active') || el.classList.contains('nav-current') || el.classList.contains('active'));
+      if (!current && group.matches('.chips')) current = items.find(el => el.classList.contains('active'));
+      if (!current && !group.matches('.chips')) {
+        current = items.find(el => el.classList.contains('btn-primary') || el.classList.contains('search-btn') || el.classList.contains('small-btn')) || items[0];
+      }
+      if (current) setStickyActive(current);
+    });
+  }
   function installButtonUX(){
     const selector = getStickySelector();
     const panelSelector = getPanelSelector();
@@ -1095,12 +1116,12 @@
         const el = e.target.closest(selector);
         if (!el) return;
         flash(el, 'btn-press-pop', 220);
+        if (!el.classList.contains('lang-tab') && shouldStickyManage(el, getStickyGroup(el))) setStickyActive(el);
       }, true);
       document.addEventListener('click', function(e){
         const el = e.target.closest(selector);
         if (!el) return;
         flash(el, 'btn-click-pop', 420);
-        activateAction(el, 950);
         if (!el.classList.contains('lang-tab') && shouldStickyManage(el, getStickyGroup(el))) setStickyActive(el);
         const panel = el.closest(panelSelector);
         if (panel) flash(panel, 'action-flash', 620);
@@ -1112,6 +1133,7 @@
       window.addEventListener('hashchange', syncNavCurrentState);
     }
     syncCheckboxUi();
+    syncSingleActiveGroups();
     syncNavCurrentState();
   }
   function installMsgObservers(){

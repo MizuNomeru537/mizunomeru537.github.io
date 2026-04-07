@@ -44,6 +44,25 @@
   border-color:transparent !important;
   box-shadow:0 10px 24px rgba(79,70,229,.22) !important;
 }
+.single-active-group .single-active-item{
+  transition:transform .16s ease, box-shadow .22s ease, background-color .22s ease, border-color .22s ease, color .22s ease;
+}
+.single-active-group .single-active-item:not(.btn-sticky-active):not(.btn-action-active):not(.nav-current):not(.active){
+  background:#ffffff !important;
+  color:#111827 !important;
+  border:1px solid #dbe3ef !important;
+  box-shadow:none !important;
+}
+.single-active-group .single-active-item:not(.btn-sticky-active):not(.btn-action-active):not(.nav-current):not(.active) svg,
+.single-active-group .single-active-item:not(.btn-sticky-active):not(.btn-action-active):not(.nav-current):not(.active) small,
+.single-active-group .single-active-item:not(.btn-sticky-active):not(.btn-action-active):not(.nav-current):not(.active) span{
+  color:inherit !important;
+}
+.single-active-group .single-active-item:not(.btn-sticky-active):not(.btn-action-active):not(.nav-current):not(.active):hover{
+  border-color:#c7d2fe !important;
+  box-shadow:0 8px 18px rgba(99,102,241,.10) !important;
+}
+
 .btn-sticky-active svg,
 .btn-sticky-active small,
 .btn-sticky-active span,
@@ -140,7 +159,7 @@ button:active,
   background:linear-gradient(135deg,#4f46e5,#7c3aed) !important;
   color:#fff !important;
   border-color:transparent !important;
-  box-shadow:0 14px 28px rgba(79,70,229,.28) !important;
+  box-shadow:0 10px 24px rgba(79,70,229,.22) !important;
 }
 .btn-action-active svg,
 .btn-action-active small,
