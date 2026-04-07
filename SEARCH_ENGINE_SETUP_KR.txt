@@ -27,3 +27,8 @@
 - 유입이 붙는 도구는 예시, FAQ, 관련 링크를 계속 늘리면 더 유리합니다.
 - 새 도구를 만들 때마다 /tools/ 허브와 sitemap.xml 에도 같이 추가하세요.
 - 나중에는 언어별 별도 URL 구조를 만들면 SEO 에 더 유리합니다.
+
+
+[Google Search Console 메타 태그 검증 추가]
+<meta name="google-site-verification" content="rpAPu5Xbyd0Mol4er7aneJJsXC2cQs9c_IvjP3RnD_Y"/>
+이미 전체 HTML 파일에 반영되어 있습니다.
