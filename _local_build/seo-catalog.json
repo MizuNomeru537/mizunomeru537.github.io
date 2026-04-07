@@ -1,0 +1,181 @@
+{
+  "lastmod": "2026-04-07",
+  "tools": [
+    {
+      "slug": "beautifyCode",
+      "title": "Code Beautifier",
+      "desc": "Format HTML, CSS, JavaScript, and JSON in your browser with readable indentation and quick copy tools.",
+      "pill": "Code formatter for HTML, CSS, JavaScript, and JSON",
+      "category": "dev"
+    },
+    {
+      "slug": "minifyCode",
+      "title": "Code Minifier",
+      "desc": "Minify HTML, CSS, JavaScript, and JSON online to reduce size and remove unnecessary whitespace.",
+      "pill": "Code minifier for HTML, CSS, JavaScript, and JSON",
+      "category": "dev"
+    },
+    {
+      "slug": "jsonFormatter",
+      "title": "JSON Formatter",
+      "desc": "Pretty print, validate, and clean JSON online with fast browser-based formatting and copy tools.",
+      "pill": "JSON format, minify, and validation tool",
+      "category": "data"
+    },
+    {
+      "slug": "sqlFormatter",
+      "title": "SQL Formatter",
+      "desc": "Format SQL queries online for better readability with line breaks, spacing, and clean layout.",
+      "pill": "SQL formatting and readability helper",
+      "category": "data"
+    },
+    {
+      "slug": "uuidGenerator",
+      "title": "UUID Generator",
+      "desc": "Generate random UUIDs online for identifiers, testing, mock data, and development workflows.",
+      "pill": "UUID creation for development and testing",
+      "category": "util"
+    },
+    {
+      "slug": "base64",
+      "title": "Base64 Encode / Decode",
+      "desc": "Encode text to Base64 or decode Base64 strings online with instant browser-based conversion.",
+      "pill": "Base64 encoder and decoder",
+      "category": "convert"
+    },
+    {
+      "slug": "specialChars",
+      "title": "Special Characters",
+      "desc": "Copy special characters, symbols, arrows, currency marks, and common Unicode characters quickly.",
+      "pill": "Special symbols and Unicode character helper",
+      "category": "text"
+    },
+    {
+      "slug": "textCleaner",
+      "title": "Text Cleaner",
+      "desc": "Clean text online by removing extra spaces, blank lines, duplicate lines, and messy formatting.",
+      "pill": "Text cleanup and normalization tool",
+      "category": "text"
+    },
+    {
+      "slug": "htmlEscape",
+      "title": "HTML Escape / Unescape",
+      "desc": "Escape HTML special characters to entities or unescape them back to readable text in your browser.",
+      "pill": "HTML entity escaping and unescaping",
+      "category": "convert"
+    },
+    {
+      "slug": "diffCheck",
+      "title": "Document Diff Checker",
+      "desc": "Compare two text blocks line by line online and highlight changes, removals, and additions.",
+      "pill": "Text comparison and diff viewer",
+      "category": "text"
+    },
+    {
+      "slug": "caseConvert",
+      "title": "Case Converter",
+      "desc": "Convert text into uppercase, lowercase, camelCase, snake_case, kebab-case, and title case online.",
+      "pill": "Text case conversion utility",
+      "category": "text"
+    },
+    {
+      "slug": "qrMaker",
+      "title": "QR Code Generator",
+      "desc": "Create QR codes online from text or URLs and download the result as a PNG image.",
+      "pill": "QR code creation from text and links",
+      "category": "util"
+    },
+    {
+      "slug": "wordCounter",
+      "title": "Word Counter",
+      "desc": "Count words, characters, lines, and bytes online with instant browser-based text analysis.",
+      "pill": "Word, character, and line counting",
+      "category": "text"
+    },
+    {
+      "slug": "passwordGenerator",
+      "title": "Password Generator",
+      "desc": "Generate strong random passwords online with options for length, uppercase, lowercase, numbers, and symbols.",
+      "pill": "Strong random password creation",
+      "category": "util"
+    },
+    {
+      "slug": "urlEncoder",
+      "title": "URL Encoder / Decoder",
+      "desc": "Encode or decode URLs and query strings online for safe sharing, debugging, and parameter handling.",
+      "pill": "URL encoding and decoding helper",
+      "category": "convert"
+    },
+    {
+      "slug": "hashGenerator",
+      "title": "Hash Generator",
+      "desc": "Generate SHA-256 and SHA-1 hashes online in your browser for quick testing and verification work.",
+      "pill": "Hash creation for verification tasks",
+      "category": "dev"
+    },
+    {
+      "slug": "regexTester",
+      "title": "Regex Tester",
+      "desc": "Test regular expressions online with live match results, flags, and quick browser-based feedback.",
+      "pill": "Regular expression testing and debugging",
+      "category": "dev"
+    },
+    {
+      "slug": "timestampConverter",
+      "title": "Timestamp Converter",
+      "desc": "Convert Unix timestamps to readable date strings and turn readable dates back into timestamps online.",
+      "pill": "Unix timestamp conversion helper",
+      "category": "convert"
+    },
+    {
+      "slug": "colorConverter",
+      "title": "Color Converter",
+      "desc": "Convert HEX, RGB, and HSL color values online with a live preview for design and front-end work.",
+      "pill": "HEX, RGB, and HSL color conversion",
+      "category": "convert"
+    },
+    {
+      "slug": "loremIpsum",
+      "title": "Lorem Ipsum Generator",
+      "desc": "Generate placeholder paragraphs online for UI mockups, CMS drafts, design previews, and layout testing.",
+      "pill": "Placeholder text generation",
+      "category": "text"
+    },
+    {
+      "slug": "htmlPreview",
+      "title": "HTML Preview",
+      "desc": "Write HTML and preview the rendered result side by side online without leaving the browser.",
+      "pill": "HTML live preview in the browser",
+      "category": "dev"
+    },
+    {
+      "slug": "csvToJson",
+      "title": "CSV to JSON Converter",
+      "desc": "Convert CSV text into formatted JSON online for APIs, apps, mock data, and spreadsheet exports.",
+      "pill": "CSV to JSON transformation",
+      "category": "data"
+    }
+  ],
+  "categories": {
+    "dev": {
+      "name": "Developer tools",
+      "desc": "Formatting, preview, hashing, and regex utilities for code-heavy workflows."
+    },
+    "data": {
+      "name": "Data format tools",
+      "desc": "JSON, SQL, and CSV utilities for structured data cleanup and inspection."
+    },
+    "text": {
+      "name": "Text and writing tools",
+      "desc": "Cleanup, counting, diffing, placeholder text, and character helpers for daily content work."
+    },
+    "convert": {
+      "name": "Conversion tools",
+      "desc": "Encoding, timestamp, HTML entity, and color conversions for browser-based tasks."
+    },
+    "util": {
+      "name": "Utility generators",
+      "desc": "Practical generators for passwords, UUIDs, and QR codes."
+    }
+  }
+}

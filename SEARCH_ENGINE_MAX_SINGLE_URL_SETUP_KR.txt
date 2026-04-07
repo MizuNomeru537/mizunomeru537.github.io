@@ -1,0 +1,20 @@
+이 버전은 언어별 파일을 폭증시키지 않고, 단일 URL 구조에서 SEO를 최대한 끌어올리는 쪽으로 조정한 버전입니다.
+
+반영 내용:
+- 모든 툴 페이지에 더 강한 정적 설명 영역, FAQ, 관련 링크 추가
+- 홈 / 전체도구 / HTML 사이트맵 / 정보 페이지 내부링크 강화
+- sitemap.xml 재생성
+- robots.txt 보강
+- 구조화 데이터(WebSite, Organization, CollectionPage, WebPage, ItemList, FAQPage, SoftwareApplication) 정리
+- HTML 사이트맵 추가
+
+업로드 후 할 일:
+1. 기존 파일 덮어쓰기
+2. https://mizunomeru537.github.io/sitemap.xml 확인
+3. Search Console에 sitemap.xml 제출
+4. 홈(/), 전체도구(/tools/), 대표 툴 3~5개 URL 색인 요청
+5. 사이트 내부에서 새 페이지 링크가 모두 열리는지 확인
+
+참고:
+- 이 구조는 언어별 복제 파일을 크게 늘리지 않으면서, 각 페이지 자체를 더 강한 SEO 문서로 만드는 방식입니다.
+- 국가별/언어별 완전 분리는 아니므로, 검색엔진에는 기본적으로 영어 중심의 단일 URL 페이지로 이해되게 맞춰졌습니다.
