@@ -29,6 +29,7 @@
 - 나중에는 언어별 별도 URL 구조를 만들면 SEO 에 더 유리합니다.
 
 
-[Google Search Console 메타 태그 검증 추가]
-<meta name="google-site-verification" content="rpAPu5Xbyd0Mol4er7aneJJsXC2cQs9c_IvjP3RnD_Y"/>
-이미 전체 HTML 파일에 반영되어 있습니다.
+[Google Search Console URL-prefix verification]
+- HTML file: /googleee2817ea275c3c15.html
+- File content: google-site-verification: googleee2817ea275c3c15.html
+- HTML meta verification token: 83sesWtvgIuYIljbg4SIfYbnCX3K7iDVzsHPr6RD7QY
