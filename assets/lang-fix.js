@@ -719,15 +719,6 @@
     related_tools: {en:'Related tools', ko:'관련 도구', ja:'関連ツール', 'zh-TW':'相關工具', 'zh-CN':'相关工具', fr:'Outils liés', de:'Ähnliche Tools', ru:'Связанные инструменты', 'es-419':'Herramientas relacionadas', es:'Herramientas relacionadas', id:'Alat terkait', ar:'أدوات ذات صلة'},
     faq: {en:'FAQ', ko:'자주 묻는 질문', ja:'FAQ', 'zh-TW':'常見問題', 'zh-CN':'常见问题', fr:'FAQ', de:'FAQ', ru:'FAQ', 'es-419':'Preguntas frecuentes', es:'Preguntas frecuentes', id:'FAQ', ar:'الأسئلة الشائعة'},
     note_browser_tool: {en:'This page runs entirely in the browser. No installation is required for quick everyday tasks.', ko:'이 페이지는 브라우저에서 바로 실행됩니다. 빠르게 써야 하는 일상 작업에 별도 설치가 필요 없습니다.', ja:'このページはブラウザだけで動作します。日常的な作業にすぐ使え、インストールも不要です。', 'zh-TW':'此頁面可直接在瀏覽器中執行，日常快速作業不需要額外安裝。', 'zh-CN':'此页面可直接在浏览器中运行，日常快速任务无需额外安装。', fr:'Cette page fonctionne entièrement dans le navigateur. Aucune installation n’est nécessaire pour les tâches rapides du quotidien.', de:'Diese Seite läuft vollständig im Browser. Für schnelle Alltagsaufgaben ist keine Installation nötig.', ru:'Эта страница полностью работает в браузере. Для быстрых повседневных задач установка не нужна.', 'es-419':'Esta página funciona completamente en el navegador. No necesitas instalar nada para tareas rápidas del día a día.', es:'Esta página funciona completamente en el navegador. No necesitas instalar nada para tareas rápidas del día a día.', id:'Halaman ini berjalan sepenuhnya di browser. Tidak perlu instalasi untuk tugas cepat sehari-hari.', ar:'تعمل هذه الصفحة بالكامل داخل المتصفح، ولا تحتاج إلى تثبيت للمهام اليومية السريعة.'},
-    seo_about: {en:'Use {tool} directly in the browser to process text, code, or data quickly without installing anything.', ko:'{tool}를 브라우저에서 바로 실행해 텍스트, 코드, 데이터를 빠르게 처리할 수 있습니다. 별도 설치가 필요 없습니다.', ja:'{tool} をブラウザ上でそのまま使って、テキスト・コード・データをすばやく処理できます。インストールは不要です。', 'zh-TW':'可直接在瀏覽器中使用 {tool}，快速處理文字、程式碼或資料，無需額外安裝。', 'zh-CN':'可直接在浏览器中使用 {tool}，快速处理文本、代码或数据，无需额外安装。', fr:'Utilisez {tool} directement dans le navigateur pour traiter rapidement du texte, du code ou des données sans installation.', de:'Verwenden Sie {tool} direkt im Browser, um Text, Code oder Daten schnell und ohne Installation zu verarbeiten.', ru:'Используйте {tool} прямо в браузере, чтобы быстро работать с текстом, кодом или данными без установки.', 'es-419':'Usa {tool} directamente en el navegador para trabajar rápido con texto, código o datos sin instalar nada.', es:'Usa {tool} directamente en el navegador para trabajar rápido con texto, código o datos sin instalar nada.', id:'Gunakan {tool} langsung di browser untuk memproses teks, kode, atau data dengan cepat tanpa instalasi.', ar:'استخدم {tool} مباشرة داخل المتصفح لمعالجة النصوص أو الشيفرة أو البيانات بسرعة ومن دون تثبيت.'},
-    seo_step1: {en:'Paste or enter your content into the input field.', ko:'입력칸에 내용을 붙여 넣거나 직접 입력하세요.', ja:'入力欄に内容を貼り付けるか、直接入力してください。', 'zh-TW':'請將內容貼到輸入欄，或直接輸入。', 'zh-CN':'请将内容粘贴到输入框，或直接输入。', fr:'Collez votre contenu dans le champ de saisie ou entrez-le directement.', de:'Fügen Sie Ihren Inhalt in das Eingabefeld ein oder geben Sie ihn direkt ein.', ru:'Вставьте содержимое в поле ввода или введите его вручную.', 'es-419':'Pega tu contenido en el campo de entrada o escríbelo directamente.', es:'Pega tu contenido en el campo de entrada o escríbelo directamente.', id:'Tempelkan isi Anda ke kolom input atau ketik langsung.', ar:'ألصق المحتوى في حقل الإدخال أو اكتبه مباشرة.'},
-    seo_step2: {en:'Run the tool to convert, format, analyze, or generate the result.', ko:'도구를 실행해 변환, 정리, 분석 또는 생성을 진행하세요.', ja:'ツールを実行して、変換・整形・分析・生成を行ってください。', 'zh-TW':'執行工具以進行轉換、整理、分析或產生結果。', 'zh-CN':'运行工具以进行转换、整理、分析或生成结果。', fr:'Exécutez l’outil pour convertir, formater, analyser ou générer le résultat.', de:'Führen Sie das Tool aus, um das Ergebnis zu konvertieren, zu formatieren, zu analysieren oder zu erzeugen.', ru:'Запустите инструмент, чтобы преобразовать, отформатировать, проанализировать или создать результат.', 'es-419':'Ejecuta la herramienta para convertir, dar formato, analizar o generar el resultado.', es:'Ejecuta la herramienta para convertir, dar formato, analizar o generar el resultado.', id:'Jalankan alat untuk mengonversi, memformat, menganalisis, atau membuat hasil.', ar:'شغّل الأداة لتحويل النتيجة أو تنسيقها أو تحليلها أو إنشائها.'},
-    seo_step3: {en:'Review the result, then copy or download it if needed.', ko:'결과를 확인한 뒤 필요하면 복사하거나 다운로드하세요.', ja:'結果を確認し、必要に応じてコピーまたはダウンロードしてください。', 'zh-TW':'確認結果後，依需要複製或下載。', 'zh-CN':'确认结果后，按需要复制或下载。', fr:'Vérifiez ensuite le résultat, puis copiez-le ou téléchargez-le si nécessaire.', de:'Prüfen Sie das Ergebnis und kopieren oder laden Sie es bei Bedarf herunter.', ru:'Проверьте результат, а затем при необходимости скопируйте или скачайте его.', 'es-419':'Revisa el resultado y luego cópialo o descárgalo si hace falta.', es:'Revisa el resultado y luego cópialo o descárgalo si hace falta.', id:'Periksa hasilnya, lalu salin atau unduh bila perlu.', ar:'راجع النتيجة ثم انسخها أو نزّلها عند الحاجة.'},
-    seo_example: {en:'Useful for quick browser tasks, drafts, checks, tests, and everyday work.', ko:'브라우저에서 빠르게 처리해야 하는 작업, 초안 작성, 확인, 테스트, 일상 업무에 유용합니다.', ja:'ブラウザで手早く済ませたい作業、下書き、確認、テスト、日常業務に便利です。', 'zh-TW':'適合用於瀏覽器中的快速作業、草稿、檢查、測試與日常工作。', 'zh-CN':'适合用于浏览器中的快速任务、草稿、检查、测试与日常工作。', fr:'Pratique pour les tâches rapides dans le navigateur, les brouillons, les vérifications, les tests et le travail quotidien.', de:'Praktisch für schnelle Aufgaben im Browser, Entwürfe, Prüfungen, Tests und die tägliche Arbeit.', ru:'Удобно для быстрых задач в браузере, черновиков, проверок, тестов и повседневной работы.', 'es-419':'Útil para tareas rápidas en el navegador, borradores, revisiones, pruebas y trabajo diario.', es:'Útil para tareas rápidas en el navegador, borradores, revisiones, pruebas y trabajo diario.', id:'Cocok untuk tugas cepat di browser, draf, pemeriksaan, pengujian, dan pekerjaan sehari-hari.', ar:'مفيد للمهام السريعة داخل المتصفح، والمسودات، والمراجعة، والاختبار، والعمل اليومي.'},
-    seo_faq_q1: {en:'What is this tool useful for?', ko:'이 도구는 언제 유용한가요?', ja:'このツールはどのような場面で役立ちますか？', 'zh-TW':'這個工具適合用在什麼情況？', 'zh-CN':'这个工具适合用在什么情况？', fr:'Dans quels cas cet outil est-il utile ?', de:'Wofür ist dieses Tool nützlich?', ru:'Для чего полезен этот инструмент?', 'es-419':'¿Para qué sirve esta herramienta?', es:'¿Para qué sirve esta herramienta?', id:'Alat ini berguna untuk apa?', ar:'في ماذا تفيد هذه الأداة؟'},
-    seo_faq_a1: {en:'It helps you handle common {tool} tasks directly in the browser.', ko:'브라우저에서 {tool} 관련 기본 작업을 바로 처리할 때 유용합니다.', ja:'ブラウザ上で {tool} に関する基本的な作業をすぐに行うのに役立ちます。', 'zh-TW':'可直接在瀏覽器中完成常見的 {tool} 工作。', 'zh-CN':'可直接在浏览器中完成常见的 {tool} 工作。', fr:'Il vous aide à effectuer les tâches courantes liées à {tool} directement dans le navigateur.', de:'Es hilft dabei, typische Aufgaben mit {tool} direkt im Browser zu erledigen.', ru:'Он помогает выполнять типичные задачи, связанные с {tool}, прямо в браузере.', 'es-419':'Te ayuda a realizar tareas comunes de {tool} directamente en el navegador.', es:'Te ayuda a realizar tareas comunes de {tool} directamente en el navegador.', id:'Alat ini membantu menangani tugas umum {tool} langsung di browser.', ar:'تساعدك هذه الأداة على إنجاز المهام الشائعة المتعلقة بـ {tool} مباشرة داخل المتصفح.'},
-    seo_faq_q2: {en:'Why use it online?', ko:'왜 온라인에서 쓰는 것이 편한가요?', ja:'なぜオンラインで使うと便利ですか？', 'zh-TW':'為什麼在線上使用比較方便？', 'zh-CN':'为什么在线使用更方便？', fr:'Pourquoi l’utiliser en ligne ?', de:'Warum online verwenden?', ru:'Почему удобно использовать его онлайн?', 'es-419':'¿Por qué usarla en línea?', es:'¿Por qué usarla en línea?', id:'Mengapa nyaman digunakan secara online?', ar:'لماذا يكون استخدامها عبر الإنترنت مريحًا؟'},
-    seo_faq_a2: {en:'It is convenient for quick work because you can use it right away without installing another app.', ko:'다른 앱을 설치하지 않고도 바로 사용할 수 있어 빠른 작업에 편리합니다.', ja:'別のアプリをインストールせず、そのまますぐ使えるので手早い作業に向いています。', 'zh-TW':'無需安裝其他應用程式即可立即使用，適合快速處理工作。', 'zh-CN':'无需安装其他应用即可立即使用，适合快速处理任务。', fr:'C’est pratique pour les tâches rapides, car vous pouvez l’utiliser immédiatement sans installer d’application supplémentaire.', de:'Das ist praktisch für schnelle Aufgaben, weil Sie es sofort ohne zusätzliche App verwenden können.', ru:'Это удобно для быстрых задач, потому что инструмент можно использовать сразу без установки дополнительных приложений.', 'es-419':'Es muy práctico para tareas rápidas porque puedes usarla al instante sin instalar otra aplicación.', es:'Es muy práctico para tareas rápidas porque puedes usarla al instante sin instalar otra aplicación.', id:'Praktis untuk tugas cepat karena dapat dipakai langsung tanpa memasang aplikasi lain.', ar:'هي مناسبة للمهام السريعة لأنك تستطيع استخدامها فورًا من دون تثبيت تطبيق إضافي.'},
     label_input_text: {en:'Input Text', ko:'입력 텍스트', ja:'入力テキスト', 'zh-TW':'輸入文字', 'zh-CN':'输入文本', fr:'Texte d’entrée', de:'Eingabetext', ru:'Входной текст', 'es-419':'Texto de entrada', es:'Texto de entrada', id:'Teks masukan', ar:'نص الإدخال'},
     create_qr: {en:'Create QR', ko:'QR 생성', ja:'QR を作成', 'zh-TW':'建立 QR', 'zh-CN':'创建二维码', fr:'Créer le QR', de:'QR erstellen', ru:'Создать QR', 'es-419':'Crear QR', es:'Crear QR', id:'Buat QR', ar:'إنشاء QR'},
     output_case_lower: {en:'lowercase', ko:'소문자', ja:'小文字', 'zh-TW':'小寫', 'zh-CN':'小写', fr:'minuscules', de:'kleinschreibung', ru:'строчные', 'es-419':'minúsculas', es:'minúsculas', id:'huruf kecil', ar:'أحرف صغيرة'},
@@ -753,12 +744,12 @@
     urlEncoder: [
       ['.hero .pill','literal:url_pill'], ['.hero h1','tool_url_title'], ['.hero p','tool_url_desc'],
       ['#encodeBtn','btn_encode'], ['#decodeBtn','btn_decode'], ['#copyBtn','btn_copy_result'], ['#sampleBtn','btn_sample'],
-      ['.grid-2 > div:nth-child(1) .label','label_input'], ['.grid-2 > div:nth-child(2) .label','label_output']
+      ['.grid-2 .label:nth-of-type(1)','label_input'], ['.grid-2 .label:nth-of-type(2)','label_output']
     ],
     qrMaker: [
       ['.hero .pill','literal:qr_pill'], ['.hero h1','tool_qr_title'], ['.hero p','tool_qr_desc'],
       ['#generateBtn','extra:create_qr'], ['#downloadBtn','btn_download_png'], ['#sampleBtn','btn_sample'],
-      ['.control-row > label:first-child','label_size'], ['.grid-2 > div:nth-child(1) .label','label_text_url'], ['.grid-2 > div:nth-child(2) .label','label_qr_result']
+      ['.control-row > label:first-child','label_size'], ['.grid-2 .label:nth-of-type(1)','label_text_url'], ['.grid-2 .label:nth-of-type(2)','label_qr_result']
     ],
     diffCheck: [
       ['.hero .pill','literal:diff_pill'], ['.hero h1','tool_diff_title'], ['.hero p','tool_diff_desc'],
@@ -781,17 +772,17 @@
     jsonFormatter: [
       ['.hero .pill','literal:json_pill'], ['.hero h1','tool_json_title'], ['.hero p','tool_json_desc'],
       ['#prettyBtn','btn_format'], ['#minifyBtn','btn_minify'], ['#validateBtn','btn_validate'], ['#copyBtn','btn_copy_result'], ['#sampleBtn','btn_sample'],
-      ['.grid-2 > div:nth-child(1) .label','label_source_json'], ['.grid-2 > div:nth-child(2) .label','label_output']
+      ['.grid-2 .label:nth-of-type(1)','label_source_json'], ['.grid-2 .label:nth-of-type(2)','label_output']
     ],
     sqlFormatter: [
       ['.hero .pill','literal:sql_pill'], ['.hero h1','tool_sql_title'], ['.hero p','tool_sql_desc'],
       ['#formatBtn','btn_format'], ['#minifyBtn','literal:single_line'], ['#copyBtn','btn_copy'], ['#sampleBtn','btn_sample'],
-      ['.grid-2 > div:nth-child(1) .label','label_source_sql'], ['.grid-2 > div:nth-child(2) .label','label_formatted_result']
+      ['.grid-2 .label:nth-of-type(1)','label_source_sql'], ['.grid-2 .label:nth-of-type(2)','label_formatted_result']
     ],
     base64: [
       ['.hero .pill','literal:base64_pill'], ['.hero h1','tool_base64_title'], ['.hero p','tool_base64_desc'],
       ['#encodeBtn','btn_encode'], ['#decodeBtn','btn_decode'], ['#swapBtn','btn_swap'], ['#copyBtn','btn_copy_result'], ['#sampleBtn','btn_sample'],
-      ['.grid-2 > div:nth-child(1) .label','label_input'], ['.grid-2 > div:nth-child(2) .label','label_output']
+      ['.grid-2 .label:nth-of-type(1)','label_input'], ['.grid-2 .label:nth-of-type(2)','label_output']
     ],
     minifyCode: [
       ['.hero .pill','literal:minify_pill'], ['.hero h1','tool_minify_title'], ['.hero p','tool_minify_desc'],
@@ -925,42 +916,16 @@
     if (l === 'ar') return 'حول ' + name;
     return 'About this ' + name;
   }
-  function seoText(key, toolName){
-    const raw = tr('extra:' + key) || '';
-    return toolName ? raw.replace(/\{tool\}/g, toolName) : raw;
-  }
   function applySeoChrome(){
     const panel = document.querySelector('.seo-panel');
     if (!panel) return;
-    const heroTitle = document.querySelector('.hero h1, #pageTitle');
-    const toolName = heroTitle ? heroTitle.textContent.trim() : '';
     const h2 = panel.querySelector('h2');
     if (h2) h2.textContent = localAboutTitle();
-    const ps = panel.querySelectorAll('p');
-    if (ps[0]) ps[0].textContent = seoText('seo_about', toolName);
     const h3s = panel.querySelectorAll('h3');
     if (h3s[0]) h3s[0].textContent = tr('extra:how_to_use');
     if (h3s[1]) h3s[1].textContent = tr('extra:example');
     if (h3s[2]) h3s[2].textContent = tr('extra:related_tools');
     if (h3s[3]) h3s[3].textContent = tr('extra:faq');
-    const lis = panel.querySelectorAll('ol li');
-    if (lis[0]) lis[0].textContent = tr('extra:seo_step1');
-    if (lis[1]) lis[1].textContent = tr('extra:seo_step2');
-    if (lis[2]) lis[2].textContent = tr('extra:seo_step3');
-    if (ps[1]) ps[1].textContent = tr('extra:seo_example');
-    const details = panel.querySelectorAll('.faq-list details');
-    if (details[0]) {
-      const s = details[0].querySelector('summary');
-      const p = details[0].querySelector('p');
-      if (s) s.textContent = tr('extra:seo_faq_q1');
-      if (p) p.textContent = seoText('seo_faq_a1', toolName);
-    }
-    if (details[1]) {
-      const s = details[1].querySelector('summary');
-      const p = details[1].querySelector('p');
-      if (s) s.textContent = tr('extra:seo_faq_q2');
-      if (p) p.textContent = tr('extra:seo_faq_a2');
-    }
     const note = panel.querySelector('.note-box');
     if (note) note.textContent = tr('extra:note_browser_tool');
     panel.querySelectorAll('.related-links a').forEach(a => {
