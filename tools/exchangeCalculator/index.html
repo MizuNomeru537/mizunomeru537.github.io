@@ -1,796 +1,790 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta name="google-site-verification" content="83sesWtvgIuYIljbg4SIfYbnCX3K7iDVzsHPr6RD7QY" />
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/>
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/>
-  <meta name="theme-color" content="#0f172a"/>
+  <meta name="theme-color" content="#4f46e5"/>
   <meta name="referrer" content="strict-origin-when-cross-origin"/>
-  <title>환율 계산기 | 통화 변환 · 국가 이미지 · 직접 환율 입력 | ToolLab</title>
-  <meta name="description" content="국가 이미지가 포함된 환율 계산기입니다. 통화 선택, 금액 입력, 자동 환율 조회, 직접 환율 입력, 최근 추이 확인을 한 화면에서 처리할 수 있습니다."/>
-  <link rel="canonical" href="https://mizunomeru537.github.io/tools/exchangeCalculator/"/>
-  <link rel="icon" type="image/x-icon" href="../../favicon.ico"/>
-  <link rel="icon" type="image/png" href="../../favicon-32x32.png"/>
-  <link rel="apple-touch-icon" type="image/png" href="../../apple-touch-icon.png"/>
-  <link rel="manifest" href="../../site.webmanifest"/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:site_name" content="ToolLab"/>
-  <meta property="og:title" content="환율 계산기 | 통화 변환 · 국가 이미지 · 직접 환율 입력 | ToolLab"/>
-  <meta property="og:description" content="국가 이미지가 포함된 카드형 환율 계산기입니다. 자동 환율과 직접 환율 입력을 모두 지원합니다."/>
-  <meta property="og:url" content="https://mizunomeru537.github.io/tools/exchangeCalculator/"/>
-  <meta property="og:image" content="https://mizunomeru537.github.io/assets/seo-cover.png"/>
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="환율 계산기 | ToolLab"/>
-  <meta name="twitter:description" content="통화 선택, 국가 이미지, 자동 환율 조회, 직접 환율 입력을 지원하는 온라인 환율 계산기"/>
-  <meta name="twitter:image" content="https://mizunomeru537.github.io/assets/seo-cover.png"/>
-  <link rel="stylesheet" href="../../assets/tool.css?v=20260408-2"/>
-  <link rel="stylesheet" href="../../assets/lang.css?v=20260408-2"/>
-  <script defer src="../../assets/i18n.js?v=20260408-2"></script>
-  <script defer src="../../assets/lang-fix.js?v=20260408-2"></script>
-  <script async crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8492468439910779"></script>
-  <style>
-    :root{
-      --bg:#0b1220;
-      --panel:#101a2e;
-      --panel-2:#111f38;
-      --border:rgba(148,163,184,.18);
-      --text:#e5eefb;
-      --muted:#94a3b8;
-      --accent:#3b82f6;
-      --accent-2:#60a5fa;
-      --good:#22c55e;
-      --warn:#f59e0b;
-      --shadow:0 24px 70px rgba(2,8,23,.34);
-      --radius:24px;
-    }
-    body.tool-page{
-      background:
-        radial-gradient(circle at top left, rgba(59,130,246,.18), transparent 32%),
-        radial-gradient(circle at top right, rgba(96,165,250,.10), transparent 26%),
-        linear-gradient(180deg,#0b1220 0%,#0a1221 100%);
-      color:var(--text);
-    }
-    .fx-page{max-width:1220px;margin:0 auto;padding:28px 20px 80px;}
-    .fx-shell{display:grid;gap:20px;}
-    .fx-hero{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;align-items:stretch;}
-    .glass-card{
-      background:linear-gradient(180deg,rgba(17,31,56,.96),rgba(12,20,37,.96));
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      backdrop-filter:blur(16px);
-    }
-    .hero-main{padding:28px;position:relative;overflow:hidden;}
-    .hero-main::after{content:"";position:absolute;right:-64px;top:-64px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(96,165,250,.28),transparent 70%);pointer-events:none;}
-    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(59,130,246,.14);border:1px solid rgba(96,165,250,.24);color:#bfdbfe;font-weight:700;font-size:.9rem;}
-    .hero-main h1{margin:16px 0 10px;font-size:clamp(2rem,3vw,3rem);line-height:1.08;letter-spacing:-.03em;}
-    .hero-main p{margin:0;color:#bfd1eb;font-size:1rem;line-height:1.7;max-width:760px;}
-    .hero-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
-    .hero-chip{padding:10px 14px;border-radius:999px;background:rgba(148,163,184,.08);border:1px solid rgba(148,163,184,.16);color:#dbeafe;font-size:.92rem;}
-    .hero-side{padding:22px;display:grid;gap:14px;align-content:start;}
-    .mini-stat{padding:16px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(148,163,184,.14);}
-    .mini-stat .label{display:block;color:var(--muted);font-size:.85rem;margin-bottom:8px;}
-    .mini-stat strong{font-size:1.1rem;}
+  <title>환율 계산기 | ToolLab</title>
+  <meta name="description" content="시장 스냅샷, 기준 환율, 직접 입력을 분리한 도구랩 환율 계산기입니다. 국가 이미지, 빠른 비교, 최근 기준 환율 차트를 제공합니다."/>
+  
+<link rel="canonical" href="https://mizunomeru537.github.io/tools/exchangeCalculator/"/>
+<link rel="icon" type="image/x-icon" href="../../favicon.ico"/>
+<link rel="icon" type="image/png" href="../../favicon-32x32.png"/>
+<link rel="apple-touch-icon" type="image/png" href="../../apple-touch-icon.png"/>
+<link rel="manifest" href="../../site.webmanifest"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="ToolLab"/>
+<meta property="og:title" content="환율 계산기 | ToolLab"/>
+<meta property="og:description" content="시장 스냅샷, 기준 환율, 직접 입력을 나눠 보여주는 ToolLab 환율 계산기"/>
+<meta property="og:url" content="https://mizunomeru537.github.io/tools/exchangeCalculator/"/>
+<meta property="og:image" content="https://mizunomeru537.github.io/assets/seo-cover.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="환율 계산기 | ToolLab"/>
+<meta name="twitter:description" content="시장 스냅샷, 기준 환율, 직접 입력을 나눠 보여주는 ToolLab 환율 계산기"/>
+<meta name="twitter:image" content="https://mizunomeru537.github.io/assets/seo-cover.png"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://mizunomeru537.github.io/#website","url":"https://mizunomeru537.github.io/","name":"ToolLab","alternateName":["도구랩","Tool Lab"],"inLanguage":"ko"},{"@type":"WebPage","@id":"https://mizunomeru537.github.io/tools/exchangeCalculator/#webpage","url":"https://mizunomeru537.github.io/tools/exchangeCalculator/","name":"환율 계산기 | ToolLab","description":"시장 스냅샷, 기준 환율, 직접 입력을 분리한 브라우저 기반 환율 계산기","isPartOf":{"@id":"https://mizunomeru537.github.io/#website"}}]}</script>
 
-    .fx-layout{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:stretch;}
-    .currency-card{padding:22px;display:grid;gap:18px;position:relative;}
-    .section-label{font-size:.92rem;font-weight:800;color:#dbeafe;letter-spacing:.02em;}
-    .currency-trigger{
-      width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;
-      padding:16px 18px;border-radius:20px;border:1px solid rgba(148,163,184,.18);
-      background:rgba(255,255,255,.04);color:var(--text);cursor:pointer;
-      transition:transform .18s ease, border-color .18s ease, background .18s ease;
-    }
-    .currency-trigger:hover{transform:translateY(-1px);border-color:rgba(96,165,250,.32);background:rgba(255,255,255,.06);}
-    .currency-meta{display:flex;align-items:center;gap:14px;min-width:0;}
-    .flag-wrap{
-      width:52px;height:52px;border-radius:18px;display:grid;place-items:center;
-      background:linear-gradient(180deg,#ffffff,#dbeafe);overflow:hidden;flex:0 0 auto;
-      border:1px solid rgba(15,23,42,.08);
-      box-shadow:0 10px 24px rgba(2,8,23,.2);
-    }
-    .flag-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
-    .flag-fallback{font-size:1.35rem;}
-    .currency-meta strong{display:block;font-size:1.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-    .currency-meta span{display:block;color:var(--muted);margin-top:4px;font-size:.92rem;}
-    .caret{width:14px;height:14px;border-right:2px solid #93c5fd;border-bottom:2px solid #93c5fd;transform:rotate(45deg);margin-right:6px;transition:transform .18s ease;}
-    .currency-trigger[aria-expanded="true"] .caret{transform:rotate(-135deg);margin-top:8px;}
+  
+        <link rel="stylesheet" href="../../assets/tool.css?v=20260408-4"/>
+        <link rel="stylesheet" href="../../assets/lang.css?v=20260408-4"/>
+        <script defer src="../../assets/i18n.js?v=20260408-4"></script>
+        <script defer src="../../assets/lang-fix.js?v=20260408-4"></script>
+        <style>
 
-    .field-grid{display:grid;gap:14px;}
-    .money-box{display:grid;grid-template-columns:120px 1fr;gap:12px;}
-    .currency-code-box,.field input,.field select,.field button{font:inherit;}
-    .currency-code-box,
-    .field input{
-      height:58px;border-radius:18px;border:1px solid rgba(148,163,184,.18);
-      background:rgba(255,255,255,.04);color:var(--text);padding:0 16px;
-    }
-    .currency-code-box{display:flex;align-items:center;justify-content:center;font-weight:800;color:#cfe1ff;}
-    .field{display:grid;gap:8px;}
-    .field label{font-size:.9rem;color:#cbd5e1;font-weight:700;}
-    .field input::placeholder{color:#7f90a9;}
-    .mode-row{display:flex;flex-wrap:wrap;gap:10px;}
-    .mode-pill{
-      border:1px solid rgba(148,163,184,.16);background:rgba(255,255,255,.04);color:#dbeafe;
-      height:46px;padding:0 16px;border-radius:999px;cursor:pointer;font-weight:700;
-    }
-    .mode-pill.active{background:rgba(59,130,246,.18);border-color:rgba(96,165,250,.36);color:#fff;}
-    .rate-box{display:grid;grid-template-columns:1fr 130px;gap:10px;}
-    .helper{font-size:.84rem;color:#9fb2cc;line-height:1.55;}
-    .swap-zone{display:grid;align-content:center;justify-items:center;}
-    .swap-btn{
-      width:72px;height:72px;border-radius:999px;border:1px solid rgba(96,165,250,.3);background:linear-gradient(180deg,#1d4ed8,#1e40af);
-      color:#fff;font-size:1.45rem;font-weight:800;cursor:pointer;box-shadow:0 20px 34px rgba(30,64,175,.34);
-      transition:transform .18s ease, box-shadow .18s ease;
-    }
-    .swap-btn:hover{transform:translateY(-2px) rotate(180deg);box-shadow:0 24px 40px rgba(30,64,175,.42);}
+.fx-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
+.fx-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fx-card{display:grid;gap:16px}
+.fx-subtitle{margin:4px 0 0;color:var(--muted);line-height:1.7;font-size:15px}
+.fx-control{display:grid;gap:8px}
+.fx-control label{font-size:14px;font-weight:800;color:#334155}
+.fx-mode-group{display:flex;flex-wrap:wrap;gap:10px}
+.fx-mode{appearance:none;border:1px solid var(--line);background:#fbfcfe;border-radius:999px;padding:11px 14px;font:inherit;font-weight:800;color:#334155;cursor:pointer}
+.fx-mode.active{background:#eef2ff;border-color:#c7d2fe;color:#4338ca}
+.fx-pair{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:stretch}
+.fx-pick{border:1px solid var(--line);border-radius:20px;background:#fbfcfe;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;min-height:82px}
+.fx-pick:hover{border-color:#c7d2fe;box-shadow:0 10px 24px rgba(79,70,229,.10)}
+.fx-pick-main{display:flex;align-items:center;gap:12px;min-width:0}
+.fx-flag{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;overflow:hidden;background:#fff;border:1px solid var(--line);flex:0 0 auto}
+.fx-flag img{width:100%;height:100%;object-fit:cover;display:block}
+.fx-flag span{font-size:24px}
+.fx-pick-title{display:block;font-size:17px;font-weight:900;line-height:1.2}
+.fx-pick-code{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+.fx-caret{font-size:18px;color:#64748b}
+.fx-swap{width:56px;height:56px;border-radius:18px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:22px;align-self:center}
+.fx-swap:hover{border-color:#c7d2fe;box-shadow:0 10px 24px rgba(79,70,229,.10)}
+.fx-inline{display:grid;grid-template-columns:120px 1fr;gap:10px}
+.fx-inline .code-box{border:1px solid #d6dbe5;border-radius:14px;background:#fbfcfe;padding:12px 14px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.fx-inline input,.fx-rate-row input{width:100%}
+.fx-rate-row{display:grid;grid-template-columns:1fr 140px;gap:10px}
+.fx-result-hero{padding:18px;border-radius:22px;background:linear-gradient(135deg,#0f172a 0%, #111827 48%, #182234 100%);color:#fff}
+.fx-kicker{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);font-size:12px;font-weight:800;letter-spacing:.02em}
+.fx-big{font-size:clamp(34px,4vw,54px);font-weight:900;letter-spacing:-1.6px;line-height:1.02;margin:14px 0 8px}
+.fx-eq{margin:0;color:#dbe5f2;font-size:18px;line-height:1.6}
+.fx-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.fx-meta .card strong{display:block;font-size:18px;margin-top:4px}
+.fx-meta .card span{font-size:12px;color:var(--muted)}
+.fx-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.fx-note{padding:14px 16px;border-radius:18px;background:#f8fafc;border:1px solid var(--line);color:var(--muted);font-size:14px;line-height:1.75}
+.fx-note.warn{background:#fff7ed;border-color:#fed7aa;color:#9a3412}
+.fx-watch{display:grid;gap:10px}
+.fx-watch-item{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);background:#fbfcfe;border-radius:18px;padding:12px 14px}
+.fx-watch-left{display:flex;align-items:center;gap:12px;min-width:0}
+.fx-watch-item strong{display:block;font-size:15px}
+.fx-watch-item span{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+.fx-watch-rate{font-weight:900;font-size:18px;color:#0f172a}
+.fx-watch-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:#eef2ff;color:#4338ca;font-size:12px;font-weight:800}
+.fx-chart-wrap{border:1px solid var(--line);border-radius:18px;background:#fbfcfe;padding:14px;min-height:300px}
+.fx-chart-wrap svg{width:100%;height:240px;display:block}
+.fx-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;color:var(--muted);font-size:13px}
+.fx-picker-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.48);display:none;align-items:center;justify-content:center;padding:18px;z-index:1000}
+.fx-picker-backdrop.open{display:flex}
+.fx-picker{width:min(920px,100%);max-height:min(80vh,760px);background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:0 30px 60px rgba(17,24,39,.22);display:grid;grid-template-rows:auto auto 1fr;overflow:hidden}
+.fx-picker-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px 14px}
+.fx-picker-top h3{margin:0;font-size:22px;letter-spacing:-.6px}
+.fx-picker-top button{border:1px solid var(--line);background:#fff;border-radius:14px;width:42px;height:42px;cursor:pointer}
+.fx-picker-search{padding:0 20px 14px}
+.fx-picker-search input{width:100%}
+.fx-picker-grid{padding:0 20px 20px;overflow:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;align-content:start}
+.fx-picker-item{border:1px solid var(--line);background:#fbfcfe;border-radius:18px;padding:14px 12px;display:grid;justify-items:center;gap:10px;cursor:pointer;text-align:center}
+.fx-picker-item:hover,.fx-picker-item.active{border-color:#c7d2fe;background:#eef2ff}
+.fx-picker-item strong{font-size:15px}
+.fx-picker-item span{font-size:12px;color:var(--muted)}
+.fx-toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(10px);background:#111827;color:#fff;padding:11px 14px;border-radius:14px;opacity:0;pointer-events:none;transition:.18s ease;z-index:1200}
+.fx-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.fx-status.ok{color:#0a7a2f}.fx-status.err{color:#b91c1c}.fx-status.info{color:#334155}
+@media (max-width:1000px){.fx-grid,.fx-grid-2,.fx-pair,.fx-meta{grid-template-columns:1fr}.fx-pair{grid-template-columns:1fr}.fx-swap{justify-self:center;transform:rotate(90deg)}.fx-swap:hover{transform:rotate(90deg)} }
+@media (max-width:760px){.fx-inline,.fx-rate-row{grid-template-columns:1fr}.fx-picker-grid{grid-template-columns:1fr 1fr;padding:0 14px 14px}.fx-picker-top,.fx-picker-search{padding-left:14px;padding-right:14px}.fx-big{font-size:34px}}
 
-    .result-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;}
-    .result-card,.chart-card,.watch-card{padding:22px;}
-    .result-head{display:flex;justify-content:space-between;gap:10px;align-items:start;flex-wrap:wrap;}
-    .status-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.22);color:#bbf7d0;font-size:.88rem;font-weight:800;}
-    .result-number{font-size:clamp(2.1rem,4vw,3.6rem);font-weight:900;letter-spacing:-.04em;margin:14px 0 8px;line-height:1.05;}
-    .result-sub{color:#9fb2cc;line-height:1.7;}
-    .result-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px;}
-    .meta-card{padding:14px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(148,163,184,.14);}
-    .meta-card span{display:block;font-size:.82rem;color:var(--muted);margin-bottom:8px;}
-    .meta-card strong{font-size:1rem;word-break:break-word;}
-    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
-    .soft-btn,.primary-btn{height:48px;padding:0 18px;border-radius:16px;cursor:pointer;font-weight:800;font:inherit;}
-    .soft-btn{border:1px solid rgba(148,163,184,.18);background:rgba(255,255,255,.04);color:#e5eefb;}
-    .primary-btn{border:1px solid rgba(96,165,250,.38);background:linear-gradient(180deg,#2563eb,#1d4ed8);color:#fff;}
-    .chart-head{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px;}
-    .chart-box{border-radius:22px;border:1px solid rgba(148,163,184,.14);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));padding:14px;min-height:280px;display:grid;align-items:center;}
-    .chart-box svg{width:100%;height:240px;display:block;}
-    .chart-legend{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:#a8bbd6;font-size:.88rem;margin-top:12px;}
-    .watch-list{display:grid;gap:10px;}
-    .watch-item{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(148,163,184,.14);}
-    .watch-left{display:flex;align-items:center;gap:12px;min-width:0;}
-    .watch-item strong{display:block;}
-    .watch-item span{display:block;color:var(--muted);font-size:.84rem;}
-    .watch-right{font-weight:900;color:#dbeafe;}
+        </style>
 
-    .ad-wrap{margin-top:22px;}
-    .picker-overlay{position:fixed;inset:0;background:rgba(2,8,23,.62);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:18px;z-index:1000;}
-    .picker-overlay.open{display:flex;}
-    .picker-panel{width:min(920px,100%);max-height:min(80vh,760px);overflow:hidden;border-radius:28px;background:linear-gradient(180deg,#111f38,#0d172b);border:1px solid rgba(148,163,184,.18);box-shadow:0 36px 100px rgba(2,8,23,.54);display:grid;grid-template-rows:auto auto 1fr;}
-    .picker-top{padding:22px 22px 14px;display:flex;justify-content:space-between;gap:12px;align-items:center;}
-    .picker-title{font-size:1.2rem;font-weight:900;}
-    .close-btn{width:42px;height:42px;border-radius:14px;border:1px solid rgba(148,163,184,.18);background:rgba(255,255,255,.05);color:#e5eefb;font-size:1.2rem;cursor:pointer;}
-    .picker-search{padding:0 22px 18px;}
-    .picker-search input{width:100%;height:52px;border-radius:16px;border:1px solid rgba(148,163,184,.16);background:rgba(255,255,255,.05);color:#fff;padding:0 16px;font:inherit;}
-    .picker-grid{padding:0 22px 22px;overflow:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:12px;align-content:start;}
-    .picker-option{display:grid;justify-items:center;gap:10px;padding:16px 12px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(148,163,184,.12);cursor:pointer;color:#e5eefb;text-align:center;}
-    .picker-option:hover,.picker-option.active{border-color:rgba(96,165,250,.38);background:rgba(59,130,246,.12);}
-    .picker-option .flag-wrap{width:48px;height:48px;border-radius:16px;}
-    .picker-option strong{font-size:.96rem;}
-    .picker-option span{font-size:.84rem;color:#b7c8df;}
-    .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);padding:12px 16px;border-radius:14px;background:#111827;color:#fff;border:1px solid rgba(148,163,184,.16);box-shadow:0 16px 34px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:.2s ease;z-index:1100;}
-    .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-    .hide{display:none !important;}
-    @media (max-width: 1080px){
-      .fx-hero,.result-wrap,.fx-layout{grid-template-columns:1fr;}
-      .swap-zone{padding:0 0 4px;}
-      .swap-btn{width:64px;height:64px;}
-    }
-    @media (max-width: 760px){
-      .fx-page{padding:20px 14px 72px;}
-      .hero-main,.hero-side,.currency-card,.result-card,.chart-card,.watch-card{padding:18px;}
-      .money-box,.rate-box,.result-meta{grid-template-columns:1fr;}
-      .picker-grid{grid-template-columns:repeat(2,minmax(0,1fr));padding:0 16px 16px;}
-      .picker-top,.picker-search{padding-left:16px;padding-right:16px;}
-      .result-number{font-size:2.3rem;}
-    }
-  </style>
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://mizunomeru537.github.io/#website","url":"https://mizunomeru537.github.io/","name":"ToolLab","alternateName":["도구랩","Tool Lab"],"inLanguage":"ko"},{"@type":"WebPage","@id":"https://mizunomeru537.github.io/tools/exchangeCalculator/#webpage","url":"https://mizunomeru537.github.io/tools/exchangeCalculator/","name":"환율 계산기 | ToolLab","description":"국가 이미지가 포함된 카드형 환율 계산기입니다. 자동 환율과 직접 환율 입력을 모두 지원합니다.","isPartOf":{"@id":"https://mizunomeru537.github.io/#website"}},{"@type":"SoftwareApplication","name":"환율 계산기","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://mizunomeru537.github.io/tools/exchangeCalculator/","description":"국가 이미지, 자동 환율 조회, 직접 환율 입력, 최근 추이를 지원하는 브라우저 기반 환율 계산기."}]}</script>
 </head>
-<body class="tool-page">
-  <main class="fx-page">
-    <section class="fx-shell">
-      <section class="fx-hero">
-        <div class="glass-card hero-main">
-          <span class="hero-badge">💱 새 스타일 환율 계산기</span>
-          <h1>국가 이미지가 들어간<br>카드형 환율 계산기</h1>
-          <p>
-            기존 은행 화면 느낌은 살리되 그대로 따라하지 않고 새로 구성한 버전이다.
-            통화별 국가 이미지를 넣었고, 자동 환율 조회와 직접 환율 입력을 둘 다 지원한다.
-            장중 시세와 차이가 날 때는 직접 환율 입력으로 바로 맞춰서 계산할 수 있다.
-          </p>
-          <div class="hero-chips">
-            <span class="hero-chip">국가 이미지 포함</span>
-            <span class="hero-chip">자동 환율 + 직접 입력</span>
-            <span class="hero-chip">최근 추이 차트</span>
-            <span class="hero-chip">통화 스왑</span>
-          </div>
-        </div>
-        <aside class="glass-card hero-side">
-          <div class="mini-stat">
-            <span class="label">자동 환율 데이터</span>
-            <strong id="sourceSummary">오픈 환율 API + 타임스탬프 표시</strong>
-          </div>
-          <div class="mini-stat">
-            <span class="label">빠른 사용 흐름</span>
-            <strong>통화 선택 → 금액 입력 → 계산</strong>
-          </div>
-          <div class="mini-stat">
-            <span class="label">특징</span>
-            <strong>GitHub Pages용 정적 페이지 구성</strong>
-          </div>
-        </aside>
-      </section>
-
-      <section class="fx-layout">
-        <section class="glass-card currency-card">
-          <div class="section-label">보유 금액</div>
-          <button class="currency-trigger" id="fromPickerBtn" type="button" aria-expanded="false">
-            <div class="currency-meta" id="fromMeta"></div>
-            <span class="caret" aria-hidden="true"></span>
-          </button>
-          <div class="field-grid">
-            <div class="field">
-              <label for="amountInput">금액 입력</label>
-              <div class="money-box">
-                <div class="currency-code-box" id="fromCodeBox">KRW</div>
-                <input id="amountInput" type="number" inputmode="decimal" step="any" min="0" placeholder="입력 금액" value="100000" />
-              </div>
-            </div>
-            <div class="field">
-              <label>환율 기준</label>
-              <div class="mode-row">
-                <button class="mode-pill active" type="button" data-mode="auto">자동 환율</button>
-                <button class="mode-pill" type="button" data-mode="manual">직접 환율 입력</button>
-              </div>
-            </div>
-            <div class="field" id="rateFieldWrap">
-              <label for="manualRateInput">적용 환율</label>
-              <div class="rate-box">
-                <input id="manualRateInput" type="number" inputmode="decimal" step="any" min="0" placeholder="예: 1473.00" />
-                <input id="decimalInput" type="number" inputmode="numeric" step="1" min="0" max="8" placeholder="소수 자리" value="2" />
-              </div>
-              <div class="helper" id="modeHelper">
-                자동 환율은 외부 오픈 API의 최신 스냅샷을 사용한다. 장중 값과 다르면 직접 환율 입력으로 바로 맞출 수 있다.
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <div class="swap-zone">
-          <button class="swap-btn" id="swapBtn" type="button" title="통화 바꾸기">⇄</button>
-        </div>
-
-        <section class="glass-card currency-card">
-          <div class="section-label">환전 금액</div>
-          <button class="currency-trigger" id="toPickerBtn" type="button" aria-expanded="false">
-            <div class="currency-meta" id="toMeta"></div>
-            <span class="caret" aria-hidden="true"></span>
-          </button>
-          <div class="field-grid">
-            <div class="field">
-              <label for="convertedOutput">계산 결과</label>
-              <div class="money-box">
-                <div class="currency-code-box" id="toCodeBox">USD</div>
-                <input id="convertedOutput" type="text" readonly value="-" />
-              </div>
-            </div>
-            <div class="field">
-              <label>안내</label>
-              <div class="helper">
-                결과 금액은 일반 환산값이다. 은행별 우대율, 수수료, 스프레드는 포함하지 않았다.
-                실제 거래용 숫자가 필요하면 은행 고시나 증권사 시세를 한 번 더 확인하는 편이 안전하다.
-              </div>
-            </div>
-          </div>
-        </section>
-      </section>
-
-      <section class="result-wrap">
-        <section class="glass-card result-card">
-          <div class="result-head">
-            <div>
-              <div class="section-label">계산 결과</div>
-              <div class="result-number" id="resultNumber">-</div>
-              <div class="result-sub" id="resultSentence">통화를 선택하고 금액을 입력하면 결과가 표시된다.</div>
-            </div>
-            <div class="status-badge" id="statusBadge">대기 중</div>
-          </div>
-          <div class="result-meta">
-            <div class="meta-card">
-              <span>적용 환율</span>
-              <strong id="appliedRate">-</strong>
-            </div>
-            <div class="meta-card">
-              <span>기준 시각</span>
-              <strong id="updatedAt">-</strong>
-            </div>
-            <div class="meta-card">
-              <span>데이터 방식</span>
-              <strong id="modeStatus">자동 환율</strong>
-            </div>
-          </div>
-          <div class="actions">
-            <button class="primary-btn" id="calcBtn" type="button">계산하기</button>
-            <button class="soft-btn" id="resetBtn" type="button">초기화</button>
-            <button class="soft-btn" id="copyBtn" type="button">결과 복사</button>
-          </div>
-        </section>
-
-        <section class="glass-card watch-card">
-          <div class="section-label" style="margin-bottom:12px;">빠른 비교</div>
-          <div class="watch-list" id="watchList"></div>
-        </section>
-      </section>
-
-      <section class="glass-card chart-card">
-        <div class="chart-head">
-          <div>
-            <div class="section-label">최근 7영업일 추이</div>
-            <div class="helper">차트는 최근 영업일 기준 일별 데이터로 표시된다.</div>
-          </div>
-          <div class="status-badge" id="chartStatus">차트 준비 중</div>
-        </div>
-        <div class="chart-box" id="chartBox">
-          <div class="helper">차트 데이터를 불러오는 중...</div>
-        </div>
-        <div class="chart-legend" id="chartLegend"></div>
-      </section>
-
-      <section class="ad-wrap">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-8492468439910779"
-             data-ad-slot="1234567890"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-      </section>
-    </section>
-  </main>
-
-  <div class="picker-overlay" id="pickerOverlay" aria-hidden="true">
-    <div class="picker-panel">
-      <div class="picker-top">
-        <div class="picker-title" id="pickerTitle">통화 선택</div>
-        <button class="close-btn" type="button" id="pickerCloseBtn">✕</button>
-      </div>
-      <div class="picker-search">
-        <input id="pickerSearchInput" type="search" placeholder="국가명, 통화 코드, 통화명 검색" />
-      </div>
-      <div class="picker-grid" id="pickerGrid"></div>
-    </div>
+<body>
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a class="brand" href="../../index.html">
+      <span class="brand-mark">⚡</span>
+      <span>도구랩</span>
+    </a>
+    <nav class="nav">
+      <a href="../../index.html">홈</a>
+      <a href="../../index.html#featured">추천 도구</a>
+      <a href="../../tools/">전체 도구</a>
+      <a href="../../about.html">소개</a>
+    </nav>
   </div>
+</header>
 
-  <div class="toast" id="toast"></div>
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <div class="pill">환율 · 시장 스냅샷 / 기준 환율 / 직접 입력</div>
+        <h1>ToolLab 스타일로 다시 만든<br>환율 계산기</h1>
+        <p>
+          이전처럼 일일 기준값을 마치 실시간처럼 보이게 하지 않고,
+          <strong>시장 스냅샷</strong>, <strong>기준 환율</strong>, <strong>직접 입력</strong>을 분리했다.
+          국가 이미지, 빠른 비교, 최근 기준 환율 차트까지 한 화면에 넣었고 전체 디자인도 ToolLab 메인과 맞췄다.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-light" href="#calculator">바로 계산하기</a>
+          <a class="btn btn-secondary" href="#guide">사용 방법 보기</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <script>
-  (() => {
-    const currencies = [
-      { code:'KRW', name:'대한민국 원', country:'대한민국', flag:'kr', emoji:'🇰🇷' },
-      { code:'USD', name:'미국 달러', country:'미국', flag:'us', emoji:'🇺🇸' },
-      { code:'JPY', name:'일본 엔', country:'일본', flag:'jp', emoji:'🇯🇵' },
-      { code:'CNY', name:'중국 위안', country:'중국', flag:'cn', emoji:'🇨🇳' },
-      { code:'EUR', name:'유로', country:'유럽연합', flag:'eu', emoji:'🇪🇺' },
-      { code:'GBP', name:'영국 파운드', country:'영국', flag:'gb', emoji:'🇬🇧' },
-      { code:'AUD', name:'호주 달러', country:'호주', flag:'au', emoji:'🇦🇺' },
-      { code:'CAD', name:'캐나다 달러', country:'캐나다', flag:'ca', emoji:'🇨🇦' },
-      { code:'CHF', name:'스위스 프랑', country:'스위스', flag:'ch', emoji:'🇨🇭' },
-      { code:'HKD', name:'홍콩 달러', country:'홍콩', flag:'hk', emoji:'🇭🇰' },
-      { code:'SGD', name:'싱가포르 달러', country:'싱가포르', flag:'sg', emoji:'🇸🇬' },
-      { code:'TWD', name:'대만 달러', country:'대만', flag:'tw', emoji:'🇹🇼' },
-      { code:'THB', name:'태국 바트', country:'태국', flag:'th', emoji:'🇹🇭' },
-      { code:'VND', name:'베트남 동', country:'베트남', flag:'vn', emoji:'🇻🇳' },
-      { code:'PHP', name:'필리핀 페소', country:'필리핀', flag:'ph', emoji:'🇵🇭' },
-      { code:'MYR', name:'말레이시아 링깃', country:'말레이시아', flag:'my', emoji:'🇲🇾' },
-      { code:'IDR', name:'인도네시아 루피아', country:'인도네시아', flag:'id', emoji:'🇮🇩' },
-      { code:'INR', name:'인도 루피', country:'인도', flag:'in', emoji:'🇮🇳' },
-      { code:'NZD', name:'뉴질랜드 달러', country:'뉴질랜드', flag:'nz', emoji:'🇳🇿' },
-      { code:'SEK', name:'스웨덴 크로나', country:'스웨덴', flag:'se', emoji:'🇸🇪' },
-      { code:'NOK', name:'노르웨이 크로네', country:'노르웨이', flag:'no', emoji:'🇳🇴' },
-      { code:'DKK', name:'덴마크 크로네', country:'덴마크', flag:'dk', emoji:'🇩🇰' },
-      { code:'SAR', name:'사우디 리얄', country:'사우디아라비아', flag:'sa', emoji:'🇸🇦' },
-      { code:'AED', name:'아랍에미리트 디르함', country:'아랍에미리트', flag:'ae', emoji:'🇦🇪' },
-      { code:'KWD', name:'쿠웨이트 디나르', country:'쿠웨이트', flag:'kw', emoji:'🇰🇼' },
-      { code:'QAR', name:'카타르 리얄', country:'카타르', flag:'qa', emoji:'🇶🇦' },
-      { code:'BHD', name:'바레인 디나르', country:'바레인', flag:'bh', emoji:'🇧🇭' }
-    ];
+  <section class="section" id="calculator">
+    <div class="container fx-grid">
+      <div class="panel fx-card">
+        <div class="section-head">
+          <div>
+            <h2>환율 설정</h2>
+            <p class="fx-subtitle">보유 통화와 환전 통화를 고른 뒤, 어떤 방식으로 값을 가져올지 선택합니다.</p>
+          </div>
+        </div>
 
-    const state = {
-      from: 'KRW',
-      to: 'USD',
-      amount: 100000,
-      mode: 'auto',
-      manualRate: '',
-      decimals: 2,
-      autoRate: null,
-      updatedAt: '',
-      pickerTarget: 'from',
-      chartSeries: []
-    };
+        <div class="fx-control">
+          <label>환율 방식</label>
+          <div class="fx-mode-group">
+            <button class="fx-mode active" type="button" data-mode="market">시장 스냅샷</button>
+            <button class="fx-mode" type="button" data-mode="reference">기준 환율</button>
+            <button class="fx-mode" type="button" data-mode="manual">직접 입력</button>
+          </div>
+          <div class="fx-note" id="modeHelper">시장 스냅샷은 공공 시세 페이지의 지연 호가를 best-effort로 읽어옵니다. 실패하면 기준 환율로 자동 전환됩니다.</div>
+        </div>
 
-    const $ = (sel) => document.querySelector(sel);
-    const els = {
-      fromMeta: $('#fromMeta'),
-      toMeta: $('#toMeta'),
-      fromCodeBox: $('#fromCodeBox'),
-      toCodeBox: $('#toCodeBox'),
-      amountInput: $('#amountInput'),
-      manualRateInput: $('#manualRateInput'),
-      decimalInput: $('#decimalInput'),
-      convertedOutput: $('#convertedOutput'),
-      resultNumber: $('#resultNumber'),
-      resultSentence: $('#resultSentence'),
-      appliedRate: $('#appliedRate'),
-      updatedAt: $('#updatedAt'),
-      modeStatus: $('#modeStatus'),
-      statusBadge: $('#statusBadge'),
-      chartStatus: $('#chartStatus'),
-      chartBox: $('#chartBox'),
-      chartLegend: $('#chartLegend'),
-      watchList: $('#watchList'),
-      toast: $('#toast'),
-      pickerOverlay: $('#pickerOverlay'),
-      pickerGrid: $('#pickerGrid'),
-      pickerTitle: $('#pickerTitle'),
-      pickerSearchInput: $('#pickerSearchInput'),
-      fromPickerBtn: $('#fromPickerBtn'),
-      toPickerBtn: $('#toPickerBtn'),
-      sourceSummary: $('#sourceSummary')
-    };
+        <div class="fx-pair">
+          <button class="fx-pick" id="fromBtn" type="button"><div id="fromMeta"></div></button>
+          <button class="fx-swap" id="swapBtn" type="button" aria-label="통화 교체">⇄</button>
+          <button class="fx-pick" id="toBtn" type="button"><div id="toMeta"></div></button>
+        </div>
 
-    const currencyMap = new Map(currencies.map(item => [item.code, item]));
-
-    function flagUrl(flag){
-      return `https://flagcdn.com/w80/${flag}.png`;
-    }
-
-    function flagMarkup(currency){
-      const safeName = `${currency.country} 국기`;
-      return `
-        <div class="flag-wrap">
-          <img src="${flagUrl(currency.flag)}" alt="${safeName}" loading="lazy" onerror="this.outerHTML='<span class=\'flag-fallback\'>${currency.emoji}</span>'">
-        </div>`;
-    }
-
-    function currencyMetaMarkup(code){
-      const c = currencyMap.get(code);
-      return `${flagMarkup(c)}
-        <div>
-          <strong>${c.country}</strong>
-          <span>${c.code} · ${c.name}</span>
-        </div>`;
-    }
-
-    function setPickerExpanded(isFrom, open){
-      (isFrom ? els.fromPickerBtn : els.toPickerBtn).setAttribute('aria-expanded', String(open));
-    }
-
-    function renderCurrencyMeta(){
-      els.fromMeta.innerHTML = currencyMetaMarkup(state.from);
-      els.toMeta.innerHTML = currencyMetaMarkup(state.to);
-      els.fromCodeBox.textContent = state.from;
-      els.toCodeBox.textContent = state.to;
-    }
-
-    function formatNumber(value, decimals = state.decimals){
-      if (!Number.isFinite(value)) return '-';
-      const fraction = Math.max(0, Math.min(8, Number(decimals) || 0));
-      return new Intl.NumberFormat('ko-KR', {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: fraction
-      }).format(value);
-    }
-
-    function showToast(message){
-      els.toast.textContent = message;
-      els.toast.classList.add('show');
-      window.clearTimeout(showToast._timer);
-      showToast._timer = window.setTimeout(() => els.toast.classList.remove('show'), 1800);
-    }
-
-    function setStatus(text, type='idle'){
-      els.statusBadge.textContent = text;
-      els.statusBadge.style.background = type === 'loading'
-        ? 'rgba(245,158,11,.12)'
-        : type === 'error'
-          ? 'rgba(239,68,68,.12)'
-          : 'rgba(34,197,94,.12)';
-      els.statusBadge.style.borderColor = type === 'loading'
-        ? 'rgba(245,158,11,.22)'
-        : type === 'error'
-          ? 'rgba(239,68,68,.22)'
-          : 'rgba(34,197,94,.22)';
-      els.statusBadge.style.color = type === 'loading'
-        ? '#fde68a'
-        : type === 'error'
-          ? '#fecaca'
-          : '#bbf7d0';
-    }
-
-    function setMode(mode){
-      state.mode = mode;
-      document.querySelectorAll('.mode-pill').forEach(btn => btn.classList.toggle('active', btn.dataset.mode === mode));
-      els.modeStatus.textContent = mode === 'auto' ? '자동 환율' : '직접 입력';
-      els.manualRateInput.disabled = mode !== 'manual';
-      $('#modeHelper').textContent = mode === 'auto'
-        ? '자동 환율은 외부 오픈 API의 최신 스냅샷을 사용한다. 장중 값과 다르면 직접 환율 입력으로 바로 맞출 수 있다.'
-        : '예: 1 USD = 1473 KRW처럼 직접 값을 넣고 맞출 수 있다. 입력값은 “1 ' + state.from + ' = ? ' + state.to + '” 기준이다.';
-      calculate();
-    }
-
-    async function fetchAutoRate(){
-      setStatus('자동 환율 불러오는 중', 'loading');
-      const url = `https://open.er-api.com/v6/latest/${encodeURIComponent(state.from)}?v=${Date.now()}`;
-      const res = await fetch(url, { cache: 'no-store' });
-      if (!res.ok) throw new Error('자동 환율 조회 실패');
-      const data = await res.json();
-      if (!data || data.result !== 'success' || !data.rates || typeof data.rates[state.to] !== 'number') {
-        throw new Error('환율 데이터 형식 오류');
-      }
-      state.autoRate = Number(data.rates[state.to]);
-      state.updatedAt = data.time_last_update_utc || data.time_next_update_utc || '';
-      els.sourceSummary.textContent = `${data.provider ? 'Open ER API' : '오픈 환율 API'} · ${state.updatedAt || '타임스탬프 없음'}`;
-      return state.autoRate;
-    }
-
-    async function fetchHistory(){
-      els.chartStatus.textContent = '차트 불러오는 중';
-      const end = new Date();
-      const start = new Date();
-      start.setDate(end.getDate() - 12);
-      const startText = start.toISOString().slice(0,10);
-      const endText = end.toISOString().slice(0,10);
-      const url = `https://api.frankfurter.dev/v1/${startText}..${endText}?base=${encodeURIComponent(state.from)}&symbols=${encodeURIComponent(state.to)}`;
-      const res = await fetch(url, { cache: 'no-store' });
-      if (!res.ok) throw new Error('차트 조회 실패');
-      const data = await res.json();
-      const rates = data && data.rates ? data.rates : {};
-      const series = Object.keys(rates)
-        .map(date => ({ date, value: Number(rates[date][state.to]) }))
-        .filter(item => Number.isFinite(item.value))
-        .sort((a,b) => a.date.localeCompare(b.date))
-        .slice(-7);
-      state.chartSeries = series;
-      renderChart();
-    }
-
-    function renderChart(){
-      const series = state.chartSeries || [];
-      if (!series.length){
-        els.chartStatus.textContent = '차트 없음';
-        els.chartBox.innerHTML = '<div class="helper">최근 차트 데이터를 가져오지 못했다.</div>';
-        els.chartLegend.innerHTML = '';
-        return;
-      }
-      const values = series.map(d => d.value);
-      const min = Math.min(...values);
-      const max = Math.max(...values);
-      const width = 720;
-      const height = 240;
-      const paddingX = 24;
-      const paddingY = 24;
-      const drawableW = width - paddingX * 2;
-      const drawableH = height - paddingY * 2;
-      const range = max - min || 1;
-      const points = series.map((item, index) => {
-        const x = paddingX + (drawableW * index / Math.max(1, series.length - 1));
-        const y = paddingY + drawableH - ((item.value - min) / range) * drawableH;
-        return { ...item, x, y };
-      });
-      const path = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(' ');
-      const areaPath = `${path} L ${points[points.length-1].x.toFixed(2)} ${height-paddingY} L ${points[0].x.toFixed(2)} ${height-paddingY} Z`;
-      const grid = [0, .25, .5, .75, 1].map(t => {
-        const y = paddingY + drawableH - t * drawableH;
-        const val = min + t * range;
-        return `<g><line x1="${paddingX}" y1="${y}" x2="${width-paddingX}" y2="${y}" stroke="rgba(148,163,184,.12)" stroke-width="1" /><text x="${width-paddingX}" y="${y-6}" text-anchor="end" fill="#8fa4c1" font-size="11">${formatNumber(val, 4)}</text></g>`;
-      }).join('');
-      const labels = points.map(p => `<text x="${p.x}" y="${height-6}" text-anchor="middle" fill="#8fa4c1" font-size="11">${p.date.slice(5).replace('-', '/')}</text>`).join('');
-      const circles = points.map(p => `<circle cx="${p.x}" cy="${p.y}" r="4" fill="#93c5fd" stroke="#0f172a" stroke-width="2"><title>${p.date}: ${formatNumber(p.value, 4)}</title></circle>`).join('');
-      els.chartBox.innerHTML = `
-        <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="최근 7영업일 환율 추이">
-          <defs>
-            <linearGradient id="areaGrad" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stop-color="rgba(96,165,250,.45)"/>
-              <stop offset="100%" stop-color="rgba(96,165,250,0)"/>
-            </linearGradient>
-          </defs>
-          ${grid}
-          <path d="${areaPath}" fill="url(#areaGrad)"/>
-          <path d="${path}" fill="none" stroke="#60a5fa" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-          ${circles}
-          ${labels}
-        </svg>`;
-      const first = series[0].value;
-      const last = series[series.length-1].value;
-      const change = ((last - first) / first) * 100;
-      els.chartLegend.innerHTML = `
-        <span>${state.from} → ${state.to}</span>
-        <span>최저 ${formatNumber(min, 4)}</span>
-        <span>최고 ${formatNumber(max, 4)}</span>
-        <span>${change >= 0 ? '상승' : '하락'} ${Math.abs(change).toFixed(2)}%</span>`;
-      els.chartStatus.textContent = '차트 완료';
-    }
-
-    function renderWatchList(baseRate){
-      const targets = ['KRW','USD','JPY','EUR','CNY','GBP'].filter(code => code !== state.from).slice(0,5);
-      const html = targets.map(code => {
-        const target = currencyMap.get(code);
-        let displayRate = '-';
-        if (state.mode === 'manual' && code === state.to) {
-          displayRate = formatNumber(Number(state.manualRateInput.value || 0), 4);
-        } else if (code === state.to && Number.isFinite(baseRate)) {
-          displayRate = formatNumber(baseRate, 4);
-        }
-        return `
-          <div class="watch-item">
-            <div class="watch-left">
-              ${flagMarkup(target)}
-              <div>
-                <strong>${target.country}</strong>
-                <span>${state.from} → ${code}</span>
-              </div>
+        <div class="grid-2">
+          <div class="fx-control">
+            <label for="amountInput">금액 입력</label>
+            <div class="fx-inline">
+              <div class="code-box" id="fromCode">USD</div>
+              <input id="amountInput" type="number" inputmode="decimal" step="any" min="0" value="1000" placeholder="입력 금액"/>
             </div>
-            <div class="watch-right">${displayRate}</div>
-          </div>`;
-      }).join('');
-      els.watchList.innerHTML = html;
-    }
+          </div>
+          <div class="fx-control">
+            <label for="manualRateInput">직접 환율 입력</label>
+            <div class="fx-rate-row">
+              <input id="manualRateInput" type="number" inputmode="decimal" step="any" min="0" placeholder="예: 1473.00" disabled/>
+              <input id="decimalInput" type="number" inputmode="numeric" step="1" min="0" max="8" value="2" placeholder="소수 자리"/>
+            </div>
+            <div class="inline-note">입력 형식: 1 기준통화 = ? 환전통화</div>
+          </div>
+        </div>
 
-    async function calculate(){
-      state.amount = Number(els.amountInput.value || 0);
-      state.manualRate = els.manualRateInput.value;
-      state.decimals = Math.max(0, Math.min(8, Number(els.decimalInput.value || 2)));
+        <div class="fx-actions">
+          <button class="btn btn-primary" id="calcBtn" type="button">계산하기</button>
+          <button class="btn btn-light" id="resetBtn" type="button">초기화</button>
+          <button class="btn btn-light" id="copyBtn" type="button">결과 복사</button>
+        </div>
+        <div class="msg fx-status info" id="statusText">시장 스냅샷과 기준 환율을 분리해서 표시합니다.</div>
+      </div>
 
-      if (!Number.isFinite(state.amount) || state.amount < 0) {
-        setStatus('금액 확인 필요', 'error');
-        return;
+      <div class="panel fx-card">
+        <div class="section-head">
+          <div>
+            <h2>계산 결과</h2>
+            <p class="fx-subtitle" id="sourceText">자동 소스: 시장 스냅샷 → 실패 시 기준 환율</p>
+          </div>
+        </div>
+
+        <div class="fx-result-hero">
+          <div class="fx-kicker">결과</div>
+          <div class="fx-big" id="resultBig">-</div>
+          <p class="fx-eq" id="resultEq">-</p>
+        </div>
+
+        <div class="fx-meta">
+          <div class="card"><span>적용 환율</span><strong id="resultRate">-</strong></div>
+          <div class="card"><span>기준 시각</span><strong id="resultUpdated">-</strong></div>
+          <div class="card"><span>데이터 출처</span><strong id="resultSource">-</strong></div>
+        </div>
+
+        <div class="fx-control">
+          <label for="convertedOutput">복사용 결과</label>
+          <input id="convertedOutput" type="text" readonly placeholder="계산 후 여기에 표시됩니다."/>
+        </div>
+
+        <div class="fx-note warn">
+          <strong>참고</strong><br/>
+          시장 스냅샷은 장중에 더 가깝지만 지연 시세일 수 있고, 기준 환율은 가장 안정적인 대신 장중 시세와 다를 수 있습니다.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container fx-grid-2">
+      <div class="panel">
+        <div class="section-head">
+          <div>
+            <h2>최근 기준 환율 차트</h2>
+            <p class="fx-subtitle">최근 7영업일 기준으로 같은 통화쌍의 흐름을 보여줍니다.</p>
+          </div>
+          <div class="fx-watch-tag" id="chartStatus">차트 준비중</div>
+        </div>
+        <div class="fx-chart-wrap" id="chartWrap"><div class="inline-note">차트 데이터를 불러오는 중입니다.</div></div>
+        <div class="fx-legend" id="chartLegend"></div>
+      </div>
+
+      <div class="panel">
+        <div class="section-head">
+          <div>
+            <h2>빠른 비교</h2>
+            <p class="fx-subtitle">자주 보는 통화들을 현재 기준 통화 기준으로 같이 확인합니다.</p>
+          </div>
+          <div class="fx-watch-tag" id="watchSourceTag">시장 스냅샷</div>
+        </div>
+        <div class="fx-watch" id="watchList"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="guide">
+    <div class="container">
+      <div class="panel seo-panel">
+        <h2>이 버전에서 바뀐 점</h2>
+        <p>
+          이전처럼 일일 기준값만 보고 실시간처럼 오해하기 쉬운 구성을 줄이고, 소스 성격을 구분해서 보이도록 다시 정리했다.
+          메인 ToolLab의 밝은 카드형 레이아웃, 상단 히어로, 패널 구조와 맞추어 전체 디자인도 통일했다.
+        </p>
+        <h3>사용 방법</h3>
+        <ol>
+          <li>보유 통화와 환전 통화를 고른다.</li>
+          <li>시장 스냅샷, 기준 환율, 직접 입력 중 하나를 선택한다.</li>
+          <li>금액을 넣고 계산하면 결과와 적용 환율, 기준 시각, 데이터 출처가 함께 표시된다.</li>
+        </ol>
+        <h3>추천 사용 방식</h3>
+        <div class="related-links">
+          <a href="javascript:void(0)">장중 느낌이 필요할 때 → 시장 스냅샷</a>
+          <a href="javascript:void(0)">안정적으로 계산할 때 → 기준 환율</a>
+          <a href="javascript:void(0)">내가 본 숫자와 맞출 때 → 직접 입력</a>
+        </div>
+        <h3>FAQ</h3>
+        <div class="faq-list">
+          <details open>
+            <summary>왜 어떤 날은 기준 환율과 시장 스냅샷 값이 다르게 보이나요?</summary>
+            <p>기준 환율은 일일 기준 데이터라 장중 변동을 바로 반영하지 않습니다. 시장 스냅샷은 장중에 더 가깝지만 지연 시세일 수 있습니다.</p>
+          </details>
+          <details>
+            <summary>1497처럼 전일 값 비슷하게 보이던 문제는 어떻게 바뀌었나요?</summary>
+            <p>이제 소스를 분리해서 보여주고, 시장 스냅샷이 실패하면 분명하게 기준 환율로 전환되었다고 표시합니다.</p>
+          </details>
+          <details>
+            <summary>정확히 내가 본 숫자와 맞추고 싶으면 어떻게 하나요?</summary>
+            <p>직접 입력 모드에서 1 기준통화 = ? 환전통화 값을 넣으면 됩니다. 예를 들어 1 USD = 1473 KRW처럼 바로 맞출 수 있습니다.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="fx-picker-backdrop" id="pickerBackdrop" aria-hidden="true">
+  <div class="fx-picker">
+    <div class="fx-picker-top">
+      <h3 id="pickerTitle">통화 선택</h3>
+      <button type="button" id="pickerClose" aria-label="닫기">✕</button>
+    </div>
+    <div class="fx-picker-search">
+      <input id="pickerSearch" type="search" placeholder="국가명, 통화코드, 통화명 검색"/>
+    </div>
+    <div class="fx-picker-grid" id="pickerGrid"></div>
+  </div>
+</div>
+<div class="fx-toast" id="fxToast"></div>
+
+<script>
+
+(() => {
+  const currencies = [{"code": "KRW", "name": "대한민국 원", "country": "대한민국", "flag": "kr", "emoji": "🇰🇷"}, {"code": "USD", "name": "미국 달러", "country": "미국", "flag": "us", "emoji": "🇺🇸"}, {"code": "JPY", "name": "일본 엔", "country": "일본", "flag": "jp", "emoji": "🇯🇵"}, {"code": "CNY", "name": "중국 위안", "country": "중국", "flag": "cn", "emoji": "🇨🇳"}, {"code": "EUR", "name": "유로", "country": "유럽연합", "flag": "eu", "emoji": "🇪🇺"}, {"code": "GBP", "name": "영국 파운드", "country": "영국", "flag": "gb", "emoji": "🇬🇧"}, {"code": "AUD", "name": "호주 달러", "country": "호주", "flag": "au", "emoji": "🇦🇺"}, {"code": "CAD", "name": "캐나다 달러", "country": "캐나다", "flag": "ca", "emoji": "🇨🇦"}, {"code": "CHF", "name": "스위스 프랑", "country": "스위스", "flag": "ch", "emoji": "🇨🇭"}, {"code": "HKD", "name": "홍콩 달러", "country": "홍콩", "flag": "hk", "emoji": "🇭🇰"}, {"code": "SGD", "name": "싱가포르 달러", "country": "싱가포르", "flag": "sg", "emoji": "🇸🇬"}, {"code": "TWD", "name": "대만 달러", "country": "대만", "flag": "tw", "emoji": "🇹🇼"}, {"code": "THB", "name": "태국 바트", "country": "태국", "flag": "th", "emoji": "🇹🇭"}, {"code": "VND", "name": "베트남 동", "country": "베트남", "flag": "vn", "emoji": "🇻🇳"}, {"code": "PHP", "name": "필리핀 페소", "country": "필리핀", "flag": "ph", "emoji": "🇵🇭"}, {"code": "MYR", "name": "말레이시아 링깃", "country": "말레이시아", "flag": "my", "emoji": "🇲🇾"}, {"code": "IDR", "name": "인도네시아 루피아", "country": "인도네시아", "flag": "id", "emoji": "🇮🇩"}, {"code": "INR", "name": "인도 루피", "country": "인도", "flag": "in", "emoji": "🇮🇳"}, {"code": "NZD", "name": "뉴질랜드 달러", "country": "뉴질랜드", "flag": "nz", "emoji": "🇳🇿"}, {"code": "SEK", "name": "스웨덴 크로나", "country": "스웨덴", "flag": "se", "emoji": "🇸🇪"}, {"code": "NOK", "name": "노르웨이 크로네", "country": "노르웨이", "flag": "no", "emoji": "🇳🇴"}, {"code": "DKK", "name": "덴마크 크로네", "country": "덴마크", "flag": "dk", "emoji": "🇩🇰"}, {"code": "SAR", "name": "사우디 리얄", "country": "사우디아라비아", "flag": "sa", "emoji": "🇸🇦"}, {"code": "AED", "name": "아랍에미리트 디르함", "country": "아랍에미리트", "flag": "ae", "emoji": "🇦🇪"}, {"code": "KWD", "name": "쿠웨이트 디나르", "country": "쿠웨이트", "flag": "kw", "emoji": "🇰🇼"}, {"code": "QAR", "name": "카타르 리얄", "country": "카타르", "flag": "qa", "emoji": "🇶🇦"}, {"code": "BHD", "name": "바레인 디나르", "country": "바레인", "flag": "bh", "emoji": "🇧🇭"}];
+  const currencyMap = new Map(currencies.map(item => [item.code, item]));
+  const QUICK_COMPARE = ['KRW','USD','JPY','EUR','CNY','GBP'];
+  const CHART_WINDOW_DAYS = 12;
+  const state = {
+    from: 'USD',
+    to: 'KRW',
+    amount: 1000,
+    mode: 'market',
+    manualRate: '',
+    decimals: 2,
+    lastRate: 0,
+    lastSourceName: '',
+    updatedAt: '',
+    referenceRates: {},
+    chartSeries: [],
+    pickerTarget: 'from'
+  };
+
+  const $ = (sel) => document.querySelector(sel);
+  const els = {
+    fromMeta: $('#fromMeta'),
+    toMeta: $('#toMeta'),
+    fromCode: $('#fromCode'),
+    amountInput: $('#amountInput'),
+    manualRateInput: $('#manualRateInput'),
+    decimalInput: $('#decimalInput'),
+    statusText: $('#statusText'),
+    sourceText: $('#sourceText'),
+    resultBig: $('#resultBig'),
+    resultEq: $('#resultEq'),
+    resultRate: $('#resultRate'),
+    resultUpdated: $('#resultUpdated'),
+    resultSource: $('#resultSource'),
+    convertedOutput: $('#convertedOutput'),
+    chartWrap: $('#chartWrap'),
+    chartLegend: $('#chartLegend'),
+    chartStatus: $('#chartStatus'),
+    watchList: $('#watchList'),
+    watchSourceTag: $('#watchSourceTag'),
+    pickerBackdrop: $('#pickerBackdrop'),
+    pickerTitle: $('#pickerTitle'),
+    pickerSearch: $('#pickerSearch'),
+    pickerGrid: $('#pickerGrid'),
+    modeButtons: Array.from(document.querySelectorAll('[data-mode]')),
+    modeHelper: $('#modeHelper'),
+    toast: $('#fxToast')
+  };
+
+  function formatNumber(value, decimals = null) {
+    if (!Number.isFinite(value)) return '-';
+    const fixed = decimals == null ? state.decimals : decimals;
+    return new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: fixed,
+      maximumFractionDigits: fixed
+    }).format(value);
+  }
+
+  function flagMarkup(item) {
+    const src = item.flag === 'eu' ? 'https://flagcdn.com/w80/eu.png' : `https://flagcdn.com/w80/${item.flag}.png`;
+    return `
+      <div class="fx-flag">
+        <img src="${src}" alt="${item.country} 국기" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${item.emoji}'}))" />
+      </div>`;
+  }
+
+  function renderCurrencyButton(code, targetEl) {
+    const item = currencyMap.get(code);
+    targetEl.innerHTML = `
+      <div class="fx-pick-main">
+        ${flagMarkup(item)}
+        <div>
+          <strong class="fx-pick-title">${item.country}</strong>
+          <span class="fx-pick-code">${item.code} · ${item.name}</span>
+        </div>
+      </div>
+      <span class="fx-caret">▾</span>`;
+  }
+
+  function showToast(text) {
+    els.toast.textContent = text;
+    els.toast.classList.add('show');
+    clearTimeout(showToast._timer);
+    showToast._timer = setTimeout(() => els.toast.classList.remove('show'), 1800);
+  }
+
+  function setStatus(text, kind='info') {
+    els.statusText.textContent = text;
+    els.statusText.className = `msg fx-status ${kind}`;
+  }
+
+  function updateModeButtons() {
+    els.modeButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.mode === state.mode));
+    const manual = state.mode === 'manual';
+    els.manualRateInput.disabled = !manual;
+    els.modeHelper.textContent = manual
+      ? `예: 1 ${state.from} = 1473.00 ${state.to} 형태로 직접 입력합니다.`
+      : state.mode === 'market'
+        ? '시장 스냅샷은 공공 시세 페이지의 지연 호가를 best-effort로 읽어옵니다. 실패하면 기준 환율로 자동 전환됩니다.'
+        : '기준 환율은 일일 기준 데이터입니다. 장중 시세와 다를 수 있지만 가장 안정적으로 동작합니다.';
+  }
+
+  function updateSummary() {
+    renderCurrencyButton(state.from, els.fromMeta);
+    renderCurrencyButton(state.to, els.toMeta);
+    els.fromCode.textContent = state.from;
+    els.amountInput.value = state.amount;
+    els.decimalInput.value = state.decimals;
+    updateModeButtons();
+    els.sourceText.textContent = state.mode === 'market'
+      ? '자동 소스: 시장 스냅샷 → 실패 시 기준 환율'
+      : state.mode === 'reference'
+        ? '자동 소스: 기준 환율'
+        : '직접 환율 입력';
+  }
+
+  async function requestJson(url) {
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error('데이터 요청 실패');
+    return res.json();
+  }
+
+  async function requestText(url) {
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error('시세 페이지 요청 실패');
+    return res.text();
+  }
+
+  async function fetchReferenceBundle(base) {
+    const symbols = QUICK_COMPARE.filter(code => code !== base).join(',');
+    const url = `https://api.frankfurter.dev/v1/latest?base=${encodeURIComponent(base)}&symbols=${encodeURIComponent(symbols)}`;
+    const data = await requestJson(url);
+    if (!data || !data.rates) throw new Error('기준 환율 응답 오류');
+    return {
+      rates: { ...data.rates, [base]: 1 },
+      updatedAt: data.date || '',
+      sourceName: 'Frankfurter 기준 환율'
+    };
+  }
+
+  function buildYahooCandidates(from, to) {
+    const direct = `${from}${to}=X`;
+    const reverse = `${to}${from}=X`;
+    const list = [{ symbol: direct, invert: false }];
+    if (from === 'USD') list.push({ symbol: `${to}=X`, invert: false });
+    list.push({ symbol: reverse, invert: true });
+    return Array.from(new Map(list.map(item => [item.symbol + ':' + item.invert, item])).values());
+  }
+
+  function escapeRegExp(value) {
+    return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function parseYahooQuote(text, from, to, symbol) {
+    const compact = String(text).replace(/\s+/g, ' ').trim();
+    const escapedSymbol = escapeRegExp(symbol);
+    const patterns = [
+      new RegExp(`${from}\\s*\\/\\s*${to}\\s*\\([^)]*\\)\\.\\s*([0-9][0-9,]*(?:\\.[0-9]+)?)`, 'i'),
+      new RegExp(`${escapedSymbol}[^0-9]{0,40}([0-9][0-9,]*(?:\\.[0-9]+)?)`, 'i'),
+      /CCY\s*-\s*Delayed Quote[^0-9]{0,40}([0-9][0-9,]*(?:\.\d+)?)/i,
+      /As of [^.]{6,120}\.\s*([0-9][0-9,]*(?:\.\d+)?)/i
+    ];
+    for (const regex of patterns) {
+      const m = compact.match(regex);
+      if (m && m[1]) {
+        const value = Number(m[1].replace(/,/g, ''));
+        if (Number.isFinite(value) && value > 0) return value;
       }
-      let rate;
-      try {
-        if (state.mode === 'manual') {
-          rate = Number(state.manualRate);
-          if (!Number.isFinite(rate) || rate <= 0) throw new Error('직접 환율을 입력해야 함');
-          state.updatedAt = '직접 입력';
-          setStatus('직접 환율 적용', 'idle');
-        } else {
-          rate = await fetchAutoRate();
-          setStatus('자동 환율 적용 완료', 'idle');
+    }
+    throw new Error('시장 스냅샷 파싱 실패');
+  }
+
+  function parseYahooUpdatedAt(text) {
+    const compact = String(text).replace(/\s+/g, ' ').trim();
+    const m = compact.match(/As of\s+([^.]{6,120})\./i);
+    return m ? m[1] : 'Yahoo delayed quote';
+  }
+
+  async function fetchMarketPair(from, to) {
+    const candidates = buildYahooCandidates(from, to);
+    let lastError = null;
+    for (const item of candidates) {
+      const urls = [
+        `https://r.jina.ai/http://finance.yahoo.com/quote/${encodeURIComponent(item.symbol)}/`,
+        `https://r.jina.ai/http://finance.yahoo.com/quote/${encodeURIComponent(item.symbol)}`
+      ];
+      for (const url of urls) {
+        try {
+          const text = await requestText(url);
+          const raw = parseYahooQuote(text, from, to, item.symbol);
+          const rate = item.invert ? 1 / raw : raw;
+          if (Number.isFinite(rate) && rate > 0) {
+            return {
+              rate,
+              updatedAt: parseYahooUpdatedAt(text),
+              sourceName: 'Yahoo 지연 시세 스냅샷'
+            };
+          }
+        } catch (error) {
+          lastError = error;
         }
-        const result = state.amount * rate;
-        els.convertedOutput.value = formatNumber(result);
-        els.resultNumber.textContent = `${formatNumber(result)} ${state.to}`;
-        els.resultSentence.textContent = `${formatNumber(state.amount)} ${state.from} = ${formatNumber(result)} ${state.to}`;
-        els.appliedRate.textContent = `1 ${state.from} = ${formatNumber(rate, 6)} ${state.to}`;
-        els.updatedAt.textContent = state.updatedAt || '-';
-        els.modeStatus.textContent = state.mode === 'manual' ? '직접 입력' : '자동 환율';
-        renderWatchList(rate);
-      } catch (error) {
-        els.convertedOutput.value = '-';
-        els.resultNumber.textContent = '-';
-        els.resultSentence.textContent = error.message || '계산 실패';
-        els.appliedRate.textContent = '-';
-        els.updatedAt.textContent = '-';
-        renderWatchList(NaN);
-        setStatus(error.message || '계산 실패', 'error');
+      }
+    }
+    throw lastError || new Error('시장 스냅샷 불러오기 실패');
+  }
+
+  async function fetchHistory() {
+    els.chartStatus.textContent = '차트 불러오는 중';
+    const end = new Date();
+    const start = new Date();
+    start.setDate(end.getDate() - CHART_WINDOW_DAYS);
+    const startText = start.toISOString().slice(0, 10);
+    const endText = end.toISOString().slice(0, 10);
+    const url = `https://api.frankfurter.dev/v1/${startText}..${endText}?base=${encodeURIComponent(state.from)}&symbols=${encodeURIComponent(state.to)}`;
+    const data = await requestJson(url);
+    const rates = data && data.rates ? data.rates : {};
+    state.chartSeries = Object.keys(rates)
+      .map(date => ({ date, value: Number(rates[date][state.to]) }))
+      .filter(item => Number.isFinite(item.value))
+      .sort((a, b) => a.date.localeCompare(b.date))
+      .slice(-7);
+    renderChart();
+  }
+
+  function renderChart() {
+    const series = state.chartSeries;
+    if (!series.length) {
+      els.chartWrap.innerHTML = '<div class="inline-note">최근 기준 환율 차트를 불러오지 못했습니다.</div>';
+      els.chartLegend.innerHTML = '';
+      els.chartStatus.textContent = '차트 없음';
+      return;
+    }
+    const values = series.map(x => x.value);
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    const w = 700, h = 240, px = 24, py = 24;
+    const dw = w - px * 2, dh = h - py * 2;
+    const range = max - min || 1;
+    const pts = series.map((item, idx) => {
+      const x = px + (dw * idx / Math.max(1, series.length - 1));
+      const y = py + dh - (((item.value - min) / range) * dh);
+      return { ...item, x, y };
+    });
+    const path = pts.map((p, i) => `${i ? 'L' : 'M'} ${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(' ');
+    const area = `${path} L ${pts[pts.length - 1].x.toFixed(2)} ${h - py} L ${pts[0].x.toFixed(2)} ${h - py} Z`;
+    const grid = [0, .25, .5, .75, 1].map(t => {
+      const y = py + dh - (t * dh);
+      const val = min + (t * range);
+      return `<g><line x1="${px}" y1="${y}" x2="${w - px}" y2="${y}" stroke="#e5e7eb" stroke-width="1"/><text x="${w - px}" y="${y - 6}" text-anchor="end" fill="#64748b" font-size="11">${formatNumber(val, 4)}</text></g>`;
+    }).join('');
+    const labels = pts.map(p => `<text x="${p.x}" y="${h - 6}" text-anchor="middle" fill="#64748b" font-size="11">${p.date.slice(5).replace('-', '/')}</text>`).join('');
+    const circles = pts.map(p => `<circle cx="${p.x}" cy="${p.y}" r="4" fill="#4f46e5"><title>${p.date} · ${formatNumber(p.value, 4)}</title></circle>`).join('');
+    els.chartWrap.innerHTML = `
+      <svg viewBox="0 0 ${w} ${h}" role="img" aria-label="최근 7영업일 기준 환율 추이">
+        <defs>
+          <linearGradient id="fxArea" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#c7d2fe" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#eef2ff" stop-opacity="0.15"/>
+          </linearGradient>
+        </defs>
+        ${grid}
+        <path d="${area}" fill="url(#fxArea)"/>
+        <path d="${path}" fill="none" stroke="#4f46e5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        ${circles}
+        ${labels}
+      </svg>`;
+    const change = ((values[values.length - 1] - values[0]) / values[0]) * 100;
+    els.chartLegend.innerHTML = `
+      <span>${state.from} → ${state.to}</span>
+      <span>최저 ${formatNumber(min, 4)}</span>
+      <span>최고 ${formatNumber(max, 4)}</span>
+      <span>${change >= 0 ? '상승' : '하락'} ${Math.abs(change).toFixed(2)}%</span>`;
+    els.chartStatus.textContent = '차트 완료';
+  }
+
+  async function renderWatchList(rates, sourceLabel) {
+    const targets = QUICK_COMPARE.filter(code => code !== state.from).slice(0, 5);
+    els.watchSourceTag.textContent = sourceLabel;
+    els.watchList.innerHTML = targets.map(code => {
+      const target = currencyMap.get(code);
+      const value = rates && Number.isFinite(rates[code]) ? formatNumber(rates[code], 4) : '...';
+      return `
+        <div class="fx-watch-item">
+          <div class="fx-watch-left">
+            ${flagMarkup(target)}
+            <div>
+              <strong>${target.country}</strong>
+              <span>${state.from} → ${code}</span>
+            </div>
+          </div>
+          <div class="fx-watch-rate">${value}</div>
+        </div>`;
+    }).join('');
+  }
+
+  async function refreshMarketWatch() {
+    const targets = QUICK_COMPARE.filter(code => code !== state.from).slice(0, 5);
+    await renderWatchList({}, '시장 스냅샷 불러오는 중');
+    const results = await Promise.allSettled(targets.map(code => fetchMarketPair(state.from, code)));
+    const rateMap = {};
+    let okCount = 0;
+    results.forEach((res, idx) => {
+      const code = targets[idx];
+      if (res.status === 'fulfilled') {
+        rateMap[code] = res.value.rate;
+        okCount += 1;
+      } else if (state.referenceRates[code]) {
+        rateMap[code] = state.referenceRates[code];
+      }
+    });
+    await renderWatchList(rateMap, okCount ? '시장 스냅샷 중심' : '기준 환율 대체');
+  }
+
+  function updateResult(rate, sourceName, updatedAt) {
+    const amount = Number(els.amountInput.value || 0);
+    const result = amount * rate;
+    state.amount = amount;
+    state.lastRate = rate;
+    state.lastSourceName = sourceName;
+    state.updatedAt = updatedAt || '-';
+    els.convertedOutput.value = formatNumber(result, state.decimals);
+    els.resultBig.textContent = `${formatNumber(result, state.decimals)} ${state.to}`;
+    els.resultEq.textContent = `${formatNumber(amount, state.decimals)} ${state.from} = ${formatNumber(result, state.decimals)} ${state.to}`;
+    els.resultRate.textContent = `1 ${state.from} = ${formatNumber(rate, 6)} ${state.to}`;
+    els.resultUpdated.textContent = updatedAt || '-';
+    els.resultSource.textContent = sourceName;
+  }
+
+  async function calculate() {
+    state.amount = Number(els.amountInput.value || 0);
+    state.decimals = Math.max(0, Math.min(8, Number(els.decimalInput.value || 2)));
+    if (!Number.isFinite(state.amount) || state.amount < 0) {
+      setStatus('금액을 다시 확인해 주세요.', 'err');
+      return;
+    }
+    try {
+      const reference = await fetchReferenceBundle(state.from);
+      state.referenceRates = reference.rates;
+      if (state.mode === 'manual') {
+        const rate = Number(els.manualRateInput.value || 0);
+        if (!(rate > 0)) throw new Error('직접 환율을 입력해 주세요.');
+        updateResult(rate, '직접 환율 입력', '직접 입력');
+        await renderWatchList(reference.rates, '기준 환율 참고');
+        setStatus('직접 입력 환율로 계산했습니다.', 'ok');
+      } else if (state.mode === 'reference') {
+        const rate = Number(reference.rates[state.to]);
+        if (!(rate > 0)) throw new Error('기준 환율을 불러오지 못했습니다.');
+        updateResult(rate, reference.sourceName, reference.updatedAt);
+        await renderWatchList(reference.rates, '기준 환율');
+        setStatus('기준 환율로 계산했습니다.', 'ok');
+      } else {
+        try {
+          const market = await fetchMarketPair(state.from, state.to);
+          updateResult(market.rate, market.sourceName, market.updatedAt);
+          setStatus('시장 스냅샷으로 계산했습니다. 지연 시세일 수 있습니다.', 'ok');
+          refreshMarketWatch().catch(() => renderWatchList(reference.rates, '기준 환율 대체'));
+        } catch (error) {
+          const rate = Number(reference.rates[state.to]);
+          if (!(rate > 0)) throw error;
+          updateResult(rate, reference.sourceName, reference.updatedAt);
+          await renderWatchList(reference.rates, '기준 환율 대체');
+          setStatus('시장 스냅샷 실패 → 기준 환율로 전환했습니다.', 'info');
+        }
       }
       fetchHistory().catch(() => {
-        els.chartStatus.textContent = '차트 불러오기 실패';
-        els.chartBox.innerHTML = '<div class="helper">차트 데이터 조회에 실패했다. 계산 기능은 계속 사용할 수 있다.</div>';
+        els.chartStatus.textContent = '차트 실패';
+        els.chartWrap.innerHTML = '<div class="inline-note">차트 조회에 실패했습니다.</div>';
         els.chartLegend.innerHTML = '';
       });
+    } catch (error) {
+      els.resultBig.textContent = '-';
+      els.resultEq.textContent = error.message || '계산 실패';
+      els.resultRate.textContent = '-';
+      els.resultUpdated.textContent = '-';
+      els.resultSource.textContent = '-';
+      els.convertedOutput.value = '';
+      setStatus(error.message || '계산 실패', 'err');
+      await renderWatchList({}, '불러오기 실패');
     }
+  }
 
-    function openPicker(target){
-      state.pickerTarget = target;
-      els.pickerTitle.textContent = target === 'from' ? '보유 통화 선택' : '환전 통화 선택';
-      els.pickerSearchInput.value = '';
-      renderPickerOptions();
-      els.pickerOverlay.classList.add('open');
-      els.pickerOverlay.setAttribute('aria-hidden', 'false');
-      setPickerExpanded(target === 'from', true);
-      els.pickerSearchInput.focus();
-    }
+  function closePicker() {
+    els.pickerBackdrop.classList.remove('open');
+  }
 
-    function closePicker(){
-      els.pickerOverlay.classList.remove('open');
-      els.pickerOverlay.setAttribute('aria-hidden', 'true');
-      setPickerExpanded(true, false);
-      setPickerExpanded(false, false);
-    }
-
-    function renderPickerOptions(){
-      const keyword = els.pickerSearchInput.value.trim().toLowerCase();
-      const list = currencies.filter(c => {
-        const hay = `${c.code} ${c.name} ${c.country}`.toLowerCase();
-        return !keyword || hay.includes(keyword);
-      });
-      const selectedCode = state[state.pickerTarget];
-      els.pickerGrid.innerHTML = list.map(c => `
-        <button class="picker-option ${c.code === selectedCode ? 'active' : ''}" type="button" data-code="${c.code}">
-          ${flagMarkup(c)}
-          <strong>${c.country}</strong>
-          <span>${c.code} · ${c.name}</span>
-        </button>
-      `).join('');
-    }
-
-    function applyCurrency(code){
-      if (state.pickerTarget === 'from') {
-        state.from = code;
-        if (state.to === code) state.to = currencies.find(c => c.code !== code)?.code || 'USD';
-      } else {
-        state.to = code;
-        if (state.from === code) state.from = currencies.find(c => c.code !== code)?.code || 'KRW';
+  function renderPicker(keyword='') {
+    const q = keyword.trim().toLowerCase();
+    const filtered = currencies.filter(item => !q || [item.code, item.name, item.country].join(' ').toLowerCase().includes(q));
+    els.pickerGrid.innerHTML = filtered.map(item => `
+      <button class="fx-picker-item ${state[state.pickerTarget] === item.code ? 'active' : ''}" type="button" data-code="${item.code}">
+        ${flagMarkup(item)}
+        <strong>${item.country}</strong>
+        <span>${item.code} · ${item.name}</span>
+      </button>`).join('');
+    els.pickerGrid.querySelectorAll('[data-code]').forEach(btn => btn.addEventListener('click', () => {
+      const code = btn.dataset.code;
+      state[state.pickerTarget] = code;
+      if (state.from === state.to) {
+        const next = currencies.find(item => item.code !== state.from);
+        if (next) state.to = next.code;
       }
-      renderCurrencyMeta();
       closePicker();
+      updateSummary();
       calculate();
-    }
+    }));
+  }
 
-    function resetAll(){
-      state.from = 'KRW';
-      state.to = 'USD';
-      state.mode = 'auto';
-      els.amountInput.value = '100000';
-      els.manualRateInput.value = '';
-      els.decimalInput.value = '2';
-      renderCurrencyMeta();
-      setMode('auto');
-      calculate();
-    }
+  function openPicker(target) {
+    state.pickerTarget = target;
+    els.pickerTitle.textContent = target === 'from' ? '보유 통화 선택' : '환전 통화 선택';
+    els.pickerSearch.value = '';
+    els.pickerBackdrop.classList.add('open');
+    renderPicker('');
+    els.pickerSearch.focus();
+  }
 
-    function wireEvents(){
-      els.fromPickerBtn.addEventListener('click', () => openPicker('from'));
-      els.toPickerBtn.addEventListener('click', () => openPicker('to'));
-      $('#pickerCloseBtn').addEventListener('click', closePicker);
-      els.pickerOverlay.addEventListener('click', (e) => { if (e.target === els.pickerOverlay) closePicker(); });
-      els.pickerSearchInput.addEventListener('input', renderPickerOptions);
-      els.pickerGrid.addEventListener('click', (e) => {
-        const btn = e.target.closest('.picker-option');
-        if (!btn) return;
-        applyCurrency(btn.dataset.code);
-      });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closePicker();
-      });
-      document.querySelectorAll('.mode-pill').forEach(btn => btn.addEventListener('click', () => setMode(btn.dataset.mode)));
-      ['change','input'].forEach(ev => {
-        els.amountInput.addEventListener(ev, calculate);
-        els.manualRateInput.addEventListener(ev, calculate);
-        els.decimalInput.addEventListener(ev, calculate);
-      });
-      $('#swapBtn').addEventListener('click', () => {
-        const prev = state.from;
-        state.from = state.to;
-        state.to = prev;
-        renderCurrencyMeta();
-        calculate();
-      });
-      $('#calcBtn').addEventListener('click', calculate);
-      $('#resetBtn').addEventListener('click', resetAll);
-      $('#copyBtn').addEventListener('click', async () => {
-        const text = `${els.resultSentence.textContent}\n${els.appliedRate.textContent}\n기준 시각: ${els.updatedAt.textContent}`;
-        try{
-          await navigator.clipboard.writeText(text);
-          showToast('결과를 복사했다.');
-        }catch{
-          showToast('복사 실패');
-        }
-      });
-      window.addEventListener('load', () => {
-        try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
-      });
+  document.getElementById('fromBtn').addEventListener('click', () => openPicker('from'));
+  document.getElementById('toBtn').addEventListener('click', () => openPicker('to'));
+  document.getElementById('swapBtn').addEventListener('click', () => {
+    [state.from, state.to] = [state.to, state.from];
+    updateSummary();
+    calculate();
+  });
+  document.getElementById('calcBtn').addEventListener('click', calculate);
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    state.from = 'USD';
+    state.to = 'KRW';
+    state.amount = 1000;
+    state.mode = 'market';
+    state.decimals = 2;
+    els.manualRateInput.value = '';
+    updateSummary();
+    calculate();
+  });
+  document.getElementById('copyBtn').addEventListener('click', async () => {
+    if (!els.convertedOutput.value) {
+      showToast('복사할 결과가 없습니다.');
+      return;
     }
+    await navigator.clipboard.writeText(els.convertedOutput.value + ' ' + state.to);
+    showToast('결과를 복사했습니다.');
+  });
+  document.getElementById('pickerClose').addEventListener('click', closePicker);
+  els.pickerBackdrop.addEventListener('click', (e) => { if (e.target === els.pickerBackdrop) closePicker(); });
+  els.pickerSearch.addEventListener('input', (e) => renderPicker(e.target.value));
+  els.modeButtons.forEach(btn => btn.addEventListener('click', () => {
+    state.mode = btn.dataset.mode;
+    updateSummary();
+    calculate();
+  }));
+  els.decimalInput.addEventListener('input', () => { calculate(); });
+  els.manualRateInput.addEventListener('input', () => { if (state.mode === 'manual') calculate(); });
 
-    function init(){
-      renderCurrencyMeta();
-      wireEvents();
-      setMode('auto');
-      calculate();
-    }
+  updateSummary();
+  calculate();
+})();
 
-    init();
-  })();
-  </script>
+</script>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <h4>도구랩</h4>
+      <p>브라우저에서 바로 사용하는 온라인 도구 모음.</p>
+    </div>
+    <div>
+      <h4>바로가기</h4>
+      <a href="../../index.html">홈</a>
+      <a href="../../roadmap.html">로드맵</a>
+      <a href="../../changelog.html">변경이력</a>
+    </div>
+    <div>
+      <h4>정보</h4>
+      <a href="../../about.html">소개</a>
+      <a href="../../privacy.html">개인정보처리방침</a>
+      <a href="../../contact.html">문의</a>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
