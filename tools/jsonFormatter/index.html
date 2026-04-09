@@ -62,10 +62,10 @@
     const indentEl = document.getElementById('indent');
     const msgEl = document.getElementById('message');
     const sample = `{
-  "project": "tool-lab",
+  "project": "public-demo",
   "enabled": true,
-  "features": ["format", "minify", "copy"],
-  "owner": {"name": "lee", "lang": "ko"}
+  "features": ["format", "copy", "share"],
+  "profile": {"name": "demo-user", "lang": "en"}
 }`;
 
     function setMessage(text, ok=false){ msgEl.textContent = text || ''; msgEl.className = ok ? 'msg ok' : 'msg'; }

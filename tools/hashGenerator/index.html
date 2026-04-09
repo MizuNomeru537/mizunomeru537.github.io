@@ -82,7 +82,7 @@
     document.getElementById('sha256Btn').addEventListener('click',()=>digest('SHA-256'));
     document.getElementById('sha1Btn').addEventListener('click',()=>digest('SHA-1'));
     document.getElementById('copyBtn').addEventListener('click', async ()=>{if(!hgOut.value)return; await navigator.clipboard.writeText(hgOut.value); hgMsg.textContent=pageT('msg_copied'); hgMsg.className='msg ok';});
-    document.getElementById('sampleBtn').addEventListener('click',()=>{hgIn.value='ToolLab hash sample'; hgOut.value=''; hgMsg.textContent='';});
+    document.getElementById('sampleBtn').addEventListener('click',()=>{hgIn.value='public-demo-hash-text'; hgOut.value=''; hgMsg.textContent='';});
 
   </script>
 <footer class="footer">

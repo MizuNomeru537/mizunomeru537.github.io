@@ -74,7 +74,7 @@
     const hpIn=document.getElementById('inputHtml'), hpMsg=document.getElementById('message');
     function renderPreview(){ const doc=document.getElementById('previewFrame').contentWindow.document; doc.open(); doc.write(hpIn.value); doc.close(); hpMsg.textContent=pageT('msg_previewed'); hpMsg.className='msg ok'; }
     document.getElementById('previewBtn').addEventListener('click', renderPreview);
-    document.getElementById('sampleBtn').addEventListener('click', ()=>{hpIn.value='<!doctype html><html><body style="font-family:Arial;padding:24px"><h1 style="color:#4f46e5">ToolLab HTML Preview</h1><p>This is a sample block rendered in the preview frame.</p><button style="padding:10px 14px;border-radius:10px;border:0;background:#111827;color:#fff">Button</button></body></html>'; renderPreview();});
+    document.getElementById('sampleBtn').addEventListener('click', ()=>{hpIn.value='<!doctype html><html><body style="font-family:Arial;padding:24px"><h1 style="color:#4f46e5">Public Demo Preview</h1><p>This is a generic sample block rendered in the preview frame.</p><button style="padding:10px 14px;border-radius:10px;border:0;background:#111827;color:#fff">Button</button></body></html>'; renderPreview();});
     document.getElementById('copyBtn').addEventListener('click', async ()=>{ await navigator.clipboard.writeText(hpIn.value); hpMsg.textContent=pageT('msg_copied'); hpMsg.className='msg ok';});
 
   </script>

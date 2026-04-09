@@ -109,7 +109,7 @@
       <div class="hero-card">
         <div class="pill" id="pagePill">SQL · safer formatter · fixed 4 spaces</div>
         <h1 id="pageTitle">SQL Formatter</h1>
-        <p id="pageDesc">Long SQL queries are reorganized with fixed 4-space indentation, cleaner SELECT lists, readable JOIN blocks, and safer keyword handling for names like WON_COST or ORDER_USE_COUPON.</p>
+        <p id="pageDesc">Long SQL queries are reorganized with fixed 4-space indentation, cleaner SELECT lists, readable JOIN blocks, and safer keyword handling for identifiers like REGION_NAME or COUPON_ORDER_COUNT.</p>
       </div>
     </div>
   </section>
@@ -172,7 +172,7 @@
         <h3 id="helpTitle">What changed</h3>
         <ul>
           <li id="helpItem1">Indentation is fixed to 4 spaces across the formatter.</li>
-          <li id="helpItem2">Keyword detection is token-based, so ON / OR / AND inside identifiers are less likely to break names such as WON_COST.</li>
+          <li id="helpItem2">Keyword detection is token-based, so ON / OR / AND inside identifiers are less likely to break names such as REGION_NAME.</li>
           <li id="helpItem3">Very vendor-specific syntax can still need manual cleanup, but long everyday queries should read much better now.</li>
         </ul>
       </div>
@@ -266,11 +266,11 @@ const PAGE_TEXT = {
     ar: "منسّق SQL"
   },
   pageDesc: {
-    en: "Long SQL queries are reorganized with fixed 4-space indentation, cleaner SELECT lists, readable JOIN blocks, and safer keyword handling for names like WON_COST or ORDER_USE_COUPON.",
-    ko: "긴 SQL 쿼리를 4칸 고정 들여쓰기로 정리하고, SELECT 목록과 JOIN 블록을 더 읽기 쉽게 만들며, WON_COST나 ORDER_USE_COUPON 같은 이름 안의 키워드도 덜 깨지게 처리합니다.",
-    ja: "長い SQL クエリを 4 スペース固定で整え、SELECT 一覧と JOIN ブロックを読みやすくし、WON_COST や ORDER_USE_COUPON のような識別子内キーワードも壊れにくくします。",
-    "zh-TW": "使用固定 4 空格縮排整理長 SQL，讓 SELECT 清單與 JOIN 區塊更易讀，也降低 WON_COST、ORDER_USE_COUPON 這類名稱被錯切的機率。",
-    "zh-CN": "使用固定 4 空格缩进整理长 SQL，让 SELECT 列表与 JOIN 区块更易读，也降低 WON_COST、ORDER_USE_COUPON 这类名称被误切的概率。"
+    en: "Long SQL queries are reorganized with fixed 4-space indentation, cleaner SELECT lists, readable JOIN blocks, and safer keyword handling for identifiers like REGION_NAME or COUPON_ORDER_COUNT.",
+    ko: "긴 SQL 쿼리를 4칸 고정 들여쓰기로 정리하고, SELECT 목록과 JOIN 블록을 더 읽기 쉽게 만들며, REGION_NAME이나 COUPON_ORDER_COUNT 같은 식별자 안의 키워드도 덜 깨지게 처리합니다.",
+    ja: "長い SQL クエリを 4 スペース固定で整え、SELECT 一覧と JOIN ブロックを読みやすくし、REGION_NAME や COUPON_ORDER_COUNT のような識別子内キーワードも壊れにくくします。",
+    "zh-TW": "使用固定 4 空格縮排整理長 SQL，讓 SELECT 清單與 JOIN 區塊更易讀，也降低 REGION_NAME、COUPON_ORDER_COUNT 這類名稱被錯切的機率。",
+    "zh-CN": "使用固定 4 空格缩进整理长 SQL，让 SELECT 列表与 JOIN 区块更易读，也降低 REGION_NAME、COUPON_ORDER_COUNT 这类名称被误切的概率。"
   },
   tagIndent: {
     en: "Indentation: fixed 4 spaces",
@@ -329,11 +329,11 @@ const PAGE_TEXT = {
     "zh-CN": "整个格式化工具的缩进已固定为 4 空格。"
   },
   helpItem2: {
-    en: "Keyword detection is token-based, so ON / OR / AND inside identifiers are less likely to break names such as WON_COST.",
-    ko: "키워드 감지를 토큰 기준으로 바꿔서 WON_COST 같은 이름 안의 ON / OR / AND 때문에 문자열이 깨질 가능성을 줄였습니다.",
-    ja: "キーワード検出をトークン単位に変更し、WON_COST のような識別子内の ON / OR / AND で壊れにくくしました。",
-    "zh-TW": "改為以 token 為單位偵測關鍵字，降低 WON_COST 這類名稱因 ON / OR / AND 被誤切的情況。",
-    "zh-CN": "改为按 token 识别关键字，降低 WON_COST 这类名称因 ON / OR / AND 被误切的情况。"
+    en: "Keyword detection is token-based, so ON / OR / AND inside identifiers are less likely to break names such as REGION_NAME.",
+    ko: "키워드 감지를 토큰 기준으로 바꿔서 REGION_NAME 같은 이름 안의 ON / OR / AND 때문에 문자열이 깨질 가능성을 줄였습니다.",
+    ja: "キーワード検出をトークン単位に変更し、REGION_NAME のような識別子内の ON / OR / AND で壊れにくくしました。",
+    "zh-TW": "改為以 token 為單位偵測關鍵字，降低 REGION_NAME 這類名稱因 ON / OR / AND 被誤切的情況。",
+    "zh-CN": "改为按 token 识别关键字，降低 REGION_NAME 这类名称因 ON / OR / AND 被误切的情况。"
   },
   helpItem3: {
     en: "Very vendor-specific syntax can still need manual cleanup, but long everyday queries should read much better now.",
@@ -371,7 +371,7 @@ const PAGE_TEXT = {
   }
 };
 
-const SAMPLE_SQL = `SELECT A.OrderProductNo,A.IDX,A.ORDER_STATUS,A.PRODUCT_NAME,A.SALE_COST,A.PRODUCTCODE,A.SIZE_NAME,A.SIZE_CODE,A.SALE_CNT,A.WON_COST,A.INVOICE_NO,A.ERP_GET_DELIVERY_CHK,A.SABANGNET_DELIVERY_CHK,A.ORDER_USE_COUPON,A.MALL_SALE_TYPE,A.PromotionMasterNo,A.PromotionSalePrice,B.DELIVERY_NM,D.CodeName,ISNULL(CS.OrderCsCnt,0) AS OrderCsCnt,A.ONE_ORDER_ID,PM.PromotionName,A.p_type,A.CodeOrderStatusNo,(SELECT ProductBarCode FROM TB_ProductSizeStock WHERE ProductNo = A.ProductNo AND ProductSize = SIZE_CODE) AS ProductBarCode FROM TB_SabangNet_Order_Master OM INNER JOIN TB_SabangNet_Order_Product A ON OM.OrderNo = A.OrderNo LEFT OUTER JOIN TB_SabangNet_Delivery_Code B ON A.DELIVERY_ID = B.DELIVERY_CODE LEFT OUTER JOIN TB_CodeOrderStatusNew D ON A.CodeOrderStatusNo = D.CodeOrderStatusNo LEFT OUTER JOIN (SELECT OrderNo AS CsOrderNo, COUNT(*) AS OrderCsCnt FROM TB_SabangNet_Order_Master_Cs GROUP BY OrderNo) CS ON A.OrderNo = CS.CsOrderNo WHERE A.ETC = 'ON_cost and ORANGE' AND A.WON_COST > 0 ORDER BY A.OrderNo DESC;`;
+const SAMPLE_SQL = `SELECT O.order_id,O.region_name,O.coupon_order_count,O.order_total,C.customer_name,C.account_status,ISNULL(S.summary_count,0) AS summary_count FROM public_orders O INNER JOIN public_customers C ON O.customer_id = C.customer_id LEFT OUTER JOIN (SELECT order_id, COUNT(*) AS summary_count FROM public_order_summary GROUP BY order_id) S ON O.order_id = S.order_id WHERE O.region_name = 'North Zone' AND O.order_total > 0 ORDER BY O.created_at DESC;`;
 
 const inputEl = document.getElementById('inputSql');
 const outputEl = document.getElementById('outputSql');

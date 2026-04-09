@@ -76,7 +76,7 @@
     document.getElementById('encodeBtn').addEventListener('click',()=>{ueOut.value=encodeURIComponent(ueIn.value); ueMsg.textContent=pageT('msg_encoded'); ueMsg.className='msg ok';});
     document.getElementById('decodeBtn').addEventListener('click',()=>{try{ueOut.value=decodeURIComponent(ueIn.value); ueMsg.textContent=pageT('msg_decoded'); ueMsg.className='msg ok';}catch(err){ueMsg.textContent=pageT('msg_invalid')+'\n'+err.message; ueMsg.className='msg';}});
     document.getElementById('copyBtn').addEventListener('click', async ()=>{ if(!ueOut.value) return; await navigator.clipboard.writeText(ueOut.value); ueMsg.textContent=pageT('msg_copied'); ueMsg.className='msg ok';});
-    document.getElementById('sampleBtn').addEventListener('click',()=>{ueIn.value='https://example.com/search?q=도구랩 test&lang=ko'; ueOut.value=''; ueMsg.textContent='';});
+    document.getElementById('sampleBtn').addEventListener('click',()=>{ueIn.value='https://example.com/search?q=public demo&lang=en'; ueOut.value=''; ueMsg.textContent='';});
 
   </script>
 <footer class="footer">

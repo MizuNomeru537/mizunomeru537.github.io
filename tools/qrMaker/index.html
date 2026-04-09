@@ -72,7 +72,7 @@
       setMessage(t('msg_qr_done'), true);
     }
     document.getElementById('generateBtn').addEventListener('click', generate);
-    document.getElementById('sampleBtn').addEventListener('click', ()=>{ inputEl.value = 'https://mizunomeru5379.github.io/code-tools/'; generate(); });
+    document.getElementById('sampleBtn').addEventListener('click', ()=>{ inputEl.value = 'https://example.com/public-demo?ref=tool'; generate(); });
     document.getElementById('downloadBtn').addEventListener('click', ()=>{
       const canvas = boxEl.querySelector('canvas');
       const img = boxEl.querySelector('img');
@@ -86,7 +86,7 @@
       a.click();
       setMessage(t('msg_download_start'), true);
     });
-    inputEl.value = 'https://mizunomeru5379.github.io/code-tools/';
+    inputEl.value = 'https://example.com/public-demo?ref=tool';
     generate();
   </script>
 <footer class="footer">

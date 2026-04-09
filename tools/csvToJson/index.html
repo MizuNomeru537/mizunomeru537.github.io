@@ -76,7 +76,7 @@
     function convertCsv(){ try{ const lines=cjIn.value.split(/\r?\n/).filter(x=>x.trim().length); if(lines.length<2){ cjMsg.textContent=pageT('msg_need_more'); cjMsg.className='msg'; return; } const headers=parseCsvLine(lines[0]); const rows=lines.slice(1).map(line=>{ const vals=parseCsvLine(line); const obj={}; headers.forEach((h,idx)=>obj[h]=vals[idx] ?? ''); return obj; }); cjOut.value=JSON.stringify(rows,null,2); cjMsg.textContent=pageT('msg_converted'); cjMsg.className='msg ok'; }catch(err){ cjMsg.textContent=pageT('msg_error')+'\n'+err.message; cjMsg.className='msg'; } }
     document.getElementById('convertBtn').addEventListener('click', convertCsv);
     document.getElementById('copyBtn').addEventListener('click', async ()=>{ if(!cjOut.value) return; await navigator.clipboard.writeText(cjOut.value); cjMsg.textContent=pageT('msg_copied'); cjMsg.className='msg ok';});
-    document.getElementById('sampleBtn').addEventListener('click', ()=>{ cjIn.value='name,role,lang\nAlice,Developer,en\nBob,Designer,ko'; cjOut.value=''; cjMsg.textContent=''; convertCsv(); });
+    document.getElementById('sampleBtn').addEventListener('click', ()=>{ cjIn.value='item,category,price\nNotebook,Stationery,2500\nLamp,Home,18000'; cjOut.value=''; cjMsg.textContent=''; convertCsv(); });
 
   </script>
 <footer class="footer">
