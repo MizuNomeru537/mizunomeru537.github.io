@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -7,8 +7,8 @@
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/>
   <meta name="theme-color" content="#4f46e5"/>
   <meta name="referrer" content="strict-origin-when-cross-origin"/>
-  <title>환율 계산기 | ToolLab</title>
-  <meta name="description" content="시장 스냅샷, 기준 환율, 직접 입력을 분리한 도구랩 환율 계산기입니다. 국가 이미지, 빠른 비교, 최근 기준 환율 차트를 제공합니다."/>
+  <title>Exchange Calculator | ToolLab</title>
+  <meta name="description" content="Convert currencies with market snapshot, reference rate, manual rate, fee estimate, and reverse target-receive calculation in your browser."/>
   
 <link rel="canonical" href="https://mizunomeru537.github.io/tools/exchangeCalculator/"/>
 <link rel="icon" type="image/x-icon" href="../../favicon.ico"/>
@@ -17,17 +17,17 @@
 <link rel="manifest" href="../../site.webmanifest"/>
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="ToolLab"/>
-<meta property="og:title" content="환율 계산기 | ToolLab"/>
-<meta property="og:description" content="시장 스냅샷, 기준 환율, 직접 입력을 나눠 보여주는 ToolLab 환율 계산기"/>
+<meta property="og:title" content="Exchange Calculator | ToolLab"/>
+<meta property="og:description" content="Convert currencies with market snapshot, reference rate, manual rate, fee estimate, and reverse target-receive calculation."/>
 <meta property="og:url" content="https://mizunomeru537.github.io/tools/exchangeCalculator/"/>
 <meta property="og:image" content="https://mizunomeru537.github.io/assets/seo-cover.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="환율 계산기 | ToolLab"/>
-<meta name="twitter:description" content="시장 스냅샷, 기준 환율, 직접 입력을 나눠 보여주는 ToolLab 환율 계산기"/>
+<meta name="twitter:title" content="Exchange Calculator | ToolLab"/>
+<meta name="twitter:description" content="Convert currencies with market snapshot, reference rate, manual rate, fee estimate, and reverse target-receive calculation."/>
 <meta name="twitter:image" content="https://mizunomeru537.github.io/assets/seo-cover.png"/>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://mizunomeru537.github.io/#website","url":"https://mizunomeru537.github.io/","name":"ToolLab","alternateName":["도구랩","Tool Lab"],"inLanguage":"ko"},{"@type":"WebPage","@id":"https://mizunomeru537.github.io/tools/exchangeCalculator/#webpage","url":"https://mizunomeru537.github.io/tools/exchangeCalculator/","name":"환율 계산기 | ToolLab","description":"시장 스냅샷, 기준 환율, 직접 입력을 분리한 브라우저 기반 환율 계산기","isPartOf":{"@id":"https://mizunomeru537.github.io/#website"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://mizunomeru537.github.io/#website","url":"https://mizunomeru537.github.io/","name":"ToolLab","alternateName":["도구랩","Tool Lab"],"inLanguage":"en"},{"@type":"WebPage","@id":"https://mizunomeru537.github.io/tools/exchangeCalculator/#webpage","url":"https://mizunomeru537.github.io/tools/exchangeCalculator/","name":"Exchange Calculator | ToolLab","description":"Browser-based currency converter with market snapshot, reference rate, manual rate, fee estimate, and reverse target calculation.","isPartOf":{"@id":"https://mizunomeru537.github.io/#website"}}]}</script>
 
   
         <link rel="stylesheet" href="../../assets/tool.css?v=20260408-4"/>
@@ -108,13 +108,13 @@
   <div class="container topbar-inner">
     <a class="brand" href="../../index.html">
       <span class="brand-mark">⚡</span>
-      <span>도구랩</span>
+      <span id="brandText">도구랩</span>
     </a>
     <nav class="nav">
-      <a href="../../index.html">홈</a>
-      <a href="../../index.html#featured">추천 도구</a>
-      <a href="../../tools/">전체 도구</a>
-      <a href="../../about.html">소개</a>
+      <a href="../../index.html" id="navHome">홈</a>
+      <a href="../../index.html#featured" id="navFeatured">추천 도구</a>
+      <a href="../../tools/" id="navTools">전체 도구</a>
+      <a href="../../about.html" id="navAbout">소개</a>
     </nav>
   </div>
 </header>
@@ -123,16 +123,12 @@
   <section class="hero">
     <div class="container">
       <div class="hero-card">
-        <div class="pill">환율 · 시장 스냅샷 / 기준 환율 / 직접 입력</div>
-        <h1>ToolLab 스타일로 다시 만든<br>환율 계산기</h1>
-        <p>
-          이전처럼 일일 기준값을 마치 실시간처럼 보이게 하지 않고,
-          <strong>시장 스냅샷</strong>, <strong>기준 환율</strong>, <strong>직접 입력</strong>을 분리했다.
-          국가 이미지, 빠른 비교, 최근 기준 환율 차트까지 한 화면에 넣었고 전체 디자인도 ToolLab 메인과 맞췄다.
-        </p>
+        <div class="pill" id="heroPill">환율 · 시장 스냅샷 / 기준 환율 / 직접 입력</div>
+        <h1 id="heroTitle">ToolLab 스타일로 다시 만든<br>환율 계산기</h1>
+        <p id="heroDesc">이전처럼 일일 기준값을 마치 실시간처럼 보이게 하지 않고, <strong>시장 스냅샷</strong>, <strong>기준 환율</strong>, <strong>직접 입력</strong>을 분리했습니다. 여기에 <strong>수수료 반영</strong>과 <strong>목표 수령액 기준 역산</strong>까지 추가해 한 화면에서 처리합니다.</p>
         <div class="hero-actions">
-          <a class="btn btn-light" href="#calculator">바로 계산하기</a>
-          <a class="btn btn-secondary" href="#guide">사용 방법 보기</a>
+          <a class="btn btn-light" href="#calculator" id="heroBtnCalc">바로 계산하기</a>
+          <a class="btn btn-secondary" href="#guide" id="heroBtnGuide">사용 방법 보기</a>
         </div>
       </div>
     </div>
@@ -143,17 +139,17 @@
       <div class="panel fx-card">
         <div class="section-head">
           <div>
-            <h2>환율 설정</h2>
-            <p class="fx-subtitle">보유 통화와 환전 통화를 고른 뒤, 어떤 방식으로 값을 가져올지 선택합니다.</p>
+            <h2 id="settingsTitle">환율 설정</h2>
+            <p class="fx-subtitle" id="settingsDesc">보유 통화와 환전 통화를 고른 뒤, 어떤 방식으로 값을 가져올지 선택합니다.</p>
           </div>
         </div>
 
         <div class="fx-control">
-          <label>환율 방식</label>
+          <label id="labelMode">환율 방식</label>
           <div class="fx-mode-group">
-            <button class="fx-mode active" type="button" data-mode="market">시장 스냅샷</button>
-            <button class="fx-mode" type="button" data-mode="reference">기준 환율</button>
-            <button class="fx-mode" type="button" data-mode="manual">직접 입력</button>
+            <button class="fx-mode active" type="button" data-mode="market" id="modeMarketBtn">시장 스냅샷</button>
+            <button class="fx-mode" type="button" data-mode="reference" id="modeReferenceBtn">기준 환율</button>
+            <button class="fx-mode" type="button" data-mode="manual" id="modeManualBtn">직접 입력</button>
           </div>
           <div class="fx-note" id="modeHelper">시장 스냅샷은 공공 시세 페이지의 지연 호가를 best-effort로 읽어옵니다. 실패하면 기준 환율로 자동 전환됩니다.</div>
         </div>
@@ -166,20 +162,40 @@
 
         <div class="grid-2">
           <div class="fx-control">
-            <label for="amountInput">금액 입력</label>
+            <label for="amountInput" id="labelAmount">금액 입력</label>
             <div class="fx-inline">
               <div class="code-box" id="fromCode">USD</div>
-              <input id="amountInput" type="number" inputmode="decimal" step="any" min="0" value="1000" placeholder="입력 금액"/>
+              <input id="amountInput" type="number" inputmode="decimal" step="any" min="0" value="1000" placeholder="입력 금액" data-ph-key="phAmount"/>
             </div>
           </div>
           <div class="fx-control">
-            <label for="manualRateInput">직접 환율 입력</label>
+            <label for="manualRateInput" id="labelManualRate">직접 환율 입력</label>
             <div class="fx-rate-row">
-              <input id="manualRateInput" type="number" inputmode="decimal" step="any" min="0" placeholder="예: 1473.00" disabled/>
-              <input id="decimalInput" type="number" inputmode="numeric" step="1" min="0" max="8" value="2" placeholder="소수 자리"/>
+              <input id="manualRateInput" type="number" inputmode="decimal" step="any" min="0" placeholder="예: 1473.00" data-ph-key="phManualRate" disabled/>
+              <input id="decimalInput" type="number" inputmode="numeric" step="1" min="0" max="8" value="2" placeholder="소수 자리" data-ph-key="phDecimals"/>
             </div>
-            <div class="inline-note">입력 형식: 1 기준통화 = ? 환전통화</div>
+            <div class="inline-note" id="manualHint">입력 형식: 1 기준통화 = ? 환전통화</div>
           </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="fx-control">
+            <label for="feePercentInput" id="labelFeePercent">퍼센트 수수료</label>
+            <input id="feePercentInput" type="number" inputmode="decimal" step="any" min="0" value="0" placeholder="예: 1.5" data-ph-key="phFeePercent"/>
+          </div>
+          <div class="fx-control">
+            <label for="fixedFeeInput" id="labelFixedFee">고정 수수료</label>
+            <input id="fixedFeeInput" type="number" inputmode="decimal" step="any" min="0" value="0" placeholder="예: 3" data-ph-key="phFixedFee"/>
+          </div>
+        </div>
+
+        <div class="fx-control">
+          <label for="targetReceiveInput" id="labelTargetReceive">목표 수령액 기준 역산</label>
+          <div class="fx-rate-row">
+            <input id="targetReceiveInput" type="number" inputmode="decimal" step="any" min="0" placeholder="받고 싶은 금액 입력" data-ph-key="phTargetReceive"/>
+            <button class="btn btn-light" id="calcReverseBtn" type="button">필요 금액 계산</button>
+          </div>
+          <div class="inline-note" id="reverseHint">수수료까지 반영해서 목표 수령액을 받으려면 얼마나 보내야 하는지 계산합니다.</div>
         </div>
 
         <div class="fx-actions">
@@ -193,31 +209,31 @@
       <div class="panel fx-card">
         <div class="section-head">
           <div>
-            <h2>계산 결과</h2>
+            <h2 id="resultTitle">계산 결과</h2>
             <p class="fx-subtitle" id="sourceText">자동 소스: 시장 스냅샷 → 실패 시 기준 환율</p>
           </div>
         </div>
 
         <div class="fx-result-hero">
-          <div class="fx-kicker">결과</div>
+          <div class="fx-kicker" id="resultKicker">결과</div>
           <div class="fx-big" id="resultBig">-</div>
           <p class="fx-eq" id="resultEq">-</p>
         </div>
 
         <div class="fx-meta">
-          <div class="card"><span>적용 환율</span><strong id="resultRate">-</strong></div>
-          <div class="card"><span>기준 시각</span><strong id="resultUpdated">-</strong></div>
-          <div class="card"><span>데이터 출처</span><strong id="resultSource">-</strong></div>
+          <div class="card"><span id="metaRateLabel">적용 환율</span><strong id="resultRate">-</strong></div>
+          <div class="card"><span id="metaUpdatedLabel">기준 시각</span><strong id="resultUpdated">-</strong></div>
+          <div class="card"><span id="metaSourceLabel">데이터 출처</span><strong id="resultSource">-</strong></div>
         </div>
 
         <div class="fx-control">
-          <label for="convertedOutput">복사용 결과</label>
-          <input id="convertedOutput" type="text" readonly placeholder="계산 후 여기에 표시됩니다."/>
+          <label for="convertedOutput" id="labelCopyField">복사용 결과</label>
+          <input id="convertedOutput" type="text" readonly placeholder="계산 후 여기에 표시됩니다." data-ph-key="phCopyField"/>
         </div>
 
         <div class="fx-note warn">
-          <strong>참고</strong><br/>
-          시장 스냅샷은 장중에 더 가깝지만 지연 시세일 수 있고, 기준 환율은 가장 안정적인 대신 장중 시세와 다를 수 있습니다.
+          <strong id="warnTitle">참고</strong><br/>
+          <span id="warnBody">시장 스냅샷은 장중에 더 가깝지만 지연 시세일 수 있고, 기준 환율은 가장 안정적인 대신 장중 시세와 다를 수 있습니다.</span>
         </div>
       </div>
     </div>
@@ -228,20 +244,20 @@
       <div class="panel">
         <div class="section-head">
           <div>
-            <h2>최근 기준 환율 차트</h2>
-            <p class="fx-subtitle">최근 7영업일 기준으로 같은 통화쌍의 흐름을 보여줍니다.</p>
+            <h2 id="chartTitle">최근 기준 환율 차트</h2>
+            <p class="fx-subtitle" id="chartDesc">최근 7영업일 기준으로 같은 통화쌍의 흐름을 보여줍니다.</p>
           </div>
           <div class="fx-watch-tag" id="chartStatus">차트 준비중</div>
         </div>
-        <div class="fx-chart-wrap" id="chartWrap"><div class="inline-note">차트 데이터를 불러오는 중입니다.</div></div>
+        <div class="fx-chart-wrap" id="chartWrap"><div class="inline-note" id="chartLoadingText">차트 데이터를 불러오는 중입니다.</div></div>
         <div class="fx-legend" id="chartLegend"></div>
       </div>
 
       <div class="panel">
         <div class="section-head">
           <div>
-            <h2>빠른 비교</h2>
-            <p class="fx-subtitle">자주 보는 통화들을 현재 기준 통화 기준으로 같이 확인합니다.</p>
+            <h2 id="watchTitle">빠른 비교</h2>
+            <p class="fx-subtitle" id="watchDesc">자주 보는 통화들을 현재 기준 통화 기준으로 같이 확인합니다.</p>
           </div>
           <div class="fx-watch-tag" id="watchSourceTag">시장 스냅샷</div>
         </div>
@@ -253,36 +269,33 @@
   <section class="section" id="guide">
     <div class="container">
       <div class="panel seo-panel">
-        <h2>이 버전에서 바뀐 점</h2>
-        <p>
-          이전처럼 일일 기준값만 보고 실시간처럼 오해하기 쉬운 구성을 줄이고, 소스 성격을 구분해서 보이도록 다시 정리했다.
-          메인 ToolLab의 밝은 카드형 레이아웃, 상단 히어로, 패널 구조와 맞추어 전체 디자인도 통일했다.
-        </p>
-        <h3>사용 방법</h3>
+        <h2 id="guideTitle">이 버전에서 바뀐 점</h2>
+        <p id="guideIntro">이전처럼 일일 기준값만 보고 실시간처럼 오해하기 쉬운 구성을 줄이고, 소스 성격을 구분해서 보이도록 다시 정리했습니다. 메인 ToolLab의 밝은 카드형 레이아웃과 맞추어 전체 디자인도 통일했습니다.</p>
+        <h3 id="howToTitle">사용 방법</h3>
         <ol>
-          <li>보유 통화와 환전 통화를 고른다.</li>
-          <li>시장 스냅샷, 기준 환율, 직접 입력 중 하나를 선택한다.</li>
-          <li>금액을 넣고 계산하면 결과와 적용 환율, 기준 시각, 데이터 출처가 함께 표시된다.</li>
+          <li id="step1">보유 통화와 환전 통화를 고릅니다.</li>
+          <li id="step2">시장 스냅샷, 기준 환율, 직접 입력 중 하나를 선택합니다.</li>
+          <li id="step3">금액을 넣고 계산하면 결과와 적용 환율, 기준 시각, 데이터 출처가 함께 표시됩니다.</li>
         </ol>
-        <h3>추천 사용 방식</h3>
+        <h3 id="tipsTitle">추천 사용 방식</h3>
         <div class="related-links">
-          <a href="javascript:void(0)">장중 느낌이 필요할 때 → 시장 스냅샷</a>
-          <a href="javascript:void(0)">안정적으로 계산할 때 → 기준 환율</a>
-          <a href="javascript:void(0)">내가 본 숫자와 맞출 때 → 직접 입력</a>
+          <a href="javascript:void(0)" id="tipMarket">장중 느낌이 필요할 때 → 시장 스냅샷</a>
+          <a href="javascript:void(0)" id="tipReference">안정적으로 계산할 때 → 기준 환율</a>
+          <a href="javascript:void(0)" id="tipManual">내가 본 숫자와 맞출 때 → 직접 입력</a>
         </div>
-        <h3>FAQ</h3>
+        <h3 id="faqTitle">FAQ</h3>
         <div class="faq-list">
           <details open>
-            <summary>왜 어떤 날은 기준 환율과 시장 스냅샷 값이 다르게 보이나요?</summary>
-            <p>기준 환율은 일일 기준 데이터라 장중 변동을 바로 반영하지 않습니다. 시장 스냅샷은 장중에 더 가깝지만 지연 시세일 수 있습니다.</p>
+            <summary id="faqQ1">왜 어떤 날은 기준 환율과 시장 스냅샷 값이 다르게 보이나요?</summary>
+            <p id="faqA1">기준 환율은 일일 기준 데이터라 장중 변동을 바로 반영하지 않습니다. 시장 스냅샷은 장중에 더 가깝지만 지연 시세일 수 있습니다.</p>
           </details>
           <details>
-            <summary>1497처럼 전일 값 비슷하게 보이던 문제는 어떻게 바뀌었나요?</summary>
-            <p>이제 소스를 분리해서 보여주고, 시장 스냅샷이 실패하면 분명하게 기준 환율로 전환되었다고 표시합니다.</p>
+            <summary id="faqQ2">1497처럼 전일 값 비슷하게 보이던 문제는 어떻게 바뀌었나요?</summary>
+            <p id="faqA2">이제 소스를 분리해서 보여주고, 시장 스냅샷이 실패하면 분명하게 기준 환율로 전환되었다고 표시합니다.</p>
           </details>
           <details>
-            <summary>정확히 내가 본 숫자와 맞추고 싶으면 어떻게 하나요?</summary>
-            <p>직접 입력 모드에서 1 기준통화 = ? 환전통화 값을 넣으면 됩니다. 예를 들어 1 USD = 1473 KRW처럼 바로 맞출 수 있습니다.</p>
+            <summary id="faqQ3">정확히 내가 본 숫자와 맞추고 싶으면 어떻게 하나요?</summary>
+            <p id="faqA3">직접 입력 모드에서 1 기준통화 = ? 환전통화 값을 넣으면 됩니다. 예를 들어 1 USD = 1473 KRW처럼 바로 맞출 수 있습니다.</p>
           </details>
         </div>
       </div>
@@ -297,492 +310,227 @@
       <button type="button" id="pickerClose" aria-label="닫기">✕</button>
     </div>
     <div class="fx-picker-search">
-      <input id="pickerSearch" type="search" placeholder="국가명, 통화코드, 통화명 검색"/>
+      <input id="pickerSearch" type="search" placeholder="국가명, 통화코드, 통화명 검색" data-ph-key="phPickerSearch"/>
     </div>
     <div class="fx-picker-grid" id="pickerGrid"></div>
   </div>
 </div>
 <div class="fx-toast" id="fxToast"></div>
 
-<script>
 
+<script>
 (() => {
   const currencies = [{"code": "KRW", "name": "대한민국 원", "country": "대한민국", "flag": "kr", "emoji": "🇰🇷"}, {"code": "USD", "name": "미국 달러", "country": "미국", "flag": "us", "emoji": "🇺🇸"}, {"code": "JPY", "name": "일본 엔", "country": "일본", "flag": "jp", "emoji": "🇯🇵"}, {"code": "CNY", "name": "중국 위안", "country": "중국", "flag": "cn", "emoji": "🇨🇳"}, {"code": "EUR", "name": "유로", "country": "유럽연합", "flag": "eu", "emoji": "🇪🇺"}, {"code": "GBP", "name": "영국 파운드", "country": "영국", "flag": "gb", "emoji": "🇬🇧"}, {"code": "AUD", "name": "호주 달러", "country": "호주", "flag": "au", "emoji": "🇦🇺"}, {"code": "CAD", "name": "캐나다 달러", "country": "캐나다", "flag": "ca", "emoji": "🇨🇦"}, {"code": "CHF", "name": "스위스 프랑", "country": "스위스", "flag": "ch", "emoji": "🇨🇭"}, {"code": "HKD", "name": "홍콩 달러", "country": "홍콩", "flag": "hk", "emoji": "🇭🇰"}, {"code": "SGD", "name": "싱가포르 달러", "country": "싱가포르", "flag": "sg", "emoji": "🇸🇬"}, {"code": "TWD", "name": "대만 달러", "country": "대만", "flag": "tw", "emoji": "🇹🇼"}, {"code": "THB", "name": "태국 바트", "country": "태국", "flag": "th", "emoji": "🇹🇭"}, {"code": "VND", "name": "베트남 동", "country": "베트남", "flag": "vn", "emoji": "🇻🇳"}, {"code": "PHP", "name": "필리핀 페소", "country": "필리핀", "flag": "ph", "emoji": "🇵🇭"}, {"code": "MYR", "name": "말레이시아 링깃", "country": "말레이시아", "flag": "my", "emoji": "🇲🇾"}, {"code": "IDR", "name": "인도네시아 루피아", "country": "인도네시아", "flag": "id", "emoji": "🇮🇩"}, {"code": "INR", "name": "인도 루피", "country": "인도", "flag": "in", "emoji": "🇮🇳"}, {"code": "NZD", "name": "뉴질랜드 달러", "country": "뉴질랜드", "flag": "nz", "emoji": "🇳🇿"}, {"code": "SEK", "name": "스웨덴 크로나", "country": "스웨덴", "flag": "se", "emoji": "🇸🇪"}, {"code": "NOK", "name": "노르웨이 크로네", "country": "노르웨이", "flag": "no", "emoji": "🇳🇴"}, {"code": "DKK", "name": "덴마크 크로네", "country": "덴마크", "flag": "dk", "emoji": "🇩🇰"}, {"code": "SAR", "name": "사우디 리얄", "country": "사우디아라비아", "flag": "sa", "emoji": "🇸🇦"}, {"code": "AED", "name": "아랍에미리트 디르함", "country": "아랍에미리트", "flag": "ae", "emoji": "🇦🇪"}, {"code": "KWD", "name": "쿠웨이트 디나르", "country": "쿠웨이트", "flag": "kw", "emoji": "🇰🇼"}, {"code": "QAR", "name": "카타르 리얄", "country": "카타르", "flag": "qa", "emoji": "🇶🇦"}, {"code": "BHD", "name": "바레인 디나르", "country": "바레인", "flag": "bh", "emoji": "🇧🇭"}];
   const currencyMap = new Map(currencies.map(item => [item.code, item]));
   const QUICK_COMPARE = ['KRW','USD','JPY','EUR','CNY','GBP'];
   const CHART_WINDOW_DAYS = 12;
-  const state = {
-    from: 'USD',
-    to: 'KRW',
-    amount: 1000,
-    mode: 'market',
-    manualRate: '',
-    decimals: 2,
-    lastRate: 0,
-    lastSourceName: '',
-    updatedAt: '',
-    referenceRates: {},
-    chartSeries: [],
-    pickerTarget: 'from'
+
+  const PAGE_TEXT = {
+    brandText: { en:'ToolLab', ko:'도구랩', ja:'ツールラボ', 'zh-TW':'工具站', 'zh-CN':'工具站' },
+    navHome: { en:'Home', ko:'홈', ja:'ホーム', 'zh-TW':'首頁', 'zh-CN':'首页' },
+    navFeatured: { en:'Featured tools', ko:'추천 도구', ja:'おすすめツール', 'zh-TW':'推薦工具', 'zh-CN':'推荐工具' },
+    navTools: { en:'All tools', ko:'전체 도구', ja:'全ツール', 'zh-TW':'所有工具', 'zh-CN':'全部工具' },
+    navAbout: { en:'About', ko:'소개', ja:'紹介', 'zh-TW':'介紹', 'zh-CN':'介绍' },
+    heroPill: { en:'Exchange · market snapshot / reference / manual', ko:'환율 · 시장 스냅샷 / 기준 환율 / 직접 입력', ja:'為替・市場スナップショット / 基準レート / 手動入力', 'zh-TW':'匯率・市場快照 / 基準匯率 / 手動輸入', 'zh-CN':'汇率・市场快照 / 基准汇率 / 手动输入' },
+    heroTitle: { en:'Exchange Calculator rebuilt in the ToolLab style', ko:'ToolLab 스타일로 다시 만든 환율 계산기', ja:'ToolLab スタイルで作り直した為替計算ツール', 'zh-TW':'以 ToolLab 風格重新整理的匯率計算器', 'zh-CN':'以 ToolLab 风格重新整理的汇率计算器' },
+    heroDesc: { en:'Separate market snapshot, reference rate, and manual rate clearly. Added fee estimates and reverse calculation for target receive amounts in one screen.', ko:'시장 스냅샷, 기준 환율, 직접 입력을 분리했고 수수료 반영과 목표 수령액 기준 역산까지 한 화면에 넣었습니다.', ja:'市場スナップショット、基準レート、手動入力を分け、手数料反映と受取希望額からの逆算まで 1 画面で扱えます。', 'zh-TW':'清楚區分市場快照、基準匯率與手動輸入，並加入手續費估算與目標收款反算。', 'zh-CN':'清楚区分市场快照、基准汇率与手动输入，并加入手续费估算与目标收款反算。' },
+    heroBtnCalc: { en:'Open calculator', ko:'바로 계산하기', ja:'今すぐ計算', 'zh-TW':'立即計算', 'zh-CN':'立即计算' },
+    heroBtnGuide: { en:'How to use', ko:'사용 방법 보기', ja:'使い方を見る', 'zh-TW':'查看使用方式', 'zh-CN':'查看使用方法' },
+    settingsTitle: { en:'Exchange settings', ko:'환율 설정', ja:'為替設定', 'zh-TW':'匯率設定', 'zh-CN':'汇率设置' },
+    settingsDesc: { en:'Choose source and target currencies, then select how the rate should be loaded.', ko:'보유 통화와 환전 통화를 고른 뒤, 어떤 방식으로 값을 가져올지 선택합니다.', ja:'保有通貨と換算先通貨を選び、どの方法でレートを 읽어올지 선택합니다。', 'zh-TW':'選擇來源與目標貨幣，再決定要用哪種方式載入匯率。', 'zh-CN':'选择来源与目标货币，再决定要用哪种方式载入汇率。' },
+    labelMode: { en:'Rate mode', ko:'환율 방식', ja:'レート方式', 'zh-TW':'匯率模式', 'zh-CN':'汇率模式' },
+    modeMarketBtn: { en:'Market snapshot', ko:'시장 스냅샷', ja:'市場スナップショット', 'zh-TW':'市場快照', 'zh-CN':'市场快照' },
+    modeReferenceBtn: { en:'Reference rate', ko:'기준 환율', ja:'基準レート', 'zh-TW':'基準匯率', 'zh-CN':'基准汇率' },
+    modeManualBtn: { en:'Manual rate', ko:'직접 입력', ja:'手動入力', 'zh-TW':'手動輸入', 'zh-CN':'手动输入' },
+    labelAmount: { en:'Amount', ko:'금액 입력', ja:'金額入力', 'zh-TW':'輸入金額', 'zh-CN':'输入金额' },
+    labelManualRate: { en:'Manual rate', ko:'직접 환율 입력', ja:'手動レート入力', 'zh-TW':'手動輸入匯率', 'zh-CN':'手动输入汇率' },
+    manualHint: { en:'Input format: 1 source currency = ? target currency', ko:'입력 형식: 1 기준통화 = ? 환전통화', ja:'入力形式: 1 基準通貨 = ? 換算先通貨', 'zh-TW':'輸入格式：1 來源貨幣 = ? 目標貨幣', 'zh-CN':'输入格式：1 来源货币 = ? 目标货币' },
+    labelFeePercent: { en:'Percent fee', ko:'퍼센트 수수료', ja:'割合手数料', 'zh-TW':'百分比手續費', 'zh-CN':'百分比手续费' },
+    labelFixedFee: { en:'Fixed fee', ko:'고정 수수료', ja:'固定手数料', 'zh-TW':'固定手續費', 'zh-CN':'固定手续费' },
+    labelTargetReceive: { en:'Reverse from target receive amount', ko:'목표 수령액 기준 역산', ja:'受取希望額から逆算', 'zh-TW':'依目標收款金額反算', 'zh-CN':'按目标收款金额反算' },
+    reverseHint: { en:'Include fees and calculate how much source currency is required to receive the target amount.', ko:'수수료까지 반영해서 목표 수령액을 받으려면 얼마나 보내야 하는지 계산합니다.', ja:'手数料を含め、希望する受取額を得るために必要な元通貨額を計算します。', 'zh-TW':'包含手續費，計算為了收到目標金額需要多少來源貨幣。', 'zh-CN':'包含手续费，计算为了收到目标金额需要多少来源货币。' },
+    calcBtn: { en:'Calculate', ko:'계산하기', ja:'計算', 'zh-TW':'計算', 'zh-CN':'计算' },
+    resetBtn: { en:'Reset', ko:'초기화', ja:'リセット', 'zh-TW':'重設', 'zh-CN':'重置' },
+    copyBtn: { en:'Copy result', ko:'결과 복사', ja:'結果をコピー', 'zh-TW':'複製結果', 'zh-CN':'复制结果' },
+    calcReverseBtn: { en:'Calculate required amount', ko:'필요 금액 계산', ja:'必要額を計算', 'zh-TW':'計算所需金額', 'zh-CN':'计算所需金额' },
+    resultTitle: { en:'Result', ko:'계산 결과', ja:'計算結果', 'zh-TW':'計算結果', 'zh-CN':'计算结果' },
+    resultKicker: { en:'Result', ko:'결과', ja:'結果', 'zh-TW':'結果', 'zh-CN':'结果' },
+    metaRateLabel: { en:'Applied rate', ko:'적용 환율', ja:'適用レート', 'zh-TW':'套用匯率', 'zh-CN':'应用汇率' },
+    metaUpdatedLabel: { en:'Updated at', ko:'기준 시각', ja:'更新時刻', 'zh-TW':'更新時間', 'zh-CN':'更新时间' },
+    metaSourceLabel: { en:'Data source', ko:'데이터 출처', ja:'データ元', 'zh-TW':'資料來源', 'zh-CN':'数据来源' },
+    labelCopyField: { en:'Copyable summary', ko:'복사용 결과', ja:'コピー用結果', 'zh-TW':'可複製結果', 'zh-CN':'可复制结果' },
+    warnTitle: { en:'Note', ko:'참고', ja:'注意', 'zh-TW':'注意', 'zh-CN':'注意' },
+    warnBody: { en:'Market snapshot can be closer to intraday pricing but may still be delayed. Reference rates are steadier but may differ from live pricing.', ko:'시장 스냅샷은 장중에 더 가깝지만 지연 시세일 수 있고, 기준 환율은 가장 안정적인 대신 장중 시세와 다를 수 있습니다.', ja:'市場スナップショットは場中により近い一方で遅延している可能性があります。基準レートは安定していますがリアルタイム値とは異なる場合があります。', 'zh-TW':'市場快照較接近日內價格，但可能仍是延遲報價；基準匯率較穩定，但可能與即時價格不同。', 'zh-CN':'市场快照更接近日内价格，但可能仍是延迟报价；基准汇率更稳定，但可能与实时价格不同。' },
+    chartTitle: { en:'Recent reference-rate chart', ko:'최근 기준 환율 차트', ja:'最近の基準レートチャート', 'zh-TW':'近期基準匯率圖表', 'zh-CN':'近期基准汇率图表' },
+    chartDesc: { en:'Shows the recent movement of the selected currency pair based on reference-rate history.', ko:'최근 7영업일 기준으로 같은 통화쌍의 흐름을 보여줍니다.', ja:'直近 7 営業日程度の基準レート推移を表示します。', 'zh-TW':'顯示近期 7 個營業日左右的基準匯率走勢。', 'zh-CN':'显示近期 7 个工作日左右的基准汇率走势。' },
+    watchTitle: { en:'Quick compare', ko:'빠른 비교', ja:'クイック比較', 'zh-TW':'快速比較', 'zh-CN':'快速比较' },
+    watchDesc: { en:'Check a few common target currencies at once against the current base currency.', ko:'자주 보는 통화들을 현재 기준 통화 기준으로 같이 확인합니다.', ja:'現在の基準通貨に対してよく使う通貨をまとめて確認できます。', 'zh-TW':'可一次查看常見貨幣相對於目前基準貨幣的匯率。', 'zh-CN':'可一次查看常见货币相对于当前基准货币的汇率。' },
+    guideTitle: { en:'What changed in this version', ko:'이 버전에서 바뀐 점', ja:'このバージョンで変わった点', 'zh-TW':'此版本的變更', 'zh-CN':'此版本的变更' },
+    guideIntro: { en:'This version separates source types more clearly instead of making a daily reference value feel like a live quote. The layout was also aligned with the main ToolLab card style.', ko:'이전처럼 일일 기준값이 실시간처럼 보이지 않도록 소스 성격을 더 분명하게 나눴고, ToolLab 메인 카드 스타일과도 맞췄습니다.', ja:'日次の基準値がリアルタイム値のように見えないようソースの性格を分け、ToolLab メインのカードデザインにも揃えました。', 'zh-TW':'此版本更清楚區分資料來源，避免把每日基準值誤認成即時報價，版面也與 ToolLab 主站風格保持一致。', 'zh-CN':'此版本更清楚区分数据来源，避免把每日基准值误认为实时报价，版面也与 ToolLab 主站风格保持一致。' },
+    howToTitle: { en:'How to use', ko:'사용 방법', ja:'使い方', 'zh-TW':'使用方式', 'zh-CN':'使用方法' },
+    step1: { en:'Choose the source currency and the target currency.', ko:'보유 통화와 환전 통화를 고릅니다.', ja:'保有通貨と換算先通貨を選びます。', 'zh-TW':'選擇來源貨幣與目標貨幣。', 'zh-CN':'选择来源货币与目标货币。' },
+    step2: { en:'Select market snapshot, reference rate, or manual rate mode.', ko:'시장 스냅샷, 기준 환율, 직접 입력 중 하나를 선택합니다.', ja:'市場スナップショット、基準レート、手動入力から選びます。', 'zh-TW':'選擇市場快照、基準匯率或手動輸入模式。', 'zh-CN':'选择市场快照、基准汇率或手动输入模式。' },
+    step3: { en:'Enter an amount and check the converted result, rate, update time, and source.', ko:'금액을 넣고 계산하면 결과와 적용 환율, 기준 시각, 데이터 출처가 함께 표시됩니다.', ja:'金額を入力すると、結果・レート・更新時刻・データ元が表示されます。', 'zh-TW':'輸入金額後，可查看結果、匯率、更新時間與資料來源。', 'zh-CN':'输入金额后，可查看结果、汇率、更新时间与数据来源。' },
+    tipsTitle: { en:'Suggested usage', ko:'추천 사용 방식', ja:'おすすめの使い方', 'zh-TW':'建議使用方式', 'zh-CN':'建议使用方式' },
+    tipMarket: { en:'Need a near-intraday feeling → Market snapshot', ko:'장중 느낌이 필요할 때 → 시장 스냅샷', ja:'場中に近い感覚が必要なとき → 市場スナップショット', 'zh-TW':'想看接近日內的感覺 → 市場快照', 'zh-CN':'想看接近日内的感觉 → 市场快照' },
+    tipReference: { en:'Need stable repeatable calculation → Reference rate', ko:'안정적으로 계산할 때 → 기준 환율', ja:'安定して計算したいとき → 基準レート', 'zh-TW':'需要穩定計算 → 基準匯率', 'zh-CN':'需要稳定计算 → 基准汇率' },
+    tipManual: { en:'Need to match a bank or app number exactly → Manual rate', ko:'내가 본 숫자와 맞출 때 → 직접 입력', ja:'見た数字に正確に合わせたいとき → 手動入力', 'zh-TW':'想精準符合銀行或 App 的數字 → 手動輸入', 'zh-CN':'想精确符合银行或 App 的数字 → 手动输入' },
+    faqTitle: { en:'FAQ', ko:'FAQ', ja:'FAQ', 'zh-TW':'FAQ', 'zh-CN':'FAQ' },
+    faqQ1: { en:'Why can the market snapshot and reference rate differ?', ko:'왜 어떤 날은 기준 환율과 시장 스냅샷 값이 다르게 보이나요?', ja:'市場スナップショットと基準レートが違って見えるのはなぜですか？', 'zh-TW':'為什麼市場快照和基準匯率會不同？', 'zh-CN':'为什么市场快照和基准汇率会不同？' },
+    faqA1: { en:'Reference rates are daily base data and do not reflect intraday changes immediately. Market snapshots are closer to intraday moves but can still be delayed.', ko:'기준 환율은 일일 기준 데이터라 장중 변동을 바로 반영하지 않습니다. 시장 스냅샷은 장중에 더 가깝지만 지연 시세일 수 있습니다.', ja:'基準レートは日次データなので場中の変動を即時反映しません。市場スナップショットは場中に近いものの遅延している場合があります。', 'zh-TW':'基準匯率屬於每日基準資料，不會立即反映盤中變動；市場快照較接近盤中，但可能仍延遲。', 'zh-CN':'基准汇率属于每日基准数据，不会立即反映盘中波动；市场快照更接近盘中，但可能仍有延迟。' },
+    faqQ2: { en:'How was the old “looks like yesterday’s value” problem changed?', ko:'1497처럼 전일 값 비슷하게 보이던 문제는 어떻게 바뀌었나요?', ja:'以前の「前日値っぽく見える」問題はどう変わりましたか？', 'zh-TW':'以前看起來像昨天數字的問題如何改善？', 'zh-CN':'以前看起来像昨天数字的问题如何改善？' },
+    faqA2: { en:'The page now separates sources more clearly and explicitly shows when it had to fall back from the market snapshot to the reference rate.', ko:'이제 소스를 분리해서 보여주고, 시장 스냅샷이 실패하면 분명하게 기준 환율로 전환되었다고 표시합니다.', ja:'ソースを分けて表示し、市場スナップショットに失敗した場合は基準レートへ切り替えたことを明示します。', 'zh-TW':'現在會清楚區分資料來源，若市場快照失敗，也會明確標示已切換到基準匯率。', 'zh-CN':'现在会清楚区分数据来源，若市场快照失败，也会明确标示已切换到基准汇率。' },
+    faqQ3: { en:'How do I match a number I saw in a bank app?', ko:'정확히 내가 본 숫자와 맞추고 싶으면 어떻게 하나요?', ja:'銀行アプリで見た数字に合わせるには？', 'zh-TW':'想和銀行 App 的數字對上怎麼辦？', 'zh-CN':'想和银行 App 的数字对上怎么办？' },
+    faqA3: { en:'Use manual mode and enter the exact rate in the form “1 source currency = ? target currency.”', ko:'직접 입력 모드에서 1 기준통화 = ? 환전통화 값을 넣으면 됩니다. 예를 들어 1 USD = 1473 KRW처럼 바로 맞출 수 있습니다.', ja:'手動入力モードで「1 基準通貨 = ? 換算先通貨」の形で正確なレートを入れれば合わせられます。', 'zh-TW':'使用手動輸入模式，輸入「1 來源貨幣 = ? 目標貨幣」的實際匯率即可。', 'zh-CN':'使用手动输入模式，输入“1 来源货币 = ? 目标货币”的实际汇率即可。' },
+    footerBrandTitle: { en:'ToolLab', ko:'도구랩', ja:'ツールラボ', 'zh-TW':'工具站', 'zh-CN':'工具站' },
+    footerTagline: { en:'A collection of online tools that run directly in your browser.', ko:'브라우저에서 바로 사용하는 온라인 도구 모음.', ja:'ブラウザでそのまま使えるオンラインツール集。', 'zh-TW':'可直接在瀏覽器中使用的線上工具集合。', 'zh-CN':'可直接在浏览器中使用的在线工具合集。' },
+    footerQuickTitle: { en:'Quick links', ko:'바로가기', ja:'クイックリンク', 'zh-TW':'快速連結', 'zh-CN':'快速链接' },
+    footerHome: { en:'Home', ko:'홈', ja:'ホーム', 'zh-TW':'首頁', 'zh-CN':'首页' },
+    footerRoadmap: { en:'Roadmap', ko:'로드맵', ja:'ロードマップ', 'zh-TW':'路線圖', 'zh-CN':'路线图' },
+    footerChangelog: { en:'Changelog', ko:'변경이력', ja:'変更履歴', 'zh-TW':'更新紀錄', 'zh-CN':'更新记录' },
+    footerInfoTitle: { en:'Info', ko:'정보', ja:'情報', 'zh-TW':'資訊', 'zh-CN':'信息' },
+    footerAbout: { en:'About', ko:'소개', ja:'紹介', 'zh-TW':'介紹', 'zh-CN':'介绍' },
+    footerPrivacy: { en:'Privacy Policy', ko:'개인정보처리방침', ja:'プライバシーポリシー', 'zh-TW':'隱私權政策', 'zh-CN':'隐私政策' },
+    footerContact: { en:'Contact', ko:'문의', ja:'お問い合わせ', 'zh-TW':'聯絡', 'zh-CN':'联系' },
+    phAmount: { en:'Enter amount', ko:'입력 금액', ja:'金額を入力', 'zh-TW':'輸入金額', 'zh-CN':'输入金额' },
+    phManualRate: { en:'Example: 1473.00', ko:'예: 1473.00', ja:'例: 1473.00', 'zh-TW':'例如：1473.00', 'zh-CN':'例如：1473.00' },
+    phDecimals: { en:'Decimals', ko:'소수 자리', ja:'小数桁', 'zh-TW':'小數位數', 'zh-CN':'小数位数' },
+    phFeePercent: { en:'Example: 1.5', ko:'예: 1.5', ja:'例: 1.5', 'zh-TW':'例如：1.5', 'zh-CN':'例如：1.5' },
+    phFixedFee: { en:'Example: 3', ko:'예: 3', ja:'例: 3', 'zh-TW':'例如：3', 'zh-CN':'例如：3' },
+    phTargetReceive: { en:'Enter target receive amount', ko:'받고 싶은 금액 입력', ja:'受け取りたい金額を入力', 'zh-TW':'輸入想收到的金額', 'zh-CN':'输入想收到的金额' },
+    phCopyField: { en:'The result will appear here after calculation.', ko:'계산 후 여기에 표시됩니다.', ja:'計算後にここへ表示されます。', 'zh-TW':'計算後會顯示於此。', 'zh-CN':'计算后会显示在这里。' },
+    phPickerSearch: { en:'Search country, currency code, or currency name', ko:'국가명, 통화코드, 통화명 검색', ja:'国名、通貨コード、通貨名を検索', 'zh-TW':'搜尋國家、貨幣代碼或貨幣名稱', 'zh-CN':'搜索国家、货币代码或货币名称' },
+    pickerTitleFrom: { en:'Choose source currency', ko:'보유 통화 선택', ja:'保有通貨を選択', 'zh-TW':'選擇來源貨幣', 'zh-CN':'选择来源货币' },
+    pickerTitleTo: { en:'Choose target currency', ko:'환전 통화 선택', ja:'換算先通貨を選択', 'zh-TW':'選擇目標貨幣', 'zh-CN':'选择目标货币' },
+    pickerCloseAria: { en:'Close', ko:'닫기', ja:'閉じる', 'zh-TW':'關閉', 'zh-CN':'关闭' },
+    statusReady: { en:'Market snapshot and reference rates are shown separately.', ko:'시장 스냅샷과 기준 환율을 분리해서 표시합니다.', ja:'市場スナップショットと基準レートを分けて表示します。', 'zh-TW':'市場快照與基準匯率會分開顯示。', 'zh-CN':'市场快照与基准汇率会分开显示。' },
+    statusNeedAmount: { en:'Please check the amount again.', ko:'금액을 다시 확인해 주세요.', ja:'金額をもう一度確認してください。', 'zh-TW':'請重新確認金額。', 'zh-CN':'请重新确认金额。' },
+    statusNeedManual: { en:'Please enter a manual rate.', ko:'직접 환율을 입력해 주세요.', ja:'手動レートを入力してください。', 'zh-TW':'請輸入手動匯率。', 'zh-CN':'请输入手动汇率。' },
+    statusReferenceOk: { en:'Calculated with the reference rate.', ko:'기준 환율로 계산했습니다.', ja:'基準レートで計算しました。', 'zh-TW':'已用基準匯率計算。', 'zh-CN':'已用基准汇率计算。' },
+    statusManualOk: { en:'Calculated with the manual rate.', ko:'직접 입력 환율로 계산했습니다.', ja:'手動レートで計算しました。', 'zh-TW':'已用手動匯率計算。', 'zh-CN':'已用手动汇率计算。' },
+    statusMarketOk: { en:'Calculated with the market snapshot. It may still be delayed.', ko:'시장 스냅샷으로 계산했습니다. 지연 시세일 수 있습니다.', ja:'市場スナップショットで計算しました。遅延している場合があります。', 'zh-TW':'已用市場快照計算，仍可能是延遲報價。', 'zh-CN':'已用市场快照计算，仍可能是延迟报价。' },
+    statusFallback: { en:'Market snapshot failed → switched to the reference rate.', ko:'시장 스냅샷 실패 → 기준 환율로 전환했습니다.', ja:'市場スナップショットに失敗したため基準レートへ切り替えました。', 'zh-TW':'市場快照失敗 → 已切換為基準匯率。', 'zh-CN':'市场快照失败 → 已切换为基准汇率。' },
+    statusReverseOk: { en:'Calculated the required source amount from the target receive amount.', ko:'목표 수령액 기준으로 필요한 보낼 금액을 계산했습니다.', ja:'受取希望額から必要な元通貨額を計算しました。', 'zh-TW':'已依目標收款金額計算所需來源貨幣。', 'zh-CN':'已按目标收款金额计算所需来源货币。' },
+    statusNoCopy: { en:'There is no result to copy.', ko:'복사할 결과가 없습니다.', ja:'コピーする結果がありません。', 'zh-TW':'沒有可複製的結果。', 'zh-CN':'没有可复制的结果。' },
+    statusCopied: { en:'Copied the result.', ko:'결과를 복사했습니다.', ja:'結果をコピーしました。', 'zh-TW':'已複製結果。', 'zh-CN':'已复制结果。' },
+    sourceMarketAuto: { en:'Auto source: market snapshot → fallback to reference rate', ko:'자동 소스: 시장 스냅샷 → 실패 시 기준 환율', ja:'自動ソース: 市場スナップショット → 失敗時は基準レート', 'zh-TW':'自動來源：市場快照 → 失敗時改用基準匯率', 'zh-CN':'自动来源：市场快照 → 失败时改用基准汇率' },
+    sourceReference: { en:'Auto source: reference rate', ko:'자동 소스: 기준 환율', ja:'自動ソース: 基準レート', 'zh-TW':'自動來源：基準匯率', 'zh-CN':'自动来源：基准汇率' },
+    sourceManual: { en:'Manual rate input', ko:'직접 환율 입력', ja:'手動レート入力', 'zh-TW':'手動輸入匯率', 'zh-CN':'手动输入汇率' },
+    sourceManualName: { en:'Manual rate', ko:'직접 환율 입력', ja:'手動レート', 'zh-TW':'手動匯率', 'zh-CN':'手动汇率' },
+    sourceReferenceName: { en:'Frankfurter reference rate', ko:'Frankfurter 기준 환율', ja:'Frankfurter 基準レート', 'zh-TW':'Frankfurter 基準匯率', 'zh-CN':'Frankfurter 基准汇率' },
+    sourceMarketName: { en:'Yahoo delayed market snapshot', ko:'Yahoo 지연 시세 스냅샷', ja:'Yahoo 遅延市場スナップショット', 'zh-TW':'Yahoo 延遲市場快照', 'zh-CN':'Yahoo 延迟市场快照' },
+    chartLoadingShort: { en:'Loading chart', ko:'차트 불러오는 중', ja:'チャート読込中', 'zh-TW':'載入圖表中', 'zh-CN':'加载图表中' },
+    chartReady: { en:'Chart ready', ko:'차트 완료', ja:'チャート完了', 'zh-TW':'圖表完成', 'zh-CN':'图表完成' },
+    chartEmpty: { en:'No chart data', ko:'차트 없음', ja:'チャートなし', 'zh-TW':'無圖表資料', 'zh-CN':'无图表数据' },
+    chartFail: { en:'Chart failed', ko:'차트 실패', ja:'チャート失敗', 'zh-TW':'圖表失敗', 'zh-CN':'图表失败' },
+    chartNoData: { en:'Could not load the recent reference-rate chart.', ko:'최근 기준 환율 차트를 불러오지 못했습니다.', ja:'最近の基準レートチャートを読み込めませんでした。', 'zh-TW':'無法載入近期基準匯率圖表。', 'zh-CN':'无法加载近期基准汇率图表。' },
+    chartFailBody: { en:'Failed to load the chart.', ko:'차트 조회에 실패했습니다.', ja:'チャートの取得に失敗しました。', 'zh-TW':'載入圖表失敗。', 'zh-CN':'加载图表失败。' },
+    chartLegendMin: { en:'Low', ko:'최저', ja:'安値', 'zh-TW':'最低', 'zh-CN':'最低' },
+    chartLegendMax: { en:'High', ko:'최고', ja:'高値', 'zh-TW':'最高', 'zh-CN':'最高' },
+    chartLegendUp: { en:'Up', ko:'상승', ja:'上昇', 'zh-TW':'上升', 'zh-CN':'上升' },
+    chartLegendDown: { en:'Down', ko:'하락', ja:'下落', 'zh-TW':'下降', 'zh-CN':'下降' },
+    watchLoading: { en:'Loading market snapshots', ko:'시장 스냅샷 불러오는 중', ja:'市場スナップショット読込中', 'zh-TW':'載入市場快照中', 'zh-CN':'加载市场快照中' },
+    watchMarket: { en:'Market snapshot first', ko:'시장 스냅샷 중심', ja:'市場スナップショット優先', 'zh-TW':'以市場快照為主', 'zh-CN':'以市场快照为主' },
+    watchFallback: { en:'Reference-rate fallback', ko:'기준 환율 대체', ja:'基準レート代替', 'zh-TW':'改用基準匯率', 'zh-CN':'改用基准汇率' },
+    watchFailed: { en:'Load failed', ko:'불러오기 실패', ja:'読込失敗', 'zh-TW':'載入失敗', 'zh-CN':'加载失败' },
+    reverseLabel: { en:'Required source amount', ko:'필요한 보낼 금액', ja:'必要な元通貨額', 'zh-TW':'所需來源金額', 'zh-CN':'所需来源金额' },
+    netReceiveLabel: { en:'Net receive amount', ko:'실수령 금액', ja:'受取額', 'zh-TW':'實收金額', 'zh-CN':'实收金额' },
+    grossLabel: { en:'Gross before fees', ko:'수수료 전 금액', ja:'手数料前金額', 'zh-TW':'扣費前金額', 'zh-CN':'扣费前金额' },
+    feeLabel: { en:'Estimated fees', ko:'예상 수수료', ja:'想定手数料', 'zh-TW':'預估手續費', 'zh-CN':'预估手续费' }
   };
 
+  const state = { from:'USD', to:'KRW', amount:1000, mode:'market', decimals:2, feePercent:0, fixedFee:0, lastRate:0, lastSourceName:'', updatedAt:'', referenceRates:{}, chartSeries:[], pickerTarget:'from' };
   const $ = (sel) => document.querySelector(sel);
   const els = {
-    fromMeta: $('#fromMeta'),
-    toMeta: $('#toMeta'),
-    fromCode: $('#fromCode'),
-    amountInput: $('#amountInput'),
-    manualRateInput: $('#manualRateInput'),
-    decimalInput: $('#decimalInput'),
-    statusText: $('#statusText'),
-    sourceText: $('#sourceText'),
-    resultBig: $('#resultBig'),
-    resultEq: $('#resultEq'),
-    resultRate: $('#resultRate'),
-    resultUpdated: $('#resultUpdated'),
-    resultSource: $('#resultSource'),
-    convertedOutput: $('#convertedOutput'),
-    chartWrap: $('#chartWrap'),
-    chartLegend: $('#chartLegend'),
-    chartStatus: $('#chartStatus'),
-    watchList: $('#watchList'),
-    watchSourceTag: $('#watchSourceTag'),
-    pickerBackdrop: $('#pickerBackdrop'),
-    pickerTitle: $('#pickerTitle'),
-    pickerSearch: $('#pickerSearch'),
-    pickerGrid: $('#pickerGrid'),
-    modeButtons: Array.from(document.querySelectorAll('[data-mode]')),
-    modeHelper: $('#modeHelper'),
+    brandText: $('#brandText'), navHome: $('#navHome'), navFeatured: $('#navFeatured'), navTools: $('#navTools'), navAbout: $('#navAbout'),
+    heroPill: $('#heroPill'), heroTitle: $('#heroTitle'), heroDesc: $('#heroDesc'), heroBtnCalc: $('#heroBtnCalc'), heroBtnGuide: $('#heroBtnGuide'),
+    settingsTitle: $('#settingsTitle'), settingsDesc: $('#settingsDesc'), labelMode: $('#labelMode'), modeButtons: Array.from(document.querySelectorAll('[data-mode]')), modeHelper: $('#modeHelper'),
+    fromMeta: $('#fromMeta'), toMeta: $('#toMeta'), fromCode: $('#fromCode'), amountInput: $('#amountInput'), manualRateInput: $('#manualRateInput'), decimalInput: $('#decimalInput'), feePercentInput: $('#feePercentInput'), fixedFeeInput: $('#fixedFeeInput'), targetReceiveInput: $('#targetReceiveInput'),
+    labelAmount: $('#labelAmount'), labelManualRate: $('#labelManualRate'), manualHint: $('#manualHint'), labelFeePercent: $('#labelFeePercent'), labelFixedFee: $('#labelFixedFee'), labelTargetReceive: $('#labelTargetReceive'), reverseHint: $('#reverseHint'),
+    calcBtn: $('#calcBtn'), resetBtn: $('#resetBtn'), copyBtn: $('#copyBtn'), calcReverseBtn: $('#calcReverseBtn'),
+    statusText: $('#statusText'), sourceText: $('#sourceText'), resultTitle: $('#resultTitle'), resultKicker: $('#resultKicker'), resultBig: $('#resultBig'), resultEq: $('#resultEq'), resultRate: $('#resultRate'), resultUpdated: $('#resultUpdated'), resultSource: $('#resultSource'), convertedOutput: $('#convertedOutput'),
+    metaRateLabel: $('#metaRateLabel'), metaUpdatedLabel: $('#metaUpdatedLabel'), metaSourceLabel: $('#metaSourceLabel'), labelCopyField: $('#labelCopyField'), warnTitle: $('#warnTitle'), warnBody: $('#warnBody'),
+    chartTitle: $('#chartTitle'), chartDesc: $('#chartDesc'), chartWrap: $('#chartWrap'), chartLegend: $('#chartLegend'), chartStatus: $('#chartStatus'),
+    watchTitle: $('#watchTitle'), watchDesc: $('#watchDesc'), watchList: $('#watchList'), watchSourceTag: $('#watchSourceTag'),
+    guideTitle: $('#guideTitle'), guideIntro: $('#guideIntro'), howToTitle: $('#howToTitle'), step1: $('#step1'), step2: $('#step2'), step3: $('#step3'), tipsTitle: $('#tipsTitle'), tipMarket: $('#tipMarket'), tipReference: $('#tipReference'), tipManual: $('#tipManual'), faqTitle: $('#faqTitle'), faqQ1: $('#faqQ1'), faqA1: $('#faqA1'), faqQ2: $('#faqQ2'), faqA2: $('#faqA2'), faqQ3: $('#faqQ3'), faqA3: $('#faqA3'),
+    pickerBackdrop: $('#pickerBackdrop'), pickerTitle: $('#pickerTitle'), pickerSearch: $('#pickerSearch'), pickerGrid: $('#pickerGrid'), pickerClose: $('#pickerClose'),
+    footerBrandTitle: $('#footerBrandTitle'), footerTagline: $('#footerTagline'), footerQuickTitle: $('#footerQuickTitle'), footerHome: $('#footerHome'), footerRoadmap: $('#footerRoadmap'), footerChangelog: $('#footerChangelog'), footerInfoTitle: $('#footerInfoTitle'), footerAbout: $('#footerAbout'), footerPrivacy: $('#footerPrivacy'), footerContact: $('#footerContact'),
     toast: $('#fxToast')
   };
 
-  function formatNumber(value, decimals = null) {
-    if (!Number.isFinite(value)) return '-';
-    const fixed = decimals == null ? state.decimals : decimals;
-    return new Intl.NumberFormat('en-US', {
-      minimumFractionDigits: fixed,
-      maximumFractionDigits: fixed
-    }).format(value);
-  }
-
-  function flagMarkup(item) {
-    const src = item.flag === 'eu' ? 'https://flagcdn.com/w80/eu.png' : `https://flagcdn.com/w80/${item.flag}.png`;
-    return `
-      <div class="fx-flag">
-        <img src="${src}" alt="${item.country} 국기" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${item.emoji}'}))" />
-      </div>`;
-  }
-
-  function renderCurrencyButton(code, targetEl) {
-    const item = currencyMap.get(code);
-    targetEl.innerHTML = `
-      <div class="fx-pick-main">
-        ${flagMarkup(item)}
-        <div>
-          <strong class="fx-pick-title">${item.country}</strong>
-          <span class="fx-pick-code">${item.code} · ${item.name}</span>
-        </div>
-      </div>
-      <span class="fx-caret">▾</span>`;
-  }
-
-  function showToast(text) {
-    els.toast.textContent = text;
-    els.toast.classList.add('show');
-    clearTimeout(showToast._timer);
-    showToast._timer = setTimeout(() => els.toast.classList.remove('show'), 1800);
-  }
-
-  function setStatus(text, kind='info') {
-    els.statusText.textContent = text;
-    els.statusText.className = `msg fx-status ${kind}`;
-  }
-
-  function updateModeButtons() {
-    els.modeButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.mode === state.mode));
-    const manual = state.mode === 'manual';
-    els.manualRateInput.disabled = !manual;
-    els.modeHelper.textContent = manual
-      ? `예: 1 ${state.from} = 1473.00 ${state.to} 형태로 직접 입력합니다.`
-      : state.mode === 'market'
-        ? '시장 스냅샷은 공공 시세 페이지의 지연 호가를 best-effort로 읽어옵니다. 실패하면 기준 환율로 자동 전환됩니다.'
-        : '기준 환율은 일일 기준 데이터입니다. 장중 시세와 다를 수 있지만 가장 안정적으로 동작합니다.';
-  }
-
-  function updateSummary() {
-    renderCurrencyButton(state.from, els.fromMeta);
-    renderCurrencyButton(state.to, els.toMeta);
-    els.fromCode.textContent = state.from;
-    els.amountInput.value = state.amount;
-    els.decimalInput.value = state.decimals;
-    updateModeButtons();
-    els.sourceText.textContent = state.mode === 'market'
-      ? '자동 소스: 시장 스냅샷 → 실패 시 기준 환율'
-      : state.mode === 'reference'
-        ? '자동 소스: 기준 환율'
-        : '직접 환율 입력';
-  }
-
-  async function requestJson(url) {
-    const res = await fetch(url, { cache: 'no-store' });
-    if (!res.ok) throw new Error('데이터 요청 실패');
-    return res.json();
-  }
-
-  async function requestText(url) {
-    const res = await fetch(url, { cache: 'no-store' });
-    if (!res.ok) throw new Error('시세 페이지 요청 실패');
-    return res.text();
-  }
-
-  async function fetchReferenceBundle(base) {
-    const symbols = QUICK_COMPARE.filter(code => code !== base).join(',');
-    const url = `https://api.frankfurter.dev/v1/latest?base=${encodeURIComponent(base)}&symbols=${encodeURIComponent(symbols)}`;
-    const data = await requestJson(url);
-    if (!data || !data.rates) throw new Error('기준 환율 응답 오류');
-    return {
-      rates: { ...data.rates, [base]: 1 },
-      updatedAt: data.date || '',
-      sourceName: 'Frankfurter 기준 환율'
-    };
-  }
-
-  function buildYahooCandidates(from, to) {
-    const direct = `${from}${to}=X`;
-    const reverse = `${to}${from}=X`;
-    const list = [{ symbol: direct, invert: false }];
-    if (from === 'USD') list.push({ symbol: `${to}=X`, invert: false });
-    list.push({ symbol: reverse, invert: true });
-    return Array.from(new Map(list.map(item => [item.symbol + ':' + item.invert, item])).values());
-  }
-
-  function escapeRegExp(value) {
-    return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  }
-
-  function parseYahooQuote(text, from, to, symbol) {
-    const compact = String(text).replace(/\s+/g, ' ').trim();
-    const escapedSymbol = escapeRegExp(symbol);
-    const patterns = [
-      new RegExp(`${from}\\s*\\/\\s*${to}\\s*\\([^)]*\\)\\.\\s*([0-9][0-9,]*(?:\\.[0-9]+)?)`, 'i'),
-      new RegExp(`${escapedSymbol}[^0-9]{0,40}([0-9][0-9,]*(?:\\.[0-9]+)?)`, 'i'),
-      /CCY\s*-\s*Delayed Quote[^0-9]{0,40}([0-9][0-9,]*(?:\.\d+)?)/i,
-      /As of [^.]{6,120}\.\s*([0-9][0-9,]*(?:\.\d+)?)/i
-    ];
-    for (const regex of patterns) {
-      const m = compact.match(regex);
-      if (m && m[1]) {
-        const value = Number(m[1].replace(/,/g, ''));
-        if (Number.isFinite(value) && value > 0) return value;
-      }
-    }
-    throw new Error('시장 스냅샷 파싱 실패');
-  }
-
-  function parseYahooUpdatedAt(text) {
-    const compact = String(text).replace(/\s+/g, ' ').trim();
-    const m = compact.match(/As of\s+([^.]{6,120})\./i);
-    return m ? m[1] : 'Yahoo delayed quote';
-  }
-
-  async function fetchMarketPair(from, to) {
-    const candidates = buildYahooCandidates(from, to);
-    let lastError = null;
-    for (const item of candidates) {
-      const urls = [
-        `https://r.jina.ai/http://finance.yahoo.com/quote/${encodeURIComponent(item.symbol)}/`,
-        `https://r.jina.ai/http://finance.yahoo.com/quote/${encodeURIComponent(item.symbol)}`
-      ];
-      for (const url of urls) {
-        try {
-          const text = await requestText(url);
-          const raw = parseYahooQuote(text, from, to, item.symbol);
-          const rate = item.invert ? 1 / raw : raw;
-          if (Number.isFinite(rate) && rate > 0) {
-            return {
-              rate,
-              updatedAt: parseYahooUpdatedAt(text),
-              sourceName: 'Yahoo 지연 시세 스냅샷'
-            };
-          }
-        } catch (error) {
-          lastError = error;
-        }
-      }
-    }
-    throw lastError || new Error('시장 스냅샷 불러오기 실패');
-  }
-
-  async function fetchHistory() {
-    els.chartStatus.textContent = '차트 불러오는 중';
-    const end = new Date();
-    const start = new Date();
-    start.setDate(end.getDate() - CHART_WINDOW_DAYS);
-    const startText = start.toISOString().slice(0, 10);
-    const endText = end.toISOString().slice(0, 10);
-    const url = `https://api.frankfurter.dev/v1/${startText}..${endText}?base=${encodeURIComponent(state.from)}&symbols=${encodeURIComponent(state.to)}`;
-    const data = await requestJson(url);
-    const rates = data && data.rates ? data.rates : {};
-    state.chartSeries = Object.keys(rates)
-      .map(date => ({ date, value: Number(rates[date][state.to]) }))
-      .filter(item => Number.isFinite(item.value))
-      .sort((a, b) => a.date.localeCompare(b.date))
-      .slice(-7);
-    renderChart();
-  }
-
-  function renderChart() {
-    const series = state.chartSeries;
-    if (!series.length) {
-      els.chartWrap.innerHTML = '<div class="inline-note">최근 기준 환율 차트를 불러오지 못했습니다.</div>';
-      els.chartLegend.innerHTML = '';
-      els.chartStatus.textContent = '차트 없음';
-      return;
-    }
-    const values = series.map(x => x.value);
-    const min = Math.min(...values);
-    const max = Math.max(...values);
-    const w = 700, h = 240, px = 24, py = 24;
-    const dw = w - px * 2, dh = h - py * 2;
-    const range = max - min || 1;
-    const pts = series.map((item, idx) => {
-      const x = px + (dw * idx / Math.max(1, series.length - 1));
-      const y = py + dh - (((item.value - min) / range) * dh);
-      return { ...item, x, y };
-    });
-    const path = pts.map((p, i) => `${i ? 'L' : 'M'} ${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(' ');
-    const area = `${path} L ${pts[pts.length - 1].x.toFixed(2)} ${h - py} L ${pts[0].x.toFixed(2)} ${h - py} Z`;
-    const grid = [0, .25, .5, .75, 1].map(t => {
-      const y = py + dh - (t * dh);
-      const val = min + (t * range);
-      return `<g><line x1="${px}" y1="${y}" x2="${w - px}" y2="${y}" stroke="#e5e7eb" stroke-width="1"/><text x="${w - px}" y="${y - 6}" text-anchor="end" fill="#64748b" font-size="11">${formatNumber(val, 4)}</text></g>`;
-    }).join('');
-    const labels = pts.map(p => `<text x="${p.x}" y="${h - 6}" text-anchor="middle" fill="#64748b" font-size="11">${p.date.slice(5).replace('-', '/')}</text>`).join('');
-    const circles = pts.map(p => `<circle cx="${p.x}" cy="${p.y}" r="4" fill="#4f46e5"><title>${p.date} · ${formatNumber(p.value, 4)}</title></circle>`).join('');
-    els.chartWrap.innerHTML = `
-      <svg viewBox="0 0 ${w} ${h}" role="img" aria-label="최근 7영업일 기준 환율 추이">
-        <defs>
-          <linearGradient id="fxArea" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#c7d2fe" stop-opacity="0.9"/>
-            <stop offset="100%" stop-color="#eef2ff" stop-opacity="0.15"/>
-          </linearGradient>
-        </defs>
-        ${grid}
-        <path d="${area}" fill="url(#fxArea)"/>
-        <path d="${path}" fill="none" stroke="#4f46e5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-        ${circles}
-        ${labels}
-      </svg>`;
-    const change = ((values[values.length - 1] - values[0]) / values[0]) * 100;
-    els.chartLegend.innerHTML = `
-      <span>${state.from} → ${state.to}</span>
-      <span>최저 ${formatNumber(min, 4)}</span>
-      <span>최고 ${formatNumber(max, 4)}</span>
-      <span>${change >= 0 ? '상승' : '하락'} ${Math.abs(change).toFixed(2)}%</span>`;
-    els.chartStatus.textContent = '차트 완료';
-  }
-
-  async function renderWatchList(rates, sourceLabel) {
-    const targets = QUICK_COMPARE.filter(code => code !== state.from).slice(0, 5);
-    els.watchSourceTag.textContent = sourceLabel;
-    els.watchList.innerHTML = targets.map(code => {
-      const target = currencyMap.get(code);
-      const value = rates && Number.isFinite(rates[code]) ? formatNumber(rates[code], 4) : '...';
-      return `
-        <div class="fx-watch-item">
-          <div class="fx-watch-left">
-            ${flagMarkup(target)}
-            <div>
-              <strong>${target.country}</strong>
-              <span>${state.from} → ${code}</span>
-            </div>
-          </div>
-          <div class="fx-watch-rate">${value}</div>
-        </div>`;
-    }).join('');
-  }
-
-  async function refreshMarketWatch() {
-    const targets = QUICK_COMPARE.filter(code => code !== state.from).slice(0, 5);
-    await renderWatchList({}, '시장 스냅샷 불러오는 중');
-    const results = await Promise.allSettled(targets.map(code => fetchMarketPair(state.from, code)));
-    const rateMap = {};
-    let okCount = 0;
-    results.forEach((res, idx) => {
-      const code = targets[idx];
-      if (res.status === 'fulfilled') {
-        rateMap[code] = res.value.rate;
-        okCount += 1;
-      } else if (state.referenceRates[code]) {
-        rateMap[code] = state.referenceRates[code];
-      }
-    });
-    await renderWatchList(rateMap, okCount ? '시장 스냅샷 중심' : '기준 환율 대체');
-  }
-
-  function updateResult(rate, sourceName, updatedAt) {
-    const amount = Number(els.amountInput.value || 0);
-    const result = amount * rate;
-    state.amount = amount;
-    state.lastRate = rate;
-    state.lastSourceName = sourceName;
-    state.updatedAt = updatedAt || '-';
-    els.convertedOutput.value = formatNumber(result, state.decimals);
-    els.resultBig.textContent = `${formatNumber(result, state.decimals)} ${state.to}`;
-    els.resultEq.textContent = `${formatNumber(amount, state.decimals)} ${state.from} = ${formatNumber(result, state.decimals)} ${state.to}`;
-    els.resultRate.textContent = `1 ${state.from} = ${formatNumber(rate, 6)} ${state.to}`;
-    els.resultUpdated.textContent = updatedAt || '-';
-    els.resultSource.textContent = sourceName;
-  }
-
-  async function calculate() {
-    state.amount = Number(els.amountInput.value || 0);
-    state.decimals = Math.max(0, Math.min(8, Number(els.decimalInput.value || 2)));
-    if (!Number.isFinite(state.amount) || state.amount < 0) {
-      setStatus('금액을 다시 확인해 주세요.', 'err');
-      return;
-    }
-    try {
-      const reference = await fetchReferenceBundle(state.from);
-      state.referenceRates = reference.rates;
-      if (state.mode === 'manual') {
-        const rate = Number(els.manualRateInput.value || 0);
-        if (!(rate > 0)) throw new Error('직접 환율을 입력해 주세요.');
-        updateResult(rate, '직접 환율 입력', '직접 입력');
-        await renderWatchList(reference.rates, '기준 환율 참고');
-        setStatus('직접 입력 환율로 계산했습니다.', 'ok');
-      } else if (state.mode === 'reference') {
-        const rate = Number(reference.rates[state.to]);
-        if (!(rate > 0)) throw new Error('기준 환율을 불러오지 못했습니다.');
-        updateResult(rate, reference.sourceName, reference.updatedAt);
-        await renderWatchList(reference.rates, '기준 환율');
-        setStatus('기준 환율로 계산했습니다.', 'ok');
-      } else {
-        try {
-          const market = await fetchMarketPair(state.from, state.to);
-          updateResult(market.rate, market.sourceName, market.updatedAt);
-          setStatus('시장 스냅샷으로 계산했습니다. 지연 시세일 수 있습니다.', 'ok');
-          refreshMarketWatch().catch(() => renderWatchList(reference.rates, '기준 환율 대체'));
-        } catch (error) {
-          const rate = Number(reference.rates[state.to]);
-          if (!(rate > 0)) throw error;
-          updateResult(rate, reference.sourceName, reference.updatedAt);
-          await renderWatchList(reference.rates, '기준 환율 대체');
-          setStatus('시장 스냅샷 실패 → 기준 환율로 전환했습니다.', 'info');
-        }
-      }
-      fetchHistory().catch(() => {
-        els.chartStatus.textContent = '차트 실패';
-        els.chartWrap.innerHTML = '<div class="inline-note">차트 조회에 실패했습니다.</div>';
-        els.chartLegend.innerHTML = '';
-      });
-    } catch (error) {
-      els.resultBig.textContent = '-';
-      els.resultEq.textContent = error.message || '계산 실패';
-      els.resultRate.textContent = '-';
-      els.resultUpdated.textContent = '-';
-      els.resultSource.textContent = '-';
-      els.convertedOutput.value = '';
-      setStatus(error.message || '계산 실패', 'err');
-      await renderWatchList({}, '불러오기 실패');
-    }
-  }
-
-  function closePicker() {
-    els.pickerBackdrop.classList.remove('open');
-  }
-
-  function renderPicker(keyword='') {
-    const q = keyword.trim().toLowerCase();
-    const filtered = currencies.filter(item => !q || [item.code, item.name, item.country].join(' ').toLowerCase().includes(q));
-    els.pickerGrid.innerHTML = filtered.map(item => `
-      <button class="fx-picker-item ${state[state.pickerTarget] === item.code ? 'active' : ''}" type="button" data-code="${item.code}">
-        ${flagMarkup(item)}
-        <strong>${item.country}</strong>
-        <span>${item.code} · ${item.name}</span>
-      </button>`).join('');
-    els.pickerGrid.querySelectorAll('[data-code]').forEach(btn => btn.addEventListener('click', () => {
-      const code = btn.dataset.code;
-      state[state.pickerTarget] = code;
-      if (state.from === state.to) {
-        const next = currencies.find(item => item.code !== state.from);
-        if (next) state.to = next.code;
-      }
-      closePicker();
-      updateSummary();
-      calculate();
-    }));
-  }
-
-  function openPicker(target) {
-    state.pickerTarget = target;
-    els.pickerTitle.textContent = target === 'from' ? '보유 통화 선택' : '환전 통화 선택';
-    els.pickerSearch.value = '';
-    els.pickerBackdrop.classList.add('open');
-    renderPicker('');
-    els.pickerSearch.focus();
-  }
-
+  function currentLang(){ return window.ToolI18n && typeof window.ToolI18n.getLang === 'function' ? window.ToolI18n.getLang() : 'en'; }
+  function t(key){ const entry = PAGE_TEXT[key] || {}; const lang = currentLang(); return entry[lang] || entry.en || key; }
+  function localeForIntl(){ const lang = currentLang(); if(lang==='zh-TW') return 'zh-Hant-TW'; if(lang==='zh-CN') return 'zh-Hans-CN'; return lang; }
+  function formatNumber(value, decimals = null){ if(!Number.isFinite(value)) return '-'; const fixed = decimals == null ? state.decimals : decimals; return new Intl.NumberFormat(localeForIntl(), { minimumFractionDigits: fixed, maximumFractionDigits: fixed }).format(value); }
+  function getCurrencyName(code){ try { return new Intl.DisplayNames([localeForIntl()], { type:'currency' }).of(code) || code; } catch { return code; } }
+  function getRegionName(flagCode, fallback){ try { return new Intl.DisplayNames([localeForIntl()], { type:'region' }).of(String(flagCode || '').toUpperCase()) || fallback; } catch { return fallback; } }
+  function flagMarkup(item){ const src = item.flag === 'eu' ? 'https://flagcdn.com/w80/eu.png' : `https://flagcdn.com/w80/${item.flag}.png`; return `<div class="fx-flag"><img src="${src}" alt="${getRegionName(item.flag, item.country)} flag" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${item.emoji}'}))" /></div>`; }
+  function renderCurrencyButton(code, targetEl){ const item = currencyMap.get(code); targetEl.innerHTML = `<div class="fx-pick-main">${flagMarkup(item)}<div><strong class="fx-pick-title">${getRegionName(item.flag, item.country)}</strong><span class="fx-pick-code">${item.code} · ${getCurrencyName(item.code)}</span></div></div><span class="fx-caret">▾</span>`; }
+  function applyPlaceholders(){ document.querySelectorAll('[data-ph-key]').forEach(el => el.setAttribute('placeholder', t(el.dataset.phKey))); }
+  function applyPlain(id){ if(els[id]) els[id].textContent = t(id); }
+  function applyLang(){ ['brandText','navHome','navFeatured','navTools','navAbout','heroPill','heroTitle','heroDesc','heroBtnCalc','heroBtnGuide','settingsTitle','settingsDesc','labelMode','labelAmount','labelManualRate','manualHint','labelFeePercent','labelFixedFee','labelTargetReceive','reverseHint','calcBtn','resetBtn','copyBtn','calcReverseBtn','resultTitle','resultKicker','metaRateLabel','metaUpdatedLabel','metaSourceLabel','labelCopyField','warnTitle','warnBody','chartTitle','chartDesc','watchTitle','watchDesc','guideTitle','guideIntro','howToTitle','step1','step2','step3','tipsTitle','tipMarket','tipReference','tipManual','faqTitle','faqQ1','faqA1','faqQ2','faqA2','faqQ3','faqA3','footerBrandTitle','footerTagline','footerQuickTitle','footerHome','footerRoadmap','footerChangelog','footerInfoTitle','footerAbout','footerPrivacy','footerContact','modeMarketBtn','modeReferenceBtn','modeManualBtn'].forEach(applyPlain); if(els.pickerClose) els.pickerClose.setAttribute('aria-label', t('pickerCloseAria')); applyPlaceholders(); updateSummary(); }
+  function showToast(text){ els.toast.textContent = text; els.toast.classList.add('show'); clearTimeout(showToast._timer); showToast._timer = setTimeout(() => els.toast.classList.remove('show'), 1800); }
+  function setStatus(text, kind='info'){ els.statusText.textContent = text; els.statusText.className = `msg fx-status ${kind}`; }
+  function modeHelperText(){ if(state.mode === 'manual') return `${t('labelManualRate')}: 1 ${state.from} = ? ${state.to}`; if(state.mode === 'market') return t('statusReady'); return t('sourceReference'); }
+  function updateModeButtons(){ els.modeButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.mode === state.mode)); els.manualRateInput.disabled = state.mode !== 'manual'; els.modeHelper.textContent = modeHelperText(); }
+  function updateSummary(){ renderCurrencyButton(state.from, els.fromMeta); renderCurrencyButton(state.to, els.toMeta); els.fromCode.textContent = state.from; els.amountInput.value = state.amount; els.decimalInput.value = state.decimals; els.feePercentInput.value = state.feePercent; els.fixedFeeInput.value = state.fixedFee; updateModeButtons(); els.sourceText.textContent = state.mode === 'market' ? t('sourceMarketAuto') : state.mode === 'reference' ? t('sourceReference') : t('sourceManual'); }
+  async function requestJson(url){ const res = await fetch(url, { cache:'no-store' }); if(!res.ok) throw new Error('Request failed'); return res.json(); }
+  async function requestText(url){ const res = await fetch(url, { cache:'no-store' }); if(!res.ok) throw new Error('Request failed'); return res.text(); }
+  async function fetchReferenceBundle(base){ const symbols = QUICK_COMPARE.filter(code => code !== base).join(','); const url = `https://api.frankfurter.dev/v1/latest?base=${encodeURIComponent(base)}&symbols=${encodeURIComponent(symbols)}`; const data = await requestJson(url); if(!data || !data.rates) throw new Error('reference failed'); return { rates:{ ...data.rates, [base]:1 }, updatedAt:data.date || '', sourceName:t('sourceReferenceName') }; }
+  function buildYahooCandidates(from, to){ const direct = `${from}${to}=X`; const reverse = `${to}${from}=X`; const list = [{ symbol:direct, invert:false }]; if(from==='USD') list.push({ symbol:`${to}=X`, invert:false }); list.push({ symbol:reverse, invert:true }); return Array.from(new Map(list.map(item => [item.symbol + ':' + item.invert, item])).values()); }
+  function escapeRegExp(value){ return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  function parseYahooQuote(text, from, to, symbol){ const compact = String(text).replace(/\s+/g, ' ').trim(); const escapedSymbol = escapeRegExp(symbol); const patterns = [new RegExp(`${from}\s*\/\s*${to}\s*\([^)]*\)\.\s*([0-9][0-9,]*(?:\.[0-9]+)?)`, 'i'), new RegExp(`${escapedSymbol}[^0-9]{0,40}([0-9][0-9,]*(?:\.[0-9]+)?)`, 'i'), /CCY\s*-\s*Delayed Quote[^0-9]{0,40}([0-9][0-9,]*(?:\.\d+)?)/i, /As of [^.]{6,120}\.\s*([0-9][0-9,]*(?:\.\d+)?)/i]; for(const regex of patterns){ const m = compact.match(regex); if(m && m[1]){ const value = Number(m[1].replace(/,/g,'')); if(Number.isFinite(value) && value > 0) return value; } } throw new Error('parse failed'); }
+  function parseYahooUpdatedAt(text){ const compact = String(text).replace(/\s+/g, ' ').trim(); const m = compact.match(/As of\s+([^.]{6,120})\./i); return m ? m[1] : t('sourceMarketName'); }
+  async function fetchMarketPair(from, to){ const candidates = buildYahooCandidates(from, to); let lastError = null; for(const item of candidates){ const urls = [`https://r.jina.ai/http://finance.yahoo.com/quote/${encodeURIComponent(item.symbol)}/`, `https://r.jina.ai/http://finance.yahoo.com/quote/${encodeURIComponent(item.symbol)}`]; for(const url of urls){ try { const text = await requestText(url); const raw = parseYahooQuote(text, from, to, item.symbol); const rate = item.invert ? 1 / raw : raw; if(Number.isFinite(rate) && rate > 0) return { rate, updatedAt: parseYahooUpdatedAt(text), sourceName: t('sourceMarketName') }; } catch(error){ lastError = error; } } } throw lastError || new Error('market failed'); }
+  async function fetchHistory(){ els.chartStatus.textContent = t('chartLoadingShort'); const end = new Date(); const start = new Date(); start.setDate(end.getDate() - CHART_WINDOW_DAYS); const startText = start.toISOString().slice(0,10); const endText = end.toISOString().slice(0,10); const url = `https://api.frankfurter.dev/v1/${startText}..${endText}?base=${encodeURIComponent(state.from)}&symbols=${encodeURIComponent(state.to)}`; const data = await requestJson(url); const rates = data && data.rates ? data.rates : {}; state.chartSeries = Object.keys(rates).map(date => ({ date, value:Number(rates[date][state.to]) })).filter(item => Number.isFinite(item.value)).sort((a,b)=>a.date.localeCompare(b.date)).slice(-7); renderChart(); }
+  function renderChart(){ const series = state.chartSeries; if(!series.length){ els.chartWrap.innerHTML = `<div class="inline-note">${t('chartNoData')}</div>`; els.chartLegend.innerHTML = ''; els.chartStatus.textContent = t('chartEmpty'); return; } const values = series.map(x=>x.value); const min = Math.min(...values), max = Math.max(...values); const w=700,h=240,px=24,py=24,dw=w-px*2,dh=h-py*2,range=max-min||1; const pts = series.map((item, idx) => ({ ...item, x:px + (dw * idx / Math.max(1, series.length - 1)), y:py + dh - (((item.value - min) / range) * dh) })); const path = pts.map((p,i)=>`${i?'L':'M'} ${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(' '); const area = `${path} L ${pts[pts.length-1].x.toFixed(2)} ${h-py} L ${pts[0].x.toFixed(2)} ${h-py} Z`; const grid=[0,.25,.5,.75,1].map(tick=>{ const y = py + dh - (tick*dh); const val = min + (tick*range); return `<g><line x1="${px}" y1="${y}" x2="${w-px}" y2="${y}" stroke="#e5e7eb" stroke-width="1"/><text x="${w-px}" y="${y-6}" text-anchor="end" fill="#64748b" font-size="11">${formatNumber(val,4)}</text></g>`; }).join(''); const labels = pts.map(p=>`<text x="${p.x}" y="${h-6}" text-anchor="middle" fill="#64748b" font-size="11">${p.date.slice(5).replace('-', '/')}</text>`).join(''); const circles = pts.map(p=>`<circle cx="${p.x}" cy="${p.y}" r="4" fill="#4f46e5"><title>${p.date} · ${formatNumber(p.value,4)}</title></circle>`).join(''); els.chartWrap.innerHTML = `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="reference rate history"><defs><linearGradient id="fxArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c7d2fe" stop-opacity="0.9"/><stop offset="100%" stop-color="#eef2ff" stop-opacity="0.15"/></linearGradient></defs>${grid}<path d="${area}" fill="url(#fxArea)"/><path d="${path}" fill="none" stroke="#4f46e5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>${circles}${labels}</svg>`; const change = ((values[values.length-1] - values[0]) / values[0]) * 100; els.chartLegend.innerHTML = `<span>${state.from} → ${state.to}</span><span>${t('chartLegendMin')} ${formatNumber(min,4)}</span><span>${t('chartLegendMax')} ${formatNumber(max,4)}</span><span>${change >= 0 ? t('chartLegendUp') : t('chartLegendDown')} ${Math.abs(change).toFixed(2)}%</span>`; els.chartStatus.textContent = t('chartReady'); }
+  async function renderWatchList(rates, sourceLabel){ const targets = QUICK_COMPARE.filter(code => code !== state.from).slice(0,5); els.watchSourceTag.textContent = sourceLabel; els.watchList.innerHTML = targets.map(code=>{ const target = currencyMap.get(code); const value = rates && Number.isFinite(rates[code]) ? formatNumber(rates[code],4) : '...'; return `<div class="fx-watch-item"><div class="fx-watch-left">${flagMarkup(target)}<div><strong>${getRegionName(target.flag, target.country)}</strong><span>${state.from} → ${code}</span></div></div><div class="fx-watch-rate">${value}</div></div>`; }).join(''); }
+  async function refreshMarketWatch(){ const targets = QUICK_COMPARE.filter(code => code !== state.from).slice(0,5); await renderWatchList({}, t('watchLoading')); const results = await Promise.allSettled(targets.map(code => fetchMarketPair(state.from, code))); const rateMap = {}; let okCount = 0; results.forEach((res, idx) => { const code = targets[idx]; if(res.status === 'fulfilled'){ rateMap[code] = res.value.rate; okCount += 1; } else if(state.referenceRates[code]) { rateMap[code] = state.referenceRates[code]; } }); await renderWatchList(rateMap, okCount ? t('watchMarket') : t('watchFallback')); }
+  function computeFees(gross){ const feePercent = Math.max(0, Number(els.feePercentInput.value || 0)); const fixedFee = Math.max(0, Number(els.fixedFeeInput.value || 0)); const totalFee = gross * (feePercent / 100) + fixedFee; return { feePercent, fixedFee, totalFee, net: Math.max(0, gross - totalFee) }; }
+  function buildSummary(amount, gross, fees, net, rate, sourceName, updatedAt, reverseMode=false){ if(reverseMode) return `${t('reverseLabel')}: ${formatNumber(amount, state.decimals)} ${state.from} | ${t('netReceiveLabel')}: ${formatNumber(net, state.decimals)} ${state.to} | ${t('grossLabel')}: ${formatNumber(gross, state.decimals)} ${state.to} | ${t('feeLabel')}: ${formatNumber(fees.totalFee, state.decimals)} ${state.to} | 1 ${state.from} = ${formatNumber(rate,6)} ${state.to} | ${sourceName} | ${updatedAt || '-'}`; return `${formatNumber(amount, state.decimals)} ${state.from} → ${formatNumber(net, state.decimals)} ${state.to} | ${t('grossLabel')}: ${formatNumber(gross, state.decimals)} ${state.to} | ${t('feeLabel')}: ${formatNumber(fees.totalFee, state.decimals)} ${state.to} | 1 ${state.from} = ${formatNumber(rate,6)} ${state.to} | ${sourceName} | ${updatedAt || '-'}`; }
+  function updateResult(rate, sourceName, updatedAt, sourceAmount = null, targetReceive = null){ const amount = sourceAmount == null ? Number(els.amountInput.value || 0) : sourceAmount; const gross = amount * rate; const fees = computeFees(gross); const net = targetReceive == null ? fees.net : targetReceive; state.amount = amount; state.lastRate = rate; state.lastSourceName = sourceName; state.updatedAt = updatedAt || '-'; state.feePercent = fees.feePercent; state.fixedFee = fees.fixedFee; els.resultBig.textContent = `${formatNumber(net, state.decimals)} ${state.to}`; els.resultEq.textContent = `${formatNumber(amount, state.decimals)} ${state.from} → ${formatNumber(gross, state.decimals)} ${state.to} → ${formatNumber(net, state.decimals)} ${state.to}`; els.resultRate.textContent = `1 ${state.from} = ${formatNumber(rate,6)} ${state.to}`; els.resultUpdated.textContent = updatedAt || '-'; els.resultSource.textContent = sourceName; els.convertedOutput.value = buildSummary(amount, gross, fees, net, rate, sourceName, updatedAt, sourceAmount != null); }
+  async function calculate(reverseTarget = null){ state.amount = Number(els.amountInput.value || 0); state.decimals = Math.max(0, Math.min(8, Number(els.decimalInput.value || 2))); if(!Number.isFinite(state.amount) || state.amount < 0){ setStatus(t('statusNeedAmount'), 'err'); return; } try { const reference = await fetchReferenceBundle(state.from); state.referenceRates = reference.rates; let rate, sourceName, updatedAt; if(state.mode === 'manual'){ rate = Number(els.manualRateInput.value || 0); if(!(rate > 0)) throw new Error(t('statusNeedManual')); sourceName = t('sourceManualName'); updatedAt = t('sourceManual'); } else if(state.mode === 'reference'){ rate = Number(reference.rates[state.to]); if(!(rate > 0)) throw new Error(t('statusNeedAmount')); sourceName = reference.sourceName; updatedAt = reference.updatedAt; } else { try { const market = await fetchMarketPair(state.from, state.to); rate = market.rate; sourceName = market.sourceName; updatedAt = market.updatedAt; setStatus(t('statusMarketOk'), 'ok'); refreshMarketWatch().catch(() => renderWatchList(reference.rates, t('watchFallback'))); } catch { rate = Number(reference.rates[state.to]); if(!(rate > 0)) throw new Error(t('statusNeedAmount')); sourceName = reference.sourceName; updatedAt = reference.updatedAt; setStatus(t('statusFallback'), 'info'); await renderWatchList(reference.rates, t('watchFallback')); } } if(reverseTarget != null){ const target = Number(reverseTarget); const feePercent = Math.max(0, Number(els.feePercentInput.value || 0)); const fixedFee = Math.max(0, Number(els.fixedFeeInput.value || 0)); if(!(target > 0)) throw new Error(t('phTargetReceive')); const divisor = 1 - (feePercent / 100); if(!(divisor > 0)) throw new Error(t('labelFeePercent')); const grossNeeded = (target + fixedFee) / divisor; const sourceNeeded = grossNeeded / rate; updateResult(rate, sourceName, updatedAt, sourceNeeded, target); setStatus(t('statusReverseOk'), 'ok'); } else { updateResult(rate, sourceName, updatedAt); if(state.mode === 'manual') setStatus(t('statusManualOk'), 'ok'); else if(state.mode === 'reference') setStatus(t('statusReferenceOk'), 'ok'); } fetchHistory().catch(() => { els.chartStatus.textContent = t('chartFail'); els.chartWrap.innerHTML = `<div class="inline-note">${t('chartFailBody')}</div>`; els.chartLegend.innerHTML = ''; }); if(state.mode !== 'market') await renderWatchList(reference.rates, t('watchFallback')); } catch(error){ els.resultBig.textContent = '-'; els.resultEq.textContent = error.message || 'Error'; els.resultRate.textContent = '-'; els.resultUpdated.textContent = '-'; els.resultSource.textContent = '-'; els.convertedOutput.value = ''; setStatus(error.message || 'Error', 'err'); await renderWatchList({}, t('watchFailed')); } }
+  function closePicker(){ els.pickerBackdrop.classList.remove('open'); }
+  function renderPicker(keyword=''){ const q = keyword.trim().toLowerCase(); const filtered = currencies.filter(item => !q || [item.code, getCurrencyName(item.code), getRegionName(item.flag, item.country), item.name, item.country].join(' ').toLowerCase().includes(q)); els.pickerGrid.innerHTML = filtered.map(item => `<button class="fx-picker-item ${state[state.pickerTarget] === item.code ? 'active' : ''}" type="button" data-code="${item.code}">${flagMarkup(item)}<strong>${getRegionName(item.flag, item.country)}</strong><span>${item.code} · ${getCurrencyName(item.code)}</span></button>`).join(''); els.pickerGrid.querySelectorAll('[data-code]').forEach(btn => btn.addEventListener('click', () => { const code = btn.dataset.code; state[state.pickerTarget] = code; if(state.from === state.to){ const next = currencies.find(item => item.code !== state.from); if(next) state.to = next.code; } closePicker(); updateSummary(); calculate(); })); }
+  function openPicker(target){ state.pickerTarget = target; els.pickerTitle.textContent = target === 'from' ? t('pickerTitleFrom') : t('pickerTitleTo'); els.pickerSearch.value = ''; els.pickerBackdrop.classList.add('open'); renderPicker(''); els.pickerSearch.focus(); }
+  async function copyText(text){ if(navigator.clipboard && window.isSecureContext){ await navigator.clipboard.writeText(text); return; } const temp = document.createElement('textarea'); temp.value = text; temp.style.position = 'fixed'; temp.style.opacity = '0'; document.body.appendChild(temp); temp.focus(); temp.select(); document.execCommand('copy'); temp.remove(); }
   document.getElementById('fromBtn').addEventListener('click', () => openPicker('from'));
   document.getElementById('toBtn').addEventListener('click', () => openPicker('to'));
-  document.getElementById('swapBtn').addEventListener('click', () => {
-    [state.from, state.to] = [state.to, state.from];
-    updateSummary();
-    calculate();
-  });
-  document.getElementById('calcBtn').addEventListener('click', calculate);
-  document.getElementById('resetBtn').addEventListener('click', () => {
-    state.from = 'USD';
-    state.to = 'KRW';
-    state.amount = 1000;
-    state.mode = 'market';
-    state.decimals = 2;
-    els.manualRateInput.value = '';
-    updateSummary();
-    calculate();
-  });
-  document.getElementById('copyBtn').addEventListener('click', async () => {
-    if (!els.convertedOutput.value) {
-      showToast('복사할 결과가 없습니다.');
-      return;
-    }
-    await navigator.clipboard.writeText(els.convertedOutput.value + ' ' + state.to);
-    showToast('결과를 복사했습니다.');
-  });
-  document.getElementById('pickerClose').addEventListener('click', closePicker);
-  els.pickerBackdrop.addEventListener('click', (e) => { if (e.target === els.pickerBackdrop) closePicker(); });
+  document.getElementById('swapBtn').addEventListener('click', () => { [state.from, state.to] = [state.to, state.from]; updateSummary(); calculate(); });
+  els.calcBtn.addEventListener('click', () => calculate());
+  els.calcReverseBtn.addEventListener('click', () => calculate(els.targetReceiveInput.value));
+  els.resetBtn.addEventListener('click', () => { state.from='USD'; state.to='KRW'; state.amount=1000; state.mode='market'; state.decimals=2; state.feePercent=0; state.fixedFee=0; els.manualRateInput.value=''; els.targetReceiveInput.value=''; updateSummary(); calculate(); });
+  els.copyBtn.addEventListener('click', async () => { if(!els.convertedOutput.value) return showToast(t('statusNoCopy')); try { await copyText(els.convertedOutput.value); showToast(t('statusCopied')); } catch { showToast(t('statusNoCopy')); } });
+  els.pickerClose.addEventListener('click', closePicker);
+  els.pickerBackdrop.addEventListener('click', (e) => { if(e.target === els.pickerBackdrop) closePicker(); });
   els.pickerSearch.addEventListener('input', (e) => renderPicker(e.target.value));
-  els.modeButtons.forEach(btn => btn.addEventListener('click', () => {
-    state.mode = btn.dataset.mode;
-    updateSummary();
-    calculate();
-  }));
-  els.decimalInput.addEventListener('input', () => { calculate(); });
-  els.manualRateInput.addEventListener('input', () => { if (state.mode === 'manual') calculate(); });
-
-  updateSummary();
-  calculate();
+  els.modeButtons.forEach(btn => btn.addEventListener('click', () => { state.mode = btn.dataset.mode; updateSummary(); calculate(); }));
+  [els.amountInput, els.decimalInput, els.manualRateInput, els.feePercentInput, els.fixedFeeInput].forEach(input => input.addEventListener('input', () => { if(input === els.manualRateInput && state.mode !== 'manual') return; calculate(); }));
+  els.targetReceiveInput.addEventListener('keydown', (e) => { if(e.key === 'Enter'){ e.preventDefault(); calculate(els.targetReceiveInput.value); } });
+  els.amountInput.addEventListener('keydown', (e) => { if(e.key === 'Enter'){ e.preventDefault(); calculate(); } });
+  document.addEventListener('toollab:languagechange', applyLang);
+  document.addEventListener('DOMContentLoaded', () => { applyLang(); updateSummary(); calculate(); });
 })();
-
 </script>
+
 
 <footer class="footer">
   <div class="container footer-grid">
     <div>
-      <h4>도구랩</h4>
-      <p>브라우저에서 바로 사용하는 온라인 도구 모음.</p>
+      <h4 id="footerBrandTitle">도구랩</h4>
+      <p id="footerTagline">브라우저에서 바로 사용하는 온라인 도구 모음.</p>
     </div>
     <div>
-      <h4>바로가기</h4>
-      <a href="../../index.html">홈</a>
-      <a href="../../roadmap.html">로드맵</a>
-      <a href="../../changelog.html">변경이력</a>
+      <h4 id="footerQuickTitle">바로가기</h4>
+      <a href="../../index.html" id="footerHome">홈</a>
+      <a href="../../roadmap.html" id="footerRoadmap">로드맵</a>
+      <a href="../../changelog.html" id="footerChangelog">변경이력</a>
     </div>
     <div>
-      <h4>정보</h4>
-      <a href="../../about.html">소개</a>
-      <a href="../../privacy.html">개인정보처리방침</a>
-      <a href="../../contact.html">문의</a>
+      <h4 id="footerInfoTitle">정보</h4>
+      <a href="../../about.html" id="footerAbout">소개</a>
+      <a href="../../privacy.html" id="footerPrivacy">개인정보처리방침</a>
+      <a href="../../contact.html" id="footerContact">문의</a>
     </div>
   </div>
 </footer>
