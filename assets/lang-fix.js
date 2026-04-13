@@ -738,7 +738,7 @@
     ],
     beautifyCode: [
       ['.hero .pill','literal:beautify_pill'], ['.hero h1','tool_beautify_title'], ['.hero p','tool_beautify_desc'],
-      ['#formatBtn','btn_format'], ['#copyBtn','btn_copy_result'], ['#sampleBtn','btn_sample'], ['#clearBtn','btn_clear'],
+      ['#formatBtn','btn_format'], ['#copyBtn','btn_copy_result'], ['#sampleBtn','btn_sample'],
       ['label[for="inputCode"]','label_original_code'], ['label[for="outputCode"]','label_formatted_result']
     ],
     urlEncoder: [
@@ -965,7 +965,7 @@
   function applyGenericLocalizedControls(){
     const key = pageKey();
     const pageRules = {
-      beautifyCode: [['#formatBtn','btn_format'],['#copyBtn','btn_copy_result'],['#sampleBtn','btn_sample'],['#clearBtn','btn_clear']],
+      beautifyCode: [['#formatBtn','btn_format'],['#copyBtn','btn_copy_result'],['#sampleBtn','btn_sample']],
       minifyCode: [['#runBtn','btn_minify'],['#copyBtn','btn_copy_result'],['#sampleBtn','btn_sample'],['#clearBtn','btn_clear']],
       jsonFormatter: [['#prettyBtn','btn_format'],['#minifyBtn','btn_minify'],['#validateBtn','btn_validate'],['#copyBtn','btn_copy_result'],['#sampleBtn','btn_sample']],
       sqlFormatter: [['#formatBtn','btn_format'],['#minifyBtn','literal:single_line'],['#copyBtn','btn_copy'],['#sampleBtn','btn_sample']],

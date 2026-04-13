@@ -10,7 +10,6 @@
 <link href="../../assets/lang.css?v=20260407-8" rel="stylesheet"/>
 <script defer="" src="../../assets/i18n.js?v=20260407-8"></script>
 <script defer="" src="../../assets/lang-fix.js?v=20260407-8"></script>
-<meta name="google-adsense-account" content="ca-pub-8492468439910779"/>
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8492468439910779"></script>
 <title>JSON Formatter Online – Pretty Print and Validate JSON | ToolLab</title><meta content="Pretty print, validate, and clean JSON online with fast browser-based formatting and copy tools." name="description"/><meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="googlebot"/><meta content="#4f46e5" name="theme-color"/><meta content="strict-origin-when-cross-origin" name="referrer"/><link href="https://mizunomeru537.github.io/tools/jsonFormatter/" rel="canonical"/><link href="../../favicon.ico" rel="icon" type="image/x-icon"/><link href="../../favicon-32x32.png" rel="icon" type="image/png"/><link href="../../apple-touch-icon.png" rel="apple-touch-icon" type="image/png"/><link href="../../site.webmanifest" rel="manifest"/><meta content="website" property="og:type"/><meta content="ToolLab" property="og:site_name"/><meta content="JSON Formatter Online – Pretty Print and Validate JSON | ToolLab" property="og:title"/><meta content="Pretty print, validate, and clean JSON online with fast browser-based formatting and copy tools." property="og:description"/><meta content="https://mizunomeru537.github.io/tools/jsonFormatter/" property="og:url"/><meta content="https://mizunomeru537.github.io/assets/seo-cover.png" property="og:image"/><meta content="1200" property="og:image:width"/><meta content="630" property="og:image:height"/><meta content="summary_large_image" name="twitter:card"/><meta content="JSON Formatter Online – Pretty Print and Validate JSON | ToolLab" name="twitter:title"/><meta content="Pretty print, validate, and clean JSON online with fast browser-based formatting and copy tools." name="twitter:description"/><meta content="https://mizunomeru537.github.io/assets/seo-cover.png" name="twitter:image"/><script data-seo-jsonld="1" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://mizunomeru537.github.io/#website","url":"https://mizunomeru537.github.io/","name":"ToolLab","alternateName":["도구랩","Tool Lab"],"inLanguage":"en"},{"@type":"WebPage","@id":"https://mizunomeru537.github.io/tools/jsonFormatter/#webpage","url":"https://mizunomeru537.github.io/tools/jsonFormatter/","name":"JSON 정리기 | ToolLab","description":"JSON을 보기 좋게 정리하거나 공백 없이 압축하고, 문법이 맞는지 바로 확인할 수 있습니다.","isPartOf":{"@id":"https://mizunomeru537.github.io/#website"},"breadcrumb":{"@id":"https://mizunomeru537.github.io/tools/jsonFormatter/#breadcrumb"},"inLanguage":"en"},{"@type":"BreadcrumbList","@id":"https://mizunomeru537.github.io/tools/jsonFormatter/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mizunomeru537.github.io/"},{"@type":"ListItem","position":2,"name":"JSON 정리기","item":"https://mizunomeru537.github.io/tools/jsonFormatter/"}]}]}</script><script data-extra-seo="1" type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "JSON Formatter", "applicationCategory": "DeveloperApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "url": "https://mizunomeru537.github.io/tools/jsonFormatter/", "description": "Pretty print, validate, and clean JSON online with fast browser-based formatting and copy tools.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can it validate invalid JSON?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The tool can show whether the text is valid JSON and help you spot common syntax problems."}}, {"@type": "Question", "name": "Who uses a JSON formatter?", "acceptedAnswer": {"@type": "Answer", "text": "Developers, testers, support teams, and technical writers often use it for APIs and configuration files."}}]}]}</script></head>
 <body>
@@ -29,15 +28,9 @@
 </div>
 </header>
 <main>
-<section class="hero"><div class="container"><div class="hero-card"><div class="pill">JSON · 정리 / 압축 / 검증</div><h1>JSON 정리기</h1><p>JSON을 보기 좋게 정리하거나 공백 없이 압축하고, 문법이 맞는지 바로 확인할 수 있습니다.</p></div></div></section>
+<section class="hero"><div class="container"><div class="hero-card"><div class="pill">JSON · 정리 / 압축 / 검증</div><h1>JSON 정리기</h1><p>복잡한 옵션 없이 JSON을 정리하거나 압축하고, 문법이 맞는지 바로 확인할 수 있습니다.</p></div></div></section>
 <section class="section"><div class="container"><div class="panel">
 <div class="control-row">
-<label>들여쓰기
-          <select id="indent">
-<option value="2">2칸</option>
-<option value="4">4칸</option>
-</select>
-</label>
 <button class="btn btn-primary" id="prettyBtn">정리하기</button>
 <button class="btn btn-secondary" id="minifyBtn">압축하기</button>
 <button class="btn btn-light" id="validateBtn">검증하기</button>
@@ -51,16 +44,15 @@
 <div class="msg" id="message"></div>
 </div>
 <div class="grid-3">
-<div class="help-box"><h3>정리하기</h3><p>JSON.parse 후 지정한 들여쓰기로 다시 직렬화합니다.</p></div>
+<div class="help-box"><h3>정리하기</h3><p>JSON.parse 후 읽기 좋은 기본 스타일로 다시 직렬화합니다.</p></div>
 <div class="help-box"><h3>압축하기</h3><p>공백을 모두 제거해 한 줄 JSON으로 만듭니다.</p></div>
 <div class="help-box"><h3>검증하기</h3><p>문법 오류가 있으면 어느 지점에서 깨졌는지 메시지를 보여줍니다.</p></div>
 </div></div></section>
-<section class="section"><div class="container"><div class="panel seo-panel"><h2>About this JSON Formatter</h2><p>Use this JSON formatter to make API responses readable, detect invalid JSON quickly, and prepare sample payloads for debugging or docs.</p><h3>How to use</h3><ol><li>Paste raw JSON into the input field.</li><li>Click Format or Validate to inspect the structure.</li><li>Copy the prettified JSON or fix errors based on the validation message.</li></ol><h3>Example</h3><p>Common examples include formatting API responses, configuration files, webhook payloads, and test fixtures.</p><h3>Related tools</h3><div class="related-links"><a href="../csvToJson/">CSV to JSON Converter →</a><a href="../beautifyCode/">Code Beautifier →</a><a href="../base64/">Base64 Encode / Decode →</a></div><h3>FAQ</h3><div class="faq-list"><details><summary>Can it validate invalid JSON?</summary><p>Yes. The tool can show whether the text is valid JSON and help you spot common syntax problems.</p></details><details><summary>Who uses a JSON formatter?</summary><p>Developers, testers, support teams, and technical writers often use it for APIs and configuration files.</p></details></div><div class="note-box">This page is built as a browser-based utility. No installation is required for quick everyday tasks.</div></div></div></section></main>
+<section class="section"><div class="container"><div class="panel seo-panel"><h2>About this JSON Formatter</h2><p>Use this JSON formatter to make API responses readable, detect invalid JSON quickly, and prepare sample payloads for debugging or docs.</p><h3>How to use</h3><ol><li>Paste raw JSON into the input field.</li><li>Click Format or Validate to inspect the structure quickly.</li><li>Copy the prettified JSON or fix errors based on the validation message.</li></ol><h3>Example</h3><p>Common examples include formatting API responses, configuration files, webhook payloads, and test fixtures.</p><h3>Related tools</h3><div class="related-links"><a href="../csvToJson/">CSV to JSON Converter →</a><a href="../beautifyCode/">Code Beautifier →</a><a href="../base64/">Base64 Encode / Decode →</a></div><h3>FAQ</h3><div class="faq-list"><details><summary>Can it validate invalid JSON?</summary><p>Yes. The tool can show whether the text is valid JSON and help you spot common syntax problems.</p></details><details><summary>Who uses a JSON formatter?</summary><p>Developers, testers, support teams, and technical writers often use it for APIs and configuration files.</p></details></div><div class="note-box">This page is built as a browser-based utility. No installation is required for quick everyday tasks.</div></div></div></section></main>
 <script>
     const t = (key) => (window.ToolI18n ? window.ToolI18n.t(key) : key);
     const inputEl = document.getElementById('inputJson');
     const outputEl = document.getElementById('outputJson');
-    const indentEl = document.getElementById('indent');
     const msgEl = document.getElementById('message');
     const sample = `{
   "project": "public-demo",
@@ -71,7 +63,7 @@
 
     function setMessage(text, ok=false){ msgEl.textContent = text || ''; msgEl.className = ok ? 'msg ok' : 'msg'; }
     function parseJson(){ return JSON.parse(inputEl.value); }
-    function pretty(){ outputEl.value = JSON.stringify(parseJson(), null, Number(indentEl.value)); setMessage(t('msg_done_format'), true); }
+    function pretty(){ outputEl.value = JSON.stringify(parseJson(), null, 4); setMessage(t('msg_done_format'), true); }
     function minify(){ outputEl.value = JSON.stringify(parseJson()); setMessage(t('msg_minify_done'), true); }
     function validate(){ parseJson(); setMessage(t('msg_valid_json'), true); }
 
@@ -79,7 +71,8 @@
     document.getElementById('minifyBtn').addEventListener('click', ()=>{ try{ minify(); }catch(err){ outputEl.value=''; setMessage('오류\n' + err.message); } });
     document.getElementById('validateBtn').addEventListener('click', ()=>{ try{ validate(); }catch(err){ setMessage('오류\n' + err.message); } });
     document.getElementById('copyBtn').addEventListener('click', async ()=>{ if(!outputEl.value) return setMessage(t('msg_no_result')); await navigator.clipboard.writeText(outputEl.value); setMessage(t('msg_copied'), true); });
-    document.getElementById('sampleBtn').addEventListener('click', ()=>{ inputEl.value = sample; outputEl.value=''; setMessage(''); });
+    document.getElementById('sampleBtn').addEventListener('click', ()=>{ inputEl.value = sample; outputEl.value=''; setMessage(''); pretty(); });
+    inputEl.addEventListener('keydown', (event)=>{ if((event.ctrlKey || event.metaKey) && event.key === 'Enter'){ event.preventDefault(); try{ pretty(); }catch(err){ outputEl.value=''; setMessage('오류\n' + err.message); } } });
     inputEl.value = sample;
   </script>
 <footer class="footer">
