@@ -1,35 +1,29 @@
-도구랩 검색 유입 강화 설정 가이드
+[ToolLab 구글 검색 최종 체크]
 
-이번 수정에서 반영한 것
-- GitHub Pages 루트 도메인 기준 URL로 canonical 전체 수정
-- robots.txt 와 sitemap.xml 을 루트 도메인 기준으로 수정
-- site.webmanifest 경로를 루트 도메인 기준으로 수정
-- /tools/ 전용 허브 페이지 추가
-- 각 도구 페이지에 SEO 설명 섹션, FAQ, 관련 도구 링크 추가
-- 각 도구 페이지 title / description / OG / Twitter 메타 강화
-- 구조화 데이터(JSON-LD) 보강
+1. 이번 패키지에서 반영된 것
+- HTML 사이트맵 페이지 추가: /tool-sitemap.html
+- FAQ 페이지 추가: /faq.html
+- RSS 피드 추가: /feed.xml
+- sitemap.xml 전체 갱신
+- robots.txt에서 sitemap.xml 연결 유지
+- 핵심/지원 페이지 내부 링크 강화
+- 주요 도구 페이지 WebApplication 구조화 데이터 추가
+- FAQ 있는 페이지 FAQPage 구조화 데이터 보강
+- 얇았던 소개/문의/로드맵/변경이력 페이지 내용 보강
 
-현재 기준 주요 주소
-- 홈: https://mizunomeru537.github.io/
-- 전체 도구 허브: https://mizunomeru537.github.io/tools/
-- 사이트맵: https://mizunomeru537.github.io/sitemap.xml
-- robots.txt: https://mizunomeru537.github.io/robots.txt
+2. 배포 후 꼭 할 것
+- GitHub Pages 반영 확인
+- https://mizunomeru537.github.io/sitemap.xml 직접 열어보기
+- https://mizunomeru537.github.io/tool-sitemap.html 직접 열어보기
+- https://mizunomeru537.github.io/faq.html 직접 열어보기
+- Search Console에서 Sitemap 제출: https://mizunomeru537.github.io/sitemap.xml
 
-배포 후 해야 할 일
-1. 이 파일들로 GitHub 저장소 내용을 덮어씁니다.
-2. 배포 완료 후 실제 사이트에서 canonical 과 sitemap 주소가 루트 도메인으로 열리는지 확인합니다.
-3. Google Search Console, Bing Webmaster Tools, 네이버 서치어드바이저에 사이트를 등록합니다.
-4. sitemap.xml 을 제출합니다.
-5. 먼저 홈, /tools/, JSON Formatter, Password Generator, QR Code Generator 페이지부터 수집 요청합니다.
+3. 확인용 검색
+- site:mizunomeru537.github.io
+- site:mizunomeru537.github.io/tools/sqlFormatter/
+- site:mizunomeru537.github.io/tools/jsonFormatter/
 
-운영 팁
-- 검색 유입은 도구 수보다 페이지 품질이 더 중요합니다.
-- 유입이 붙는 도구는 예시, FAQ, 관련 링크를 계속 늘리면 더 유리합니다.
-- 새 도구를 만들 때마다 /tools/ 허브와 sitemap.xml 에도 같이 추가하세요.
-- 나중에는 언어별 별도 URL 구조를 만들면 SEO 에 더 유리합니다.
-
-
-[Google Search Console URL-prefix verification]
-- HTML file: /googleee2817ea275c3c15.html
-- File content: google-site-verification: googleee2817ea275c3c15.html
-- HTML meta verification token: 83sesWtvgIuYIljbg4SIfYbnCX3K7iDVzsHPr6RD7QY
+4. 중요
+- 이 작업은 '코드/구조' 최대치에 가깝게 올린 것임
+- 실제 순위는 색인 시간, 경쟁도, 검색 의도, 외부 링크, 사용자 반응에 따라 달라짐
+- 그러나 지금 상태가 이전보다 훨씬 검색엔진 친화적인 구조임
