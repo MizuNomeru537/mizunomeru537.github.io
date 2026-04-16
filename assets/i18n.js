@@ -46,32 +46,7 @@
     return 'index';
   }
 
-  const LANG_TO_FOLDER = {"en":"", "ko":"ko", "ja":"ja", "zh-TW":"zh-tw", "zh-CN":"zh-cn", "fr":"fr", "de":"de", "ru":"ru", "es":"es", "es-419":"es-419", "id":"id", "ar":"ar"};
-  const FOLDER_TO_LANG = {"ko":"ko", "ja":"ja", "zh-tw":"zh-TW", "zh-cn":"zh-CN", "fr":"fr", "de":"de", "ru":"ru", "es":"es", "es-419":"es-419", "id":"id", "ar":"ar"};
-
-  function getPathFolder(){
-    const parts = (location.pathname || '/').split('/').filter(Boolean);
-    return (parts[0] || '').toLowerCase();
-  }
-
-  function getPathLang(){
-    return FOLDER_TO_LANG[getPathFolder()] || 'en';
-  }
-
-  function stripLocalePrefix(pathname){
-    const parts = (pathname || '/').split('/').filter(Boolean);
-    if (parts.length && FOLDER_TO_LANG[(parts[0] || '').toLowerCase()]) parts.shift();
-    return '/' + parts.join('/');
-  }
-
-  function buildLangUrl(lang){
-    const clean = stripLocalePrefix(location.pathname || '/');
-    const folder = LANG_TO_FOLDER[lang] || '';
-    if (!folder) return clean === '/' ? '/' : clean;
-    return '/' + folder + (clean === '/' ? '/' : clean);
-  }
-
-  let currentLang = getPathLang();
+  let currentLang = localStorage.getItem('toollab_lang') || 'en';
 
   function getText(key, lang){
     const entry = T[key];
@@ -153,11 +128,6 @@
       if (!btn) return;
       currentLang = btn.dataset.lang;
       localStorage.setItem('toollab_lang', currentLang);
-      const nextUrl = buildLangUrl(currentLang) + (location.search || '') + (location.hash || '');
-      if (nextUrl !== (location.pathname + (location.search || '') + (location.hash || ''))) {
-        location.href = nextUrl;
-        return;
-      }
       applyLanguage();
     });
   }
@@ -216,18 +186,12 @@
     setLang: function(lang){
       currentLang = lang;
       localStorage.setItem('toollab_lang', currentLang);
-      const nextUrl = buildLangUrl(currentLang) + (location.search || '') + (location.hash || '');
-      if (nextUrl !== (location.pathname + (location.search || '') + (location.hash || ''))) {
-        location.href = nextUrl;
-        return;
-      }
       applyLanguage();
     },
     onChange: function(fn){ document.addEventListener('toollab:languagechange', fn); }
   };
 
   document.addEventListener('DOMContentLoaded', function(){
-    localStorage.setItem('toollab_lang', currentLang);
     mountTabs();
     applyLanguage();
   });
