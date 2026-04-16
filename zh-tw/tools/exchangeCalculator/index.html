@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head><script data-fixed-lang="1">localStorage.setItem('toollab_lang','zh-TW');document.documentElement.lang='zh-TW';document.documentElement.dir='ltr';</script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/>
+<meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="googlebot"/>
+<meta content="#4f46e5" name="theme-color"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<title>Exchange Calculator | ToolLab</title>
+<meta content="Convert currencies with market snapshot, reference rate, manual rate, fee estimate, and reverse target-receive calculation in your browser." name="description"/>
+<link href="https://mizunomeru537.github.io/zh-tw/tools/exchangeCalculator/" rel="canonical"/>
+<link href="../../favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="../../favicon-32x32.png" rel="icon" type="image/png"/>
+<link href="../../apple-touch-icon.png" rel="apple-touch-icon" type="image/png"/>
+<link href="../../site.webmanifest" rel="manifest"/>
+<meta content="website" property="og:type"/>
+<meta content="ToolLab" property="og:site_name"/>
+<meta content="Exchange Calculator | ToolLab" property="og:title"/>
+<meta content="Convert currencies with market snapshot, reference rate, manual rate, fee estimate, and reverse target-receive calculation." property="og:description"/>
+<meta content="https://mizunomeru537.github.io/zh-tw/tools/exchangeCalculator/" property="og:url"/>
+<meta content="https://mizunomeru537.github.io/assets/seo-cover.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Exchange Calculator | ToolLab" name="twitter:title"/>
+<meta content="Convert currencies with market snapshot, reference rate, manual rate, fee estimate, and reverse target-receive calculation." name="twitter:description"/>
+<meta content="https://mizunomeru537.github.io/assets/seo-cover.png" name="twitter:image"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://mizunomeru537.github.io/#website","url":"https://mizunomeru537.github.io/","name":"ToolLab","alternateName":["ToolLab","Tool Lab"],"inLanguage":"en"},{"@type":"WebPage","@id":"https://mizunomeru537.github.io/zh-tw/tools/exchangeCalculator/#webpage","url":"https://mizunomeru537.github.io/zh-tw/tools/exchangeCalculator/","name":"Exchange Calculator | ToolLab","description":"Browser-based currency converter with market snapshot, reference rate, manual rate, fee estimate, and reverse target calculation.","isPartOf":{"@id":"https://mizunomeru537.github.io/#website"}}]}</script>
+<link href="../../assets/tool.css?v=20260408-4" rel="stylesheet"/>
+<link href="../../assets/lang.css?v=20260408-4" rel="stylesheet"/>
+<script defer="" src="../../assets/i18n.js?v=20260408-4"></script>
+<script defer="" src="../../assets/lang-fix.js?v=20260408-4"></script>
+<style>
+
+.fx-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
+.fx-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fx-card{display:grid;gap:16px}
+.fx-subtitle{margin:4px 0 0;color:var(--muted);line-height:1.7;font-size:15px}
+.fx-control{display:grid;gap:8px}
+.fx-control label{font-size:14px;font-weight:800;color:#334155}
+.fx-mode-group{display:flex;flex-wrap:wrap;gap:10px}
+.fx-mode{appearance:none;border:1px solid var(--line);background:#fbfcfe;border-radius:999px;padding:11px 14px;font:inherit;font-weight:800;color:#334155;cursor:pointer}
+.fx-mode.active{background:#eef2ff;border-color:#c7d2fe;color:#4338ca}
+.fx-pair{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:stretch}
+.fx-pick{border:1px solid var(--line);border-radius:20px;background:#fbfcfe;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;min-height:82px}
+.fx-pick:hover{border-color:#c7d2fe;box-shadow:0 10px 24px rgba(79,70,229,.10)}
+.fx-pick-main{display:flex;align-items:center;gap:12px;min-width:0}
+.fx-flag{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;overflow:hidden;background:#fff;border:1px solid var(--line);flex:0 0 auto}
+.fx-flag img{width:100%;height:100%;object-fit:cover;display:block}
+.fx-flag span{font-size:24px}
+.fx-pick-title{display:block;font-size:17px;font-weight:900;line-height:1.2}
+.fx-pick-code{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+.fx-caret{font-size:18px;color:#64748b}
+.fx-swap{width:56px;height:56px;border-radius:18px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:22px;align-self:center}
+.fx-swap:hover{border-color:#c7d2fe;box-shadow:0 10px 24px rgba(79,70,229,.10)}
+.fx-inline{display:grid;grid-template-columns:120px 1fr;gap:10px}
+.fx-inline .code-box{border:1px solid #d6dbe5;border-radius:14px;background:#fbfcfe;padding:12px 14px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.fx-inline input,.fx-rate-row input{width:100%}
+.fx-rate-row{display:grid;grid-template-columns:1fr 140px;gap:10px}
+.fx-result-hero{padding:18px;border-radius:22px;background:linear-gradient(135deg,#0f172a 0%, #111827 48%, #182234 100%);color:#fff}
+.fx-kicker{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);font-size:12px;font-weight:800;letter-spacing:.02em}
+.fx-big{font-size:clamp(34px,4vw,54px);font-weight:900;letter-spacing:-1.6px;line-height:1.02;margin:14px 0 8px}
+.fx-eq{margin:0;color:#dbe5f2;font-size:18px;line-height:1.6}
+.fx-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.fx-meta .card strong{display:block;font-size:18px;margin-top:4px}
+.fx-meta .card span{font-size:12px;color:var(--muted)}
+.fx-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.fx-note{padding:14px 16px;border-radius:18px;background:#f8fafc;border:1px solid var(--line);color:var(--muted);font-size:14px;line-height:1.75}
+.fx-note.warn{background:#fff7ed;border-color:#fed7aa;color:#9a3412}
+.fx-watch{display:grid;gap:10px}
+.fx-watch-item{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);background:#fbfcfe;border-radius:18px;padding:12px 14px}
+.fx-watch-left{display:flex;align-items:center;gap:12px;min-width:0}
+.fx-watch-item strong{display:block;font-size:15px}
+.fx-watch-item span{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+.fx-watch-rate{font-weight:900;font-size:18px;color:#0f172a}
+.fx-watch-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:#eef2ff;color:#4338ca;font-size:12px;font-weight:800}
+.fx-chart-wrap{border:1px solid var(--line);border-radius:18px;background:#fbfcfe;padding:14px;min-height:300px}
+.fx-chart-wrap svg{width:100%;height:240px;display:block}
+.fx-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;color:var(--muted);font-size:13px}
+.fx-picker-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.48);display:none;align-items:center;justify-content:center;padding:18px;z-index:1000}
+.fx-picker-backdrop.open{display:flex}
+.fx-picker{width:min(920px,100%);max-height:min(80vh,760px);background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:0 30px 60px rgba(17,24,39,.22);display:grid;grid-template-rows:auto auto 1fr;overflow:hidden}
+.fx-picker-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px 14px}
+.fx-picker-top h3{margin:0;font-size:22px;letter-spacing:-.6px}
+.fx-picker-top button{border:1px solid var(--line);background:#fff;border-radius:14px;width:42px;height:42px;cursor:pointer}
+.fx-picker-search{padding:0 20px 14px}
+.fx-picker-search input{width:100%}
+.fx-picker-grid{padding:0 20px 20px;overflow:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;align-content:start}
+.fx-picker-item{border:1px solid var(--line);background:#fbfcfe;border-radius:18px;padding:14px 12px;display:grid;justify-items:center;gap:10px;cursor:pointer;text-align:center}
+.fx-picker-item:hover,.fx-picker-item.active{border-color:#c7d2fe;background:#eef2ff}
+.fx-picker-item strong{font-size:15px}
+.fx-picker-item span{font-size:12px;color:var(--muted)}
+.fx-toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(10px);background:#111827;color:#fff;padding:11px 14px;border-radius:14px;opacity:0;pointer-events:none;transition:.18s ease;z-index:1200}
+.fx-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.fx-status.ok{color:#0a7a2f}.fx-status.err{color:#b91c1c}.fx-status.info{color:#334155}
+@media (max-width:1000px){.fx-grid,.fx-grid-2,.fx-pair,.fx-meta{grid-template-columns:1fr}.fx-pair{grid-template-columns:1fr}.fx-swap{justify-self:center;transform:rotate(90deg)}.fx-swap:hover{transform:rotate(90deg)} }
+@media (max-width:760px){.fx-inline,.fx-rate-row{grid-template-columns:1fr}.fx-picker-grid{grid-template-columns:1fr 1fr;padding:0 14px 14px}.fx-picker-top,.fx-picker-search{padding-left:14px;padding-right:14px}.fx-big{font-size:34px}}
+
+        </style>
+<meta content="ToolLab" name="author"/><meta content="ToolLab" name="application-name"/><link href="https://mizunomeru537.github.io/feed.xml" rel="alternate" title="ToolLab updates" type="application/rss+xml"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "왜 어떤 날은 기준 환율과 시장 스냅샷 값이 다르게 보이나요?", "acceptedAnswer": {"@type": "Answer", "text": "기준 환율은 일일 기준 데이터라 장중 변동을 바로 반영하지 않습니다. 시장 스냅샷은 장중에 더 가깝지만 지연 시세일 수 있습니다."}}, {"@type": "Question", "name": "1497처럼 전일 값 비슷하게 보이던 문제는 어떻게 바뀌었나요?", "acceptedAnswer": {"@type": "Answer", "text": "이제 소스를 분리해서 보여주고, 시장 스냅샷이 실패하면 분명하게 기준 환율로 전환되었다고 표시합니다."}}, {"@type": "Question", "name": "정확히 내가 본 숫자와 맞추고 싶으면 어떻게 하나요?", "acceptedAnswer": {"@type": "Answer", "text": "직접 입력 모드에서 1 기준통화 = ? 환전통화 값을 넣으면 됩니다. 예를 들어 1 USD = 1473 KRW처럼 바로 맞출 수 있습니다."}}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Exchange Calculator", "url": "https://mizunomeru537.github.io/zh-tw/tools/exchangeCalculator/", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "description": "Convert currencies with market snapshot, reference rate, manual rate, fee estimate, and reverse target-receive calculation in your browser.", "browserRequirements": "Requires a modern browser with JavaScript enabled."}</script><meta content="zh_TW" property="og:locale"/><meta content="zh-TW" http-equiv="Content-Language"/><link href="https://mizunomeru537.github.io/tools/exchangeCalculator/" hreflang="en" rel="alternate"/><link href="https://mizunomeru537.github.io/ko/tools/exchangeCalculator/" hreflang="ko" rel="alternate"/><link href="https://mizunomeru537.github.io/ja/tools/exchangeCalculator/" hreflang="ja" rel="alternate"/><link href="https://mizunomeru537.github.io/zh-cn/tools/exchangeCalculator/" hreflang="zh-CN" rel="alternate"/><link href="https://mizunomeru537.github.io/zh-tw/tools/exchangeCalculator/" hreflang="zh-TW" rel="alternate"/><link href="https://mizunomeru537.github.io/fr/tools/exchangeCalculator/" hreflang="fr" rel="alternate"/><link href="https://mizunomeru537.github.io/de/tools/exchangeCalculator/" hreflang="de" rel="alternate"/><link href="https://mizunomeru537.github.io/ru/tools/exchangeCalculator/" hreflang="ru" rel="alternate"/><link href="https://mizunomeru537.github.io/es/tools/exchangeCalculator/" hreflang="es" rel="alternate"/><link href="https://mizunomeru537.github.io/es-419/tools/exchangeCalculator/" hreflang="es-419" rel="alternate"/><link href="https://mizunomeru537.github.io/id/tools/exchangeCalculator/" hreflang="id" rel="alternate"/><link href="https://mizunomeru537.github.io/ar/tools/exchangeCalculator/" hreflang="ar" rel="alternate"/><link href="https://mizunomeru537.github.io/tools/exchangeCalculator/" hreflang="x-default" rel="alternate"/></head>
+<body>
+<header class="topbar">
+<div class="container topbar-inner">
+<a class="brand" href="../../index.html">
+<span class="brand-mark">⚡</span>
+<span id="brandText">ToolLab</span>
+</a>
+<nav class="nav">
+<a href="../../index.html" id="navHome">Home</a>
+<a href="../../index.html#featured" id="navFeatured">Featured Tools</a>
+<a href="../../tools/" id="navTools">All Tools</a>
+<a href="../../about.html" id="navAbout">About</a>
+</nav>
+</div>
+</header>
+<main>
+<section class="hero">
+<div class="container">
+<div class="hero-card">
+<div class="pill" id="heroPill">환율 · 시장 스냅샷 / 기준 환율 / 직접 입력</div>
+<h1 id="heroTitle">ToolLab 스타일로 다시 만든<br/>Exchange Calculator</h1>
+<p id="heroDesc">이전처럼 일일 기준값을 마치 실시간처럼 보이게 하지 않고, <strong>시장 스냅샷</strong>, <strong>기준 환율</strong>, <strong>직접 입력</strong>을 분리했습니다. 여기에 <strong>수수료 반영</strong>과 <strong>목표 수령액 기준 역산</strong>까지 추가해 한 화면에서 처리합니다.</p>
+<div class="hero-actions">
+<a class="btn btn-light" href="#calculator" id="heroBtnCalc">바로 계산하기</a>
+<a class="btn btn-secondary" href="#guide" id="heroBtnGuide">사용 방법 보기</a>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="calculator">
+<div class="container fx-grid">
+<div class="panel fx-card">
+<div class="section-head">
+<div>
+<h2 id="settingsTitle">환율 설정</h2>
+<p class="fx-subtitle" id="settingsDesc">보유 통화와 환전 통화를 고른 뒤, 어떤 방식으로 값을 가져올지 선택합니다.</p>
+</div>
+</div>
+<div class="fx-control">
+<label id="labelMode">환율 방식</label>
+<div class="fx-mode-group">
+<button class="fx-mode active" data-mode="market" id="modeMarketBtn" type="button">시장 스냅샷</button>
+<button class="fx-mode" data-mode="reference" id="modeReferenceBtn" type="button">기준 환율</button>
+<button class="fx-mode" data-mode="manual" id="modeManualBtn" type="button">직접 입력</button>
+</div>
+<div class="fx-note" id="modeHelper">시장 스냅샷은 공공 시세 페이지의 지연 호가를 best-effort로 읽어옵니다. 실패하면 기준 환율로 자동 전환됩니다.</div>
+</div>
+<div class="fx-pair">
+<button class="fx-pick" id="fromBtn" type="button"><div id="fromMeta"></div></button>
+<button aria-label="Swap currencies" class="fx-swap" id="swapBtn" type="button">⇄</button>
+<button class="fx-pick" id="toBtn" type="button"><div id="toMeta"></div></button>
+</div>
+<div class="grid-2">
+<div class="fx-control">
+<label for="amountInput" id="labelAmount">금액 입력</label>
+<div class="fx-inline">
+<div class="code-box" id="fromCode">USD</div>
+<input data-ph-key="phAmount" id="amountInput" inputmode="decimal" min="0" placeholder="입력 금액" step="any" type="number" value="1000"/>
+</div>
+</div>
+<div class="fx-control">
+<label for="manualRateInput" id="labelManualRate">직접 환율 입력</label>
+<div class="fx-rate-row">
+<input data-ph-key="phManualRate" disabled="" id="manualRateInput" inputmode="decimal" min="0" placeholder="예: 1473.00" step="any" type="number"/>
+<input data-ph-key="phDecimals" id="decimalInput" inputmode="numeric" max="8" min="0" placeholder="소수 자리" step="1" type="number" value="2"/>
+</div>
+<div class="inline-note" id="manualHint">입력 형식: 1 기준통화 = ? 환전통화</div>
+</div>
+</div>
+<div class="grid-2">
+<div class="fx-control">
+<label for="feePercentInput" id="labelFeePercent">퍼센트 수수료</label>
+<input data-ph-key="phFeePercent" id="feePercentInput" inputmode="decimal" min="0" placeholder="예: 1.5" step="any" type="number" value="0"/>
+</div>
+<div class="fx-control">
+<label for="fixedFeeInput" id="labelFixedFee">고정 수수료</label>
+<input data-ph-key="phFixedFee" id="fixedFeeInput" inputmode="decimal" min="0" placeholder="예: 3" step="any" type="number" value="0"/>
+</div>
+</div>
+<div class="fx-control">
+<label for="targetReceiveInput" id="labelTargetReceive">목표 수령액 기준 역산</label>
+<div class="fx-rate-row">
+<input data-ph-key="phTargetReceive" id="targetReceiveInput" inputmode="decimal" min="0" placeholder="받고 싶은 금액 입력" step="any" type="number"/>
+<button class="btn btn-light" id="calcReverseBtn" type="button">필요 금액 계산</button>
+</div>
+<div class="inline-note" id="reverseHint">수수료까지 반영해서 목표 수령액을 받으려면 얼마나 보내야 하는지 계산합니다.</div>
+</div>
+<div class="fx-actions">
+<button class="btn btn-primary" id="calcBtn" type="button">계산하기</button>
+<button class="btn btn-light" id="resetBtn" type="button">초기화</button>
+<button class="btn btn-light" id="copyBtn" type="button">결과 복사</button>
+</div>
+<div class="msg fx-status info" id="statusText">시장 스냅샷과 기준 환율을 분리해서 표시합니다.</div>
+</div>
+<div class="panel fx-card">
+<div class="section-head">
+<div>
+<h2 id="resultTitle">계산 결과</h2>
+<p class="fx-subtitle" id="sourceText">자동 소스: 시장 스냅샷 → 실패 시 기준 환율</p>
+</div>
+</div>
+<div class="fx-result-hero">
+<div class="fx-kicker" id="resultKicker">결과</div>
+<div class="fx-big" id="resultBig">-</div>
+<p class="fx-eq" id="resultEq">-</p>
+</div>
+<div class="fx-meta">
+<div class="card"><span id="metaRateLabel">적용 환율</span><strong id="resultRate">-</strong></div>
+<div class="card"><span id="metaUpdatedLabel">기준 시각</span><strong id="resultUpdated">-</strong></div>
+<div class="card"><span id="metaSourceLabel">데이터 출처</span><strong id="resultSource">-</strong></div>
+</div>
+<div class="fx-control">
+<label for="convertedOutput" id="labelCopyField">복사용 결과</label>
+<input data-ph-key="phCopyField" id="convertedOutput" placeholder="계산 후 여기에 표시됩니다." readonly="" type="text"/>
+</div>
+<div class="fx-note warn">
+<strong id="warnTitle">참고</strong><br/>
+<span id="warnBody">시장 스냅샷은 장중에 더 가깝지만 지연 시세일 수 있고, 기준 환율은 가장 안정적인 대신 장중 시세와 다를 수 있습니다.</span>
+</div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="container fx-grid-2">
+<div class="panel">
+<div class="section-head">
+<div>
+<h2 id="chartTitle">최근 기준 환율 차트</h2>
+<p class="fx-subtitle" id="chartDesc">최근 7영업일 기준으로 같은 통화쌍의 흐름을 보여줍니다.</p>
+</div>
+<div class="fx-watch-tag" id="chartStatus">차트 준비중</div>
+</div>
+<div class="fx-chart-wrap" id="chartWrap"><div class="inline-note" id="chartLoadingText">Loading chart data.</div></div>
+<div class="fx-legend" id="chartLegend"></div>
+</div>
+<div class="panel">
+<div class="section-head">
+<div>
+<h2 id="watchTitle">빠른 비교</h2>
+<p class="fx-subtitle" id="watchDesc">자주 보는 통화들을 현재 기준 통화 기준으로 같이 확인합니다.</p>
+</div>
+<div class="fx-watch-tag" id="watchSourceTag">시장 스냅샷</div>
+</div>
+<div class="fx-watch" id="watchList"></div>
+</div>
+</div>
+</section>
+<section class="section" id="guide">
+<div class="container">
+<div class="panel seo-panel">
+<h2 id="guideTitle">이 버전에서 바뀐 점</h2>
+<p id="guideIntro">이전처럼 일일 기준값만 보고 실시간처럼 오해하기 쉬운 구성을 줄이고, 소스 성격을 구분해서 보이도록 다시 정리했습니다. 메인 ToolLab의 밝은 카드형 레이아웃과 맞추어 All 디자인도 통일했습니다.</p>
+<h3 id="howToTitle">사용 방법</h3>
+<ol>
+<li id="step1">보유 통화와 환전 통화를 고릅니다.</li>
+<li id="step2">시장 스냅샷, 기준 환율, 직접 입력 중 하나를 선택합니다.</li>
+<li id="step3">금액을 넣고 계산하면 결과와 적용 환율, 기준 시각, 데이터 출처가 함께 표시됩니다.</li>
+</ol>
+<h3 id="tipsTitle">추천 사용 방식</h3>
+<div class="related-links">
+<a href="javascript:void(0)" id="tipMarket">장중 느낌이 필요할 때 → 시장 스냅샷</a>
+<a href="javascript:void(0)" id="tipReference">안정적으로 계산할 때 → 기준 환율</a>
+<a href="javascript:void(0)" id="tipManual">내가 본 숫자와 맞출 때 → 직접 입력</a>
+</div>
+<h3 id="faqTitle">FAQ</h3>
+<div class="faq-list">
+<details open="">
+<summary id="faqQ1">왜 어떤 날은 기준 환율과 시장 스냅샷 값이 다르게 보이나요?</summary>
+<p id="faqA1">기준 환율은 일일 기준 데이터라 장중 변동을 바로 반영하지 않습니다. 시장 스냅샷은 장중에 더 가깝지만 지연 시세일 수 있습니다.</p>
+</details>
+<details>
+<summary id="faqQ2">1497처럼 전일 값 비슷하게 보이던 문제는 어떻게 바뀌었나요?</summary>
+<p id="faqA2">이제 소스를 분리해서 보여주고, 시장 스냅샷이 실패하면 분명하게 기준 환율로 전환되었다고 표시합니다.</p>
+</details>
+<details>
+<summary id="faqQ3">정확히 내가 본 숫자와 맞추고 싶으면 어떻게 하나요?</summary>
+<p id="faqA3">직접 입력 모드에서 1 기준통화 = ? 환전통화 값을 넣으면 됩니다. 예를 들어 1 USD = 1473 KRW처럼 바로 맞출 수 있습니다.</p>
+</details>
+</div>
+</div>
+</div>
+</section>
+</main>
+<div aria-hidden="true" class="fx-picker-backdrop" id="pickerBackdrop">
+<div class="fx-picker">
+<div class="fx-picker-top">
+<h3 id="pickerTitle">통화 선택</h3>
+<button aria-label="닫기" id="pickerClose" type="button">✕</button>
+</div>
+<div class="fx-picker-search">
+<input data-ph-key="phPickerSearch" id="pickerSearch" placeholder="국가명, 통화코드, 통화명 검색" type="search"/>
+</div>
+<div class="fx-picker-grid" id="pickerGrid"></div>
+</div>
+</div>
+<div class="fx-toast" id="fxToast"></div>
+<script>
+(() => {
+  const currencies = [{"code": "KRW", "name": "대한민국 원", "country": "대한민국", "flag": "kr", "emoji": "🇰🇷"}, {"code": "USD", "name": "미국 달러", "country": "미국", "flag": "us", "emoji": "🇺🇸"}, {"code": "JPY", "name": "일본 엔", "country": "일본", "flag": "jp", "emoji": "🇯🇵"}, {"code": "CNY", "name": "중국 위안", "country": "중국", "flag": "cn", "emoji": "🇨🇳"}, {"code": "EUR", "name": "유로", "country": "유럽연합", "flag": "eu", "emoji": "🇪🇺"}, {"code": "GBP", "name": "영국 파운드", "country": "영국", "flag": "gb", "emoji": "🇬🇧"}, {"code": "AUD", "name": "호주 달러", "country": "호주", "flag": "au", "emoji": "🇦🇺"}, {"code": "CAD", "name": "캐나다 달러", "country": "캐나다", "flag": "ca", "emoji": "🇨🇦"}, {"code": "CHF", "name": "스위스 프랑", "country": "스위스", "flag": "ch", "emoji": "🇨🇭"}, {"code": "HKD", "name": "홍콩 달러", "country": "홍콩", "flag": "hk", "emoji": "🇭🇰"}, {"code": "SGD", "name": "싱가포르 달러", "country": "싱가포르", "flag": "sg", "emoji": "🇸🇬"}, {"code": "TWD", "name": "대만 달러", "country": "대만", "flag": "tw", "emoji": "🇹🇼"}, {"code": "THB", "name": "태국 바트", "country": "태국", "flag": "th", "emoji": "🇹🇭"}, {"code": "VND", "name": "베트남 동", "country": "베트남", "flag": "vn", "emoji": "🇻🇳"}, {"code": "PHP", "name": "필리핀 페소", "country": "필리핀", "flag": "ph", "emoji": "🇵🇭"}, {"code": "MYR", "name": "말레이시아 링깃", "country": "말레이시아", "flag": "my", "emoji": "🇲🇾"}, {"code": "IDR", "name": "인도네시아 루피아", "country": "인도네시아", "flag": "id", "emoji": "🇮🇩"}, {"code": "INR", "name": "인도 루피", "country": "인도", "flag": "in", "emoji": "🇮🇳"}, {"code": "NZD", "name": "뉴질랜드 달러", "country": "뉴질랜드", "flag": "nz", "emoji": "🇳🇿"}, {"code": "SEK", "name": "스웨덴 크로나", "country": "스웨덴", "flag": "se", "emoji": "🇸🇪"}, {"code": "NOK", "name": "노르웨이 크로네", "country": "노르웨이", "flag": "no", "emoji": "🇳🇴"}, {"code": "DKK", "name": "덴마크 크로네", "country": "덴마크", "flag": "dk", "emoji": "🇩🇰"}, {"code": "SAR", "name": "사우디 리얄", "country": "사우디아라비아", "flag": "sa", "emoji": "🇸🇦"}, {"code": "AED", "name": "아랍에미리트 디르함", "country": "아랍에미리트", "flag": "ae", "emoji": "🇦🇪"}, {"code": "KWD", "name": "쿠웨이트 디나르", "country": "쿠웨이트", "flag": "kw", "emoji": "🇰🇼"}, {"code": "QAR", "name": "카타르 리얄", "country": "카타르", "flag": "qa", "emoji": "🇶🇦"}, {"code": "BHD", "name": "바레인 디나르", "country": "바레인", "flag": "bh", "emoji": "🇧🇭"}];
+  const currencyMap = new Map(currencies.map(item => [item.code, item]));
+  const QUICK_COMPARE = ['KRW','USD','JPY','EUR','CNY','GBP'];
+  const CHART_WINDOW_DAYS = 12;
+
+  const PAGE_TEXT = {
+    brandText: { en:'ToolLab', ko:'ToolLab', ja:'ツールラボ', 'zh-TW':'工具站', 'zh-CN':'工具站' },
+    navHome: { en:'Home', ko:'Home', ja:'ホーム', 'zh-TW':'首頁', 'zh-CN':'首页' },
+    navFeatured: { en:'Featured tools', ko:'Featured Tools', ja:'おすすめツール', 'zh-TW':'推薦工具', 'zh-CN':'推荐工具' },
+    navTools: { en:'All tools', ko:'All Tools', ja:'全ツール', 'zh-TW':'所有工具', 'zh-CN':'全部工具' },
+    navAbout: { en:'About', ko:'About', ja:'紹介', 'zh-TW':'介紹', 'zh-CN':'介绍' },
+    heroPill: { en:'Exchange · market snapshot / reference / manual', ko:'환율 · 시장 스냅샷 / 기준 환율 / 직접 입력', ja:'為替・市場スナップショット / 基準レート / 手動入力', 'zh-TW':'匯率・市場快照 / 基準匯率 / 手動輸入', 'zh-CN':'汇率・市场快照 / 基准汇率 / 手动输入' },
+    heroTitle: { en:'Exchange Calculator rebuilt in the ToolLab style', ko:'ToolLab 스타일로 다시 만든 Exchange Calculator', ja:'ToolLab スタイルで作り直した為替計算ツール', 'zh-TW':'以 ToolLab 風格重新整理的匯率計算器', 'zh-CN':'以 ToolLab 风格重新整理的汇率计算器' },
+    heroDesc: { en:'Separate market snapshot, reference rate, and manual rate clearly. Added fee estimates and reverse calculation for target receive amounts in one screen.', ko:'시장 스냅샷, 기준 환율, 직접 입력을 분리했고 수수료 반영과 목표 수령액 기준 역산까지 한 화면에 넣었습니다.', ja:'市場スナップショット、基準レート、手動入力を分け、手数料反映と受取希望額からの逆算まで 1 画面で扱えます。', 'zh-TW':'清楚區分市場快照、基準匯率與手動輸入，並加入手續費估算與目標收款反算。', 'zh-CN':'清楚区分市场快照、基准汇率与手动输入，并加入手续费估算与目标收款反算。' },
+    heroBtnCalc: { en:'Open calculator', ko:'바로 계산하기', ja:'今すぐ計算', 'zh-TW':'立即計算', 'zh-CN':'立即计算' },
+    heroBtnGuide: { en:'How to use', ko:'사용 방법 보기', ja:'使い方を見る', 'zh-TW':'查看使用方式', 'zh-CN':'查看使用方法' },
+    settingsTitle: { en:'Exchange settings', ko:'환율 설정', ja:'為替設定', 'zh-TW':'匯率設定', 'zh-CN':'汇率设置' },
+    settingsDesc: { en:'Choose source and target currencies, then select how the rate should be loaded.', ko:'보유 통화와 환전 통화를 고른 뒤, 어떤 방식으로 값을 가져올지 선택합니다.', ja:'保有通貨と換算先通貨を選び、どの方法でレートを 읽어올지 선택합니다。', 'zh-TW':'選擇來源與目標貨幣，再決定要用哪種方式載入匯率。', 'zh-CN':'选择来源与目标货币，再决定要用哪种方式载入汇率。' },
+    labelMode: { en:'Rate mode', ko:'환율 방식', ja:'レート方式', 'zh-TW':'匯率模式', 'zh-CN':'汇率模式' },
+    modeMarketBtn: { en:'Market snapshot', ko:'시장 스냅샷', ja:'市場スナップショット', 'zh-TW':'市場快照', 'zh-CN':'市场快照' },
+    modeReferenceBtn: { en:'Reference rate', ko:'기준 환율', ja:'基準レート', 'zh-TW':'基準匯率', 'zh-CN':'基准汇率' },
+    modeManualBtn: { en:'Manual rate', ko:'직접 입력', ja:'手動入力', 'zh-TW':'手動輸入', 'zh-CN':'手动输入' },
+    labelAmount: { en:'Amount', ko:'금액 입력', ja:'金額入力', 'zh-TW':'輸入金額', 'zh-CN':'输入金额' },
+    labelManualRate: { en:'Manual rate', ko:'직접 환율 입력', ja:'手動レート入力', 'zh-TW':'手動輸入匯率', 'zh-CN':'手动输入汇率' },
+    manualHint: { en:'Input format: 1 source currency = ? target currency', ko:'입력 형식: 1 기준통화 = ? 환전통화', ja:'入力形式: 1 基準通貨 = ? 換算先通貨', 'zh-TW':'輸入格式：1 來源貨幣 = ? 目標貨幣', 'zh-CN':'输入格式：1 来源货币 = ? 目标货币' },
+    labelFeePercent: { en:'Percent fee', ko:'퍼센트 수수료', ja:'割合手数料', 'zh-TW':'百分比手續費', 'zh-CN':'百分比手续费' },
+    labelFixedFee: { en:'Fixed fee', ko:'고정 수수료', ja:'固定手数料', 'zh-TW':'固定手續費', 'zh-CN':'固定手续费' },
+    labelTargetReceive: { en:'Reverse from target receive amount', ko:'목표 수령액 기준 역산', ja:'受取希望額から逆算', 'zh-TW':'依目標收款金額反算', 'zh-CN':'按目标收款金额反算' },
+    reverseHint: { en:'Include fees and calculate how much source currency is required to receive the target amount.', ko:'수수료까지 반영해서 목표 수령액을 받으려면 얼마나 보내야 하는지 계산합니다.', ja:'手数料を含め、希望する受取額を得るために必要な元通貨額を計算します。', 'zh-TW':'包含手續費，計算為了收到目標金額需要多少來源貨幣。', 'zh-CN':'包含手续费，计算为了收到目标金额需要多少来源货币。' },
+    calcBtn: { en:'Calculate', ko:'계산하기', ja:'計算', 'zh-TW':'計算', 'zh-CN':'计算' },
+    resetBtn: { en:'Reset', ko:'초기화', ja:'リセット', 'zh-TW':'重設', 'zh-CN':'重置' },
+    copyBtn: { en:'Copy result', ko:'결과 복사', ja:'結果をコピー', 'zh-TW':'複製結果', 'zh-CN':'复制结果' },
+    calcReverseBtn: { en:'Calculate required amount', ko:'필요 금액 계산', ja:'必要額を計算', 'zh-TW':'計算所需金額', 'zh-CN':'计算所需金额' },
+    resultTitle: { en:'Result', ko:'계산 결과', ja:'計算結果', 'zh-TW':'計算結果', 'zh-CN':'计算结果' },
+    resultKicker: { en:'Result', ko:'결과', ja:'結果', 'zh-TW':'結果', 'zh-CN':'结果' },
+    metaRateLabel: { en:'Applied rate', ko:'적용 환율', ja:'適用レート', 'zh-TW':'套用匯率', 'zh-CN':'应用汇率' },
+    metaUpdatedLabel: { en:'Updated at', ko:'기준 시각', ja:'更新時刻', 'zh-TW':'更新時間', 'zh-CN':'更新时间' },
+    metaSourceLabel: { en:'Data source', ko:'데이터 출처', ja:'データ元', 'zh-TW':'資料來源', 'zh-CN':'数据来源' },
+    labelCopyField: { en:'Copyable summary', ko:'복사용 결과', ja:'コピー用結果', 'zh-TW':'可複製結果', 'zh-CN':'可复制结果' },
+    warnTitle: { en:'Note', ko:'참고', ja:'注意', 'zh-TW':'注意', 'zh-CN':'注意' },
+    warnBody: { en:'Market snapshot can be closer to intraday pricing but may still be delayed. Reference rates are steadier but may differ from live pricing.', ko:'시장 스냅샷은 장중에 더 가깝지만 지연 시세일 수 있고, 기준 환율은 가장 안정적인 대신 장중 시세와 다를 수 있습니다.', ja:'市場スナップショットは場中により近い一方で遅延している可能性があります。基準レートは安定していますがリアルタイム値とは異なる場合があります。', 'zh-TW':'市場快照較接近日內價格，但可能仍是延遲報價；基準匯率較穩定，但可能與即時價格不同。', 'zh-CN':'市场快照更接近日内价格，但可能仍是延迟报价；基准汇率更稳定，但可能与实时价格不同。' },
+    chartTitle: { en:'Recent reference-rate chart', ko:'최근 기준 환율 차트', ja:'最近の基準レートチャート', 'zh-TW':'近期基準匯率圖表', 'zh-CN':'近期基准汇率图表' },
+    chartDesc: { en:'Shows the recent movement of the selected currency pair based on reference-rate history.', ko:'최근 7영업일 기준으로 같은 통화쌍의 흐름을 보여줍니다.', ja:'直近 7 営業日程度の基準レート推移を表示します。', 'zh-TW':'顯示近期 7 個營業日左右的基準匯率走勢。', 'zh-CN':'显示近期 7 个工作日左右的基准汇率走势。' },
+    watchTitle: { en:'Quick compare', ko:'빠른 비교', ja:'クイック比較', 'zh-TW':'快速比較', 'zh-CN':'快速比较' },
+    watchDesc: { en:'Check a few common target currencies at once against the current base currency.', ko:'자주 보는 통화들을 현재 기준 통화 기준으로 같이 확인합니다.', ja:'現在の基準通貨に対してよく使う通貨をまとめて確認できます。', 'zh-TW':'可一次查看常見貨幣相對於目前基準貨幣的匯率。', 'zh-CN':'可一次查看常见货币相对于当前基准货币的汇率。' },
+    guideTitle: { en:'What changed in this version', ko:'이 버전에서 바뀐 점', ja:'このバージョンで変わった点', 'zh-TW':'此版本的變更', 'zh-CN':'此版本的变更' },
+    guideIntro: { en:'This version separates source types more clearly instead of making a daily reference value feel like a live quote. The layout was also aligned with the main ToolLab card style.', ko:'이전처럼 일일 기준값이 실시간처럼 보이지 않도록 소스 성격을 더 분명하게 나눴고, ToolLab 메인 카드 스타일과도 맞췄습니다.', ja:'日次の基準値がリアルタイム値のように見えないようソースの性格を分け、ToolLab メインのカードデザインにも揃えました。', 'zh-TW':'此版本更清楚區分資料來源，避免把每日基準值誤認成即時報價，版面也與 ToolLab 主站風格保持一致。', 'zh-CN':'此版本更清楚区分数据来源，避免把每日基准值误认为实时报价，版面也与 ToolLab 主站风格保持一致。' },
+    howToTitle: { en:'How to use', ko:'사용 방법', ja:'使い方', 'zh-TW':'使用方式', 'zh-CN':'使用方法' },
+    step1: { en:'Choose the source currency and the target currency.', ko:'보유 통화와 환전 통화를 고릅니다.', ja:'保有通貨と換算先通貨を選びます。', 'zh-TW':'選擇來源貨幣與目標貨幣。', 'zh-CN':'选择来源货币与目标货币。' },
+    step2: { en:'Select market snapshot, reference rate, or manual rate mode.', ko:'시장 스냅샷, 기준 환율, 직접 입력 중 하나를 선택합니다.', ja:'市場スナップショット、基準レート、手動入力から選びます。', 'zh-TW':'選擇市場快照、基準匯率或手動輸入模式。', 'zh-CN':'选择市场快照、基准汇率或手动输入模式。' },
+    step3: { en:'Enter an amount and check the converted result, rate, update time, and source.', ko:'금액을 넣고 계산하면 결과와 적용 환율, 기준 시각, 데이터 출처가 함께 표시됩니다.', ja:'金額を入力すると、結果・レート・更新時刻・データ元が表示されます。', 'zh-TW':'輸入金額後，可查看結果、匯率、更新時間與資料來源。', 'zh-CN':'输入金额后，可查看结果、汇率、更新时间与数据来源。' },
+    tipsTitle: { en:'Suggested usage', ko:'추천 사용 방식', ja:'おすすめの使い方', 'zh-TW':'建議使用方式', 'zh-CN':'建议使用方式' },
+    tipMarket: { en:'Need a near-intraday feeling → Market snapshot', ko:'장중 느낌이 필요할 때 → 시장 스냅샷', ja:'場中に近い感覚が必要なとき → 市場スナップショット', 'zh-TW':'想看接近日內的感覺 → 市場快照', 'zh-CN':'想看接近日内的感觉 → 市场快照' },
+    tipReference: { en:'Need stable repeatable calculation → Reference rate', ko:'안정적으로 계산할 때 → 기준 환율', ja:'安定して計算したいとき → 基準レート', 'zh-TW':'需要穩定計算 → 基準匯率', 'zh-CN':'需要稳定计算 → 基准汇率' },
+    tipManual: { en:'Need to match a bank or app number exactly → Manual rate', ko:'내가 본 숫자와 맞출 때 → 직접 입력', ja:'見た数字に正確に合わせたいとき → 手動入力', 'zh-TW':'想精準符合銀行或 App 的數字 → 手動輸入', 'zh-CN':'想精确符合银行或 App 的数字 → 手动输入' },
+    faqTitle: { en:'FAQ', ko:'FAQ', ja:'FAQ', 'zh-TW':'FAQ', 'zh-CN':'FAQ' },
+    faqQ1: { en:'Why can the market snapshot and reference rate differ?', ko:'왜 어떤 날은 기준 환율과 시장 스냅샷 값이 다르게 보이나요?', ja:'市場スナップショットと基準レートが違って見えるのはなぜですか？', 'zh-TW':'為什麼市場快照和基準匯率會不同？', 'zh-CN':'为什么市场快照和基准汇率会不同？' },
+    faqA1: { en:'Reference rates are daily base data and do not reflect intraday changes immediately. Market snapshots are closer to intraday moves but can still be delayed.', ko:'기준 환율은 일일 기준 데이터라 장중 변동을 바로 반영하지 않습니다. 시장 스냅샷은 장중에 더 가깝지만 지연 시세일 수 있습니다.', ja:'基準レートは日次データなので場中の変動を即時反映しません。市場スナップショットは場中に近いものの遅延している場合があります。', 'zh-TW':'基準匯率屬於每日基準資料，不會立即反映盤中變動；市場快照較接近盤中，但可能仍延遲。', 'zh-CN':'基准汇率属于每日基准数据，不会立即反映盘中波动；市场快照更接近盘中，但可能仍有延迟。' },
+    faqQ2: { en:'How was the old “looks like yesterday’s value” problem changed?', ko:'1497처럼 전일 값 비슷하게 보이던 문제는 어떻게 바뀌었나요?', ja:'以前の「前日値っぽく見える」問題はどう変わりましたか？', 'zh-TW':'以前看起來像昨天數字的問題如何改善？', 'zh-CN':'以前看起来像昨天数字的问题如何改善？' },
+    faqA2: { en:'The page now separates sources more clearly and explicitly shows when it had to fall back from the market snapshot to the reference rate.', ko:'이제 소스를 분리해서 보여주고, 시장 스냅샷이 실패하면 분명하게 기준 환율로 전환되었다고 표시합니다.', ja:'ソースを分けて表示し、市場スナップショットに失敗した場合は基準レートへ切り替えたことを明示します。', 'zh-TW':'現在會清楚區分資料來源，若市場快照失敗，也會明確標示已切換到基準匯率。', 'zh-CN':'现在会清楚区分数据来源，若市场快照失败，也会明确标示已切换到基准汇率。' },
+    faqQ3: { en:'How do I match a number I saw in a bank app?', ko:'정확히 내가 본 숫자와 맞추고 싶으면 어떻게 하나요?', ja:'銀行アプリで見た数字に合わせるには？', 'zh-TW':'想和銀行 App 的數字對上怎麼辦？', 'zh-CN':'想和银行 App 的数字对上怎么办？' },
+    faqA3: { en:'Use manual mode and enter the exact rate in the form “1 source currency = ? target currency.”', ko:'직접 입력 모드에서 1 기준통화 = ? 환전통화 값을 넣으면 됩니다. 예를 들어 1 USD = 1473 KRW처럼 바로 맞출 수 있습니다.', ja:'手動入力モードで「1 基準通貨 = ? 換算先通貨」の形で正確なレートを入れれば合わせられます。', 'zh-TW':'使用手動輸入模式，輸入「1 來源貨幣 = ? 目標貨幣」的實際匯率即可。', 'zh-CN':'使用手动输入模式，输入“1 来源货币 = ? 目标货币”的实际汇率即可。' },
+    footerBrandTitle: { en:'ToolLab', ko:'ToolLab', ja:'ツールラボ', 'zh-TW':'工具站', 'zh-CN':'工具站' },
+    footerTagline: { en:'A collection of online tools that run directly in your browser.', ko:'Browser-based online tools for fast everyday work.', ja:'ブラウザでそのまま使えるオンラインツール集。', 'zh-TW':'可直接在瀏覽器中使用的線上工具集合。', 'zh-CN':'可直接在浏览器中使用的在线工具合集。' },
+    footerQuickTitle: { en:'Quick links', ko:'바로가기', ja:'クイックリンク', 'zh-TW':'快速連結', 'zh-CN':'快速链接' },
+    footerHome: { en:'Home', ko:'Home', ja:'ホーム', 'zh-TW':'首頁', 'zh-CN':'首页' },
+    footerRoadmap: { en:'Roadmap', ko:'Roadmap', ja:'ロードマップ', 'zh-TW':'路線圖', 'zh-CN':'路线图' },
+    footerChangelog: { en:'Changelog', ko:'Changelog', ja:'変更履歴', 'zh-TW':'更新紀錄', 'zh-CN':'更新记录' },
+    footerInfoTitle: { en:'Info', ko:'정보', ja:'情報', 'zh-TW':'資訊', 'zh-CN':'信息' },
+    footerAbout: { en:'About', ko:'About', ja:'紹介', 'zh-TW':'介紹', 'zh-CN':'介绍' },
+    footerPrivacy: { en:'Privacy Policy', ko:'Privacy Policy', ja:'プライバシーポリシー', 'zh-TW':'隱私權政策', 'zh-CN':'隐私政策' },
+    footerContact: { en:'Contact', ko:'Contact', ja:'お問い合わせ', 'zh-TW':'聯絡', 'zh-CN':'联系' },
+    phAmount: { en:'Enter amount', ko:'입력 금액', ja:'金額を入力', 'zh-TW':'輸入金額', 'zh-CN':'输入金额' },
+    phManualRate: { en:'Example: 1473.00', ko:'예: 1473.00', ja:'例: 1473.00', 'zh-TW':'例如：1473.00', 'zh-CN':'例如：1473.00' },
+    phDecimals: { en:'Decimals', ko:'소수 자리', ja:'小数桁', 'zh-TW':'小數位數', 'zh-CN':'小数位数' },
+    phFeePercent: { en:'Example: 1.5', ko:'예: 1.5', ja:'例: 1.5', 'zh-TW':'例如：1.5', 'zh-CN':'例如：1.5' },
+    phFixedFee: { en:'Example: 3', ko:'예: 3', ja:'例: 3', 'zh-TW':'例如：3', 'zh-CN':'例如：3' },
+    phTargetReceive: { en:'Enter target receive amount', ko:'받고 싶은 금액 입력', ja:'受け取りたい金額を入力', 'zh-TW':'輸入想收到的金額', 'zh-CN':'输入想收到的金额' },
+    phCopyField: { en:'The result will appear here after calculation.', ko:'계산 후 여기에 표시됩니다.', ja:'計算後にここへ表示されます。', 'zh-TW':'計算後會顯示於此。', 'zh-CN':'计算后会显示在这里。' },
+    phPickerSearch: { en:'Search country, currency code, or currency name', ko:'국가명, 통화코드, 통화명 검색', ja:'国名、通貨コード、通貨名を検索', 'zh-TW':'搜尋國家、貨幣代碼或貨幣名稱', 'zh-CN':'搜索国家、货币代码或货币名称' },
+    pickerTitleFrom: { en:'Choose source currency', ko:'보유 통화 선택', ja:'保有通貨を選択', 'zh-TW':'選擇來源貨幣', 'zh-CN':'选择来源货币' },
+    pickerTitleTo: { en:'Choose target currency', ko:'환전 통화 선택', ja:'換算先通貨を選択', 'zh-TW':'選擇目標貨幣', 'zh-CN':'选择目标货币' },
+    pickerCloseAria: { en:'Close', ko:'닫기', ja:'閉じる', 'zh-TW':'關閉', 'zh-CN':'关闭' },
+    statusReady: { en:'Market snapshot and reference rates are shown separately.', ko:'시장 스냅샷과 기준 환율을 분리해서 표시합니다.', ja:'市場スナップショットと基準レートを分けて表示します。', 'zh-TW':'市場快照與基準匯率會分開顯示。', 'zh-CN':'市场快照与基准汇率会分开显示。' },
+    statusNeedAmount: { en:'Please check the amount again.', ko:'금액을 다시 확인해 주세요.', ja:'金額をもう一度確認してください。', 'zh-TW':'請重新確認金額。', 'zh-CN':'请重新确认金额。' },
+    statusNeedManual: { en:'Please enter a manual rate.', ko:'직접 환율을 입력해 주세요.', ja:'手動レートを入力してください。', 'zh-TW':'請輸入手動匯率。', 'zh-CN':'请输入手动汇率。' },
+    statusReferenceOk: { en:'Calculated with the reference rate.', ko:'기준 환율로 계산했습니다.', ja:'基準レートで計算しました。', 'zh-TW':'已用基準匯率計算。', 'zh-CN':'已用基准汇率计算。' },
+    statusManualOk: { en:'Calculated with the manual rate.', ko:'직접 입력 환율로 계산했습니다.', ja:'手動レートで計算しました。', 'zh-TW':'已用手動匯率計算。', 'zh-CN':'已用手动汇率计算。' },
+    statusMarketOk: { en:'Calculated with the market snapshot. It may still be delayed.', ko:'시장 스냅샷으로 계산했습니다. 지연 시세일 수 있습니다.', ja:'市場スナップショットで計算しました。遅延している場合があります。', 'zh-TW':'已用市場快照計算，仍可能是延遲報價。', 'zh-CN':'已用市场快照计算，仍可能是延迟报价。' },
+    statusFallback: { en:'Market snapshot failed → switched to the reference rate.', ko:'시장 스냅샷 실패 → 기준 환율로 전환했습니다.', ja:'市場スナップショットに失敗したため基準レートへ切り替えました。', 'zh-TW':'市場快照失敗 → 已切換為基準匯率。', 'zh-CN':'市场快照失败 → 已切换为基准汇率。' },
+    statusReverseOk: { en:'Calculated the required source amount from the target receive amount.', ko:'목표 수령액 기준으로 필요한 보낼 금액을 계산했습니다.', ja:'受取希望額から必要な元通貨額を計算しました。', 'zh-TW':'已依目標收款金額計算所需來源貨幣。', 'zh-CN':'已按目标收款金额计算所需来源货币。' },
+    statusNoCopy: { en:'There is no result to copy.', ko:'복사할 결과가 없습니다.', ja:'コピーする結果がありません。', 'zh-TW':'沒有可複製的結果。', 'zh-CN':'没有可复制的结果。' },
+    statusCopied: { en:'Copied the result.', ko:'결과를 복사했습니다.', ja:'結果をコピーしました。', 'zh-TW':'已複製結果。', 'zh-CN':'已复制结果。' },
+    sourceMarketAuto: { en:'Auto source: market snapshot → fallback to reference rate', ko:'자동 소스: 시장 스냅샷 → 실패 시 기준 환율', ja:'自動ソース: 市場スナップショット → 失敗時は基準レート', 'zh-TW':'自動來源：市場快照 → 失敗時改用基準匯率', 'zh-CN':'自动来源：市场快照 → 失败时改用基准汇率' },
+    sourceReference: { en:'Auto source: reference rate', ko:'자동 소스: 기준 환율', ja:'自動ソース: 基準レート', 'zh-TW':'自動來源：基準匯率', 'zh-CN':'自动来源：基准汇率' },
+    sourceManual: { en:'Manual rate input', ko:'직접 환율 입력', ja:'手動レート入力', 'zh-TW':'手動輸入匯率', 'zh-CN':'手动输入汇率' },
+    sourceManualName: { en:'Manual rate', ko:'직접 환율 입력', ja:'手動レート', 'zh-TW':'手動匯率', 'zh-CN':'手动汇率' },
+    sourceReferenceName: { en:'Frankfurter reference rate', ko:'Frankfurter 기준 환율', ja:'Frankfurter 基準レート', 'zh-TW':'Frankfurter 基準匯率', 'zh-CN':'Frankfurter 基准汇率' },
+    sourceMarketName: { en:'Yahoo delayed market snapshot', ko:'Yahoo 지연 시세 스냅샷', ja:'Yahoo 遅延市場スナップショット', 'zh-TW':'Yahoo 延遲市場快照', 'zh-CN':'Yahoo 延迟市场快照' },
+    chartLoadingShort: { en:'Loading chart', ko:'차트 불러오는 중', ja:'チャート読込中', 'zh-TW':'載入圖表中', 'zh-CN':'加载图表中' },
+    chartReady: { en:'Chart ready', ko:'차트 완료', ja:'チャート完了', 'zh-TW':'圖表完成', 'zh-CN':'图表完成' },
+    chartEmpty: { en:'No chart data', ko:'차트 없음', ja:'チャートなし', 'zh-TW':'無圖表資料', 'zh-CN':'无图表数据' },
+    chartFail: { en:'Chart failed', ko:'차트 실패', ja:'チャート失敗', 'zh-TW':'圖表失敗', 'zh-CN':'图表失败' },
+    chartNoData: { en:'Could not load the recent reference-rate chart.', ko:'최근 기준 환율 차트를 불러오지 못했습니다.', ja:'最近の基準レートチャートを読み込めませんでした。', 'zh-TW':'無法載入近期基準匯率圖表。', 'zh-CN':'无法加载近期基准汇率图表。' },
+    chartFailBody: { en:'Failed to load the chart.', ko:'차트 조회에 실패했습니다.', ja:'チャートの取得に失敗しました。', 'zh-TW':'載入圖表失敗。', 'zh-CN':'加载图表失败。' },
+    chartLegendMin: { en:'Low', ko:'최저', ja:'安値', 'zh-TW':'最低', 'zh-CN':'最低' },
+    chartLegendMax: { en:'High', ko:'최고', ja:'高値', 'zh-TW':'最高', 'zh-CN':'最高' },
+    chartLegendUp: { en:'Up', ko:'상승', ja:'上昇', 'zh-TW':'上升', 'zh-CN':'上升' },
+    chartLegendDown: { en:'Down', ko:'하락', ja:'下落', 'zh-TW':'下降', 'zh-CN':'下降' },
+    watchLoading: { en:'Loading market snapshots', ko:'시장 스냅샷 불러오는 중', ja:'市場スナップショット読込中', 'zh-TW':'載入市場快照中', 'zh-CN':'加载市场快照中' },
+    watchMarket: { en:'Market snapshot first', ko:'시장 스냅샷 중심', ja:'市場スナップショット優先', 'zh-TW':'以市場快照為主', 'zh-CN':'以市场快照为主' },
+    watchFallback: { en:'Reference-rate fallback', ko:'기준 환율 대체', ja:'基準レート代替', 'zh-TW':'改用基準匯率', 'zh-CN':'改用基准汇率' },
+    watchFailed: { en:'Load failed', ko:'불러오기 실패', ja:'読込失敗', 'zh-TW':'載入失敗', 'zh-CN':'加载失败' },
+    reverseLabel: { en:'Required source amount', ko:'필요한 보낼 금액', ja:'必要な元通貨額', 'zh-TW':'所需來源金額', 'zh-CN':'所需来源金额' },
+    netReceiveLabel: { en:'Net receive amount', ko:'실수령 금액', ja:'受取額', 'zh-TW':'實收金額', 'zh-CN':'实收金额' },
+    grossLabel: { en:'Gross before fees', ko:'수수료 전 금액', ja:'手数料前金額', 'zh-TW':'扣費前金額', 'zh-CN':'扣费前金额' },
+    feeLabel: { en:'Estimated fees', ko:'예상 수수료', ja:'想定手数料', 'zh-TW':'預估手續費', 'zh-CN':'预估手续费' }
+  };
+
+  const PAGE_TEXT_EXTRA = {"heroPill":{"fr":"Change · aperçu du marché / taux de référence / saisie manuelle","de":"Wechselkurs · Markt-Snapshot / Referenzkurs / Manuelle Eingabe","ru":"Обмен валют · снимок рынка / справочный курс / ручной ввод","es":"Cambio · instantánea del mercado / tasa de referencia / entrada manual","id":"Kurs · ringkasan pasar / kurs referensi / input manual","ar":"الصرف · لقطة السوق / السعر المرجعي / الإدخال اليدوي"},"heroBtnCalc":{"fr":"Ouvrir le calculateur","de":"Rechner öffnen","ru":"Открыть калькулятор","es":"Abrir calculadora","id":"Buka kalkulator","ar":"فتح الحاسبة"},"heroBtnGuide":{"fr":"Voir l’utilisation","de":"Anleitung ansehen","ru":"Как использовать","es":"Cómo usar","id":"Cara menggunakan","ar":"كيفية الاستخدام"},"settingsTitle":{"fr":"Paramètres de change","de":"Wechselkurseinstellungen","ru":"Настройки обмена","es":"Ajustes de cambio","id":"Pengaturan kurs","ar":"إعدادات الصرف"},"settingsDesc":{"fr":"Choisissez la devise source et la devise cible, puis sélectionnez la manière de charger le taux.","de":"Wählen Sie Ausgangs- und Zielwährung und danach die Methode zum Laden des Kurses.","ru":"Выберите исходную и целевую валюты, затем способ загрузки курса.","es":"Elige la moneda de origen y la moneda de destino, y luego selecciona cómo cargar la tasa.","id":"Pilih mata uang asal dan tujuan, lalu tentukan cara memuat kurs.","ar":"اختر عملة المصدر والعملة الهدف ثم حدّد طريقة تحميل السعر."},"labelMode":{"fr":"Mode de taux","de":"Kursmodus","ru":"Режим курса","es":"Modo de tasa","id":"Mode kurs","ar":"وضع السعر"},"modeMarketBtn":{"fr":"Aperçu du marché","de":"Markt-Snapshot","ru":"Снимок рынка","es":"Instantánea del mercado","id":"Ringkasan pasar","ar":"لقطة السوق"},"modeReferenceBtn":{"fr":"Taux de référence","de":"Referenzkurs","ru":"Справочный курс","es":"Tasa de referencia","id":"Kurs referensi","ar":"السعر المرجعي"},"modeManualBtn":{"fr":"Saisie manuelle","de":"Manueller Kurs","ru":"Ручной курс","es":"Tasa manual","id":"Kurs manual","ar":"سعر يدوي"},"labelAmount":{"fr":"Montant","de":"Betrag","ru":"Сумма","es":"Monto","id":"Jumlah","ar":"المبلغ"},"labelManualRate":{"fr":"Taux manuel","de":"Manueller Kurs","ru":"Ручной курс","es":"Tasa manual","id":"Kurs manual","ar":"السعر اليدوي"},"manualHint":{"fr":"Format : 1 devise source = ? devise cible","de":"Format: 1 Ausgangswährung = ? Zielwährung","ru":"Формат: 1 исходная валюта = ? целевая валюта","es":"Formato: 1 moneda de origen = ? moneda de destino","id":"Format input: 1 mata uang asal = ? mata uang tujuan","ar":"صيغة الإدخال: 1 من عملة المصدر = ؟ من العملة الهدف"},"labelFeePercent":{"fr":"Frais en pourcentage","de":"Prozentuale Gebühr","ru":"Комиссия в процентах","es":"Comisión porcentual","id":"Biaya persentase","ar":"رسوم بالنسبة المئوية"},"labelFixedFee":{"fr":"Frais fixes","de":"Feste Gebühr","ru":"Фиксированная комиссия","es":"Comisión fija","id":"Biaya tetap","ar":"رسوم ثابتة"},"labelTargetReceive":{"fr":"Calcul inversé depuis le montant reçu","de":"Rückrechnung vom Zielbetrag","ru":"Обратный расчёт от суммы получения","es":"Cálculo inverso desde el monto recibido","id":"Hitung balik dari target diterima","ar":"حساب عكسي من مبلغ الاستلام المستهدف"},"reverseHint":{"fr":"Incluez les frais pour calculer combien de devise source est nécessaire afin de recevoir le montant cible.","de":"Gebühren einbeziehen und berechnen, wie viel Ausgangswährung nötig ist, um den Zielbetrag zu erhalten.","ru":"С учётом комиссий рассчитывает, сколько исходной валюты нужно отправить, чтобы получить целевую сумму.","es":"Incluye las comisiones y calcula cuánto se necesita enviar en la moneda de origen para recibir el monto objetivo.","id":"Sertakan biaya dan hitung berapa mata uang asal yang dibutuhkan agar jumlah target diterima.","ar":"يأخذ الرسوم في الحسبان ويحسب مقدار عملة المصدر المطلوب لإرسالها للوصول إلى مبلغ الاستلام المستهدف."},"calcBtn":{"fr":"Calculer","de":"Berechnen","ru":"Рассчитать","es":"Calcular","id":"Hitung","ar":"احسب"},"calcReverseBtn":{"fr":"Calculer le montant nécessaire","de":"Benötigten Betrag berechnen","ru":"Рассчитать нужную сумму","es":"Calcular monto necesario","id":"Hitung jumlah yang diperlukan","ar":"احسب المبلغ المطلوب"},"resultTitle":{"fr":"Résultat","de":"Ergebnis","ru":"Результат","es":"Resultado","id":"Hasil","ar":"النتيجة"},"resultKicker":{"fr":"Résultat","de":"Ergebnis","ru":"Результат","es":"Resultado","id":"Hasil","ar":"النتيجة"},"metaRateLabel":{"fr":"Taux appliqué","de":"Angewandter Kurs","ru":"Применённый курс","es":"Tasa aplicada","id":"Kurs yang diterapkan","ar":"السعر المطبق"},"metaUpdatedLabel":{"fr":"Mis à jour à","de":"Aktualisiert um","ru":"Обновлено","es":"Actualizado a las","id":"Diperbarui pada","ar":"وقت التحديث"},"metaSourceLabel":{"fr":"Source des données","de":"Datenquelle","ru":"Источник данных","es":"Fuente de datos","id":"Sumber data","ar":"مصدر البيانات"},"labelCopyField":{"fr":"Résumé copiable","de":"Kopierbare Zusammenfassung","ru":"Сводка для копирования","es":"Resumen copiable","id":"Ringkasan yang bisa disalin","ar":"ملخص قابل للنسخ"},"warnTitle":{"fr":"Remarque","de":"Hinweis","ru":"Примечание","es":"Nota","id":"Catatan","ar":"ملاحظة"},"warnBody":{"fr":"L’aperçu du marché peut être plus proche des prix intrajournaliers, mais il peut rester différé. Les taux de référence sont plus stables, mais peuvent différer des prix en direct.","de":"Der Markt-Snapshot kann näher am Intraday-Preis liegen, kann aber weiterhin verzögert sein. Referenzkurse sind stabiler, können jedoch von Live-Preisen abweichen.","ru":"Снимок рынка может быть ближе к внутридневным значениям, но всё равно может быть с задержкой. Справочные курсы стабильнее, но могут отличаться от текущих цен.","es":"La instantánea del mercado puede estar más cerca del precio intradía, pero aún puede tener retraso. Las tasas de referencia son más estables, aunque pueden diferir del precio en vivo.","id":"Ringkasan pasar bisa lebih dekat ke harga intraday, tetapi tetap dapat tertunda. Kurs referensi lebih stabil, namun bisa berbeda dari harga langsung.","ar":"قد تكون لقطة السوق أقرب إلى أسعار التداول خلال اليوم، لكنها قد تبقى متأخرة. أما الأسعار المرجعية فهي أكثر استقراراً لكنها قد تختلف عن الأسعار الحية."},"chartTitle":{"fr":"Graphique récent du taux de référence","de":"Aktuelles Referenzkurs-Diagramm","ru":"Недавний график справочного курса","es":"Gráfico reciente de tasa de referencia","id":"Grafik kurs referensi terbaru","ar":"مخطط السعر المرجعي الأخير"},"chartDesc":{"fr":"Affiche le mouvement récent de la paire de devises sélectionnée selon l’historique du taux de référence.","de":"Zeigt die jüngste Bewegung des ausgewählten Währungspaars anhand des Referenzkursverlaufs.","ru":"Показывает недавнее движение выбранной валютной пары на основе истории справочного курса.","es":"Muestra el movimiento reciente del par de divisas seleccionado según el historial de la tasa de referencia.","id":"Menampilkan pergerakan terbaru pasangan mata uang yang dipilih berdasarkan riwayat kurs referensi.","ar":"يعرض الحركة الأخيرة لزوج العملات المحدد استناداً إلى سجل السعر المرجعي."},"watchTitle":{"fr":"Comparaison rapide","de":"Schnellvergleich","ru":"Быстрое сравнение","es":"Comparación rápida","id":"Perbandingan cepat","ar":"مقارنة سريعة"},"watchDesc":{"fr":"Vérifiez en même temps quelques devises cibles courantes par rapport à la devise de base actuelle.","de":"Prüfen Sie mehrere gängige Zielwährungen gleichzeitig gegenüber der aktuellen Basiswährung.","ru":"Сразу сравните несколько популярных целевых валют относительно текущей базовой валюты.","es":"Consulta a la vez varias monedas de destino comunes frente a la moneda base actual.","id":"Lihat beberapa mata uang tujuan umum sekaligus terhadap mata uang dasar saat ini.","ar":"تحقق من عدة عملات هدف شائعة دفعة واحدة مقابل العملة الأساسية الحالية."},"guideTitle":{"fr":"Ce qui a changé dans cette version","de":"Was sich in dieser Version geändert hat","ru":"Что изменилось в этой версии","es":"Qué cambió en esta versión","id":"Perubahan di versi ini","ar":"ما الذي تغيّر في هذا الإصدار"},"guideIntro":{"fr":"Cette version distingue plus clairement les types de source au lieu de faire ressembler une valeur de référence quotidienne à un cours en direct. La mise en page a également été alignée sur le style principal de cartes ToolLab.","de":"Diese Version trennt die Quellenarten klarer, damit ein täglicher Referenzwert nicht wie ein Live-Kurs wirkt. Das Layout wurde außerdem an den ToolLab-Kartenstil angepasst.","ru":"В этой версии типы источников разделены понятнее, чтобы ежедневное справочное значение не выглядело как живая котировка. Макет также приведён к стилю карточек ToolLab.","es":"Esta versión separa con mayor claridad los tipos de fuente para que un valor de referencia diario no parezca una cotización en vivo. El diseño también se alineó con el estilo principal de tarjetas de ToolLab.","id":"Versi ini memisahkan jenis sumber dengan lebih jelas agar nilai referensi harian tidak terlihat seperti harga real-time. Tata letaknya juga diselaraskan dengan gaya kartu utama ToolLab.","ar":"يفصل هذا الإصدار أنواع المصادر بشكل أوضح حتى لا يبدو السعر المرجعي اليومي كسعر مباشر. كما تم توحيد التصميم مع أسلوب بطاقات ToolLab الرئيسي."},"howToTitle":{"fr":"Comment utiliser","de":"Verwendung","ru":"Как использовать","es":"Cómo usar","id":"Cara menggunakan","ar":"كيفية الاستخدام"},"step1":{"fr":"Choisissez la devise source et la devise cible.","de":"Wählen Sie Ausgangs- und Zielwährung.","ru":"Выберите исходную и целевую валюты.","es":"Elige la moneda de origen y la moneda de destino.","id":"Pilih mata uang asal dan tujuan.","ar":"اختر عملة المصدر والعملة الهدف."},"step2":{"fr":"Sélectionnez le mode aperçu du marché, taux de référence ou taux manuel.","de":"Wählen Sie Markt-Snapshot, Referenzkurs oder manuellen Kurs.","ru":"Выберите режим: снимок рынка, справочный курс или ручной курс.","es":"Selecciona el modo de instantánea del mercado, tasa de referencia o tasa manual.","id":"Pilih mode ringkasan pasar, kurs referensi, atau kurs manual.","ar":"اختر وضع لقطة السوق أو السعر المرجعي أو السعر اليدوي."},"step3":{"fr":"Saisissez un montant puis vérifiez le résultat converti, le taux, l’heure de mise à jour et la source.","de":"Geben Sie einen Betrag ein und prüfen Sie Ergebnis, Kurs, Aktualisierungszeit und Quelle.","ru":"Введите сумму и проверьте результат, курс, время обновления и источник.","es":"Ingresa un monto y revisa el resultado convertido, la tasa, la hora de actualización y la fuente.","id":"Masukkan jumlah lalu periksa hasil konversi, kurs, waktu pembaruan, dan sumber.","ar":"أدخل مبلغاً ثم راجع نتيجة التحويل والسعر ووقت التحديث والمصدر."},"tipsTitle":{"fr":"Utilisation recommandée","de":"Empfohlene Nutzung","ru":"Рекомендации по использованию","es":"Uso recomendado","id":"Saran penggunaan","ar":"الاستخدام المقترح"},"tipMarket":{"fr":"Besoin d’un ressenti proche de l’intraday → Aperçu du marché","de":"Sie möchten näher am Intraday-Gefühl sein → Markt-Snapshot","ru":"Нужно ощущение ближе к внутридневному рынку → Снимок рынка","es":"Necesitas una sensación más cercana al intradía → Instantánea del mercado","id":"Butuh nuansa mendekati intraday → Ringkasan pasar","ar":"إذا كنت تريد إحساساً أقرب لتقلبات اليوم → لقطة السوق"},"tipReference":{"fr":"Besoin d’un calcul stable et reproductible → Taux de référence","de":"Stabile, wiederholbare Berechnung nötig → Referenzkurs","ru":"Нужен стабильный повторяемый расчёт → Справочный курс","es":"Necesitas un cálculo estable y repetible → Tasa de referencia","id":"Butuh perhitungan stabil dan konsisten → Kurs referensi","ar":"إذا كنت تريد حساباً مستقراً ومتكرراً → السعر المرجعي"},"tipManual":{"fr":"Besoin de correspondre exactement au chiffre d’une banque ou d’une app → Taux manuel","de":"Sie möchten exakt zu einer Zahl aus Bank oder App passen → Manueller Kurs","ru":"Нужно точно совпасть с числом из банка или приложения → Ручной курс","es":"Necesitas coincidir exactamente con un número del banco o la app → Tasa manual","id":"Ingin sama persis dengan angka di bank atau aplikasi → Kurs manual","ar":"إذا كنت تريد مطابقة الرقم الظاهر في البنك أو التطبيق تماماً → السعر اليدوي"},"faqTitle":{"fr":"FAQ","de":"FAQ","ru":"FAQ","es":"FAQ","id":"FAQ","ar":"الأسئلة الشائعة"},"faqQ1":{"fr":"Pourquoi l’aperçu du marché et le taux de référence peuvent-ils être différents ?","de":"Warum können Markt-Snapshot und Referenzkurs unterschiedlich sein?","ru":"Почему снимок рынка и справочный курс могут отличаться?","es":"¿Por qué pueden diferir la instantánea del mercado y la tasa de referencia?","id":"Mengapa ringkasan pasar dan kurs referensi bisa berbeda?","ar":"لماذا قد تختلف لقطة السوق عن السعر المرجعي؟"},"faqA1":{"fr":"Les taux de référence sont des données de base quotidiennes et ne reflètent pas immédiatement les variations intrajournalières. Les aperçus du marché sont plus proches du mouvement intrajournalier mais peuvent encore être différés.","de":"Referenzkurse sind tägliche Basisdaten und spiegeln Intraday-Änderungen nicht sofort wider. Markt-Snapshots liegen näher an der Tagesbewegung, können aber weiterhin verzögert sein.","ru":"Справочные курсы — это ежедневные базовые данные, поэтому они не отражают внутридневные изменения сразу. Снимки рынка ближе к движению внутри дня, но тоже могут быть с задержкой.","es":"Las tasas de referencia son datos base diarios y no reflejan de inmediato los cambios intradía. Las instantáneas del mercado están más cerca del movimiento intradía, pero aún pueden tener retraso.","id":"Kurs referensi adalah data dasar harian dan tidak langsung mencerminkan perubahan intraday. Ringkasan pasar lebih dekat ke pergerakan intraday, tetapi tetap bisa tertunda.","ar":"الأسعار المرجعية هي بيانات أساسية يومية ولا تعكس تغيرات اليوم فوراً. أما لقطات السوق فهي أقرب إلى حركة اليوم لكنها قد تظل متأخرة."},"faqQ2":{"fr":"Comment l’ancien problème “ça ressemble à la valeur d’hier” a-t-il été modifié ?","de":"Wie wurde das alte Problem „sieht wie der Wert von gestern aus“ geändert?","ru":"Как была изменена старая проблема «похоже на вчерашнее значение»?","es":"¿Cómo se corrigió el antiguo problema de “parece el valor de ayer”?","id":"Bagaimana masalah lama “terlihat seperti nilai kemarin” diubah?","ar":"كيف تم تغيير المشكلة القديمة التي كانت تجعل القيمة تبدو كأنها قيمة الأمس؟"},"faqA2":{"fr":"La page sépare maintenant plus clairement les sources et indique explicitement quand elle a dû basculer de l’aperçu du marché vers le taux de référence.","de":"Die Seite trennt die Quellen jetzt klarer und zeigt ausdrücklich an, wenn vom Markt-Snapshot auf den Referenzkurs zurückgefallen wurde.","ru":"Теперь страница яснее разделяет источники и явно показывает, когда пришлось переключиться со снимка рынка на справочный курс.","es":"La página ahora separa con más claridad las fuentes y muestra de forma explícita cuándo tuvo que pasar de la instantánea del mercado a la tasa de referencia.","id":"Halaman kini memisahkan sumber dengan lebih jelas dan menampilkan secara tegas saat harus beralih dari ringkasan pasar ke kurs referensi.","ar":"تعرض الصفحة الآن المصادر بشكل أوضح وتوضح صراحةً متى تم التحويل من لقطة السوق إلى السعر المرجعي."},"faqQ3":{"fr":"Comment faire correspondre exactement un chiffre vu dans une application bancaire ?","de":"Wie gleiche ich exakt eine Zahl aus einer Banking-App ab?","ru":"Как точно совпасть с числом, которое я видел в банковском приложении?","es":"¿Cómo hago coincidir exactamente un número que vi en una app bancaria?","id":"Bagaimana menyesuaikan persis dengan angka yang saya lihat di aplikasi bank?","ar":"كيف أُطابق رقماً رأيته في تطبيق بنكي بشكل دقيق؟"},"faqA3":{"fr":"Utilisez le mode manuel et saisissez le taux exact sous la forme « 1 devise source = ? devise cible ».","de":"Verwenden Sie den manuellen Modus und geben Sie den exakten Kurs im Format „1 Ausgangswährung = ? Zielwährung“ ein.","ru":"Используйте ручной режим и введите точный курс в формате «1 исходная валюта = ? целевая валюта».","es":"Usa el modo manual e introduce la tasa exacta con el formato “1 moneda de origen = ? moneda de destino”.","id":"Gunakan mode manual dan masukkan kurs tepat dalam format “1 mata uang asal = ? mata uang tujuan”.","ar":"استخدم الوضع اليدوي وأدخل السعر الدقيق بصيغة «1 من عملة المصدر = ؟ من العملة الهدف»."},"phAmount":{"fr":"Saisir un montant","de":"Betrag eingeben","ru":"Введите сумму","es":"Ingresa un monto","id":"Masukkan jumlah","ar":"أدخل المبلغ"},"phManualRate":{"fr":"Exemple : 1473,00","de":"Beispiel: 1473,00","ru":"Например: 1473.00","es":"Ejemplo: 1473.00","id":"Contoh: 1473.00","ar":"مثال: 1473.00"},"phDecimals":{"fr":"Décimales","de":"Dezimalstellen","ru":"Знаки после запятой","es":"Decimales","id":"Jumlah desimal","ar":"المنازل العشرية"},"phFeePercent":{"fr":"Exemple : 1,5","de":"Beispiel: 1,5","ru":"Например: 1.5","es":"Ejemplo: 1.5","id":"Contoh: 1.5","ar":"مثال: 1.5"},"phFixedFee":{"fr":"Exemple : 3","de":"Beispiel: 3","ru":"Например: 3","es":"Ejemplo: 3","id":"Contoh: 3","ar":"مثال: 3"},"phTargetReceive":{"fr":"Saisir le montant cible à recevoir","de":"Zielbetrag eingeben","ru":"Введите целевую сумму получения","es":"Ingresa el monto objetivo a recibir","id":"Masukkan jumlah target diterima","ar":"أدخل مبلغ الاستلام المستهدف"},"phCopyField":{"fr":"Le résultat apparaîtra ici après le calcul.","de":"Das Ergebnis erscheint hier nach der Berechnung.","ru":"После расчёта результат появится здесь.","es":"El resultado aparecerá aquí después del cálculo.","id":"Hasil akan muncul di sini setelah perhitungan.","ar":"ستظهر النتيجة هنا بعد إجراء الحساب."},"phPickerSearch":{"fr":"Rechercher un pays, un code devise ou un nom de devise","de":"Land, Währungscode oder Währungsname suchen","ru":"Искать страну, код валюты или название валюты","es":"Buscar país, código o nombre de moneda","id":"Cari negara, kode mata uang, atau nama mata uang","ar":"ابحث عن بلد أو رمز عملة أو اسم عملة"},"pickerTitleFrom":{"fr":"Choisir la devise source","de":"Ausgangswährung wählen","ru":"Выбрать исходную валюту","es":"Elegir moneda de origen","id":"Pilih mata uang asal","ar":"اختر عملة المصدر"},"pickerTitleTo":{"fr":"Choisir la devise cible","de":"Zielwährung wählen","ru":"Выбрать целевую валюту","es":"Elegir moneda de destino","id":"Pilih mata uang tujuan","ar":"اختر العملة الهدف"},"pickerCloseAria":{"fr":"Fermer","de":"Schließen","ru":"Закрыть","es":"Cerrar","id":"Tutup","ar":"إغلاق"},"statusReady":{"fr":"L’aperçu du marché et les taux de référence sont affichés séparément.","de":"Markt-Snapshot und Referenzkurse werden getrennt angezeigt.","ru":"Снимок рынка и справочные курсы показываются отдельно.","es":"La instantánea del mercado y las tasas de referencia se muestran por separado.","id":"Ringkasan pasar dan kurs referensi ditampilkan terpisah.","ar":"يتم عرض لقطة السوق والأسعار المرجعية بشكل منفصل."},"statusNeedAmount":{"fr":"Veuillez vérifier à nouveau le montant.","de":"Bitte überprüfen Sie den Betrag erneut.","ru":"Проверьте сумму ещё раз.","es":"Vuelve a comprobar el monto.","id":"Silakan periksa kembali jumlahnya.","ar":"يرجى التحقق من المبلغ مرة أخرى."},"statusNeedManual":{"fr":"Veuillez saisir un taux manuel.","de":"Bitte geben Sie einen manuellen Kurs ein.","ru":"Введите ручной курс.","es":"Ingresa una tasa manual.","id":"Masukkan kurs manual.","ar":"يرجى إدخال سعر يدوي."},"statusReferenceOk":{"fr":"Calcul effectué avec le taux de référence.","de":"Mit dem Referenzkurs berechnet.","ru":"Расчёт выполнен по справочному курсу.","es":"Calculado con la tasa de referencia.","id":"Dihitung dengan kurs referensi.","ar":"تم الحساب باستخدام السعر المرجعي."},"statusManualOk":{"fr":"Calcul effectué avec le taux manuel.","de":"Mit manuellem Kurs berechnet.","ru":"Расчёт выполнен по ручному курсу.","es":"Calculado con la tasa manual.","id":"Dihitung dengan kurs manual.","ar":"تم الحساب باستخدام السعر اليدوي."},"statusMarketOk":{"fr":"Calcul effectué avec l’aperçu du marché. Il peut encore être différé.","de":"Mit Markt-Snapshot berechnet. Kann weiterhin verzögert sein.","ru":"Расчёт выполнен по снимку рынка. Данные всё ещё могут быть с задержкой.","es":"Calculado con la instantánea del mercado. Aún puede tener retraso.","id":"Dihitung dengan ringkasan pasar. Data masih bisa tertunda.","ar":"تم الحساب باستخدام لقطة السوق، وقد تظل البيانات متأخرة."},"statusFallback":{"fr":"Échec de l’aperçu du marché → bascule vers le taux de référence.","de":"Markt-Snapshot fehlgeschlagen → auf Referenzkurs umgeschaltet.","ru":"Снимок рынка недоступен → переключено на справочный курс.","es":"Falló la instantánea del mercado → se cambió a la tasa de referencia.","id":"Ringkasan pasar gagal → beralih ke kurs referensi.","ar":"فشلت لقطة السوق ← تم التحويل إلى السعر المرجعي."},"statusReverseOk":{"fr":"Le montant source nécessaire a été calculé à partir du montant cible reçu.","de":"Benötigter Ausgangsbetrag aus dem Zielbetrag berechnet.","ru":"Рассчитана необходимая исходная сумма по целевой сумме получения.","es":"Se calculó el monto de origen necesario a partir del monto objetivo recibido.","id":"Jumlah asal yang dibutuhkan dihitung dari target diterima.","ar":"تم حساب مبلغ المصدر المطلوب انطلاقاً من مبلغ الاستلام المستهدف."},"statusNoCopy":{"fr":"Aucun résultat à copier.","de":"Es gibt kein Ergebnis zum Kopieren.","ru":"Нет результата для копирования.","es":"No hay resultado para copiar.","id":"Tidak ada hasil untuk disalin.","ar":"لا توجد نتيجة لنسخها."},"statusCopied":{"fr":"Résultat copié.","de":"Ergebnis kopiert.","ru":"Результат скопирован.","es":"Resultado copiado.","id":"Hasil disalin.","ar":"تم نسخ النتيجة."},"sourceMarketAuto":{"fr":"Source automatique : aperçu du marché → repli vers le taux de référence","de":"Automatische Quelle: Markt-Snapshot → Fallback auf Referenzkurs","ru":"Автоисточник: снимок рынка → резервный справочный курс","es":"Fuente automática: instantánea del mercado → respaldo con tasa de referencia","id":"Sumber otomatis: ringkasan pasar → cadangan kurs referensi","ar":"المصدر التلقائي: لقطة السوق ← الاحتياط إلى السعر المرجعي"},"sourceReference":{"fr":"Source automatique : taux de référence","de":"Automatische Quelle: Referenzkurs","ru":"Автоисточник: справочный курс","es":"Fuente automática: tasa de referencia","id":"Sumber otomatis: kurs referensi","ar":"المصدر التلقائي: السعر المرجعي"},"sourceManual":{"fr":"Saisie manuelle du taux","de":"Manuelle Kurseingabe","ru":"Ручной ввод курса","es":"Entrada manual de tasa","id":"Input kurs manual","ar":"إدخال السعر يدوياً"},"sourceManualName":{"fr":"Taux manuel","de":"Manueller Kurs","ru":"Ручной курс","es":"Tasa manual","id":"Kurs manual","ar":"سعر يدوي"},"sourceReferenceName":{"fr":"Taux de référence Frankfurter","de":"Frankfurter-Referenzkurs","ru":"Справочный курс Frankfurter","es":"Tasa de referencia de Frankfurter","id":"Kurs referensi Frankfurter","ar":"السعر المرجعي من Frankfurter"},"sourceMarketName":{"fr":"Aperçu de marché Yahoo différé","de":"Yahoo Markt-Snapshot mit Verzögerung","ru":"Отложенный снимок рынка Yahoo","es":"Instantánea de mercado retrasada de Yahoo","id":"Ringkasan pasar Yahoo tertunda","ar":"لقطة سوق Yahoo المتأخرة"},"chartLoadingShort":{"fr":"Chargement du graphique","de":"Diagramm wird geladen","ru":"Загрузка графика","es":"Cargando gráfico","id":"Memuat grafik","ar":"جارٍ تحميل المخطط"},"chartReady":{"fr":"Graphique prêt","de":"Diagramm bereit","ru":"График готов","es":"Gráfico listo","id":"Grafik siap","ar":"المخطط جاهز"},"chartEmpty":{"fr":"Aucune donnée de graphique","de":"Keine Diagrammdaten","ru":"Нет данных графика","es":"Sin datos del gráfico","id":"Tidak ada data grafik","ar":"لا توجد بيانات للمخطط"},"chartFail":{"fr":"Échec du graphique","de":"Diagramm fehlgeschlagen","ru":"Не удалось загрузить график","es":"Falló el gráfico","id":"Grafik gagal","ar":"فشل تحميل المخطط"},"chartNoData":{"fr":"Impossible de charger le graphique récent du taux de référence.","de":"Das aktuelle Referenzkurs-Diagramm konnte nicht geladen werden.","ru":"Не удалось загрузить недавний график справочного курса.","es":"No se pudo cargar el gráfico reciente de la tasa de referencia.","id":"Tidak dapat memuat grafik kurs referensi terbaru.","ar":"تعذر تحميل مخطط السعر المرجعي الأخير."},"chartFailBody":{"fr":"Échec du chargement du graphique.","de":"Das Diagramm konnte nicht geladen werden.","ru":"Не удалось загрузить график.","es":"No se pudo cargar el gráfico.","id":"Gagal memuat grafik.","ar":"تعذر تحميل المخطط."},"chartLegendMin":{"fr":"Bas","de":"Tief","ru":"Мин.","es":"Mín.","id":"Terendah","ar":"الأدنى"},"chartLegendMax":{"fr":"Haut","de":"Hoch","ru":"Макс.","es":"Máx.","id":"Tertinggi","ar":"الأعلى"},"chartLegendUp":{"fr":"Hausse","de":"Anstieg","ru":"Рост","es":"Subida","id":"Naik","ar":"ارتفاع"},"chartLegendDown":{"fr":"Baisse","de":"Rückgang","ru":"Снижение","es":"Bajada","id":"Turun","ar":"انخفاض"},"watchLoading":{"fr":"Chargement des aperçus du marché","de":"Markt-Snapshots werden geladen","ru":"Загрузка снимков рынка","es":"Cargando instantáneas del mercado","id":"Memuat ringkasan pasar","ar":"جارٍ تحميل لقطات السوق"},"watchMarket":{"fr":"Priorité à l’aperçu du marché","de":"Markt-Snapshot zuerst","ru":"Сначала снимок рынка","es":"Primero instantánea del mercado","id":"Utamakan ringkasan pasar","ar":"أولوية لقطة السوق"},"watchFallback":{"fr":"Repli sur le taux de référence","de":"Fallback auf Referenzkurs","ru":"Резервный справочный курс","es":"Respaldo con tasa de referencia","id":"Cadangan kurs referensi","ar":"الاحتياط إلى السعر المرجعي"},"watchFailed":{"fr":"Échec du chargement","de":"Laden fehlgeschlagen","ru":"Ошибка загрузки","es":"Error al cargar","id":"Gagal memuat","ar":"فشل التحميل"},"reverseLabel":{"fr":"Montant source requis","de":"Benötigter Ausgangsbetrag","ru":"Требуемая исходная сумма","es":"Monto de origen necesario","id":"Jumlah asal yang diperlukan","ar":"مبلغ المصدر المطلوب"},"netReceiveLabel":{"fr":"Montant net reçu","de":"Netto erhalten","ru":"Чистая сумма получения","es":"Monto neto recibido","id":"Jumlah bersih diterima","ar":"صافي مبلغ الاستلام"},"grossLabel":{"fr":"Montant brut avant frais","de":"Bruttobetrag vor Gebühren","ru":"Сумма до комиссий","es":"Monto bruto antes de comisiones","id":"Jumlah kotor sebelum biaya","ar":"المبلغ الإجمالي قبل الرسوم"},"feeLabel":{"fr":"Frais estimés","de":"Geschätzte Gebühren","ru":"Оценка комиссий","es":"Comisiones estimadas","id":"Perkiraan biaya","ar":"الرسوم التقديرية"},"swapAria":{"fr":"Permuter les devises","de":"Währungen tauschen","ru":"Поменять валюты местами","es":"Intercambiar monedas","id":"Tukar mata uang","ar":"تبديل العملات"},"chartLoadingBody":{"fr":"Chargement des données du graphique.","de":"Diagrammdaten werden geladen.","ru":"Загрузка данных графика.","es":"Cargando datos del gráfico.","id":"Memuat data grafik.","ar":"جارٍ تحميل بيانات المخطط."},"chartAria":{"fr":"Historique du taux de référence","de":"Verlauf des Referenzkurses","ru":"История справочного курса","es":"Historial de la tasa de referencia","id":"Riwayat kurs referensi","ar":"سجل السعر المرجعي"}};
+  Object.keys(PAGE_TEXT_EXTRA).forEach((key) => {
+    const next = { ...(PAGE_TEXT[key] || {}), ...PAGE_TEXT_EXTRA[key] };
+    if (next.es && !next['es-419']) next['es-419'] = next.es;
+    PAGE_TEXT[key] = next;
+  });
+
+  const RICH_TEXT = {"heroTitle":{"en":"Exchange Calculator rebuilt in the<br>ToolLab style","ko":"ToolLab 스타일로 다시 만든<br>Exchange Calculator","ja":"ToolLab スタイルで作り直した<br>為替計算ツール","zh-TW":"以 ToolLab 風格重新整理的<br>匯率計算器","zh-CN":"以 ToolLab 风格重新整理的<br>汇率计算器","fr":"Calculateur de change repensé<br>dans le style ToolLab","de":"Wechselkursrechner im<br>ToolLab-Stil neu aufgebaut","ru":"Калькулятор обмена валют,<br>обновлённый в стиле ToolLab","es":"Calculadora de divisas rediseñada<br>con el estilo de ToolLab","id":"Kalkulator kurs yang dibangun ulang<br>dengan gaya ToolLab","ar":"حاسبة صرف العملات<br>بتصميم ToolLab"},"heroDesc":{"en":"Separate <strong>market snapshot</strong>, <strong>reference rate</strong>, and <strong>manual rate</strong> clearly. Added <strong>fee estimates</strong> and <strong>reverse calculation for target receive amounts</strong> in one screen.","ko":"<strong>시장 스냅샷</strong>, <strong>기준 환율</strong>, <strong>직접 입력</strong>을 명확히 분리하고, <strong>수수료 반영</strong>과 <strong>목표 수령액 기준 역산</strong>까지 한 화면에 넣었습니다.","ja":"<strong>市場スナップショット</strong>、<strong>基準レート</strong>、<strong>手動入力</strong>を分け、<strong>手数料反映</strong>と<strong>受取希望額からの逆算</strong>まで 1 画面で扱えます。","zh-TW":"清楚區分<strong>市場快照</strong>、<strong>基準匯率</strong>與<strong>手動輸入</strong>，並加入<strong>手續費估算</strong>與<strong>目標收款反算</strong>。","zh-CN":"清楚区分<strong>市场快照</strong>、<strong>基准汇率</strong>与<strong>手动输入</strong>，并加入<strong>手续费估算</strong>与<strong>目标收款反算</strong>。","fr":"Distingue clairement <strong>l’aperçu du marché</strong>, <strong>le taux de référence</strong> et <strong>la saisie manuelle</strong>. Ajoute aussi <strong>l’estimation des frais</strong> et <strong>le calcul inversé depuis le montant reçu</strong> sur un seul écran.","de":"Trennt <strong>Markt-Snapshot</strong>, <strong>Referenzkurs</strong> und <strong>manuelle Eingabe</strong> klar voneinander. Zusätzlich gibt es <strong>Gebührenschätzung</strong> und <strong>Rückrechnung vom Zielbetrag</strong> auf einer Seite.","ru":"Чётко разделяет <strong>снимок рынка</strong>, <strong>справочный курс</strong> и <strong>ручной ввод</strong>. Также добавлены <strong>оценка комиссий</strong> и <strong>обратный расчёт по целевой сумме получения</strong> на одном экране.","es":"Separa claramente la <strong>instantánea del mercado</strong>, la <strong>tasa de referencia</strong> y la <strong>tasa manual</strong>. También añade <strong>estimación de comisiones</strong> y <strong>cálculo inverso según el monto objetivo a recibir</strong> en una sola pantalla.","id":"Memisahkan dengan jelas <strong>ringkasan pasar</strong>, <strong>kurs referensi</strong>, dan <strong>input manual</strong>. Juga menambahkan <strong>perkiraan biaya</strong> serta <strong>hitung balik dari jumlah target diterima</strong> dalam satu layar.","ar":"يفصل بوضوح بين <strong>لقطة السوق</strong> و<strong>السعر المرجعي</strong> و<strong>الإدخال اليدوي</strong>. كما يضيف <strong>تقدير الرسوم</strong> و<strong>الحساب العكسي بناءً على مبلغ الاستلام المستهدف</strong> في شاشة واحدة."}};
+  const META_TEXT = {"title":{"en":"Exchange Calculator | ToolLab","ko":"Exchange Calculator | ToolLab","ja":"為替計算ツール | ツールラボ","zh-TW":"匯率計算器 | 工具站","zh-CN":"汇率计算器 | 工具站","fr":"Calculateur de change | ToolLab","de":"Wechselkursrechner | ToolLab","ru":"Калькулятор обмена валют | ToolLab","es":"Calculadora de divisas | ToolLab","id":"Kalkulator kurs | ToolLab","ar":"حاسبة صرف العملات | ToolLab"},"description":{"en":"Convert currencies with market snapshot, reference rate, manual rate, fee estimate, and reverse target-receive calculation in your browser.","ko":"시장 스냅샷, 기준 환율, 직접 입력, 수수료 반영, 목표 수령액 역산까지 브라우저에서 처리하는 Exchange Calculator입니다.","ja":"市場スナップショット、基準レート、手動入力、手数料反映、受取希望額からの逆算までブラウザで使える為替計算ツールです。","zh-TW":"支援市場快照、基準匯率、手動輸入、手續費估算與目標收款反算的瀏覽器匯率計算器。","zh-CN":"支持市场快照、基准汇率、手动输入、手续费估算与目标收款反算的浏览器汇率计算器。","fr":"Calculateur de change dans le navigateur avec aperçu du marché, taux de référence, taux manuel, estimation des frais et calcul inverse du montant reçu.","de":"Browserbasierter Wechselkursrechner mit Markt-Snapshot, Referenzkurs, manuellem Kurs, Gebührenschätzung und Rückrechnung vom Zielbetrag.","ru":"Браузерный калькулятор обмена валют со снимком рынка, справочным курсом, ручным курсом, оценкой комиссий и обратным расчётом по сумме получения.","es":"Calculadora de divisas en el navegador con instantánea del mercado, tasa de referencia, tasa manual, estimación de comisiones y cálculo inverso por monto a recibir.","id":"Kalkulator kurs di browser dengan ringkasan pasar, kurs referensi, kurs manual, perkiraan biaya, dan hitung balik dari jumlah target diterima.","ar":"حاسبة صرف عملات داخل المتصفح تدعم لقطة السوق والسعر المرجعي والسعر اليدوي وتقدير الرسوم والحساب العكسي لمبلغ الاستلام."}};
+  const SHARED_TEXT_KEYS = {
+    brandText:'brand',
+    navHome:'nav_home',
+    navFeatured:'nav_featured',
+    navTools:'nav_tools',
+    navAbout:'nav_about',
+    footerBrandTitle:'brand',
+    footerTagline:'footer_tagline',
+    footerQuickTitle:'footer_quick',
+    footerHome:'nav_home',
+    footerRoadmap:'roadmap',
+    footerChangelog:'changelog',
+    footerInfoTitle:'footer_info',
+    footerAbout:'about',
+    footerPrivacy:'privacy',
+    footerContact:'contact',
+    resetBtn:'btn_clear',
+    copyBtn:'btn_copy_result'
+  };
+  const RICH_IDS = new Set(['heroTitle','heroDesc']);
+
+
+  const state = {
+    from:'USD',
+    to:'KRW',
+    amount:1000,
+    mode:'market',
+    decimals:2,
+    feePercent:0,
+    fixedFee:0,
+    lastRate:0,
+    lastSourceName:'',
+    updatedAt:'',
+    referenceRates:{},
+    chartSeries:[],
+    pickerTarget:'from',
+    lastStatusKey:'statusReady',
+    lastStatusKind:'info',
+    lastWatchLabelKey:'watchMarket',
+    lastWatchRates:{},
+    lastResult:null
+  };
+  const $ = (sel) => document.querySelector(sel);
+  const els = {
+    brandText: $('#brandText'), navHome: $('#navHome'), navFeatured: $('#navFeatured'), navTools: $('#navTools'), navAbout: $('#navAbout'),
+    heroPill: $('#heroPill'), heroTitle: $('#heroTitle'), heroDesc: $('#heroDesc'), heroBtnCalc: $('#heroBtnCalc'), heroBtnGuide: $('#heroBtnGuide'), swapBtn: $('#swapBtn'),
+    settingsTitle: $('#settingsTitle'), settingsDesc: $('#settingsDesc'), labelMode: $('#labelMode'), modeButtons: Array.from(document.querySelectorAll('[data-mode]')), modeHelper: $('#modeHelper'),
+    fromMeta: $('#fromMeta'), toMeta: $('#toMeta'), fromCode: $('#fromCode'), amountInput: $('#amountInput'), manualRateInput: $('#manualRateInput'), decimalInput: $('#decimalInput'), feePercentInput: $('#feePercentInput'), fixedFeeInput: $('#fixedFeeInput'), targetReceiveInput: $('#targetReceiveInput'),
+    labelAmount: $('#labelAmount'), labelManualRate: $('#labelManualRate'), manualHint: $('#manualHint'), labelFeePercent: $('#labelFeePercent'), labelFixedFee: $('#labelFixedFee'), labelTargetReceive: $('#labelTargetReceive'), reverseHint: $('#reverseHint'),
+    calcBtn: $('#calcBtn'), resetBtn: $('#resetBtn'), copyBtn: $('#copyBtn'), calcReverseBtn: $('#calcReverseBtn'),
+    statusText: $('#statusText'), sourceText: $('#sourceText'), resultTitle: $('#resultTitle'), resultKicker: $('#resultKicker'), resultBig: $('#resultBig'), resultEq: $('#resultEq'), resultRate: $('#resultRate'), resultUpdated: $('#resultUpdated'), resultSource: $('#resultSource'), convertedOutput: $('#convertedOutput'),
+    metaRateLabel: $('#metaRateLabel'), metaUpdatedLabel: $('#metaUpdatedLabel'), metaSourceLabel: $('#metaSourceLabel'), labelCopyField: $('#labelCopyField'), warnTitle: $('#warnTitle'), warnBody: $('#warnBody'),
+    chartTitle: $('#chartTitle'), chartDesc: $('#chartDesc'), chartWrap: $('#chartWrap'), chartLegend: $('#chartLegend'), chartStatus: $('#chartStatus'), chartLoadingText: $('#chartLoadingText'),
+    watchTitle: $('#watchTitle'), watchDesc: $('#watchDesc'), watchList: $('#watchList'), watchSourceTag: $('#watchSourceTag'),
+    guideTitle: $('#guideTitle'), guideIntro: $('#guideIntro'), howToTitle: $('#howToTitle'), step1: $('#step1'), step2: $('#step2'), step3: $('#step3'), tipsTitle: $('#tipsTitle'), tipMarket: $('#tipMarket'), tipReference: $('#tipReference'), tipManual: $('#tipManual'), faqTitle: $('#faqTitle'), faqQ1: $('#faqQ1'), faqA1: $('#faqA1'), faqQ2: $('#faqQ2'), faqA2: $('#faqA2'), faqQ3: $('#faqQ3'), faqA3: $('#faqA3'),
+    pickerBackdrop: $('#pickerBackdrop'), pickerTitle: $('#pickerTitle'), pickerSearch: $('#pickerSearch'), pickerGrid: $('#pickerGrid'), pickerClose: $('#pickerClose'),
+    footerBrandTitle: $('#footerBrandTitle'), footerTagline: $('#footerTagline'), footerQuickTitle: $('#footerQuickTitle'), footerHome: $('#footerHome'), footerRoadmap: $('#footerRoadmap'), footerChangelog: $('#footerChangelog'), footerInfoTitle: $('#footerInfoTitle'), footerAbout: $('#footerAbout'), footerPrivacy: $('#footerPrivacy'), footerContact: $('#footerContact'),
+    toast: $('#fxToast')
+  };
+
+  function currentLang(){ return window.ToolI18n && typeof window.ToolI18n.getLang === 'function' ? window.ToolI18n.getLang() : 'en'; }
+  function sharedText(id){
+    const sharedKey = SHARED_TEXT_KEYS[id];
+    if (!sharedKey || !window.ToolI18n || typeof window.ToolI18n.t !== 'function') return '';
+    return window.ToolI18n.t(sharedKey) || '';
+  }
+  function t(key){
+    const entry = PAGE_TEXT[key] || {};
+    const lang = currentLang();
+    return entry[lang] || (lang === 'es-419' ? entry.es : '') || entry.en || key;
+  }
+  function rich(key){
+    const entry = RICH_TEXT[key] || {};
+    const lang = currentLang();
+    return entry[lang] || (lang === 'es-419' ? entry.es : '') || entry.en || t(key);
+  }
+  function metaText(key){
+    const entry = META_TEXT[key] || {};
+    const lang = currentLang();
+    return entry[lang] || (lang === 'es-419' ? entry.es : '') || entry.en || '';
+  }
+  function localeForIntl(){ const lang = currentLang(); if(lang==='zh-TW') return 'zh-Hant-TW'; if(lang==='zh-CN') return 'zh-Hans-CN'; return lang; }
+  function formatNumber(value, decimals = null){ if(!Number.isFinite(value)) return '-'; const fixed = decimals == null ? state.decimals : decimals; return new Intl.NumberFormat(localeForIntl(), { minimumFractionDigits: fixed, maximumFractionDigits: fixed }).format(value); }
+  function getCurrencyName(code){ try { return new Intl.DisplayNames([localeForIntl()], { type:'currency' }).of(code) || code; } catch { return code; } }
+  function getRegionName(flagCode, fallback){ try { return new Intl.DisplayNames([localeForIntl()], { type:'region' }).of(String(flagCode || '').toUpperCase()) || fallback; } catch { return fallback; } }
+  function flagMarkup(item){ const src = item.flag === 'eu' ? 'https://flagcdn.com/w80/eu.png' : `https://flagcdn.com/w80/${item.flag}.png`; return `<div class="fx-flag"><img src="${src}" alt="${getRegionName(item.flag, item.country)} flag" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${item.emoji}'}))" /></div>`; }
+  function renderCurrencyButton(code, targetEl){ const item = currencyMap.get(code); targetEl.innerHTML = `<div class="fx-pick-main">${flagMarkup(item)}<div><strong class="fx-pick-title">${getRegionName(item.flag, item.country)}</strong><span class="fx-pick-code">${item.code} · ${getCurrencyName(item.code)}</span></div></div><span class="fx-caret">▾</span>`; }
+  function applyPlaceholders(){ document.querySelectorAll('[data-ph-key]').forEach(el => el.setAttribute('placeholder', t(el.dataset.phKey))); }
+  function applyPlain(id){
+    if(!els[id]) return;
+    const shared = sharedText(id);
+    const value = shared || t(id);
+    if (RICH_IDS.has(id)) els[id].innerHTML = rich(id);
+    else els[id].textContent = value;
+  }
+  function applyMeta(){
+    document.documentElement.lang = currentLang();
+    document.documentElement.dir = currentLang() === 'ar' ? 'rtl' : 'ltr';
+    document.title = metaText('title') || document.title;
+    const desc = metaText('description');
+    const title = metaText('title') || document.title;
+    [['meta[name="description"]', desc], ['meta[property="og:title"]', title], ['meta[property="og:description"]', desc], ['meta[name="twitter:title"]', title], ['meta[name="twitter:description"]', desc]].forEach(([sel, value]) => {
+      const node = document.querySelector(sel);
+      if(node && value) node.setAttribute('content', value);
+    });
+  }
+  function refreshDynamicLanguage(){
+    if (els.swapBtn) els.swapBtn.setAttribute('aria-label', t('swapAria'));
+    if (els.pickerClose) els.pickerClose.setAttribute('aria-label', t('pickerCloseAria'));
+    if (els.chartLoadingText && !state.chartSeries.length) els.chartLoadingText.textContent = t('chartLoadingBody');
+    if (state.lastResult) {
+      updateResult(
+        state.lastResult.rate,
+        t(state.lastResult.sourceKey),
+        state.lastResult.updatedAt,
+        state.lastResult.sourceAmount,
+        state.lastResult.targetReceive,
+        state.lastResult.sourceKey
+      );
+    } else {
+      setStatus(t(state.lastStatusKey || 'statusReady'), state.lastStatusKind || 'info');
+      els.resultSource.textContent = '-';
+      if (els.convertedOutput && !els.convertedOutput.value) els.convertedOutput.setAttribute('placeholder', t('phCopyField'));
+    }
+    if (state.chartSeries.length) renderChart();
+    else if (els.chartStatus) els.chartStatus.textContent = t('chartLoadingShort');
+    renderWatchList(state.lastWatchRates, state.lastWatchLabelKey || 'watchMarket', true);
+    if (els.pickerBackdrop && els.pickerBackdrop.classList.contains('open')) renderPicker(els.pickerSearch.value || '');
+  }
+  function applyLang(){
+    ['brandText','navHome','navFeatured','navTools','navAbout','heroPill','heroTitle','heroDesc','heroBtnCalc','heroBtnGuide','settingsTitle','settingsDesc','labelMode','labelAmount','labelManualRate','manualHint','labelFeePercent','labelFixedFee','labelTargetReceive','reverseHint','calcBtn','resetBtn','copyBtn','calcReverseBtn','resultTitle','resultKicker','metaRateLabel','metaUpdatedLabel','metaSourceLabel','labelCopyField','warnTitle','warnBody','chartTitle','chartDesc','watchTitle','watchDesc','guideTitle','guideIntro','howToTitle','step1','step2','step3','tipsTitle','tipMarket','tipReference','tipManual','faqTitle','faqQ1','faqA1','faqQ2','faqA2','faqQ3','faqA3','footerBrandTitle','footerTagline','footerQuickTitle','footerHome','footerRoadmap','footerChangelog','footerInfoTitle','footerAbout','footerPrivacy','footerContact','modeMarketBtn','modeReferenceBtn','modeManualBtn'].forEach(applyPlain);
+    applyPlaceholders();
+    applyMeta();
+    updateSummary();
+    refreshDynamicLanguage();
+  }
+  function showToast(text){ els.toast.textContent = text; els.toast.classList.add('show'); clearTimeout(showToast._timer); showToast._timer = setTimeout(() => els.toast.classList.remove('show'), 1800); }
+  function setStatus(text, kind='info'){ els.statusText.textContent = text; els.statusText.className = `msg fx-status ${kind}`; }
+  function setStatusByKey(key, kind='info'){ state.lastStatusKey = key; state.lastStatusKind = kind; setStatus(t(key), kind); }
+  function modeHelperText(){ if(state.mode === 'manual') return `${t('labelManualRate')}: 1 ${state.from} = ? ${state.to}`; if(state.mode === 'market') return t('statusReady'); return t('sourceReference'); }
+  function updateModeButtons(){ els.modeButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.mode === state.mode)); els.manualRateInput.disabled = state.mode !== 'manual'; els.modeHelper.textContent = modeHelperText(); }
+  function updateSummary(){ renderCurrencyButton(state.from, els.fromMeta); renderCurrencyButton(state.to, els.toMeta); els.fromCode.textContent = state.from; els.amountInput.value = state.amount; els.decimalInput.value = state.decimals; els.feePercentInput.value = state.feePercent; els.fixedFeeInput.value = state.fixedFee; updateModeButtons(); els.sourceText.textContent = state.mode === 'market' ? t('sourceMarketAuto') : state.mode === 'reference' ? t('sourceReference') : t('sourceManual'); }
+  async function requestJson(url){ const res = await fetch(url, { cache:'no-store' }); if(!res.ok) throw new Error('Request failed'); return res.json(); }
+  async function requestText(url){ const res = await fetch(url, { cache:'no-store' }); if(!res.ok) throw new Error('Request failed'); return res.text(); }
+  async function fetchReferenceBundle(base){ const symbols = QUICK_COMPARE.filter(code => code !== base).join(','); const url = `https://api.frankfurter.dev/v1/latest?base=${encodeURIComponent(base)}&symbols=${encodeURIComponent(symbols)}`; const data = await requestJson(url); if(!data || !data.rates) throw new Error('reference failed'); return { rates:{ ...data.rates, [base]:1 }, updatedAt:data.date || '', sourceName:t('sourceReferenceName') }; }
+  function buildYahooCandidates(from, to){ const direct = `${from}${to}=X`; const reverse = `${to}${from}=X`; const list = [{ symbol:direct, invert:false }]; if(from==='USD') list.push({ symbol:`${to}=X`, invert:false }); list.push({ symbol:reverse, invert:true }); return Array.from(new Map(list.map(item => [item.symbol + ':' + item.invert, item])).values()); }
+  function escapeRegExp(value){ return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  function parseYahooQuote(text, from, to, symbol){ const compact = String(text).replace(/\s+/g, ' ').trim(); const escapedSymbol = escapeRegExp(symbol); const patterns = [new RegExp(`${from}\s*\/\s*${to}\s*\([^)]*\)\.\s*([0-9][0-9,]*(?:\.[0-9]+)?)`, 'i'), new RegExp(`${escapedSymbol}[^0-9]{0,40}([0-9][0-9,]*(?:\.[0-9]+)?)`, 'i'), /CCY\s*-\s*Delayed Quote[^0-9]{0,40}([0-9][0-9,]*(?:\.\d+)?)/i, /As of [^.]{6,120}\.\s*([0-9][0-9,]*(?:\.\d+)?)/i]; for(const regex of patterns){ const m = compact.match(regex); if(m && m[1]){ const value = Number(m[1].replace(/,/g,'')); if(Number.isFinite(value) && value > 0) return value; } } throw new Error('parse failed'); }
+  function parseYahooUpdatedAt(text){ const compact = String(text).replace(/\s+/g, ' ').trim(); const m = compact.match(/As of\s+([^.]{6,120})\./i); return m ? m[1] : t('sourceMarketName'); }
+  async function fetchMarketPair(from, to){ const candidates = buildYahooCandidates(from, to); let lastError = null; for(const item of candidates){ const urls = [`https://r.jina.ai/http://finance.yahoo.com/quote/${encodeURIComponent(item.symbol)}/`, `https://r.jina.ai/http://finance.yahoo.com/quote/${encodeURIComponent(item.symbol)}`]; for(const url of urls){ try { const text = await requestText(url); const raw = parseYahooQuote(text, from, to, item.symbol); const rate = item.invert ? 1 / raw : raw; if(Number.isFinite(rate) && rate > 0) return { rate, updatedAt: parseYahooUpdatedAt(text), sourceName: t('sourceMarketName') }; } catch(error){ lastError = error; } } } throw lastError || new Error('market failed'); }
+  async function fetchHistory(){ els.chartStatus.textContent = t('chartLoadingShort'); const end = new Date(); const start = new Date(); start.setDate(end.getDate() - CHART_WINDOW_DAYS); const startText = start.toISOString().slice(0,10); const endText = end.toISOString().slice(0,10); const url = `https://api.frankfurter.dev/v1/${startText}..${endText}?base=${encodeURIComponent(state.from)}&symbols=${encodeURIComponent(state.to)}`; const data = await requestJson(url); const rates = data && data.rates ? data.rates : {}; state.chartSeries = Object.keys(rates).map(date => ({ date, value:Number(rates[date][state.to]) })).filter(item => Number.isFinite(item.value)).sort((a,b)=>a.date.localeCompare(b.date)).slice(-7); renderChart(); }
+  function renderChart(){
+    const series = state.chartSeries;
+    if(!series.length){
+      els.chartWrap.innerHTML = `<div class="inline-note">${t('chartNoData')}</div>`;
+      els.chartLegend.innerHTML = '';
+      els.chartStatus.textContent = t('chartEmpty');
+      return;
+    }
+    const values = series.map(x=>x.value);
+    const min = Math.min(...values), max = Math.max(...values);
+    const w=700,h=240,px=24,py=24,dw=w-px*2,dh=h-py*2,range=max-min||1;
+    const pts = series.map((item, idx) => ({ ...item, x:px + (dw * idx / Math.max(1, series.length - 1)), y:py + dh - (((item.value - min) / range) * dh) }));
+    const path = pts.map((p,i)=>`${i?'L':'M'} ${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(' ');
+    const area = `${path} L ${pts[pts.length-1].x.toFixed(2)} ${h-py} L ${pts[0].x.toFixed(2)} ${h-py} Z`;
+    const grid=[0,.25,.5,.75,1].map(tick=>{ const y = py + dh - (tick*dh); const val = min + (tick*range); return `<g><line x1="${px}" y1="${y}" x2="${w-px}" y2="${y}" stroke="#e5e7eb" stroke-width="1"/><text x="${w-px}" y="${y-6}" text-anchor="end" fill="#64748b" font-size="11">${formatNumber(val,4)}</text></g>`; }).join('');
+    const labels = pts.map(p=>`<text x="${p.x}" y="${h-6}" text-anchor="middle" fill="#64748b" font-size="11">${p.date.slice(5).replace('-', '/')}</text>`).join('');
+    const circles = pts.map(p=>`<circle cx="${p.x}" cy="${p.y}" r="4" fill="#4f46e5"><title>${p.date} · ${formatNumber(p.value,4)}</title></circle>`).join('');
+    els.chartWrap.innerHTML = `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="${t('chartAria')}"><defs><linearGradient id="fxArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c7d2fe" stop-opacity="0.9"/><stop offset="100%" stop-color="#eef2ff" stop-opacity="0.15"/></linearGradient></defs>${grid}<path d="${area}" fill="url(#fxArea)"/><path d="${path}" fill="none" stroke="#4f46e5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>${circles}${labels}</svg>`;
+    const change = ((values[values.length-1] - values[0]) / values[0]) * 100;
+    els.chartLegend.innerHTML = `<span>${state.from} → ${state.to}</span><span>${t('chartLegendMin')} ${formatNumber(min,4)}</span><span>${t('chartLegendMax')} ${formatNumber(max,4)}</span><span>${change >= 0 ? t('chartLegendUp') : t('chartLegendDown')} ${Math.abs(change).toFixed(2)}%</span>`;
+    els.chartStatus.textContent = t('chartReady');
+  }
+  async function renderWatchList(rates = {}, sourceLabelOrKey = 'watchMarket', useKey = false){
+    const targets = QUICK_COMPARE.filter(code => code !== state.from).slice(0,5);
+    state.lastWatchRates = { ...(rates || {}) };
+    state.lastWatchLabelKey = useKey ? sourceLabelOrKey : '';
+    const sourceLabel = useKey ? t(sourceLabelOrKey) : sourceLabelOrKey;
+    els.watchSourceTag.textContent = sourceLabel;
+    els.watchList.innerHTML = targets.map(code=>{ const target = currencyMap.get(code); const value = rates && Number.isFinite(rates[code]) ? formatNumber(rates[code],4) : '...'; return `<div class="fx-watch-item"><div class="fx-watch-left">${flagMarkup(target)}<div><strong>${getRegionName(target.flag, target.country)}</strong><span>${state.from} → ${code}</span></div></div><div class="fx-watch-rate">${value}</div></div>`; }).join('');
+  }
+  async function refreshMarketWatch(){ const targets = QUICK_COMPARE.filter(code => code !== state.from).slice(0,5); await renderWatchList({}, 'watchLoading', true); const results = await Promise.allSettled(targets.map(code => fetchMarketPair(state.from, code))); const rateMap = {}; let okCount = 0; results.forEach((res, idx) => { const code = targets[idx]; if(res.status === 'fulfilled'){ rateMap[code] = res.value.rate; okCount += 1; } else if(state.referenceRates[code]) { rateMap[code] = state.referenceRates[code]; } }); await renderWatchList(rateMap, okCount ? 'watchMarket' : 'watchFallback', true); }
+  function computeFees(gross){ const feePercent = Math.max(0, Number(els.feePercentInput.value || 0)); const fixedFee = Math.max(0, Number(els.fixedFeeInput.value || 0)); const totalFee = gross * (feePercent / 100) + fixedFee; return { feePercent, fixedFee, totalFee, net: Math.max(0, gross - totalFee) }; }
+  function buildSummary(amount, gross, fees, net, rate, sourceName, updatedAt, reverseMode=false){ if(reverseMode) return `${t('reverseLabel')}: ${formatNumber(amount, state.decimals)} ${state.from} | ${t('netReceiveLabel')}: ${formatNumber(net, state.decimals)} ${state.to} | ${t('grossLabel')}: ${formatNumber(gross, state.decimals)} ${state.to} | ${t('feeLabel')}: ${formatNumber(fees.totalFee, state.decimals)} ${state.to} | 1 ${state.from} = ${formatNumber(rate,6)} ${state.to} | ${sourceName} | ${updatedAt || '-'}`; return `${formatNumber(amount, state.decimals)} ${state.from} → ${formatNumber(net, state.decimals)} ${state.to} | ${t('grossLabel')}: ${formatNumber(gross, state.decimals)} ${state.to} | ${t('feeLabel')}: ${formatNumber(fees.totalFee, state.decimals)} ${state.to} | 1 ${state.from} = ${formatNumber(rate,6)} ${state.to} | ${sourceName} | ${updatedAt || '-'}`; }
+  function updateResult(rate, sourceName, updatedAt, sourceAmount = null, targetReceive = null, sourceKey = null){
+    const amount = sourceAmount == null ? Number(els.amountInput.value || 0) : sourceAmount;
+    const gross = amount * rate;
+    const fees = computeFees(gross);
+    const net = targetReceive == null ? fees.net : targetReceive;
+    state.amount = amount;
+    state.lastRate = rate;
+    state.lastSourceName = sourceName;
+    state.updatedAt = updatedAt || '-';
+    state.feePercent = fees.feePercent;
+    state.fixedFee = fees.fixedFee;
+    state.lastResult = { rate, updatedAt: updatedAt || '-', sourceAmount, targetReceive, sourceKey: sourceKey || 'sourceReferenceName' };
+    els.resultBig.textContent = `${formatNumber(net, state.decimals)} ${state.to}`;
+    els.resultEq.textContent = `${formatNumber(amount, state.decimals)} ${state.from} → ${formatNumber(gross, state.decimals)} ${state.to} → ${formatNumber(net, state.decimals)} ${state.to}`;
+    els.resultRate.textContent = `1 ${state.from} = ${formatNumber(rate,6)} ${state.to}`;
+    els.resultUpdated.textContent = updatedAt || '-';
+    els.resultSource.textContent = sourceName;
+    els.convertedOutput.value = buildSummary(amount, gross, fees, net, rate, sourceName, updatedAt, sourceAmount != null);
+  }
+  async function calculate(reverseTarget = null){
+    state.amount = Number(els.amountInput.value || 0);
+    state.decimals = Math.max(0, Math.min(8, Number(els.decimalInput.value || 2)));
+    if(!Number.isFinite(state.amount) || state.amount < 0){
+      state.lastResult = null;
+      setStatusByKey('statusNeedAmount', 'err');
+      return;
+    }
+    try {
+      const reference = await fetchReferenceBundle(state.from);
+      state.referenceRates = reference.rates;
+      let rate, sourceName, updatedAt, sourceKey;
+      if(state.mode === 'manual'){
+        rate = Number(els.manualRateInput.value || 0);
+        if(!(rate > 0)) throw new Error(t('statusNeedManual'));
+        sourceKey = 'sourceManualName';
+        sourceName = t(sourceKey);
+        updatedAt = t('sourceManual');
+      } else if(state.mode === 'reference'){
+        rate = Number(reference.rates[state.to]);
+        if(!(rate > 0)) throw new Error(t('statusNeedAmount'));
+        sourceKey = 'sourceReferenceName';
+        sourceName = reference.sourceName;
+        updatedAt = reference.updatedAt;
+      } else {
+        try {
+          const market = await fetchMarketPair(state.from, state.to);
+          rate = market.rate;
+          sourceKey = 'sourceMarketName';
+          sourceName = market.sourceName;
+          updatedAt = market.updatedAt;
+          setStatusByKey('statusMarketOk', 'ok');
+          refreshMarketWatch().catch(() => renderWatchList(reference.rates, 'watchFallback', true));
+        } catch {
+          rate = Number(reference.rates[state.to]);
+          if(!(rate > 0)) throw new Error(t('statusNeedAmount'));
+          sourceKey = 'sourceReferenceName';
+          sourceName = reference.sourceName;
+          updatedAt = reference.updatedAt;
+          setStatusByKey('statusFallback', 'info');
+          await renderWatchList(reference.rates, 'watchFallback', true);
+        }
+      }
+      if(reverseTarget != null){
+        const target = Number(reverseTarget);
+        const feePercent = Math.max(0, Number(els.feePercentInput.value || 0));
+        const fixedFee = Math.max(0, Number(els.fixedFeeInput.value || 0));
+        if(!(target > 0)) throw new Error(t('phTargetReceive'));
+        const divisor = 1 - (feePercent / 100);
+        if(!(divisor > 0)) throw new Error(t('labelFeePercent'));
+        const grossNeeded = (target + fixedFee) / divisor;
+        const sourceNeeded = grossNeeded / rate;
+        updateResult(rate, sourceName, updatedAt, sourceNeeded, target, sourceKey);
+        setStatusByKey('statusReverseOk', 'ok');
+      } else {
+        updateResult(rate, sourceName, updatedAt, null, null, sourceKey);
+        if(state.mode === 'manual') setStatusByKey('statusManualOk', 'ok');
+        else if(state.mode === 'reference') setStatusByKey('statusReferenceOk', 'ok');
+      }
+      fetchHistory().catch(() => {
+        els.chartStatus.textContent = t('chartFail');
+        els.chartWrap.innerHTML = `<div class="inline-note">${t('chartFailBody')}</div>`;
+        els.chartLegend.innerHTML = '';
+      });
+      if(state.mode !== 'market') await renderWatchList(reference.rates, 'watchFallback', true);
+    } catch(error){
+      state.lastResult = null;
+      els.resultBig.textContent = '-';
+      els.resultEq.textContent = error.message || 'Error';
+      els.resultRate.textContent = '-';
+      els.resultUpdated.textContent = '-';
+      els.resultSource.textContent = '-';
+      els.convertedOutput.value = '';
+      setStatus(error.message || 'Error', 'err');
+      state.lastStatusKind = 'err';
+      state.lastStatusKey = '';
+      await renderWatchList({}, 'watchFailed', true);
+    }
+  }
+  function closePicker(){ els.pickerBackdrop.classList.remove('open'); }
+  function renderPicker(keyword=''){ const q = keyword.trim().toLowerCase(); const filtered = currencies.filter(item => !q || [item.code, getCurrencyName(item.code), getRegionName(item.flag, item.country), item.name, item.country].join(' ').toLowerCase().includes(q)); els.pickerGrid.innerHTML = filtered.map(item => `<button class="fx-picker-item ${state[state.pickerTarget] === item.code ? 'active' : ''}" type="button" data-code="${item.code}">${flagMarkup(item)}<strong>${getRegionName(item.flag, item.country)}</strong><span>${item.code} · ${getCurrencyName(item.code)}</span></button>`).join(''); els.pickerGrid.querySelectorAll('[data-code]').forEach(btn => btn.addEventListener('click', () => { const code = btn.dataset.code; state[state.pickerTarget] = code; if(state.from === state.to){ const next = currencies.find(item => item.code !== state.from); if(next) state.to = next.code; } closePicker(); updateSummary(); calculate(); })); }
+  function openPicker(target){ state.pickerTarget = target; els.pickerTitle.textContent = target === 'from' ? t('pickerTitleFrom') : t('pickerTitleTo'); els.pickerSearch.value = ''; els.pickerBackdrop.classList.add('open'); renderPicker(''); els.pickerSearch.focus(); }
+  async function copyText(text){ if(navigator.clipboard && window.isSecureContext){ await navigator.clipboard.writeText(text); return; } const temp = document.createElement('textarea'); temp.value = text; temp.style.position = 'fixed'; temp.style.opacity = '0'; document.body.appendChild(temp); temp.focus(); temp.select(); document.execCommand('copy'); temp.remove(); }
+  document.getElementById('fromBtn').addEventListener('click', () => openPicker('from'));
+  document.getElementById('toBtn').addEventListener('click', () => openPicker('to'));
+  document.getElementById('swapBtn').addEventListener('click', () => { [state.from, state.to] = [state.to, state.from]; updateSummary(); calculate(); });
+  els.calcBtn.addEventListener('click', () => calculate());
+  els.calcReverseBtn.addEventListener('click', () => calculate(els.targetReceiveInput.value));
+  els.resetBtn.addEventListener('click', () => { state.from='USD'; state.to='KRW'; state.amount=1000; state.mode='market'; state.decimals=2; state.feePercent=0; state.fixedFee=0; state.lastResult=null; els.manualRateInput.value=''; els.targetReceiveInput.value=''; updateSummary(); calculate(); });
+  els.copyBtn.addEventListener('click', async () => { if(!els.convertedOutput.value) return showToast(t('statusNoCopy')); try { await copyText(els.convertedOutput.value); showToast(t('statusCopied')); } catch { showToast(t('statusNoCopy')); } });
+  els.pickerClose.addEventListener('click', closePicker);
+  els.pickerBackdrop.addEventListener('click', (e) => { if(e.target === els.pickerBackdrop) closePicker(); });
+  els.pickerSearch.addEventListener('input', (e) => renderPicker(e.target.value));
+  els.modeButtons.forEach(btn => btn.addEventListener('click', () => { state.mode = btn.dataset.mode; updateSummary(); calculate(); }));
+  [els.amountInput, els.decimalInput, els.manualRateInput, els.feePercentInput, els.fixedFeeInput].forEach(input => input.addEventListener('input', () => { if(input === els.manualRateInput && state.mode !== 'manual') return; calculate(); }));
+  els.targetReceiveInput.addEventListener('keydown', (e) => { if(e.key === 'Enter'){ e.preventDefault(); calculate(els.targetReceiveInput.value); } });
+  els.amountInput.addEventListener('keydown', (e) => { if(e.key === 'Enter'){ e.preventDefault(); calculate(); } });
+  document.addEventListener('toollab:languagechange', applyLang);
+  document.addEventListener('DOMContentLoaded', () => { applyLang(); updateSummary(); calculate(); });
+})();
+</script>
+<footer class="footer">
+<div class="container footer-grid">
+<div>
+<h4 id="footerBrandTitle">ToolLab</h4>
+<p id="footerTagline">Browser-based online tools for fast everyday work.</p>
+</div>
+<div>
+<h4 id="footerQuickTitle">바로가기</h4>
+<a href="../../index.html" id="footerHome">Home</a>
+<a href="../../roadmap.html" id="footerRoadmap">Roadmap</a>
+<a href="../../changelog.html" id="footerChangelog">Changelog</a>
+</div>
+<div>
+<h4 id="footerInfoTitle">정보</h4>
+<a href="../../about.html" id="footerAbout">About</a>
+<a href="../../privacy.html" id="footerPrivacy">Privacy Policy</a>
+<a href="../../contact.html" id="footerContact">Contact</a>
+</div>
+<a href="./tool-sitemap.html">Tool Sitemap</a><a href="./faq.html">FAQ</a><a href="./feed.xml">RSS Feed</a></div>
+</footer>
+</body>
+</html>

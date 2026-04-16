@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+<title>ToolLab Updates</title>
+<link>https://mizunomeru537.github.io/</link>
+<description>Recent structural and content updates for ToolLab.</description>
+<language>en-us</language>
+<lastBuildDate>Thu, 16 Apr 2026 00:00:00 +0900</lastBuildDate>
+<item><title>Added HTML tool sitemap</title><link>https://mizunomeru537.github.io/tool-sitemap.html</link><guid>https://mizunomeru537.github.io/tool-sitemap.html</guid><pubDate>Thu, 16 Apr 2026 00:00:00 +0900</pubDate><description>Added a browseable HTML sitemap that links every major tool page and support page.</description></item>
+<item><title>Added FAQ page</title><link>https://mizunomeru537.github.io/faq.html</link><guid>https://mizunomeru537.github.io/faq.html</guid><pubDate>Thu, 16 Apr 2026 00:00:00 +0900</pubDate><description>Published a dedicated FAQ page covering tools, privacy, and search visibility.</description></item>
+<item><title>Expanded support pages</title><link>https://mizunomeru537.github.io/changelog.html</link><guid>https://mizunomeru537.github.io/changelog.html</guid><pubDate>Thu, 16 Apr 2026 00:00:00 +0900</pubDate><description>Expanded support pages such as changelog, roadmap, about, and contact to avoid thin content.</description></item>
+</channel></rss>

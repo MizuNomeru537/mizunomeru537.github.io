@@ -1,0 +1,197 @@
+
+.lang-tabs-wrap{
+  background:#ffffff;
+  border-bottom:1px solid #e6ebf2;
+  box-shadow:0 8px 20px rgba(15,23,42,.04);
+}
+.lang-tabs{
+  display:flex;
+  gap:8px;
+  padding:12px 0;
+  overflow:auto hidden;
+  scrollbar-width:thin;
+}
+.lang-tab{
+  transition:transform .16s ease, box-shadow .22s ease, background-color .22s ease, border-color .22s ease, color .22s ease;
+  border:1px solid #dbe3ef;
+  background:#fff;
+  color:#1f2937;
+  padding:10px 14px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:700;
+  white-space:nowrap;
+  cursor:pointer;
+}
+.lang-tab.active{
+  background:linear-gradient(135deg,#4f46e5,#7c3aed);
+  color:#fff;
+  border-color:transparent;
+  box-shadow:0 10px 24px rgba(79,70,229,.22);
+}
+
+
+/* persistent active state for buttons / nav / chips */
+.btn-sticky-active,
+.nav a.nav-current,
+.nav-right a.nav-current,
+.ghost-btn.nav-current,
+.search-btn.nav-current,
+.small-btn.nav-current,
+.chip.active{
+  background:linear-gradient(135deg,#4f46e5,#7c3aed) !important;
+  color:#fff !important;
+  border-color:transparent !important;
+  box-shadow:0 10px 24px rgba(79,70,229,.22) !important;
+}
+.single-active-group .single-active-item{
+  transition:transform .16s ease, box-shadow .22s ease, background-color .22s ease, border-color .22s ease, color .22s ease;
+}
+.single-active-group .single-active-item:not(.btn-sticky-active):not(.btn-action-active):not(.nav-current):not(.active){
+  background:#ffffff !important;
+  color:#111827 !important;
+  border:1px solid #dbe3ef !important;
+  box-shadow:none !important;
+}
+.single-active-group .single-active-item:not(.btn-sticky-active):not(.btn-action-active):not(.nav-current):not(.active) svg,
+.single-active-group .single-active-item:not(.btn-sticky-active):not(.btn-action-active):not(.nav-current):not(.active) small,
+.single-active-group .single-active-item:not(.btn-sticky-active):not(.btn-action-active):not(.nav-current):not(.active) span{
+  color:inherit !important;
+}
+.single-active-group .single-active-item:not(.btn-sticky-active):not(.btn-action-active):not(.nav-current):not(.active):hover{
+  border-color:#c7d2fe !important;
+  box-shadow:0 8px 18px rgba(99,102,241,.10) !important;
+}
+
+.btn-sticky-active svg,
+.btn-sticky-active small,
+.btn-sticky-active span,
+.nav a.nav-current svg,
+.nav a.nav-current small,
+.nav a.nav-current span,
+.ghost-btn.nav-current svg,
+.ghost-btn.nav-current small,
+.ghost-btn.nav-current span,
+.search-btn.nav-current svg,
+.search-btn.nav-current small,
+.search-btn.nav-current span,
+.small-btn.nav-current svg,
+.small-btn.nav-current small,
+.small-btn.nav-current span,
+.chip.active svg,
+.chip.active small,
+.chip.active span{
+  color:inherit !important;
+}
+.checkbox{
+  transition:transform .16s ease, box-shadow .22s ease, background-color .22s ease, border-color .22s ease, color .22s ease;
+}
+.checkbox.ui-checked{
+  background:linear-gradient(135deg,#4f46e5,#7c3aed) !important;
+  color:#fff !important;
+  border-color:transparent !important;
+  box-shadow:0 10px 24px rgba(79,70,229,.18) !important;
+}
+.checkbox.ui-checked input{
+  accent-color:#ffffff;
+}
+.rtl-lang .lang-tabs{
+  direction:rtl;
+}
+
+.rtl-lang .stat-row{direction:ltr;}
+.rtl-lang .search-wrap input{text-align:right;}
+.rtl-lang .hero-card,.rtl-lang .section,.rtl-lang .footer{text-align:right;}
+
+
+/* shared action feedback across home + tool pages */
+.btn,
+.lang-tab,
+.copy-btn,
+.related-links a,
+.hub-card a,
+.nav a,
+.ghost-btn,
+.search-btn,
+.small-btn,
+.chip,
+button{
+  transition:transform .16s ease, box-shadow .22s ease, background-color .22s ease, border-color .22s ease, color .22s ease, opacity .22s ease;
+  will-change:transform;
+}
+.btn:hover,
+.lang-tab:hover,
+.copy-btn:hover,
+.related-links a:hover,
+.hub-card a:hover,
+.nav a:hover,
+.ghost-btn:hover,
+.search-btn:hover,
+.small-btn:hover,
+.chip:hover,
+button:hover{
+  transform:translateY(-1px);
+}
+.btn:active,
+.lang-tab:active,
+.copy-btn:active,
+.related-links a:active,
+.hub-card a:active,
+.nav a:active,
+.ghost-btn:active,
+.search-btn:active,
+.small-btn:active,
+.chip:active,
+button:active,
+.btn-press-pop{
+  transform:scale(.975);
+}
+.btn-click-pop{
+  animation:btnClickPop .38s ease;
+}
+.action-flash{
+  animation:panelFlash .62s ease;
+}
+.msg-pop{
+  animation:msgPop .42s ease;
+}
+.btn-action-active{
+  background:linear-gradient(135deg,#4f46e5,#7c3aed) !important;
+  color:#fff !important;
+  border-color:transparent !important;
+  box-shadow:0 10px 24px rgba(79,70,229,.22) !important;
+}
+.btn-action-active svg,
+.btn-action-active small,
+.btn-action-active span{
+  color:inherit !important;
+}
+.btn:focus-visible,
+.lang-tab:focus-visible,
+.copy-btn:focus-visible,
+.related-links a:focus-visible,
+.hub-card a:focus-visible,
+.nav a:focus-visible,
+.ghost-btn:focus-visible,
+.search-btn:focus-visible,
+.small-btn:focus-visible,
+.chip:focus-visible,
+button:focus-visible{
+  outline:3px solid rgba(99,102,241,.22);
+  outline-offset:2px;
+}
+@keyframes btnClickPop{
+  0%{transform:scale(.98)}
+  45%{transform:scale(1.04)}
+  100%{transform:scale(1)}
+}
+@keyframes panelFlash{
+  0%{box-shadow:var(--shadow,0 18px 40px rgba(16,24,40,.08))}
+  35%{box-shadow:0 0 0 3px rgba(99,102,241,.14),0 18px 40px rgba(79,70,229,.16)}
+  100%{box-shadow:var(--shadow,0 18px 40px rgba(16,24,40,.08))}
+}
+@keyframes msgPop{
+  0%{transform:translateY(0);opacity:.85}
+  50%{transform:translateY(-2px);opacity:1}
+  100%{transform:translateY(0);opacity:1}
+}

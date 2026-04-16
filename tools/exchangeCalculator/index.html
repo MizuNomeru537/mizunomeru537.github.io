@@ -1,40 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/>
-  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/>
-  <meta name="theme-color" content="#4f46e5"/>
-  <meta name="referrer" content="strict-origin-when-cross-origin"/>
-  <title>Exchange Calculator | ToolLab</title>
-  <meta name="description" content="Convert currencies with market snapshot, reference rate, manual rate, fee estimate, and reverse target-receive calculation in your browser."/>
-  
-<link rel="canonical" href="https://mizunomeru537.github.io/tools/exchangeCalculator/"/>
-<link rel="icon" type="image/x-icon" href="../../favicon.ico"/>
-<link rel="icon" type="image/png" href="../../favicon-32x32.png"/>
-<link rel="apple-touch-icon" type="image/png" href="../../apple-touch-icon.png"/>
-<link rel="manifest" href="../../site.webmanifest"/>
-<meta property="og:type" content="website"/>
-<meta property="og:site_name" content="ToolLab"/>
-<meta property="og:title" content="Exchange Calculator | ToolLab"/>
-<meta property="og:description" content="Convert currencies with market snapshot, reference rate, manual rate, fee estimate, and reverse target-receive calculation."/>
-<meta property="og:url" content="https://mizunomeru537.github.io/tools/exchangeCalculator/"/>
-<meta property="og:image" content="https://mizunomeru537.github.io/assets/seo-cover.png"/>
-<meta property="og:image:width" content="1200"/>
-<meta property="og:image:height" content="630"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Exchange Calculator | ToolLab"/>
-<meta name="twitter:description" content="Convert currencies with market snapshot, reference rate, manual rate, fee estimate, and reverse target-receive calculation."/>
-<meta name="twitter:image" content="https://mizunomeru537.github.io/assets/seo-cover.png"/>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://mizunomeru537.github.io/#website","url":"https://mizunomeru537.github.io/","name":"ToolLab","alternateName":["도구랩","Tool Lab"],"inLanguage":"en"},{"@type":"WebPage","@id":"https://mizunomeru537.github.io/tools/exchangeCalculator/#webpage","url":"https://mizunomeru537.github.io/tools/exchangeCalculator/","name":"Exchange Calculator | ToolLab","description":"Browser-based currency converter with market snapshot, reference rate, manual rate, fee estimate, and reverse target calculation.","isPartOf":{"@id":"https://mizunomeru537.github.io/#website"}}]}</script>
 
-  
-        <link rel="stylesheet" href="../../assets/tool.css?v=20260408-4"/>
-        <link rel="stylesheet" href="../../assets/lang.css?v=20260408-4"/>
-        <script defer src="../../assets/i18n.js?v=20260408-4"></script>
-        <script defer src="../../assets/lang-fix.js?v=20260408-4"></script>
-        <style>
+<html lang="en">
+<head><script data-fixed-lang="1">localStorage.setItem('toollab_lang','en');document.documentElement.lang='en';document.documentElement.dir='ltr';</script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/>
+<meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="googlebot"/>
+<meta content="#4f46e5" name="theme-color"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<title>Exchange Calculator | ToolLab</title>
+<meta content="Convert currencies with market snapshot, reference rate, manual rate, fee estimate, and reverse target-receive calculation in your browser." name="description"/>
+<link href="https://mizunomeru537.github.io/tools/exchangeCalculator/" rel="canonical"/>
+<link href="../../favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="../../favicon-32x32.png" rel="icon" type="image/png"/>
+<link href="../../apple-touch-icon.png" rel="apple-touch-icon" type="image/png"/>
+<link href="../../site.webmanifest" rel="manifest"/>
+<meta content="website" property="og:type"/>
+<meta content="ToolLab" property="og:site_name"/>
+<meta content="Exchange Calculator | ToolLab" property="og:title"/>
+<meta content="Convert currencies with market snapshot, reference rate, manual rate, fee estimate, and reverse target-receive calculation." property="og:description"/>
+<meta content="https://mizunomeru537.github.io/tools/exchangeCalculator/" property="og:url"/>
+<meta content="https://mizunomeru537.github.io/assets/seo-cover.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Exchange Calculator | ToolLab" name="twitter:title"/>
+<meta content="Convert currencies with market snapshot, reference rate, manual rate, fee estimate, and reverse target-receive calculation." name="twitter:description"/>
+<meta content="https://mizunomeru537.github.io/assets/seo-cover.png" name="twitter:image"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://mizunomeru537.github.io/#website","url":"https://mizunomeru537.github.io/","name":"ToolLab","alternateName":["ToolLab","Tool Lab"],"inLanguage":"en"},{"@type":"WebPage","@id":"https://mizunomeru537.github.io/tools/exchangeCalculator/#webpage","url":"https://mizunomeru537.github.io/tools/exchangeCalculator/","name":"Exchange Calculator | ToolLab","description":"Browser-based currency converter with market snapshot, reference rate, manual rate, fee estimate, and reverse target calculation.","isPartOf":{"@id":"https://mizunomeru537.github.io/#website"}}]}</script>
+<link href="../../assets/tool.css?v=20260408-4" rel="stylesheet"/>
+<link href="../../assets/lang.css?v=20260408-4" rel="stylesheet"/>
+<script defer="" src="../../assets/i18n.js?v=20260408-4"></script>
+<script defer="" src="../../assets/lang-fix.js?v=20260408-4"></script>
+<style>
 
 .fx-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
 .fx-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -101,223 +99,203 @@
 @media (max-width:760px){.fx-inline,.fx-rate-row{grid-template-columns:1fr}.fx-picker-grid{grid-template-columns:1fr 1fr;padding:0 14px 14px}.fx-picker-top,.fx-picker-search{padding-left:14px;padding-right:14px}.fx-big{font-size:34px}}
 
         </style>
-
-</head>
+<meta content="ToolLab" name="author"/><meta content="ToolLab" name="application-name"/><link href="https://mizunomeru537.github.io/feed.xml" rel="alternate" title="ToolLab updates" type="application/rss+xml"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "왜 어떤 날은 기준 환율과 시장 스냅샷 값이 다르게 보이나요?", "acceptedAnswer": {"@type": "Answer", "text": "기준 환율은 일일 기준 데이터라 장중 변동을 바로 반영하지 않습니다. 시장 스냅샷은 장중에 더 가깝지만 지연 시세일 수 있습니다."}}, {"@type": "Question", "name": "1497처럼 전일 값 비슷하게 보이던 문제는 어떻게 바뀌었나요?", "acceptedAnswer": {"@type": "Answer", "text": "이제 소스를 분리해서 보여주고, 시장 스냅샷이 실패하면 분명하게 기준 환율로 전환되었다고 표시합니다."}}, {"@type": "Question", "name": "정확히 내가 본 숫자와 맞추고 싶으면 어떻게 하나요?", "acceptedAnswer": {"@type": "Answer", "text": "직접 입력 모드에서 1 기준통화 = ? 환전통화 값을 넣으면 됩니다. 예를 들어 1 USD = 1473 KRW처럼 바로 맞출 수 있습니다."}}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Exchange Calculator", "url": "https://mizunomeru537.github.io/tools/exchangeCalculator/", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "description": "Convert currencies with market snapshot, reference rate, manual rate, fee estimate, and reverse target-receive calculation in your browser.", "browserRequirements": "Requires a modern browser with JavaScript enabled."}</script><meta content="en_US" property="og:locale"/><meta content="en" http-equiv="Content-Language"/><link href="https://mizunomeru537.github.io/tools/exchangeCalculator/" hreflang="en" rel="alternate"/><link href="https://mizunomeru537.github.io/ko/tools/exchangeCalculator/" hreflang="ko" rel="alternate"/><link href="https://mizunomeru537.github.io/ja/tools/exchangeCalculator/" hreflang="ja" rel="alternate"/><link href="https://mizunomeru537.github.io/zh-cn/tools/exchangeCalculator/" hreflang="zh-CN" rel="alternate"/><link href="https://mizunomeru537.github.io/zh-tw/tools/exchangeCalculator/" hreflang="zh-TW" rel="alternate"/><link href="https://mizunomeru537.github.io/fr/tools/exchangeCalculator/" hreflang="fr" rel="alternate"/><link href="https://mizunomeru537.github.io/de/tools/exchangeCalculator/" hreflang="de" rel="alternate"/><link href="https://mizunomeru537.github.io/ru/tools/exchangeCalculator/" hreflang="ru" rel="alternate"/><link href="https://mizunomeru537.github.io/es/tools/exchangeCalculator/" hreflang="es" rel="alternate"/><link href="https://mizunomeru537.github.io/es-419/tools/exchangeCalculator/" hreflang="es-419" rel="alternate"/><link href="https://mizunomeru537.github.io/id/tools/exchangeCalculator/" hreflang="id" rel="alternate"/><link href="https://mizunomeru537.github.io/ar/tools/exchangeCalculator/" hreflang="ar" rel="alternate"/><link href="https://mizunomeru537.github.io/tools/exchangeCalculator/" hreflang="x-default" rel="alternate"/></head>
 <body>
 <header class="topbar">
-  <div class="container topbar-inner">
-    <a class="brand" href="../../index.html">
-      <span class="brand-mark">⚡</span>
-      <span id="brandText">도구랩</span>
-    </a>
-    <nav class="nav">
-      <a href="../../index.html" id="navHome">홈</a>
-      <a href="../../index.html#featured" id="navFeatured">추천 도구</a>
-      <a href="../../tools/" id="navTools">전체 도구</a>
-      <a href="../../about.html" id="navAbout">소개</a>
-    </nav>
-  </div>
+<div class="container topbar-inner">
+<a class="brand" href="../../index.html">
+<span class="brand-mark">⚡</span>
+<span id="brandText">ToolLab</span>
+</a>
+<nav class="nav">
+<a href="../../index.html" id="navHome">Home</a>
+<a href="../../index.html#featured" id="navFeatured">Featured Tools</a>
+<a href="../../tools/" id="navTools">All Tools</a>
+<a href="../../about.html" id="navAbout">About</a>
+</nav>
+</div>
 </header>
-
 <main>
-  <section class="hero">
-    <div class="container">
-      <div class="hero-card">
-        <div class="pill" id="heroPill">환율 · 시장 스냅샷 / 기준 환율 / 직접 입력</div>
-        <h1 id="heroTitle">ToolLab 스타일로 다시 만든<br>환율 계산기</h1>
-        <p id="heroDesc">이전처럼 일일 기준값을 마치 실시간처럼 보이게 하지 않고, <strong>시장 스냅샷</strong>, <strong>기준 환율</strong>, <strong>직접 입력</strong>을 분리했습니다. 여기에 <strong>수수료 반영</strong>과 <strong>목표 수령액 기준 역산</strong>까지 추가해 한 화면에서 처리합니다.</p>
-        <div class="hero-actions">
-          <a class="btn btn-light" href="#calculator" id="heroBtnCalc">바로 계산하기</a>
-          <a class="btn btn-secondary" href="#guide" id="heroBtnGuide">사용 방법 보기</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="calculator">
-    <div class="container fx-grid">
-      <div class="panel fx-card">
-        <div class="section-head">
-          <div>
-            <h2 id="settingsTitle">환율 설정</h2>
-            <p class="fx-subtitle" id="settingsDesc">보유 통화와 환전 통화를 고른 뒤, 어떤 방식으로 값을 가져올지 선택합니다.</p>
-          </div>
-        </div>
-
-        <div class="fx-control">
-          <label id="labelMode">환율 방식</label>
-          <div class="fx-mode-group">
-            <button class="fx-mode active" type="button" data-mode="market" id="modeMarketBtn">시장 스냅샷</button>
-            <button class="fx-mode" type="button" data-mode="reference" id="modeReferenceBtn">기준 환율</button>
-            <button class="fx-mode" type="button" data-mode="manual" id="modeManualBtn">직접 입력</button>
-          </div>
-          <div class="fx-note" id="modeHelper">시장 스냅샷은 공공 시세 페이지의 지연 호가를 best-effort로 읽어옵니다. 실패하면 기준 환율로 자동 전환됩니다.</div>
-        </div>
-
-        <div class="fx-pair">
-          <button class="fx-pick" id="fromBtn" type="button"><div id="fromMeta"></div></button>
-          <button class="fx-swap" id="swapBtn" type="button" aria-label="Swap currencies">⇄</button>
-          <button class="fx-pick" id="toBtn" type="button"><div id="toMeta"></div></button>
-        </div>
-
-        <div class="grid-2">
-          <div class="fx-control">
-            <label for="amountInput" id="labelAmount">금액 입력</label>
-            <div class="fx-inline">
-              <div class="code-box" id="fromCode">USD</div>
-              <input id="amountInput" type="number" inputmode="decimal" step="any" min="0" value="1000" placeholder="입력 금액" data-ph-key="phAmount"/>
-            </div>
-          </div>
-          <div class="fx-control">
-            <label for="manualRateInput" id="labelManualRate">직접 환율 입력</label>
-            <div class="fx-rate-row">
-              <input id="manualRateInput" type="number" inputmode="decimal" step="any" min="0" placeholder="예: 1473.00" data-ph-key="phManualRate" disabled/>
-              <input id="decimalInput" type="number" inputmode="numeric" step="1" min="0" max="8" value="2" placeholder="소수 자리" data-ph-key="phDecimals"/>
-            </div>
-            <div class="inline-note" id="manualHint">입력 형식: 1 기준통화 = ? 환전통화</div>
-          </div>
-        </div>
-
-        <div class="grid-2">
-          <div class="fx-control">
-            <label for="feePercentInput" id="labelFeePercent">퍼센트 수수료</label>
-            <input id="feePercentInput" type="number" inputmode="decimal" step="any" min="0" value="0" placeholder="예: 1.5" data-ph-key="phFeePercent"/>
-          </div>
-          <div class="fx-control">
-            <label for="fixedFeeInput" id="labelFixedFee">고정 수수료</label>
-            <input id="fixedFeeInput" type="number" inputmode="decimal" step="any" min="0" value="0" placeholder="예: 3" data-ph-key="phFixedFee"/>
-          </div>
-        </div>
-
-        <div class="fx-control">
-          <label for="targetReceiveInput" id="labelTargetReceive">목표 수령액 기준 역산</label>
-          <div class="fx-rate-row">
-            <input id="targetReceiveInput" type="number" inputmode="decimal" step="any" min="0" placeholder="받고 싶은 금액 입력" data-ph-key="phTargetReceive"/>
-            <button class="btn btn-light" id="calcReverseBtn" type="button">필요 금액 계산</button>
-          </div>
-          <div class="inline-note" id="reverseHint">수수료까지 반영해서 목표 수령액을 받으려면 얼마나 보내야 하는지 계산합니다.</div>
-        </div>
-
-        <div class="fx-actions">
-          <button class="btn btn-primary" id="calcBtn" type="button">계산하기</button>
-          <button class="btn btn-light" id="resetBtn" type="button">초기화</button>
-          <button class="btn btn-light" id="copyBtn" type="button">결과 복사</button>
-        </div>
-        <div class="msg fx-status info" id="statusText">시장 스냅샷과 기준 환율을 분리해서 표시합니다.</div>
-      </div>
-
-      <div class="panel fx-card">
-        <div class="section-head">
-          <div>
-            <h2 id="resultTitle">계산 결과</h2>
-            <p class="fx-subtitle" id="sourceText">자동 소스: 시장 스냅샷 → 실패 시 기준 환율</p>
-          </div>
-        </div>
-
-        <div class="fx-result-hero">
-          <div class="fx-kicker" id="resultKicker">결과</div>
-          <div class="fx-big" id="resultBig">-</div>
-          <p class="fx-eq" id="resultEq">-</p>
-        </div>
-
-        <div class="fx-meta">
-          <div class="card"><span id="metaRateLabel">적용 환율</span><strong id="resultRate">-</strong></div>
-          <div class="card"><span id="metaUpdatedLabel">기준 시각</span><strong id="resultUpdated">-</strong></div>
-          <div class="card"><span id="metaSourceLabel">데이터 출처</span><strong id="resultSource">-</strong></div>
-        </div>
-
-        <div class="fx-control">
-          <label for="convertedOutput" id="labelCopyField">복사용 결과</label>
-          <input id="convertedOutput" type="text" readonly placeholder="계산 후 여기에 표시됩니다." data-ph-key="phCopyField"/>
-        </div>
-
-        <div class="fx-note warn">
-          <strong id="warnTitle">참고</strong><br/>
-          <span id="warnBody">시장 스냅샷은 장중에 더 가깝지만 지연 시세일 수 있고, 기준 환율은 가장 안정적인 대신 장중 시세와 다를 수 있습니다.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container fx-grid-2">
-      <div class="panel">
-        <div class="section-head">
-          <div>
-            <h2 id="chartTitle">최근 기준 환율 차트</h2>
-            <p class="fx-subtitle" id="chartDesc">최근 7영업일 기준으로 같은 통화쌍의 흐름을 보여줍니다.</p>
-          </div>
-          <div class="fx-watch-tag" id="chartStatus">차트 준비중</div>
-        </div>
-        <div class="fx-chart-wrap" id="chartWrap"><div class="inline-note" id="chartLoadingText">Loading chart data.</div></div>
-        <div class="fx-legend" id="chartLegend"></div>
-      </div>
-
-      <div class="panel">
-        <div class="section-head">
-          <div>
-            <h2 id="watchTitle">빠른 비교</h2>
-            <p class="fx-subtitle" id="watchDesc">자주 보는 통화들을 현재 기준 통화 기준으로 같이 확인합니다.</p>
-          </div>
-          <div class="fx-watch-tag" id="watchSourceTag">시장 스냅샷</div>
-        </div>
-        <div class="fx-watch" id="watchList"></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="guide">
-    <div class="container">
-      <div class="panel seo-panel">
-        <h2 id="guideTitle">이 버전에서 바뀐 점</h2>
-        <p id="guideIntro">이전처럼 일일 기준값만 보고 실시간처럼 오해하기 쉬운 구성을 줄이고, 소스 성격을 구분해서 보이도록 다시 정리했습니다. 메인 ToolLab의 밝은 카드형 레이아웃과 맞추어 전체 디자인도 통일했습니다.</p>
-        <h3 id="howToTitle">사용 방법</h3>
-        <ol>
-          <li id="step1">보유 통화와 환전 통화를 고릅니다.</li>
-          <li id="step2">시장 스냅샷, 기준 환율, 직접 입력 중 하나를 선택합니다.</li>
-          <li id="step3">금액을 넣고 계산하면 결과와 적용 환율, 기준 시각, 데이터 출처가 함께 표시됩니다.</li>
-        </ol>
-        <h3 id="tipsTitle">추천 사용 방식</h3>
-        <div class="related-links">
-          <a href="javascript:void(0)" id="tipMarket">장중 느낌이 필요할 때 → 시장 스냅샷</a>
-          <a href="javascript:void(0)" id="tipReference">안정적으로 계산할 때 → 기준 환율</a>
-          <a href="javascript:void(0)" id="tipManual">내가 본 숫자와 맞출 때 → 직접 입력</a>
-        </div>
-        <h3 id="faqTitle">FAQ</h3>
-        <div class="faq-list">
-          <details open>
-            <summary id="faqQ1">왜 어떤 날은 기준 환율과 시장 스냅샷 값이 다르게 보이나요?</summary>
-            <p id="faqA1">기준 환율은 일일 기준 데이터라 장중 변동을 바로 반영하지 않습니다. 시장 스냅샷은 장중에 더 가깝지만 지연 시세일 수 있습니다.</p>
-          </details>
-          <details>
-            <summary id="faqQ2">1497처럼 전일 값 비슷하게 보이던 문제는 어떻게 바뀌었나요?</summary>
-            <p id="faqA2">이제 소스를 분리해서 보여주고, 시장 스냅샷이 실패하면 분명하게 기준 환율로 전환되었다고 표시합니다.</p>
-          </details>
-          <details>
-            <summary id="faqQ3">정확히 내가 본 숫자와 맞추고 싶으면 어떻게 하나요?</summary>
-            <p id="faqA3">직접 입력 모드에서 1 기준통화 = ? 환전통화 값을 넣으면 됩니다. 예를 들어 1 USD = 1473 KRW처럼 바로 맞출 수 있습니다.</p>
-          </details>
-        </div>
-      </div>
-    </div>
-  </section>
+<section class="hero">
+<div class="container">
+<div class="hero-card">
+<div class="pill" id="heroPill">환율 · 시장 스냅샷 / 기준 환율 / 직접 입력</div>
+<h1 id="heroTitle">ToolLab 스타일로 다시 만든<br/>Exchange Calculator</h1>
+<p id="heroDesc">이전처럼 일일 기준값을 마치 실시간처럼 보이게 하지 않고, <strong>시장 스냅샷</strong>, <strong>기준 환율</strong>, <strong>직접 입력</strong>을 분리했습니다. 여기에 <strong>수수료 반영</strong>과 <strong>목표 수령액 기준 역산</strong>까지 추가해 한 화면에서 처리합니다.</p>
+<div class="hero-actions">
+<a class="btn btn-light" href="#calculator" id="heroBtnCalc">바로 계산하기</a>
+<a class="btn btn-secondary" href="#guide" id="heroBtnGuide">사용 방법 보기</a>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="calculator">
+<div class="container fx-grid">
+<div class="panel fx-card">
+<div class="section-head">
+<div>
+<h2 id="settingsTitle">환율 설정</h2>
+<p class="fx-subtitle" id="settingsDesc">보유 통화와 환전 통화를 고른 뒤, 어떤 방식으로 값을 가져올지 선택합니다.</p>
+</div>
+</div>
+<div class="fx-control">
+<label id="labelMode">환율 방식</label>
+<div class="fx-mode-group">
+<button class="fx-mode active" data-mode="market" id="modeMarketBtn" type="button">시장 스냅샷</button>
+<button class="fx-mode" data-mode="reference" id="modeReferenceBtn" type="button">기준 환율</button>
+<button class="fx-mode" data-mode="manual" id="modeManualBtn" type="button">직접 입력</button>
+</div>
+<div class="fx-note" id="modeHelper">시장 스냅샷은 공공 시세 페이지의 지연 호가를 best-effort로 읽어옵니다. 실패하면 기준 환율로 자동 전환됩니다.</div>
+</div>
+<div class="fx-pair">
+<button class="fx-pick" id="fromBtn" type="button"><div id="fromMeta"></div></button>
+<button aria-label="Swap currencies" class="fx-swap" id="swapBtn" type="button">⇄</button>
+<button class="fx-pick" id="toBtn" type="button"><div id="toMeta"></div></button>
+</div>
+<div class="grid-2">
+<div class="fx-control">
+<label for="amountInput" id="labelAmount">금액 입력</label>
+<div class="fx-inline">
+<div class="code-box" id="fromCode">USD</div>
+<input data-ph-key="phAmount" id="amountInput" inputmode="decimal" min="0" placeholder="입력 금액" step="any" type="number" value="1000"/>
+</div>
+</div>
+<div class="fx-control">
+<label for="manualRateInput" id="labelManualRate">직접 환율 입력</label>
+<div class="fx-rate-row">
+<input data-ph-key="phManualRate" disabled="" id="manualRateInput" inputmode="decimal" min="0" placeholder="예: 1473.00" step="any" type="number"/>
+<input data-ph-key="phDecimals" id="decimalInput" inputmode="numeric" max="8" min="0" placeholder="소수 자리" step="1" type="number" value="2"/>
+</div>
+<div class="inline-note" id="manualHint">입력 형식: 1 기준통화 = ? 환전통화</div>
+</div>
+</div>
+<div class="grid-2">
+<div class="fx-control">
+<label for="feePercentInput" id="labelFeePercent">퍼센트 수수료</label>
+<input data-ph-key="phFeePercent" id="feePercentInput" inputmode="decimal" min="0" placeholder="예: 1.5" step="any" type="number" value="0"/>
+</div>
+<div class="fx-control">
+<label for="fixedFeeInput" id="labelFixedFee">고정 수수료</label>
+<input data-ph-key="phFixedFee" id="fixedFeeInput" inputmode="decimal" min="0" placeholder="예: 3" step="any" type="number" value="0"/>
+</div>
+</div>
+<div class="fx-control">
+<label for="targetReceiveInput" id="labelTargetReceive">목표 수령액 기준 역산</label>
+<div class="fx-rate-row">
+<input data-ph-key="phTargetReceive" id="targetReceiveInput" inputmode="decimal" min="0" placeholder="받고 싶은 금액 입력" step="any" type="number"/>
+<button class="btn btn-light" id="calcReverseBtn" type="button">필요 금액 계산</button>
+</div>
+<div class="inline-note" id="reverseHint">수수료까지 반영해서 목표 수령액을 받으려면 얼마나 보내야 하는지 계산합니다.</div>
+</div>
+<div class="fx-actions">
+<button class="btn btn-primary" id="calcBtn" type="button">계산하기</button>
+<button class="btn btn-light" id="resetBtn" type="button">초기화</button>
+<button class="btn btn-light" id="copyBtn" type="button">결과 복사</button>
+</div>
+<div class="msg fx-status info" id="statusText">시장 스냅샷과 기준 환율을 분리해서 표시합니다.</div>
+</div>
+<div class="panel fx-card">
+<div class="section-head">
+<div>
+<h2 id="resultTitle">계산 결과</h2>
+<p class="fx-subtitle" id="sourceText">자동 소스: 시장 스냅샷 → 실패 시 기준 환율</p>
+</div>
+</div>
+<div class="fx-result-hero">
+<div class="fx-kicker" id="resultKicker">결과</div>
+<div class="fx-big" id="resultBig">-</div>
+<p class="fx-eq" id="resultEq">-</p>
+</div>
+<div class="fx-meta">
+<div class="card"><span id="metaRateLabel">적용 환율</span><strong id="resultRate">-</strong></div>
+<div class="card"><span id="metaUpdatedLabel">기준 시각</span><strong id="resultUpdated">-</strong></div>
+<div class="card"><span id="metaSourceLabel">데이터 출처</span><strong id="resultSource">-</strong></div>
+</div>
+<div class="fx-control">
+<label for="convertedOutput" id="labelCopyField">복사용 결과</label>
+<input data-ph-key="phCopyField" id="convertedOutput" placeholder="계산 후 여기에 표시됩니다." readonly="" type="text"/>
+</div>
+<div class="fx-note warn">
+<strong id="warnTitle">참고</strong><br/>
+<span id="warnBody">시장 스냅샷은 장중에 더 가깝지만 지연 시세일 수 있고, 기준 환율은 가장 안정적인 대신 장중 시세와 다를 수 있습니다.</span>
+</div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="container fx-grid-2">
+<div class="panel">
+<div class="section-head">
+<div>
+<h2 id="chartTitle">최근 기준 환율 차트</h2>
+<p class="fx-subtitle" id="chartDesc">최근 7영업일 기준으로 같은 통화쌍의 흐름을 보여줍니다.</p>
+</div>
+<div class="fx-watch-tag" id="chartStatus">차트 준비중</div>
+</div>
+<div class="fx-chart-wrap" id="chartWrap"><div class="inline-note" id="chartLoadingText">Loading chart data.</div></div>
+<div class="fx-legend" id="chartLegend"></div>
+</div>
+<div class="panel">
+<div class="section-head">
+<div>
+<h2 id="watchTitle">빠른 비교</h2>
+<p class="fx-subtitle" id="watchDesc">자주 보는 통화들을 현재 기준 통화 기준으로 같이 확인합니다.</p>
+</div>
+<div class="fx-watch-tag" id="watchSourceTag">시장 스냅샷</div>
+</div>
+<div class="fx-watch" id="watchList"></div>
+</div>
+</div>
+</section>
+<section class="section" id="guide">
+<div class="container">
+<div class="panel seo-panel">
+<h2 id="guideTitle">이 버전에서 바뀐 점</h2>
+<p id="guideIntro">이전처럼 일일 기준값만 보고 실시간처럼 오해하기 쉬운 구성을 줄이고, 소스 성격을 구분해서 보이도록 다시 정리했습니다. 메인 ToolLab의 밝은 카드형 레이아웃과 맞추어 All 디자인도 통일했습니다.</p>
+<h3 id="howToTitle">사용 방법</h3>
+<ol>
+<li id="step1">보유 통화와 환전 통화를 고릅니다.</li>
+<li id="step2">시장 스냅샷, 기준 환율, 직접 입력 중 하나를 선택합니다.</li>
+<li id="step3">금액을 넣고 계산하면 결과와 적용 환율, 기준 시각, 데이터 출처가 함께 표시됩니다.</li>
+</ol>
+<h3 id="tipsTitle">추천 사용 방식</h3>
+<div class="related-links">
+<a href="javascript:void(0)" id="tipMarket">장중 느낌이 필요할 때 → 시장 스냅샷</a>
+<a href="javascript:void(0)" id="tipReference">안정적으로 계산할 때 → 기준 환율</a>
+<a href="javascript:void(0)" id="tipManual">내가 본 숫자와 맞출 때 → 직접 입력</a>
+</div>
+<h3 id="faqTitle">FAQ</h3>
+<div class="faq-list">
+<details open="">
+<summary id="faqQ1">왜 어떤 날은 기준 환율과 시장 스냅샷 값이 다르게 보이나요?</summary>
+<p id="faqA1">기준 환율은 일일 기준 데이터라 장중 변동을 바로 반영하지 않습니다. 시장 스냅샷은 장중에 더 가깝지만 지연 시세일 수 있습니다.</p>
+</details>
+<details>
+<summary id="faqQ2">1497처럼 전일 값 비슷하게 보이던 문제는 어떻게 바뀌었나요?</summary>
+<p id="faqA2">이제 소스를 분리해서 보여주고, 시장 스냅샷이 실패하면 분명하게 기준 환율로 전환되었다고 표시합니다.</p>
+</details>
+<details>
+<summary id="faqQ3">정확히 내가 본 숫자와 맞추고 싶으면 어떻게 하나요?</summary>
+<p id="faqA3">직접 입력 모드에서 1 기준통화 = ? 환전통화 값을 넣으면 됩니다. 예를 들어 1 USD = 1473 KRW처럼 바로 맞출 수 있습니다.</p>
+</details>
+</div>
+</div>
+</div>
+</section>
 </main>
-
-<div class="fx-picker-backdrop" id="pickerBackdrop" aria-hidden="true">
-  <div class="fx-picker">
-    <div class="fx-picker-top">
-      <h3 id="pickerTitle">통화 선택</h3>
-      <button type="button" id="pickerClose" aria-label="닫기">✕</button>
-    </div>
-    <div class="fx-picker-search">
-      <input id="pickerSearch" type="search" placeholder="국가명, 통화코드, 통화명 검색" data-ph-key="phPickerSearch"/>
-    </div>
-    <div class="fx-picker-grid" id="pickerGrid"></div>
-  </div>
+<div aria-hidden="true" class="fx-picker-backdrop" id="pickerBackdrop">
+<div class="fx-picker">
+<div class="fx-picker-top">
+<h3 id="pickerTitle">통화 선택</h3>
+<button aria-label="닫기" id="pickerClose" type="button">✕</button>
+</div>
+<div class="fx-picker-search">
+<input data-ph-key="phPickerSearch" id="pickerSearch" placeholder="국가명, 통화코드, 통화명 검색" type="search"/>
+</div>
+<div class="fx-picker-grid" id="pickerGrid"></div>
+</div>
 </div>
 <div class="fx-toast" id="fxToast"></div>
-
-
 <script>
 (() => {
   const currencies = [{"code": "KRW", "name": "대한민국 원", "country": "대한민국", "flag": "kr", "emoji": "🇰🇷"}, {"code": "USD", "name": "미국 달러", "country": "미국", "flag": "us", "emoji": "🇺🇸"}, {"code": "JPY", "name": "일본 엔", "country": "일본", "flag": "jp", "emoji": "🇯🇵"}, {"code": "CNY", "name": "중국 위안", "country": "중국", "flag": "cn", "emoji": "🇨🇳"}, {"code": "EUR", "name": "유로", "country": "유럽연합", "flag": "eu", "emoji": "🇪🇺"}, {"code": "GBP", "name": "영국 파운드", "country": "영국", "flag": "gb", "emoji": "🇬🇧"}, {"code": "AUD", "name": "호주 달러", "country": "호주", "flag": "au", "emoji": "🇦🇺"}, {"code": "CAD", "name": "캐나다 달러", "country": "캐나다", "flag": "ca", "emoji": "🇨🇦"}, {"code": "CHF", "name": "스위스 프랑", "country": "스위스", "flag": "ch", "emoji": "🇨🇭"}, {"code": "HKD", "name": "홍콩 달러", "country": "홍콩", "flag": "hk", "emoji": "🇭🇰"}, {"code": "SGD", "name": "싱가포르 달러", "country": "싱가포르", "flag": "sg", "emoji": "🇸🇬"}, {"code": "TWD", "name": "대만 달러", "country": "대만", "flag": "tw", "emoji": "🇹🇼"}, {"code": "THB", "name": "태국 바트", "country": "태국", "flag": "th", "emoji": "🇹🇭"}, {"code": "VND", "name": "베트남 동", "country": "베트남", "flag": "vn", "emoji": "🇻🇳"}, {"code": "PHP", "name": "필리핀 페소", "country": "필리핀", "flag": "ph", "emoji": "🇵🇭"}, {"code": "MYR", "name": "말레이시아 링깃", "country": "말레이시아", "flag": "my", "emoji": "🇲🇾"}, {"code": "IDR", "name": "인도네시아 루피아", "country": "인도네시아", "flag": "id", "emoji": "🇮🇩"}, {"code": "INR", "name": "인도 루피", "country": "인도", "flag": "in", "emoji": "🇮🇳"}, {"code": "NZD", "name": "뉴질랜드 달러", "country": "뉴질랜드", "flag": "nz", "emoji": "🇳🇿"}, {"code": "SEK", "name": "스웨덴 크로나", "country": "스웨덴", "flag": "se", "emoji": "🇸🇪"}, {"code": "NOK", "name": "노르웨이 크로네", "country": "노르웨이", "flag": "no", "emoji": "🇳🇴"}, {"code": "DKK", "name": "덴마크 크로네", "country": "덴마크", "flag": "dk", "emoji": "🇩🇰"}, {"code": "SAR", "name": "사우디 리얄", "country": "사우디아라비아", "flag": "sa", "emoji": "🇸🇦"}, {"code": "AED", "name": "아랍에미리트 디르함", "country": "아랍에미리트", "flag": "ae", "emoji": "🇦🇪"}, {"code": "KWD", "name": "쿠웨이트 디나르", "country": "쿠웨이트", "flag": "kw", "emoji": "🇰🇼"}, {"code": "QAR", "name": "카타르 리얄", "country": "카타르", "flag": "qa", "emoji": "🇶🇦"}, {"code": "BHD", "name": "바레인 디나르", "country": "바레인", "flag": "bh", "emoji": "🇧🇭"}];
@@ -326,13 +304,13 @@
   const CHART_WINDOW_DAYS = 12;
 
   const PAGE_TEXT = {
-    brandText: { en:'ToolLab', ko:'도구랩', ja:'ツールラボ', 'zh-TW':'工具站', 'zh-CN':'工具站' },
-    navHome: { en:'Home', ko:'홈', ja:'ホーム', 'zh-TW':'首頁', 'zh-CN':'首页' },
-    navFeatured: { en:'Featured tools', ko:'추천 도구', ja:'おすすめツール', 'zh-TW':'推薦工具', 'zh-CN':'推荐工具' },
-    navTools: { en:'All tools', ko:'전체 도구', ja:'全ツール', 'zh-TW':'所有工具', 'zh-CN':'全部工具' },
-    navAbout: { en:'About', ko:'소개', ja:'紹介', 'zh-TW':'介紹', 'zh-CN':'介绍' },
+    brandText: { en:'ToolLab', ko:'ToolLab', ja:'ツールラボ', 'zh-TW':'工具站', 'zh-CN':'工具站' },
+    navHome: { en:'Home', ko:'Home', ja:'ホーム', 'zh-TW':'首頁', 'zh-CN':'首页' },
+    navFeatured: { en:'Featured tools', ko:'Featured Tools', ja:'おすすめツール', 'zh-TW':'推薦工具', 'zh-CN':'推荐工具' },
+    navTools: { en:'All tools', ko:'All Tools', ja:'全ツール', 'zh-TW':'所有工具', 'zh-CN':'全部工具' },
+    navAbout: { en:'About', ko:'About', ja:'紹介', 'zh-TW':'介紹', 'zh-CN':'介绍' },
     heroPill: { en:'Exchange · market snapshot / reference / manual', ko:'환율 · 시장 스냅샷 / 기준 환율 / 직접 입력', ja:'為替・市場スナップショット / 基準レート / 手動入力', 'zh-TW':'匯率・市場快照 / 基準匯率 / 手動輸入', 'zh-CN':'汇率・市场快照 / 基准汇率 / 手动输入' },
-    heroTitle: { en:'Exchange Calculator rebuilt in the ToolLab style', ko:'ToolLab 스타일로 다시 만든 환율 계산기', ja:'ToolLab スタイルで作り直した為替計算ツール', 'zh-TW':'以 ToolLab 風格重新整理的匯率計算器', 'zh-CN':'以 ToolLab 风格重新整理的汇率计算器' },
+    heroTitle: { en:'Exchange Calculator rebuilt in the ToolLab style', ko:'ToolLab 스타일로 다시 만든 Exchange Calculator', ja:'ToolLab スタイルで作り直した為替計算ツール', 'zh-TW':'以 ToolLab 風格重新整理的匯率計算器', 'zh-CN':'以 ToolLab 风格重新整理的汇率计算器' },
     heroDesc: { en:'Separate market snapshot, reference rate, and manual rate clearly. Added fee estimates and reverse calculation for target receive amounts in one screen.', ko:'시장 스냅샷, 기준 환율, 직접 입력을 분리했고 수수료 반영과 목표 수령액 기준 역산까지 한 화면에 넣었습니다.', ja:'市場スナップショット、基準レート、手動入力を分け、手数料反映と受取希望額からの逆算まで 1 画面で扱えます。', 'zh-TW':'清楚區分市場快照、基準匯率與手動輸入，並加入手續費估算與目標收款反算。', 'zh-CN':'清楚区分市场快照、基准汇率与手动输入，并加入手续费估算与目标收款反算。' },
     heroBtnCalc: { en:'Open calculator', ko:'바로 계산하기', ja:'今すぐ計算', 'zh-TW':'立即計算', 'zh-CN':'立即计算' },
     heroBtnGuide: { en:'How to use', ko:'사용 방법 보기', ja:'使い方を見る', 'zh-TW':'查看使用方式', 'zh-CN':'查看使用方法' },
@@ -382,16 +360,16 @@
     faqA2: { en:'The page now separates sources more clearly and explicitly shows when it had to fall back from the market snapshot to the reference rate.', ko:'이제 소스를 분리해서 보여주고, 시장 스냅샷이 실패하면 분명하게 기준 환율로 전환되었다고 표시합니다.', ja:'ソースを分けて表示し、市場スナップショットに失敗した場合は基準レートへ切り替えたことを明示します。', 'zh-TW':'現在會清楚區分資料來源，若市場快照失敗，也會明確標示已切換到基準匯率。', 'zh-CN':'现在会清楚区分数据来源，若市场快照失败，也会明确标示已切换到基准汇率。' },
     faqQ3: { en:'How do I match a number I saw in a bank app?', ko:'정확히 내가 본 숫자와 맞추고 싶으면 어떻게 하나요?', ja:'銀行アプリで見た数字に合わせるには？', 'zh-TW':'想和銀行 App 的數字對上怎麼辦？', 'zh-CN':'想和银行 App 的数字对上怎么办？' },
     faqA3: { en:'Use manual mode and enter the exact rate in the form “1 source currency = ? target currency.”', ko:'직접 입력 모드에서 1 기준통화 = ? 환전통화 값을 넣으면 됩니다. 예를 들어 1 USD = 1473 KRW처럼 바로 맞출 수 있습니다.', ja:'手動入力モードで「1 基準通貨 = ? 換算先通貨」の形で正確なレートを入れれば合わせられます。', 'zh-TW':'使用手動輸入模式，輸入「1 來源貨幣 = ? 目標貨幣」的實際匯率即可。', 'zh-CN':'使用手动输入模式，输入“1 来源货币 = ? 目标货币”的实际汇率即可。' },
-    footerBrandTitle: { en:'ToolLab', ko:'도구랩', ja:'ツールラボ', 'zh-TW':'工具站', 'zh-CN':'工具站' },
-    footerTagline: { en:'A collection of online tools that run directly in your browser.', ko:'브라우저에서 바로 사용하는 온라인 도구 모음.', ja:'ブラウザでそのまま使えるオンラインツール集。', 'zh-TW':'可直接在瀏覽器中使用的線上工具集合。', 'zh-CN':'可直接在浏览器中使用的在线工具合集。' },
+    footerBrandTitle: { en:'ToolLab', ko:'ToolLab', ja:'ツールラボ', 'zh-TW':'工具站', 'zh-CN':'工具站' },
+    footerTagline: { en:'A collection of online tools that run directly in your browser.', ko:'Browser-based online tools for fast everyday work.', ja:'ブラウザでそのまま使えるオンラインツール集。', 'zh-TW':'可直接在瀏覽器中使用的線上工具集合。', 'zh-CN':'可直接在浏览器中使用的在线工具合集。' },
     footerQuickTitle: { en:'Quick links', ko:'바로가기', ja:'クイックリンク', 'zh-TW':'快速連結', 'zh-CN':'快速链接' },
-    footerHome: { en:'Home', ko:'홈', ja:'ホーム', 'zh-TW':'首頁', 'zh-CN':'首页' },
-    footerRoadmap: { en:'Roadmap', ko:'로드맵', ja:'ロードマップ', 'zh-TW':'路線圖', 'zh-CN':'路线图' },
-    footerChangelog: { en:'Changelog', ko:'변경이력', ja:'変更履歴', 'zh-TW':'更新紀錄', 'zh-CN':'更新记录' },
+    footerHome: { en:'Home', ko:'Home', ja:'ホーム', 'zh-TW':'首頁', 'zh-CN':'首页' },
+    footerRoadmap: { en:'Roadmap', ko:'Roadmap', ja:'ロードマップ', 'zh-TW':'路線圖', 'zh-CN':'路线图' },
+    footerChangelog: { en:'Changelog', ko:'Changelog', ja:'変更履歴', 'zh-TW':'更新紀錄', 'zh-CN':'更新记录' },
     footerInfoTitle: { en:'Info', ko:'정보', ja:'情報', 'zh-TW':'資訊', 'zh-CN':'信息' },
-    footerAbout: { en:'About', ko:'소개', ja:'紹介', 'zh-TW':'介紹', 'zh-CN':'介绍' },
-    footerPrivacy: { en:'Privacy Policy', ko:'개인정보처리방침', ja:'プライバシーポリシー', 'zh-TW':'隱私權政策', 'zh-CN':'隐私政策' },
-    footerContact: { en:'Contact', ko:'문의', ja:'お問い合わせ', 'zh-TW':'聯絡', 'zh-CN':'联系' },
+    footerAbout: { en:'About', ko:'About', ja:'紹介', 'zh-TW':'介紹', 'zh-CN':'介绍' },
+    footerPrivacy: { en:'Privacy Policy', ko:'Privacy Policy', ja:'プライバシーポリシー', 'zh-TW':'隱私權政策', 'zh-CN':'隐私政策' },
+    footerContact: { en:'Contact', ko:'Contact', ja:'お問い合わせ', 'zh-TW':'聯絡', 'zh-CN':'联系' },
     phAmount: { en:'Enter amount', ko:'입력 금액', ja:'金額を入力', 'zh-TW':'輸入金額', 'zh-CN':'输入金额' },
     phManualRate: { en:'Example: 1473.00', ko:'예: 1473.00', ja:'例: 1473.00', 'zh-TW':'例如：1473.00', 'zh-CN':'例如：1473.00' },
     phDecimals: { en:'Decimals', ko:'소수 자리', ja:'小数桁', 'zh-TW':'小數位數', 'zh-CN':'小数位数' },
@@ -446,8 +424,8 @@
     PAGE_TEXT[key] = next;
   });
 
-  const RICH_TEXT = {"heroTitle":{"en":"Exchange Calculator rebuilt in the<br>ToolLab style","ko":"ToolLab 스타일로 다시 만든<br>환율 계산기","ja":"ToolLab スタイルで作り直した<br>為替計算ツール","zh-TW":"以 ToolLab 風格重新整理的<br>匯率計算器","zh-CN":"以 ToolLab 风格重新整理的<br>汇率计算器","fr":"Calculateur de change repensé<br>dans le style ToolLab","de":"Wechselkursrechner im<br>ToolLab-Stil neu aufgebaut","ru":"Калькулятор обмена валют,<br>обновлённый в стиле ToolLab","es":"Calculadora de divisas rediseñada<br>con el estilo de ToolLab","id":"Kalkulator kurs yang dibangun ulang<br>dengan gaya ToolLab","ar":"حاسبة صرف العملات<br>بتصميم ToolLab"},"heroDesc":{"en":"Separate <strong>market snapshot</strong>, <strong>reference rate</strong>, and <strong>manual rate</strong> clearly. Added <strong>fee estimates</strong> and <strong>reverse calculation for target receive amounts</strong> in one screen.","ko":"<strong>시장 스냅샷</strong>, <strong>기준 환율</strong>, <strong>직접 입력</strong>을 명확히 분리하고, <strong>수수료 반영</strong>과 <strong>목표 수령액 기준 역산</strong>까지 한 화면에 넣었습니다.","ja":"<strong>市場スナップショット</strong>、<strong>基準レート</strong>、<strong>手動入力</strong>を分け、<strong>手数料反映</strong>と<strong>受取希望額からの逆算</strong>まで 1 画面で扱えます。","zh-TW":"清楚區分<strong>市場快照</strong>、<strong>基準匯率</strong>與<strong>手動輸入</strong>，並加入<strong>手續費估算</strong>與<strong>目標收款反算</strong>。","zh-CN":"清楚区分<strong>市场快照</strong>、<strong>基准汇率</strong>与<strong>手动输入</strong>，并加入<strong>手续费估算</strong>与<strong>目标收款反算</strong>。","fr":"Distingue clairement <strong>l’aperçu du marché</strong>, <strong>le taux de référence</strong> et <strong>la saisie manuelle</strong>. Ajoute aussi <strong>l’estimation des frais</strong> et <strong>le calcul inversé depuis le montant reçu</strong> sur un seul écran.","de":"Trennt <strong>Markt-Snapshot</strong>, <strong>Referenzkurs</strong> und <strong>manuelle Eingabe</strong> klar voneinander. Zusätzlich gibt es <strong>Gebührenschätzung</strong> und <strong>Rückrechnung vom Zielbetrag</strong> auf einer Seite.","ru":"Чётко разделяет <strong>снимок рынка</strong>, <strong>справочный курс</strong> и <strong>ручной ввод</strong>. Также добавлены <strong>оценка комиссий</strong> и <strong>обратный расчёт по целевой сумме получения</strong> на одном экране.","es":"Separa claramente la <strong>instantánea del mercado</strong>, la <strong>tasa de referencia</strong> y la <strong>tasa manual</strong>. También añade <strong>estimación de comisiones</strong> y <strong>cálculo inverso según el monto objetivo a recibir</strong> en una sola pantalla.","id":"Memisahkan dengan jelas <strong>ringkasan pasar</strong>, <strong>kurs referensi</strong>, dan <strong>input manual</strong>. Juga menambahkan <strong>perkiraan biaya</strong> serta <strong>hitung balik dari jumlah target diterima</strong> dalam satu layar.","ar":"يفصل بوضوح بين <strong>لقطة السوق</strong> و<strong>السعر المرجعي</strong> و<strong>الإدخال اليدوي</strong>. كما يضيف <strong>تقدير الرسوم</strong> و<strong>الحساب العكسي بناءً على مبلغ الاستلام المستهدف</strong> في شاشة واحدة."}};
-  const META_TEXT = {"title":{"en":"Exchange Calculator | ToolLab","ko":"환율 계산기 | 도구랩","ja":"為替計算ツール | ツールラボ","zh-TW":"匯率計算器 | 工具站","zh-CN":"汇率计算器 | 工具站","fr":"Calculateur de change | ToolLab","de":"Wechselkursrechner | ToolLab","ru":"Калькулятор обмена валют | ToolLab","es":"Calculadora de divisas | ToolLab","id":"Kalkulator kurs | ToolLab","ar":"حاسبة صرف العملات | ToolLab"},"description":{"en":"Convert currencies with market snapshot, reference rate, manual rate, fee estimate, and reverse target-receive calculation in your browser.","ko":"시장 스냅샷, 기준 환율, 직접 입력, 수수료 반영, 목표 수령액 역산까지 브라우저에서 처리하는 환율 계산기입니다.","ja":"市場スナップショット、基準レート、手動入力、手数料反映、受取希望額からの逆算までブラウザで使える為替計算ツールです。","zh-TW":"支援市場快照、基準匯率、手動輸入、手續費估算與目標收款反算的瀏覽器匯率計算器。","zh-CN":"支持市场快照、基准汇率、手动输入、手续费估算与目标收款反算的浏览器汇率计算器。","fr":"Calculateur de change dans le navigateur avec aperçu du marché, taux de référence, taux manuel, estimation des frais et calcul inverse du montant reçu.","de":"Browserbasierter Wechselkursrechner mit Markt-Snapshot, Referenzkurs, manuellem Kurs, Gebührenschätzung und Rückrechnung vom Zielbetrag.","ru":"Браузерный калькулятор обмена валют со снимком рынка, справочным курсом, ручным курсом, оценкой комиссий и обратным расчётом по сумме получения.","es":"Calculadora de divisas en el navegador con instantánea del mercado, tasa de referencia, tasa manual, estimación de comisiones y cálculo inverso por monto a recibir.","id":"Kalkulator kurs di browser dengan ringkasan pasar, kurs referensi, kurs manual, perkiraan biaya, dan hitung balik dari jumlah target diterima.","ar":"حاسبة صرف عملات داخل المتصفح تدعم لقطة السوق والسعر المرجعي والسعر اليدوي وتقدير الرسوم والحساب العكسي لمبلغ الاستلام."}};
+  const RICH_TEXT = {"heroTitle":{"en":"Exchange Calculator rebuilt in the<br>ToolLab style","ko":"ToolLab 스타일로 다시 만든<br>Exchange Calculator","ja":"ToolLab スタイルで作り直した<br>為替計算ツール","zh-TW":"以 ToolLab 風格重新整理的<br>匯率計算器","zh-CN":"以 ToolLab 风格重新整理的<br>汇率计算器","fr":"Calculateur de change repensé<br>dans le style ToolLab","de":"Wechselkursrechner im<br>ToolLab-Stil neu aufgebaut","ru":"Калькулятор обмена валют,<br>обновлённый в стиле ToolLab","es":"Calculadora de divisas rediseñada<br>con el estilo de ToolLab","id":"Kalkulator kurs yang dibangun ulang<br>dengan gaya ToolLab","ar":"حاسبة صرف العملات<br>بتصميم ToolLab"},"heroDesc":{"en":"Separate <strong>market snapshot</strong>, <strong>reference rate</strong>, and <strong>manual rate</strong> clearly. Added <strong>fee estimates</strong> and <strong>reverse calculation for target receive amounts</strong> in one screen.","ko":"<strong>시장 스냅샷</strong>, <strong>기준 환율</strong>, <strong>직접 입력</strong>을 명확히 분리하고, <strong>수수료 반영</strong>과 <strong>목표 수령액 기준 역산</strong>까지 한 화면에 넣었습니다.","ja":"<strong>市場スナップショット</strong>、<strong>基準レート</strong>、<strong>手動入力</strong>を分け、<strong>手数料反映</strong>と<strong>受取希望額からの逆算</strong>まで 1 画面で扱えます。","zh-TW":"清楚區分<strong>市場快照</strong>、<strong>基準匯率</strong>與<strong>手動輸入</strong>，並加入<strong>手續費估算</strong>與<strong>目標收款反算</strong>。","zh-CN":"清楚区分<strong>市场快照</strong>、<strong>基准汇率</strong>与<strong>手动输入</strong>，并加入<strong>手续费估算</strong>与<strong>目标收款反算</strong>。","fr":"Distingue clairement <strong>l’aperçu du marché</strong>, <strong>le taux de référence</strong> et <strong>la saisie manuelle</strong>. Ajoute aussi <strong>l’estimation des frais</strong> et <strong>le calcul inversé depuis le montant reçu</strong> sur un seul écran.","de":"Trennt <strong>Markt-Snapshot</strong>, <strong>Referenzkurs</strong> und <strong>manuelle Eingabe</strong> klar voneinander. Zusätzlich gibt es <strong>Gebührenschätzung</strong> und <strong>Rückrechnung vom Zielbetrag</strong> auf einer Seite.","ru":"Чётко разделяет <strong>снимок рынка</strong>, <strong>справочный курс</strong> и <strong>ручной ввод</strong>. Также добавлены <strong>оценка комиссий</strong> и <strong>обратный расчёт по целевой сумме получения</strong> на одном экране.","es":"Separa claramente la <strong>instantánea del mercado</strong>, la <strong>tasa de referencia</strong> y la <strong>tasa manual</strong>. También añade <strong>estimación de comisiones</strong> y <strong>cálculo inverso según el monto objetivo a recibir</strong> en una sola pantalla.","id":"Memisahkan dengan jelas <strong>ringkasan pasar</strong>, <strong>kurs referensi</strong>, dan <strong>input manual</strong>. Juga menambahkan <strong>perkiraan biaya</strong> serta <strong>hitung balik dari jumlah target diterima</strong> dalam satu layar.","ar":"يفصل بوضوح بين <strong>لقطة السوق</strong> و<strong>السعر المرجعي</strong> و<strong>الإدخال اليدوي</strong>. كما يضيف <strong>تقدير الرسوم</strong> و<strong>الحساب العكسي بناءً على مبلغ الاستلام المستهدف</strong> في شاشة واحدة."}};
+  const META_TEXT = {"title":{"en":"Exchange Calculator | ToolLab","ko":"Exchange Calculator | ToolLab","ja":"為替計算ツール | ツールラボ","zh-TW":"匯率計算器 | 工具站","zh-CN":"汇率计算器 | 工具站","fr":"Calculateur de change | ToolLab","de":"Wechselkursrechner | ToolLab","ru":"Калькулятор обмена валют | ToolLab","es":"Calculadora de divisas | ToolLab","id":"Kalkulator kurs | ToolLab","ar":"حاسبة صرف العملات | ToolLab"},"description":{"en":"Convert currencies with market snapshot, reference rate, manual rate, fee estimate, and reverse target-receive calculation in your browser.","ko":"시장 스냅샷, 기준 환율, 직접 입력, 수수료 반영, 목표 수령액 역산까지 브라우저에서 처리하는 Exchange Calculator입니다.","ja":"市場スナップショット、基準レート、手動入力、手数料反映、受取希望額からの逆算までブラウザで使える為替計算ツールです。","zh-TW":"支援市場快照、基準匯率、手動輸入、手續費估算與目標收款反算的瀏覽器匯率計算器。","zh-CN":"支持市场快照、基准汇率、手动输入、手续费估算与目标收款反算的浏览器汇率计算器。","fr":"Calculateur de change dans le navigateur avec aperçu du marché, taux de référence, taux manuel, estimation des frais et calcul inverse du montant reçu.","de":"Browserbasierter Wechselkursrechner mit Markt-Snapshot, Referenzkurs, manuellem Kurs, Gebührenschätzung und Rückrechnung vom Zielbetrag.","ru":"Браузерный калькулятор обмена валют со снимком рынка, справочным курсом, ручным курсом, оценкой комиссий и обратным расчётом по сумме получения.","es":"Calculadora de divisas en el navegador con instantánea del mercado, tasa de referencia, tasa manual, estimación de comisiones y cálculo inverso por monto a recibir.","id":"Kalkulator kurs di browser dengan ringkasan pasar, kurs referensi, kurs manual, perkiraan biaya, dan hitung balik dari jumlah target diterima.","ar":"حاسبة صرف عملات داخل المتصفح تدعم لقطة السوق والسعر المرجعي والسعر اليدوي وتقدير الرسوم والحساب العكسي لمبلغ الاستلام."}};
   const SHARED_TEXT_KEYS = {
     brandText:'brand',
     navHome:'nav_home',
@@ -752,27 +730,25 @@
   document.addEventListener('DOMContentLoaded', () => { applyLang(); updateSummary(); calculate(); });
 })();
 </script>
-
-
 <footer class="footer">
-  <div class="container footer-grid">
-    <div>
-      <h4 id="footerBrandTitle">도구랩</h4>
-      <p id="footerTagline">브라우저에서 바로 사용하는 온라인 도구 모음.</p>
-    </div>
-    <div>
-      <h4 id="footerQuickTitle">바로가기</h4>
-      <a href="../../index.html" id="footerHome">홈</a>
-      <a href="../../roadmap.html" id="footerRoadmap">로드맵</a>
-      <a href="../../changelog.html" id="footerChangelog">변경이력</a>
-    </div>
-    <div>
-      <h4 id="footerInfoTitle">정보</h4>
-      <a href="../../about.html" id="footerAbout">소개</a>
-      <a href="../../privacy.html" id="footerPrivacy">개인정보처리방침</a>
-      <a href="../../contact.html" id="footerContact">문의</a>
-    </div>
-  </div>
+<div class="container footer-grid">
+<div>
+<h4 id="footerBrandTitle">ToolLab</h4>
+<p id="footerTagline">Browser-based online tools for fast everyday work.</p>
+</div>
+<div>
+<h4 id="footerQuickTitle">바로가기</h4>
+<a href="../../index.html" id="footerHome">Home</a>
+<a href="../../roadmap.html" id="footerRoadmap">Roadmap</a>
+<a href="../../changelog.html" id="footerChangelog">Changelog</a>
+</div>
+<div>
+<h4 id="footerInfoTitle">정보</h4>
+<a href="../../about.html" id="footerAbout">About</a>
+<a href="../../privacy.html" id="footerPrivacy">Privacy Policy</a>
+<a href="../../contact.html" id="footerContact">Contact</a>
+</div>
+<a href="./tool-sitemap.html">Tool Sitemap</a><a href="./faq.html">FAQ</a><a href="./feed.xml">RSS Feed</a></div>
 </footer>
 </body>
 </html>
