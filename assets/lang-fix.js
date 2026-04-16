@@ -1168,3 +1168,363 @@
   window.addEventListener('load', schedule);
   schedule();
 })();
+
+
+/* ===== ToolLab language completeness patch (v20260416-9) ===== */
+(function(){
+  function ready(fn){
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn, {once:true});
+    else fn();
+  }
+  function currentLang(){
+    try {
+      return (window.ToolI18n && typeof window.ToolI18n.getLang === 'function' && window.ToolI18n.getLang()) || document.documentElement.lang || 'en';
+    } catch(e){
+      return document.documentElement.lang || 'en';
+    }
+  }
+  function pick(map){
+    const l = currentLang();
+    return (map && (map[l] || map[(l || '').toLowerCase()] || map.en || map.ko || map.ja || map['zh-TW'] || map['zh-CN'])) || '';
+  }
+  function setText(node, value){ if(node && typeof value === 'string') node.textContent = value; }
+  function setHTML(node, value){ if(node && typeof value === 'string') node.innerHTML = value; }
+  function setAttr(node, name, value){ if(node && typeof value === 'string') node.setAttribute(name, value); }
+  function slugFromHref(href){
+    if(!href) return '';
+    const clean = href.split('#')[0].split('?')[0];
+    const m = clean.match(/(?:^|\/)([A-Za-z0-9_-]+)\/?$/);
+    if(!m) return '';
+    const slug = m[1];
+    if (slug === 'tools' || slug === 'index.html' || slug === 'index') return '';
+    return slug;
+  }
+  function path(){ return (location.pathname || '').replace(/\\/g,'/'); }
+  function isHome(){ const p = path(); return !/\/tools\//.test(p) && (/\/index\.html$/.test(p) || /\/$/.test(p) || p === ''); }
+  function isToolsHub(){ return /\/tools\/?(?:index\.html)?$/.test(path()); }
+  function isToolPage(){ return /\/tools\/[^\/]+\/?(?:index\.html)?$/.test(path()) && !isToolsHub(); }
+  function toolSlugFromPath(){ const m = path().match(/\/tools\/([^\/]+)\/?(?:index\.html)?$/); return m ? m[1] : ''; }
+  function localizeRelatedLinks(root){
+    (root || document).querySelectorAll('.related-links a, .mini-link, .side-item, #toolGrid .tool-card, .hub-card').forEach(function(el){
+      const anchor = el.matches('a') ? el : (el.querySelector('a') || el);
+      const href = anchor.getAttribute('href') || el.getAttribute('href') || '';
+      const slug = slugFromHref(href);
+      const meta = TOOL_META[slug];
+      if(!meta) return;
+      const title = pick(meta.title);
+      const desc = pick(meta.desc);
+      const strong = el.querySelector('strong,h3');
+      const span = el.querySelector('span,p');
+      if (el.matches('#toolGrid .tool-card, .hub-card')) {
+        setText(el.querySelector('h3'), title);
+        setText(el.querySelector('p'), desc);
+        setText(el.querySelector('.go, a:last-child'), openText());
+      } else if (el.matches('.mini-link, .side-item, .related-links a')) {
+        if (strong) setText(strong, title);
+        if (span) setText(span, desc);
+        if (el.matches('.related-links a')) setText(el, title + ' →');
+      }
+    });
+  }
+  function openText(){
+    try { return (window.ToolI18n && window.ToolI18n.t && (window.ToolI18n.t('open_link') || window.ToolI18n.t('open_tool'))) || pick({en:'Open →',ko:'도구 열기 →',ja:'ツールを開く →','zh-TW':'開啟工具 →','zh-CN':'打开工具 →'}); }
+    catch(e){ return pick({en:'Open →',ko:'도구 열기 →',ja:'ツールを開く →','zh-TW':'開啟工具 →','zh-CN':'打开工具 →'}); }
+  }
+  const TOOL_META = {
+    beautifyCode:{title:{en:'Code Beautifier',ko:'코드 정렬',ja:'コード整形','zh-TW':'程式碼美化','zh-CN':'代码美化'},desc:{en:'Format HTML, CSS, JavaScript, and JSON into a cleaner layout.',ko:'HTML, CSS, JavaScript, JSON 코드를 읽기 좋게 정리합니다.',ja:'HTML・CSS・JavaScript・JSON を読みやすく整形します。','zh-TW':'將 HTML、CSS、JavaScript、JSON 整理成更易讀的版面。','zh-CN':'将 HTML、CSS、JavaScript、JSON 整理为更易读的格式。'}},
+    exchangeCalculator:{title:{en:'Exchange Calculator',ko:'환율 계산기',ja:'為替計算機','zh-TW':'匯率計算器','zh-CN':'汇率计算器'},desc:{en:'Compare rates, estimate fees, and calculate receive amounts in one place.',ko:'환율 비교, 수수료 반영, 수령액 계산을 한 화면에서 처리합니다.',ja:'為替比較、手数料反映、受取額計算を 1 ページで行えます。','zh-TW':'在同一頁面比較匯率、估算手續費與計算收款金額。','zh-CN':'在同一页面比较汇率、估算手续费并计算到手金额。'}},
+    minifyCode:{title:{en:'Code Minifier',ko:'코드 압축',ja:'コード圧縮','zh-TW':'程式碼壓縮','zh-CN':'代码压缩'},desc:{en:'Minify HTML, CSS, JavaScript, and JSON by removing extra whitespace.',ko:'공백과 줄바꿈을 줄여 HTML, CSS, JavaScript, JSON 코드를 압축합니다.',ja:'空白や改行を減らして HTML・CSS・JavaScript・JSON を圧縮します。','zh-TW':'移除多餘空白與換行，壓縮 HTML、CSS、JavaScript、JSON。','zh-CN':'移除多余空格与换行，压缩 HTML、CSS、JavaScript、JSON。'}},
+    jsonFormatter:{title:{en:'JSON Formatter',ko:'JSON Formatter',ja:'JSON フォーマッター','zh-TW':'JSON 格式化工具','zh-CN':'JSON 格式化工具'},desc:{en:'Format, validate, and clean JSON data quickly.',ko:'JSON 데이터를 보기 좋게 정리하고 검증합니다.',ja:'JSON を見やすく整形し、素早く検証できます。','zh-TW':'快速整理並驗證 JSON 資料。','zh-CN':'快速整理并验证 JSON 数据。'}},
+    sqlFormatter:{title:{en:'SQL Formatter',ko:'SQL Formatter',ja:'SQL フォーマッター','zh-TW':'SQL 格式化工具','zh-CN':'SQL 格式化工具'},desc:{en:'Reformat long SQL queries for easier reading and review.',ko:'긴 SQL 쿼리를 읽기 쉽게 정리합니다.',ja:'長い SQL クエリを読みやすい形に整えます。','zh-TW':'將冗長 SQL 查詢整理成更易讀的版面。','zh-CN':'将冗长 SQL 查询整理为更易读的格式。'}},
+    uuidGenerator:{title:{en:'UUID Generator',ko:'UUID 생성기',ja:'UUID 生成','zh-TW':'UUID 產生器','zh-CN':'UUID 生成器'},desc:{en:'Generate random UUID values and copy them in bulk.',ko:'랜덤 UUID를 여러 개 생성하고 바로 복사할 수 있습니다.',ja:'ランダム UUID をまとめて生成し、すぐにコピーできます。','zh-TW':'可一次產生多個隨機 UUID 並快速複製。','zh-CN':'可一次生成多个随机 UUID 并快速复制。'}},
+    base64:{title:{en:'Base64 Encode / Decode',ko:'Base64 인코딩 / 디코딩',ja:'Base64 エンコード / デコード','zh-TW':'Base64 編碼 / 解碼','zh-CN':'Base64 编码 / 解码'},desc:{en:'Encode text to Base64 or decode it back safely in the browser.',ko:'텍스트를 Base64로 인코딩하거나 다시 디코딩합니다.',ja:'テキストを Base64 に変換したり元に戻したりできます。','zh-TW':'可在瀏覽器中將文字編碼為 Base64 或再解碼回來。','zh-CN':'可在浏览器中将文本编码为 Base64 或再解码回来。'}},
+    specialChars:{title:{en:'Special Characters',ko:'특수문자표',ja:'特殊文字一覧','zh-TW':'特殊字元表','zh-CN':'特殊字符表'},desc:{en:'Copy symbols, arrows, currency marks, and common special characters quickly.',ko:'기호, 화살표, 통화 기호 등 자주 쓰는 특수문자를 빠르게 복사합니다.',ja:'記号、矢印、通貨記号などの特殊文字をすぐにコピーできます。','zh-TW':'快速複製符號、箭頭、貨幣符號等常用特殊字元。','zh-CN':'快速复制符号、箭头、货币符号等常用特殊字符。'}},
+    textCleaner:{title:{en:'Text Cleaner',ko:'텍스트 정리',ja:'テキスト整形','zh-TW':'文字清理工具','zh-CN':'文本清理工具'},desc:{en:'Remove repeated spaces, blank lines, and messy pasted formatting.',ko:'중복 공백, 빈 줄, 지저분한 붙여넣기 형식을 정리합니다.',ja:'余分な空白、空行、崩れた貼り付け書式を整理します。','zh-TW':'清理多餘空白、空行與凌亂貼上格式。','zh-CN':'清理多余空格、空行和凌乱粘贴格式。'}},
+    htmlEscape:{title:{en:'HTML Escape / Unescape',ko:'HTML 이스케이프 / 복원',ja:'HTML エスケープ / 復元','zh-TW':'HTML 轉義 / 還原','zh-CN':'HTML 转义 / 还原'},desc:{en:'Escape HTML-sensitive characters or restore escaped text quickly.',ko:'HTML 특수문자를 변환하거나 다시 원문으로 복원합니다.',ja:'HTML の特殊文字を変換したり元に戻したりできます。','zh-TW':'快速將 HTML 特殊字元轉義或還原。','zh-CN':'快速将 HTML 特殊字符转义或还原。'}},
+    diffCheck:{title:{en:'Document Diff Checker',ko:'문서 비교',ja:'文書比較','zh-TW':'文件差異比較','zh-CN':'文档差异比较'},desc:{en:'Compare two text blocks side by side and highlight changes.',ko:'두 텍스트를 나란히 비교하고 변경 부분을 표시합니다.',ja:'2 つのテキストを並べて比較し、変更箇所を表示します。','zh-TW':'並排比較兩段文字並標示差異。','zh-CN':'并排比较两段文本并标出差异。'}},
+    qrMaker:{title:{en:'QR Code Generator',ko:'QR 생성기',ja:'QR コード生成','zh-TW':'QR Code 產生器','zh-CN':'二维码生成器'},desc:{en:'Create QR codes from text or URLs and download the result.',ko:'텍스트나 URL로 QR 코드를 만들고 다운로드합니다.',ja:'テキストや URL から QR コードを作成して保存できます。','zh-TW':'由文字或網址產生 QR Code 並下載結果。','zh-CN':'由文本或网址生成二维码并下载结果。'}},
+    caseConvert:{title:{en:'Case Converter',ko:'문자 케이스 변환',ja:'文字ケース変換','zh-TW':'文字大小寫轉換','zh-CN':'字符大小写转换'},desc:{en:'Convert text into uppercase, lowercase, camelCase, snake_case, and more.',ko:'대문자, 소문자, camelCase, snake_case 등으로 변환합니다.',ja:'大文字・小文字・camelCase・snake_case などへ変換できます。','zh-TW':'可轉換為大寫、小寫、camelCase、snake_case 等格式。','zh-CN':'可转换为大写、小写、camelCase、snake_case 等格式。'}},
+    wordCounter:{title:{en:'Word Counter',ko:'글자 수 세기',ja:'文字数カウンター','zh-TW':'字數統計','zh-CN':'字数统计'},desc:{en:'Count characters, words, lines, and bytes instantly.',ko:'글자 수, 단어 수, 줄 수, 바이트 수를 즉시 계산합니다.',ja:'文字数、単語数、行数、バイト数をすぐに数えられます。','zh-TW':'立即統計字元數、單字數、行數與位元組數。','zh-CN':'立即统计字符数、单词数、行数与字节数。'}},
+    passwordGenerator:{title:{en:'Password Generator',ko:'비밀번호 생성기',ja:'パスワード生成','zh-TW':'密碼產生器','zh-CN':'密码生成器'},desc:{en:'Create strong random passwords with length and character options.',ko:'길이와 문자 옵션을 정해 강력한 비밀번호를 생성합니다.',ja:'長さや文字オプションを指定して強力なパスワードを作れます。','zh-TW':'可依長度與字元選項產生高強度密碼。','zh-CN':'可根据长度与字符选项生成高强度密码。'}},
+    urlEncoder:{title:{en:'URL Encoder / Decoder',ko:'URL 인코더 / 디코더',ja:'URL エンコーダー / デコーダー','zh-TW':'URL 編碼 / 解碼工具','zh-CN':'URL 编码 / 解码工具'},desc:{en:'Encode or decode URLs and query strings safely.',ko:'URL과 쿼리 문자열을 안전하게 인코딩하거나 디코딩합니다.',ja:'URL やクエリ文字列を安全にエンコード / デコードできます。','zh-TW':'安全地編碼或解碼網址與查詢字串。','zh-CN':'安全地编码或解码网址与查询字符串。'}},
+    hashGenerator:{title:{en:'Hash Generator',ko:'해시 생성기',ja:'ハッシュ生成','zh-TW':'雜湊產生器','zh-CN':'哈希生成器'},desc:{en:'Generate SHA-256 and SHA-1 hashes directly in the browser.',ko:'브라우저에서 SHA-256, SHA-1 해시를 생성합니다.',ja:'ブラウザ上で SHA-256 と SHA-1 ハッシュを生成します。','zh-TW':'可在瀏覽器中產生 SHA-256 與 SHA-1 雜湊值。','zh-CN':'可在浏览器中生成 SHA-256 和 SHA-1 哈希值。'}},
+    regexTester:{title:{en:'Regex Tester',ko:'정규식 테스터',ja:'正規表現テスター','zh-TW':'正則表達式測試器','zh-CN':'正则表达式测试器'},desc:{en:'Test patterns, flags, and match results with quick feedback.',ko:'패턴, 플래그, 매칭 결과를 빠르게 확인합니다.',ja:'パターン、フラグ、一致結果をすばやく確認できます。','zh-TW':'快速測試模式、旗標與匹配結果。','zh-CN':'快速测试模式、标记和匹配结果。'}},
+    timestampConverter:{title:{en:'Timestamp Converter',ko:'타임스탬프 변환',ja:'タイムスタンプ変換','zh-TW':'時間戳轉換','zh-CN':'时间戳转换'},desc:{en:'Convert Unix timestamps and readable date strings both ways.',ko:'Unix 타임스탬프와 일반 날짜 문자열을 서로 변환합니다.',ja:'Unix タイムスタンプと通常の日付文字列を相互変換できます。','zh-TW':'可互相轉換 Unix 時間戳與一般日期字串。','zh-CN':'可互相转换 Unix 时间戳与普通日期字符串。'}},
+    colorConverter:{title:{en:'Color Converter',ko:'색상 변환',ja:'カラー変換','zh-TW':'色彩轉換','zh-CN':'颜色转换'},desc:{en:'Convert HEX, RGB, and HSL values with live preview.',ko:'HEX, RGB, HSL 값을 미리보기와 함께 변환합니다.',ja:'HEX・RGB・HSL をプレビュー付きで変換できます。','zh-TW':'可轉換 HEX、RGB、HSL，並即時預覽。','zh-CN':'可转换 HEX、RGB、HSL，并实时预览。'}},
+    loremIpsum:{title:{en:'Lorem Ipsum Generator',ko:'Lorem Ipsum 생성기',ja:'Lorem Ipsum 生成','zh-TW':'Lorem Ipsum 產生器','zh-CN':'Lorem Ipsum 生成器'},desc:{en:'Generate placeholder paragraphs for mockups and layout testing.',ko:'목업과 레이아웃 테스트용 더미 문단을 생성합니다.',ja:'モックアップやレイアウト確認用のダミー文章を生成します。','zh-TW':'產生版面與測試用的佔位段落。','zh-CN':'生成布局与测试用的占位段落。'}},
+    htmlPreview:{title:{en:'HTML Preview',ko:'HTML 미리보기',ja:'HTML プレビュー','zh-TW':'HTML 預覽','zh-CN':'HTML 预览'},desc:{en:'Write HTML and preview the rendered result side by side.',ko:'HTML을 작성하고 렌더링 결과를 바로 미리봅니다.',ja:'HTML を書きながら表示結果を並べて確認できます。','zh-TW':'可撰寫 HTML 並並排預覽渲染結果。','zh-CN':'可编写 HTML 并并排预览渲染结果。'}},
+    csvToJson:{title:{en:'CSV to JSON Converter',ko:'CSV → JSON 변환',ja:'CSV → JSON 変換','zh-TW':'CSV → JSON 轉換','zh-CN':'CSV → JSON 转换'},desc:{en:'Turn CSV text into readable JSON instantly.',ko:'CSV 텍스트를 보기 좋은 JSON으로 즉시 변환합니다.',ja:'CSV テキストを見やすい JSON にすぐ変換します。','zh-TW':'立即將 CSV 文字轉成可讀性高的 JSON。','zh-CN':'立即将 CSV 文本转换为可读性高的 JSON。'}},
+    dateCalculator:{title:{en:'Date Calculator',ko:'날짜 계산기',ja:'日付計算機','zh-TW':'日期計算器','zh-CN':'日期计算器'},desc:{en:'Count date differences, D-day, and add or subtract days in one place.',ko:'날짜 차이, 디데이, 날짜 더하기/빼기를 한 곳에서 계산합니다.',ja:'日付差、D-day、日数の加算・減算を 1 か所で計算できます。','zh-TW':'可在同一頁面計算日期差、倒數日與日期加減。','zh-CN':'可在同一页面计算日期差、倒数日和日期加减。'}},
+    percentageCalculator:{title:{en:'Percentage Calculator',ko:'퍼센트 계산기',ja:'パーセント計算機','zh-TW':'百分比計算器','zh-CN':'百分比计算器'},desc:{en:'Find percentages, ratios, and increase or decrease amounts quickly.',ko:'퍼센트, 비율, 증감 값을 빠르게 계산합니다.',ja:'割合、比率、増減値をすばやく計算できます。','zh-TW':'快速計算百分比、比率與增減值。','zh-CN':'快速计算百分比、比率与增减值。'}},
+    jwtDecoder:{title:{en:'JWT Decoder',ko:'JWT 디코더',ja:'JWT デコーダー','zh-TW':'JWT 解碼器','zh-CN':'JWT 解码器'},desc:{en:'Decode JWT header and payload in the browser without sending data away.',ko:'데이터를 외부로 보내지 않고 JWT 헤더와 페이로드를 해석합니다.',ja:'データを外部送信せずに JWT ヘッダーとペイロードを確認できます。','zh-TW':'不把資料送出瀏覽器也能解碼 JWT 標頭與內容。','zh-CN':'不把数据发送到外部也能解码 JWT 头部与内容。'}},
+    markdownPreview:{title:{en:'Markdown Preview',ko:'Markdown 미리보기',ja:'Markdown プレビュー','zh-TW':'Markdown 預覽','zh-CN':'Markdown 预览'},desc:{en:'Write Markdown and preview the rendered result instantly.',ko:'Markdown을 작성하고 렌더링 결과를 바로 확인합니다.',ja:'Markdown を書きながら表示結果をすぐ確認できます。','zh-TW':'可撰寫 Markdown 並立即預覽渲染結果。','zh-CN':'可编写 Markdown 并立即预览渲染结果。'}},
+    textSorter:{title:{en:'Text Sorter',ko:'텍스트 정렬기',ja:'テキスト並べ替え','zh-TW':'文字排序工具','zh-CN':'文本排序工具'},desc:{en:'Sort lines, remove duplicates, and clean text lists quickly.',ko:'줄 정렬, 중복 제거, 목록 정리를 빠르게 처리합니다.',ja:'行の並べ替え、重複削除、リスト整理をすばやく行えます。','zh-TW':'快速排序行內容、移除重複並整理清單。','zh-CN':'快速排序行内容、移除重复并整理列表。'}},
+    numberBaseConverter:{title:{en:'Number Base Converter',ko:'진법 변환기',ja:'進数変換','zh-TW':'進位轉換器','zh-CN':'进制转换器'},desc:{en:'Convert between binary, octal, decimal, and hexadecimal instantly.',ko:'2진수, 8진수, 10진수, 16진수를 즉시 변환합니다.',ja:'2 進数、8 進数、10 進数、16 進数をすぐ変換できます。','zh-TW':'立即在二進位、八進位、十進位、十六進位之間轉換。','zh-CN':'立即在二进制、八进制、十进制、十六进制之间转换。'}},
+    slugGenerator:{title:{en:'Slug Generator',ko:'슬러그 생성기',ja:'スラッグ生成','zh-TW':'Slug 產生器','zh-CN':'Slug 生成器'},desc:{en:'Turn titles into clean URL slugs for docs, blogs, and pages.',ko:'제목을 문서, 블로그, 페이지용 URL 슬러그로 바꿉니다.',ja:'タイトルをブログや文書用のきれいな URL スラッグに変換します。','zh-TW':'將標題轉成適合文件、部落格、頁面的 URL slug。','zh-CN':'将标题转换为适合文档、博客和页面的 URL slug。'}}
+  };
+
+  function localAboutTitle(title){
+    const l = currentLang();
+    if (l === 'ko') return title + ' 소개';
+    if (l === 'ja') return title + ' について';
+    if (l === 'zh-TW') return '關於 ' + title;
+    if (l === 'zh-CN') return '关于 ' + title;
+    return 'About ' + title;
+  }
+
+  function patchHome(){
+    if(!isHome()) return;
+    localizeRelatedLinks(document);
+    const side = document.querySelector('.side-item[href="./tools/exchangeCalculator/"]');
+    if(side){
+      setText(side.querySelector('strong'), pick(TOOL_META.exchangeCalculator.title));
+      setText(side.querySelector('span'), pick(TOOL_META.exchangeCalculator.desc));
+    }
+    const rel = document.querySelectorAll('.seo-home-block .related-links a');
+    rel.forEach(function(a){
+      const slug = slugFromHref(a.getAttribute('href')||'');
+      if(TOOL_META[slug]) setText(a, pick(TOOL_META[slug].title) + ' →');
+    });
+  }
+
+  const ABOUT_PAGE = {
+    title:{en:'About ToolLab | ToolLab',ko:'도구랩 소개 | 도구랩',ja:'ToolLab について | ToolLab','zh-TW':'關於 ToolLab | ToolLab','zh-CN':'关于 ToolLab | ToolLab'},
+    desc:{en:'Learn what ToolLab is building and how the project prioritizes practical browser-based tools.',ko:'도구랩이 어떤 방향으로 실사용형 브라우저 도구를 만들고 있는지 소개합니다.',ja:'ToolLab がどのような方針で実用的なブラウザツールを育てているかを紹介します。','zh-TW':'介紹 ToolLab 如何規劃與優先發展實用型瀏覽器工具。','zh-CN':'介绍 ToolLab 如何规划与优先发展实用型浏览器工具。'},
+    heroPill:{en:'About ToolLab',ko:'도구랩 소개',ja:'ToolLab について','zh-TW':'關於 ToolLab','zh-CN':'关于 ToolLab'},
+    heroH1:{en:'About ToolLab',ko:'도구랩 소개',ja:'ToolLab について','zh-TW':'關於 ToolLab','zh-CN':'关于 ToolLab'},
+    heroP:{en:'A practical browser-based toolkit focused on repeat-use utilities, clear topic pages, and faster everyday workflows.',ko:'반복해서 쓰게 되는 실용 도구, 명확한 주제 페이지, 빠른 일상 작업 흐름에 집중한 브라우저 기반 도구 모음입니다.',ja:'繰り返し使う実用ツール、分かりやすいトピックページ、日常作業を速くする導線に重点を置いたブラウザ型ツール集です。','zh-TW':'專注於高重複使用率工具、清楚主題頁面與更快日常流程的瀏覽器工具集合。','zh-CN':'专注于高重复使用率工具、清晰主题页面与更快日常流程的浏览器工具集合。'},
+    c1h2a:{en:'What ToolLab is trying to do',ko:'도구랩이 하려는 일',ja:'ToolLab が目指していること','zh-TW':'ToolLab 想做什麼','zh-CN':'ToolLab 想做什么'},
+    c1pa:{en:'ToolLab is built around practical utilities that people reuse: code formatting, text cleanup, JSON and SQL work, quick generators, small calculators, and conversion tools. The goal is not to publish hundreds of thin pages, but to keep a smaller set of useful tools fast, readable, and trustworthy.',ko:'도구랩은 코드 정리, 텍스트 정리, JSON·SQL 작업, 간단 생성기, 소형 계산기, 변환 도구처럼 실제로 반복 사용되는 기능을 중심으로 구성합니다. 목적은 얇은 페이지를 수백 개 늘리는 것이 아니라, 정말 유용한 도구를 더 빠르고 읽기 쉽고 믿을 수 있게 유지하는 것입니다.',ja:'ToolLab は、コード整形、テキスト整理、JSON・SQL 作業、各種ジェネレーター、小さな計算機、変換ツールのように、実際に繰り返し使われる機能を中心に構成しています。目的は薄いページを大量に増やすことではなく、本当に使えるツールを速く、見やすく、信頼しやすい形で保つことです。','zh-TW':'ToolLab 以程式碼整理、文字清理、JSON／SQL 工作、快速產生器、小型計算工具與各種轉換工具為核心，重點是整理真正會反覆使用的功能，而不是堆出大量內容單薄的頁面。','zh-CN':'ToolLab 以代码整理、文本清理、JSON／SQL 工作、快速生成器、小型计算工具与各种转换工具为核心，重点是整理真正会反复使用的功能，而不是堆出大量内容单薄的页面。'},
+    c1h2b:{en:'How the site is prioritized',ko:'사이트 운영 우선순위',ja:'サイト運営の優先順位','zh-TW':'網站的優先順序','zh-CN':'网站的优先级'},
+    c1list:[
+      {en:'Prefer tools that solve repeat problems in development, documentation, and daily office workflows.',ko:'개발, 문서 작업, 일상 업무에서 반복적으로 발생하는 문제를 해결하는 도구를 우선합니다.',ja:'開発、文書作業、日常業務で繰り返し発生する問題を解決するツールを優先します。','zh-TW':'優先處理開發、文件與日常辦公流程中反覆出現的需求。','zh-CN':'优先处理开发、文档与日常办公流程中反复出现的需求。'},
+      {en:'Keep the main action above the fold so users can paste, format, convert, or generate quickly.',ko:'사용자가 바로 붙여넣고 정리·변환·생성할 수 있도록 핵심 동작을 첫 화면 가까이에 둡니다.',ja:'貼り付け、整形、変換、生成をすぐ始められるよう、主要操作を最初の画面に近い位置へ置きます。','zh-TW':'把主要操作放在第一屏附近，讓使用者能立刻貼上、整理、轉換或產生結果。','zh-CN':'把主要操作放在首屏附近，让用户能立刻粘贴、整理、转换或生成结果。'},
+      {en:'Strengthen each tool page over time with examples, related links, and FAQs instead of launching duplicates.',ko:'중복 도구를 늘리기보다 예시, 관련 링크, FAQ를 붙여 각 도구 페이지를 점점 더 탄탄하게 만듭니다.',ja:'重複ツールを増やすより、例・関連リンク・FAQ を追加して各ツールページを少しずつ強くしていきます。','zh-TW':'比起增加重複工具，更重視透過範例、相關連結與 FAQ 強化單一工具頁。','zh-CN':'比起增加重复工具，更重视通过示例、相关链接与 FAQ 强化单个工具页。'},
+      {en:'Use direct URLs so users can bookmark pages easily and search engines can understand clear topics.',ko:'각 도구에 직접 URL을 두어 사용자는 쉽게 북마크하고 검색엔진은 주제를 더 명확히 이해할 수 있게 합니다.',ja:'各ツールに直接 URL を持たせ、ユーザーはブックマークしやすく、検索エンジンはテーマを把握しやすくします。','zh-TW':'讓每個工具都有直接網址，方便使用者收藏，也讓搜尋引擎更容易理解主題。','zh-CN':'让每个工具都有直接网址，方便用户收藏，也让搜索引擎更容易理解主题。'}
+    ],
+    c2h2:{en:'Who this site is for',ko:'이 사이트가 맞는 사용자',ja:'このサイトが向いている人','zh-TW':'這個網站適合誰','zh-CN':'这个网站适合谁'},
+    c2p:{en:'Typical visitors include developers, QA and support teams, technical writers, bloggers, and office users who need quick answers without installing software. Many tasks are small on their own, but they repeat often, so speed and clarity matter.',ko:'주요 사용자는 개발자, QA·지원팀, 기술 문서 작성자, 블로거, 일반 사무 사용자처럼 프로그램 설치 없이 빨리 답을 얻고 싶은 사람들입니다. 개별 작업은 작아 보여도 반복 빈도가 높기 때문에 속도와 명확성이 중요합니다.',ja:'主な利用者は、開発者、QA・サポート担当、技術文書の作成者、ブロガー、一般オフィス利用者など、ソフトをインストールせずにすぐ答えを得たい人たちです。1 つ 1 つの作業は小さくても、繰り返し発生するため速度と分かりやすさが重要です。','zh-TW':'常見使用者包括開發者、QA／支援團隊、技術寫作者、部落客與一般辦公使用者。單個任務看似不大，但因為會反覆出現，所以速度與清楚度非常重要。','zh-CN':'常见用户包括开发者、QA／支持团队、技术写作者、博客作者与一般办公用户。单个任务看似不大，但因为会反复出现，所以速度与清晰度非常重要。'},
+    c3h2:{en:'How ToolLab should grow',ko:'도구랩이 커지는 방식',ja:'ToolLab の伸ばし方','zh-TW':'ToolLab 應該如何成長','zh-CN':'ToolLab 应该如何成长'},
+    c3p1:{en:'The strongest long-term direction is to improve the tools that already match clear search intent. A useful JSON formatter, SQL formatter, QR generator, UUID generator, or password generator usually grows better than launching many overlapping pages that do almost the same thing.',ko:'장기적으로 가장 강한 방향은 이미 검색 의도가 분명한 도구를 더 좋게 만드는 것입니다. 잘 만든 JSON Formatter, SQL Formatter, QR 생성기, UUID 생성기, 비밀번호 생성기는 비슷한 페이지를 많이 늘리는 것보다 보통 더 강하게 성장합니다.',ja:'長期的に強い方向は、すでに検索意図が明確なツールをさらに良くすることです。完成度の高い JSON Formatter、SQL Formatter、QR 生成、UUID 生成、パスワード生成は、似たようなページを大量に増やすよりも伸びやすい傾向があります。','zh-TW':'長期來看，最有效的方向是持續強化已經對應明確搜尋意圖的工具。比起大量新增相似頁面，更應把 JSON Formatter、SQL Formatter、QR 產生器、UUID 產生器、密碼產生器做好。','zh-CN':'长期来看，最有效的方向是持续强化已经对应明确搜索意图的工具。比起大量新增相似页面，更应该把 JSON Formatter、SQL Formatter、二维码生成器、UUID 生成器、密码生成器做好。'},
+    c3p2:{en:'That is why the site also keeps support pages such as the roadmap, changelog, FAQ, and tool sitemap. They help both users and crawlers understand what the project covers and where to start.',ko:'그래서 사이트에는 로드맵, 변경이력, FAQ, 도구 사이트맵 같은 지원 페이지도 함께 둡니다. 이런 페이지는 사용자와 검색엔진 모두에게 프로젝트 범위와 시작 지점을 더 명확하게 보여줍니다.',ja:'そのため、このサイトではロードマップ、更新履歴、FAQ、ツールサイトマップのような補助ページも維持しています。これらは利用者にもクローラーにも、プロジェクトの範囲と出発点を分かりやすく伝えます。','zh-TW':'因此網站也會保留 roadmap、changelog、FAQ、tool sitemap 這類支援頁，幫助使用者與搜尋引擎更清楚理解整體內容與入口。','zh-CN':'因此网站也会保留 roadmap、changelog、FAQ、tool sitemap 这类支持页，帮助用户与搜索引擎更清楚理解整体内容与入口。'}
+  };
+
+  function patchAbout(){
+    if(!/\/about\.html$/.test(path())) return;
+    document.title = pick(ABOUT_PAGE.title);
+    setAttr(document.querySelector('meta[name="description"]'),'content',pick(ABOUT_PAGE.desc));
+    setText(document.querySelector('.hero .pill'), pick(ABOUT_PAGE.heroPill));
+    setText(document.querySelector('.hero h1'), pick(ABOUT_PAGE.heroH1));
+    setText(document.querySelector('.hero p'), pick(ABOUT_PAGE.heroP));
+    const cards = document.querySelectorAll('.content-card');
+    if(cards[0]){
+      const h2s = cards[0].querySelectorAll('h2');
+      const p = cards[0].querySelector('p');
+      setText(h2s[0], pick(ABOUT_PAGE.c1h2a));
+      setText(p, pick(ABOUT_PAGE.c1pa));
+      setText(h2s[1], pick(ABOUT_PAGE.c1h2b));
+      cards[0].querySelectorAll('li').forEach(function(li, idx){ if(ABOUT_PAGE.c1list[idx]) setText(li, pick(ABOUT_PAGE.c1list[idx])); });
+    }
+    if(cards[1]){
+      setText(cards[1].querySelector('h2'), pick(ABOUT_PAGE.c2h2));
+      setText(cards[1].querySelector('p'), pick(ABOUT_PAGE.c2p));
+    }
+    if(cards[2]){
+      const ps = cards[2].querySelectorAll('p');
+      setText(cards[2].querySelector('h2'), pick(ABOUT_PAGE.c3h2));
+      if(ps[0]) setText(ps[0], pick(ABOUT_PAGE.c3p1));
+      if(ps[1]) setText(ps[1], pick(ABOUT_PAGE.c3p2));
+    }
+    localizeRelatedLinks(document);
+  }
+
+  const FAQ_PAGE = {
+    title:{en:'FAQ | ToolLab',ko:'FAQ | 도구랩',ja:'FAQ | ToolLab','zh-TW':'FAQ | ToolLab','zh-CN':'FAQ | ToolLab'},
+    desc:{en:'Read common questions about ToolLab tools, browser-based processing, and useful starting pages.',ko:'도구랩 도구, 브라우저 처리 방식, 추천 시작 페이지에 대한 자주 묻는 질문을 확인하세요.',ja:'ToolLab のツール、ブラウザ処理、はじめに見るべきページについてのよくある質問をまとめています。','zh-TW':'整理 ToolLab 工具、瀏覽器處理方式與推薦起點頁面的常見問題。','zh-CN':'整理 ToolLab 工具、浏览器处理方式与推荐起点页面的常见问题。'},
+    heroPill:{en:'FAQ',ko:'FAQ',ja:'FAQ','zh-TW':'FAQ','zh-CN':'FAQ'},
+    heroH1:{en:'Frequently Asked Questions',ko:'자주 묻는 질문',ja:'よくある質問','zh-TW':'常見問題','zh-CN':'常见问题'},
+    heroP:{en:'Quick answers about how ToolLab works, what pages matter most, and where to start.',ko:'도구랩이 어떻게 동작하는지, 어떤 페이지가 중요한지, 어디서 시작하면 좋은지 빠르게 정리한 안내입니다.',ja:'ToolLab の使い方、重要なページ、どこから始めるべきかを素早く確認できる案内です。','zh-TW':'快速整理 ToolLab 的運作方式、重要頁面與建議起點。','zh-CN':'快速整理 ToolLab 的运作方式、重要页面与建议起点。'},
+    g1:{en:'General questions',ko:'일반 질문',ja:'一般的な質問','zh-TW':'一般問題','zh-CN':'一般问题'},
+    g1q1:{en:'Are the tools free to use?',ko:'이 도구들은 무료로 사용할 수 있나요?',ja:'これらのツールは無料で使えますか？','zh-TW':'這些工具可以免費使用嗎？','zh-CN':'这些工具可以免费使用吗？'},
+    g1a1:{en:'Yes. The core direction of the site is to provide practical browser-based tools that are easy to use without installation.',ko:'네. 기본 방향은 설치 없이 바로 쓸 수 있는 실용적인 브라우저 도구를 제공하는 것입니다.',ja:'はい。基本方針は、インストールなしですぐ使える実用的なブラウザツールを提供することです。','zh-TW':'可以。網站的核心方向就是提供免安裝即可使用的實用瀏覽器工具。','zh-CN':'可以。网站的核心方向就是提供免安装即可使用的实用浏览器工具。'},
+    g1q2:{en:'Do I need to install anything?',ko:'무언가 설치해야 하나요?',ja:'何かインストールする必要がありますか？','zh-TW':'需要安裝任何東西嗎？','zh-CN':'需要安装任何东西吗？'},
+    g1a2:{en:'No. Most pages are designed so you can paste input, run the action, and copy the result directly in the browser.',ko:'아니요. 대부분의 페이지는 브라우저 안에서 입력을 붙여넣고, 실행하고, 결과를 복사하는 흐름으로 설계되어 있습니다.',ja:'いいえ。多くのページは、ブラウザ内で入力を貼り付け、実行し、結果をコピーできるように作られています。','zh-TW':'不需要。多數頁面都設計成可直接在瀏覽器貼上內容、執行並複製結果。','zh-CN':'不需要。多数页面都设计成可直接在浏览器粘贴内容、执行并复制结果。'},
+    g1q3:{en:'Do tool pages upload my data?',ko:'도구 페이지가 내 데이터를 업로드하나요?',ja:'ツールページは自分のデータをアップロードしますか？','zh-TW':'工具頁會上傳我的資料嗎？','zh-CN':'工具页会上传我的数据吗？'},
+    g1a3:{en:'Most formatting, conversion, and generation tasks are intended to work locally in the browser. If a page uses reference or market data, that should be made clear in the visible interface.',ko:'대부분의 포맷팅, 변환, 생성 작업은 브라우저 안에서 처리되도록 설계되어 있습니다. 외부 기준 데이터나 시세를 사용하는 페이지라면 화면에서 그 사실이 분명히 보이도록 해야 합니다.',ja:'多くの整形・変換・生成作業はブラウザ内で完結する想定です。基準データや相場データを使うページであれば、その点が画面上ではっきり分かるようにするべきです。','zh-TW':'大多數格式化、轉換與產生工作都預期在瀏覽器內完成。若有頁面使用外部參考資料或行情，應在介面上清楚標示。','zh-CN':'大多数格式化、转换与生成工作都预期在浏览器内完成。如果页面使用外部参考数据或行情，应该在界面上清楚标示。'},
+    g2:{en:'Search and indexing questions',ko:'검색과 색인 관련 질문',ja:'検索とインデックスに関する質問','zh-TW':'搜尋與索引問題','zh-CN':'搜索与索引问题'},
+    g2q1:{en:'Why are support pages like FAQ, roadmap, and changelog included?',ko:'왜 FAQ, 로드맵, 변경이력 같은 지원 페이지가 있나요?',ja:'なぜ FAQ、ロードマップ、更新履歴のような補助ページがあるのですか？','zh-TW':'為什麼會有 FAQ、roadmap、changelog 這些支援頁？','zh-CN':'为什么会有 FAQ、roadmap、changelog 这些支持页？'},
+    g2a1:{en:'They help both users and crawlers understand the project structure, the main tool groups, and where to start.',ko:'이런 페이지는 사용자와 검색엔진이 프로젝트 구조, 핵심 도구 묶음, 시작 지점을 이해하는 데 도움을 줍니다.',ja:'これらのページは、利用者にも検索エンジンにも、プロジェクト構造や主要ツール群、開始地点を理解しやすくします。','zh-TW':'它們能幫助使用者與搜尋引擎理解整體結構、主要工具群與起點。','zh-CN':'它们能帮助用户与搜索引擎理解整体结构、主要工具组与起点。'},
+    g2q2:{en:'Why is there an HTML sitemap as well as an XML sitemap?',ko:'왜 XML 사이트맵과 함께 HTML 사이트맵도 있나요?',ja:'なぜ XML サイトマップだけでなく HTML サイトマップもあるのですか？','zh-TW':'為什麼除了 XML sitemap 還有 HTML sitemap？','zh-CN':'为什么除了 XML sitemap 还要有 HTML sitemap？'},
+    g2a2:{en:'The XML sitemap is mainly for crawlers, while the HTML sitemap is a human-friendly index page that also strengthens internal linking.',ko:'XML 사이트맵은 주로 크롤러용이고, HTML 사이트맵은 사람이 보기 쉬운 색인 페이지이면서 내부 링크 구조를 강화하는 역할도 합니다.',ja:'XML サイトマップは主にクローラー向けで、HTML サイトマップは人が見やすい索引ページであり、内部リンクの強化にも役立ちます。','zh-TW':'XML sitemap 主要給爬蟲使用，而 HTML sitemap 則是給人閱讀的索引頁，同時也能強化內部連結。','zh-CN':'XML sitemap 主要供爬虫使用，而 HTML sitemap 则是给人阅读的索引页，同时也能强化内部链接。'},
+    g2q3:{en:'Which pages are the strongest starting points?',ko:'가장 먼저 보기 좋은 시작 페이지는 무엇인가요?',ja:'最初に見るとよいページは何ですか？','zh-TW':'最適合先看的起點頁面有哪些？','zh-CN':'最适合先看的起点页面有哪些？'},
+    g2a3:{en:'Usually JSON Formatter, SQL Formatter, Password Generator, QR Code Generator, UUID Generator, HTML Preview, and Exchange Calculator are strong starting points.',ko:'보통 JSON Formatter, SQL Formatter, 비밀번호 생성기, QR 생성기, UUID 생성기, HTML 미리보기, 환율 계산기가 좋은 시작점입니다.',ja:'通常は JSON Formatter、SQL Formatter、パスワード生成、QR コード生成、UUID 生成、HTML プレビュー、為替計算機が良い出発点です。','zh-TW':'通常 JSON Formatter、SQL Formatter、密碼產生器、QR Code 產生器、UUID 產生器、HTML 預覽、匯率計算器都是不錯的起點。','zh-CN':'通常 JSON Formatter、SQL Formatter、密码生成器、二维码生成器、UUID 生成器、HTML 预览、汇率计算器都是不错的起点。'},
+    g3:{en:'Best places to start',ko:'처음 써보기 좋은 도구',ja:'最初に試しやすいツール','zh-TW':'適合先開始的工具','zh-CN':'适合先开始的工具'}
+  };
+
+  function patchFaq(){
+    if(!/\/faq\.html$/.test(path())) return;
+    document.title = pick(FAQ_PAGE.title);
+    setAttr(document.querySelector('meta[name="description"]'),'content',pick(FAQ_PAGE.desc));
+    setText(document.querySelector('.hero .pill'), pick(FAQ_PAGE.heroPill));
+    setText(document.querySelector('.hero h1'), pick(FAQ_PAGE.heroH1));
+    setText(document.querySelector('.hero p'), pick(FAQ_PAGE.heroP));
+    const cards = document.querySelectorAll('.content-card');
+    if(cards[0]){
+      setText(cards[0].querySelector('h2'), pick(FAQ_PAGE.g1));
+      const details = cards[0].querySelectorAll('details');
+      if(details[0]){ setText(details[0].querySelector('summary'), pick(FAQ_PAGE.g1q1)); setText(details[0].querySelector('p'), pick(FAQ_PAGE.g1a1)); }
+      if(details[1]){ setText(details[1].querySelector('summary'), pick(FAQ_PAGE.g1q2)); setText(details[1].querySelector('p'), pick(FAQ_PAGE.g1a2)); }
+      if(details[2]){ setText(details[2].querySelector('summary'), pick(FAQ_PAGE.g1q3)); setText(details[2].querySelector('p'), pick(FAQ_PAGE.g1a3)); }
+    }
+    if(cards[1]){
+      setText(cards[1].querySelector('h2'), pick(FAQ_PAGE.g2));
+      const details = cards[1].querySelectorAll('details');
+      if(details[0]){ setText(details[0].querySelector('summary'), pick(FAQ_PAGE.g2q1)); setText(details[0].querySelector('p'), pick(FAQ_PAGE.g2a1)); }
+      if(details[1]){ setText(details[1].querySelector('summary'), pick(FAQ_PAGE.g2q2)); setText(details[1].querySelector('p'), pick(FAQ_PAGE.g2a2)); }
+      if(details[2]){ setText(details[2].querySelector('summary'), pick(FAQ_PAGE.g2q3)); setText(details[2].querySelector('p'), pick(FAQ_PAGE.g2a3)); }
+    }
+    if(cards[2]) setText(cards[2].querySelector('h2'), pick(FAQ_PAGE.g3));
+    localizeRelatedLinks(document);
+  }
+
+  const SITEMAP_PAGE = {
+    title:{en:'Tool Sitemap | ToolLab',ko:'도구 사이트맵 | 도구랩',ja:'ツールサイトマップ | ToolLab','zh-TW':'工具網站地圖 | ToolLab','zh-CN':'工具网站地图 | ToolLab'},
+    desc:{en:'Browse ToolLab pages by category, including formatters, generators, converters, and support pages.',ko:'포맷터, 생성기, 변환기, 지원 페이지까지 ToolLab 페이지를 주제별로 둘러볼 수 있습니다.',ja:'フォーマッター、生成ツール、変換ツール、補助ページまで、ToolLab のページをカテゴリ別に確認できます。','zh-TW':'可依分類瀏覽 ToolLab 的格式化工具、產生器、轉換工具與支援頁面。','zh-CN':'可按分类浏览 ToolLab 的格式化工具、生成器、转换工具与支持页面。'},
+    pill:{en:'Tool Sitemap',ko:'도구 사이트맵',ja:'ツールサイトマップ','zh-TW':'工具網站地圖','zh-CN':'工具网站地图'},
+    h1:{en:'Tool Sitemap',ko:'도구 사이트맵',ja:'ツールサイトマップ','zh-TW':'工具網站地圖','zh-CN':'工具网站地图'},
+    p:{en:'A human-friendly sitemap that groups ToolLab pages by category and use case.',ko:'ToolLab 페이지를 주제와 사용 목적별로 묶어 보여주는 사람이 보기 쉬운 사이트맵입니다.',ja:'ToolLab のページをカテゴリと用途ごとにまとめて見られる、人にやさしいサイトマップです。','zh-TW':'依照分類與使用情境整理 ToolLab 頁面的易讀網站地圖。','zh-CN':'按分类和使用场景整理 ToolLab 页面的人类可读网站地图。'},
+    whyH2:{en:'Why this page exists',ko:'이 페이지가 있는 이유',ja:'このページの役割','zh-TW':'這個頁面的作用','zh-CN':'这个页面的作用'},
+    whyP:{en:'This HTML sitemap helps both people and crawlers. It collects the main utilities and the supporting pages in one clear place, which improves exploration and strengthens internal linking.',ko:'이 HTML 사이트맵은 사용자와 검색엔진 모두에게 도움이 됩니다. 핵심 도구와 지원 페이지를 한곳에 모아 두어 탐색이 쉬워지고 내부 링크 구조도 더 강해집니다.',ja:'この HTML サイトマップは、利用者にもクローラーにも役立ちます。主要ツールと補助ページを 1 か所に集めることで、回遊しやすくなり、内部リンクも強くなります。','zh-TW':'這個 HTML sitemap 同時對使用者與搜尋引擎有幫助。它把主要工具與支援頁面集中在同一處，讓探索更容易，也能強化內部連結。','zh-CN':'这个 HTML sitemap 同时对用户与搜索引擎有帮助。它把主要工具与支持页面集中在同一处，让浏览更方便，也能强化内部链接。'},
+    groups:[
+      {title:{en:'Formatting and cleanup',ko:'정리 · 포맷팅 도구',ja:'整形・整理ツール','zh-TW':'格式化與清理工具','zh-CN':'格式化与清理工具'}, items:['beautifyCode','minifyCode','jsonFormatter','sqlFormatter','textCleaner','htmlEscape','regexTester','textSorter']},
+      {title:{en:'Generators and converters',ko:'생성기 · 변환 도구',ja:'生成・変換ツール','zh-TW':'產生器與轉換工具','zh-CN':'生成器与转换工具'}, items:['uuidGenerator','passwordGenerator','hashGenerator','base64','urlEncoder','qrMaker','caseConvert','numberBaseConverter','timestampConverter','colorConverter','csvToJson','slugGenerator']},
+      {title:{en:'Preview and utility pages',ko:'미리보기 · 유틸리티 도구',ja:'プレビュー・ユーティリティ','zh-TW':'預覽與實用工具','zh-CN':'预览与实用工具'}, items:['htmlPreview','markdownPreview','wordCounter','loremIpsum','specialChars','dateCalculator','percentageCalculator','jwtDecoder','diffCheck','exchangeCalculator']}
+    ],
+    supportTitle:{en:'Support pages',ko:'지원 페이지',ja:'補助ページ','zh-TW':'支援頁面','zh-CN':'支持页面'},
+    supportDesc:{en:'These pages help explain the project, provide navigation, and make the site structure clearer.',ko:'이 페이지들은 프로젝트 설명, 탐색 보조, 사이트 구조 정리에 도움을 줍니다.',ja:'これらのページは、プロジェクト説明、回遊補助、サイト構造の整理に役立ちます。','zh-TW':'這些頁面有助於說明專案、提供導覽並讓網站結構更清楚。','zh-CN':'这些页面有助于说明项目、提供导航并让网站结构更清晰。'},
+    supportLinks:[
+      {href:'./about.html', label:{en:'About',ko:'소개',ja:'紹介','zh-TW':'關於','zh-CN':'关于'}},
+      {href:'./faq.html', label:{en:'FAQ',ko:'FAQ',ja:'FAQ','zh-TW':'FAQ','zh-CN':'FAQ'}},
+      {href:'./roadmap.html', label:{en:'Roadmap',ko:'로드맵',ja:'ロードマップ','zh-TW':'路線圖','zh-CN':'路线图'}},
+      {href:'./changelog.html', label:{en:'Changelog',ko:'변경이력',ja:'更新履歴','zh-TW':'更新記錄','zh-CN':'更新记录'}},
+      {href:'./contact.html', label:{en:'Contact',ko:'문의',ja:'お問い合わせ','zh-TW':'聯絡','zh-CN':'联系'}},
+      {href:'./privacy.html', label:{en:'Privacy Policy',ko:'개인정보처리방침',ja:'プライバシーポリシー','zh-TW':'隱私權政策','zh-CN':'隐私政策'}}
+    ]
+  };
+
+  function patchToolSitemap(){
+    if(!/\/tool-sitemap\.html$/.test(path())) return;
+    document.title = pick(SITEMAP_PAGE.title);
+    setAttr(document.querySelector('meta[name="description"]'),'content',pick(SITEMAP_PAGE.desc));
+    setText(document.querySelector('.hero .pill'), pick(SITEMAP_PAGE.pill));
+    setText(document.querySelector('.hero h1'), pick(SITEMAP_PAGE.h1));
+    setText(document.querySelector('.hero p'), pick(SITEMAP_PAGE.p));
+    const cards = document.querySelectorAll('.content-card');
+    if(cards[0]){ setText(cards[0].querySelector('h2'), pick(SITEMAP_PAGE.whyH2)); setText(cards[0].querySelector('p'), pick(SITEMAP_PAGE.whyP)); }
+    const container = document.querySelector('main .container');
+    if(!container) return;
+    let groupsWrap = document.getElementById('toolSitemapGroups');
+    if(!groupsWrap){
+      groupsWrap = document.createElement('div');
+      groupsWrap.id = 'toolSitemapGroups';
+      container.appendChild(groupsWrap);
+    }
+    groupsWrap.innerHTML = '';
+    SITEMAP_PAGE.groups.forEach(function(group){
+      const card = document.createElement('div');
+      card.className = 'content-card';
+      const title = pick(group.title);
+      const links = group.items.map(function(slug){
+        const meta = TOOL_META[slug];
+        if(!meta) return '';
+        const href = './tools/' + slug + '/';
+        return '<a class="mini-link" href="' + href + '"><strong>' + pick(meta.title) + '</strong><span>' + pick(meta.desc) + '</span></a>';
+      }).join('');
+      card.innerHTML = '<h2>' + title + '</h2><div class="link-grid">' + links + '</div>';
+      groupsWrap.appendChild(card);
+    });
+    const supportCard = document.createElement('div');
+    supportCard.className = 'content-card';
+    supportCard.innerHTML = '<h2>' + pick(SITEMAP_PAGE.supportTitle) + '</h2><p>' + pick(SITEMAP_PAGE.supportDesc) + '</p><div class="link-grid">' + SITEMAP_PAGE.supportLinks.map(function(link){ return '<a class="mini-link" href="' + link.href + '"><strong>' + pick(link.label) + '</strong><span>' + pick(SITEMAP_PAGE.supportDesc) + '</span></a>'; }).join('') + '</div>';
+    groupsWrap.appendChild(supportCard);
+  }
+
+  const SEO_COMMON = {
+    intro:{en:'Use this tool directly in your browser for quick everyday work. Paste your content, run the action you need on this page, then review and copy the result.',ko:'이 도구는 브라우저 안에서 바로 사용할 수 있도록 만들어졌습니다. 내용을 붙여넣고, 이 페이지에서 필요한 작업을 실행한 뒤, 결과를 확인하고 복사하면 됩니다.',ja:'このツールはブラウザ上ですぐ使えるように作られています。内容を貼り付け、このページで必要な操作を実行し、結果を確認してコピーできます。','zh-TW':'這個工具可直接在瀏覽器中使用。貼上內容、執行需要的操作，再檢查並複製結果即可。','zh-CN':'这个工具可直接在浏览器中使用。粘贴内容、执行需要的操作，再检查并复制结果即可。'},
+    how:{en:'How to use',ko:'사용 방법',ja:'使い方','zh-TW':'使用方式','zh-CN':'使用方式'},
+    s1:{en:'Enter or paste the source text, code, or value.',ko:'원본 텍스트, 코드, 값 등을 입력하거나 붙여넣습니다.',ja:'元のテキスト、コード、値などを入力または貼り付けます。','zh-TW':'輸入或貼上原始文字、程式碼或數值。','zh-CN':'输入或粘贴原始文本、代码或数值。'},
+    s2:{en:'Choose the action provided on this page.',ko:'이 페이지에서 제공하는 작업을 선택합니다.',ja:'このページで使いたい操作を選びます。','zh-TW':'選擇這個頁面提供的操作。','zh-CN':'选择这个页面提供的操作。'},
+    s3:{en:'Review the result, then copy or download it if needed.',ko:'결과를 확인한 뒤 필요하면 복사하거나 다운로드합니다.',ja:'結果を確認し、必要ならコピーまたはダウンロードします。','zh-TW':'確認結果後，視需要複製或下載。','zh-CN':'确认结果后，按需要复制或下载。'},
+    example:{en:'Useful for quick checks, repeated small tasks, and simple browser-based work without installing extra software.',ko:'별도 설치 없이 빠르게 확인해야 하는 작은 반복 작업이나 브라우저 기반 작업에 유용합니다.',ja:'追加ソフトを入れずに、素早い確認や小さな反復作業を行いたいときに便利です。','zh-TW':'適合不想額外安裝軟體、只想快速完成的小型重複工作。','zh-CN':'适合不想额外安装软件、只想快速完成的小型重复工作。'},
+    related:{en:'Related tools',ko:'관련 도구',ja:'関連ツール','zh-TW':'相關工具','zh-CN':'相关工具'},
+    faq:{en:'FAQ',ko:'자주 묻는 질문',ja:'よくある質問','zh-TW':'常見問題','zh-CN':'常见问题'},
+    q1:{en:'Can I use this tool directly in the browser?',ko:'이 도구를 브라우저에서 바로 사용할 수 있나요?',ja:'このツールはブラウザですぐ使えますか？','zh-TW':'這個工具可以直接在瀏覽器中使用嗎？','zh-CN':'这个工具可以直接在浏览器中使用吗？'},
+    a1:{en:'Yes. This page is designed for quick browser-based use.',ko:'네. 이 페이지는 브라우저 기반으로 빠르게 사용할 수 있게 설계되어 있습니다.',ja:'はい。このページはブラウザ上ですぐ使える前提で設計されています。','zh-TW':'可以。這個頁面就是為了快速瀏覽器使用而設計的。','zh-CN':'可以。这个页面就是为快速浏览器使用而设计的。'},
+    q2:{en:'Do I need to install anything?',ko:'설치가 필요한가요?',ja:'インストールは必要ですか？','zh-TW':'需要安裝嗎？','zh-CN':'需要安装吗？'},
+    a2:{en:'No. For common quick tasks, you can usually use it immediately without installation.',ko:'아니요. 일반적인 빠른 작업은 설치 없이 바로 사용할 수 있습니다.',ja:'いいえ。一般的な素早い作業であれば、インストールなしですぐ使えます。','zh-TW':'不需要。一般的快速工作通常都能直接使用。','zh-CN':'不需要。一般的快速任务通常都能直接使用。'},
+    q3:{en:'Is this page meant for quick practical work?',ko:'이 페이지는 실무용으로 빠르게 쓰는 용도인가요?',ja:'このページは実務で素早く使うことを想定していますか？','zh-TW':'這個頁面是為了快速實務操作設計的嗎？','zh-CN':'这个页面是为快速实务操作设计的吗？'},
+    a3:{en:'Yes. The main idea is to keep the workflow simple so you can finish a small task quickly and move on.',ko:'네. 작은 작업을 빠르게 끝내고 넘어갈 수 있도록 흐름을 단순하게 유지하는 것이 핵심입니다.',ja:'はい。小さな作業をすぐ終えて次へ進めるよう、流れをできるだけ単純にしています。','zh-TW':'是的。重點就是把流程維持得夠簡單，讓你能快速完成小任務。','zh-CN':'是的。重点就是把流程保持得足够简单，让你能快速完成小任务。'},
+    note:{en:'This page is built as a browser-based utility. No installation is required for quick everyday tasks.',ko:'이 페이지는 브라우저 기반 도구로 제작되어 별도 설치 없이 바로 사용할 수 있습니다.',ja:'このページはブラウザベースのツールです。日常的な作業にすぐ使え、インストールは不要です。','zh-TW':'此頁面為瀏覽器工具，日常使用不需安裝即可直接操作。','zh-CN':'此页面为浏览器工具，日常使用无需安装即可直接操作。'}
+  };
+
+  function patchGenericToolSeo(){
+    if(!isToolPage()) return;
+    const slug = toolSlugFromPath();
+    if(!slug || slug === 'exchangeCalculator') return;
+    const panel = document.querySelector('.seo-panel');
+    if(!panel) return;
+    const meta = TOOL_META[slug] || null;
+    const title = meta ? pick(meta.title) : ((document.querySelector('.hero h1, #pageTitle') || {}).textContent || '').trim() || 'Tool';
+    const h2 = panel.querySelector('h2');
+    const firstP = panel.querySelector('h2 + p');
+    const h3s = panel.querySelectorAll('h3');
+    const ol = panel.querySelector('ol');
+    const details = panel.querySelectorAll('details');
+    const note = panel.querySelector('.note-box');
+    if(h2) setText(h2, localAboutTitle(title));
+    if(firstP) setText(firstP, pick(SEO_COMMON.intro));
+    if(h3s[0]) setText(h3s[0], pick(SEO_COMMON.how));
+    if(ol){ const lis = ol.querySelectorAll('li'); if(lis[0]) setText(lis[0], pick(SEO_COMMON.s1)); if(lis[1]) setText(lis[1], pick(SEO_COMMON.s2)); if(lis[2]) setText(lis[2], pick(SEO_COMMON.s3)); }
+    if(h3s[1]) setText(h3s[1], pick({en:'Example',ko:'예시',ja:'例','zh-TW':'範例','zh-CN':'示例'}));
+    if(h3s[1] && h3s[1].nextElementSibling && h3s[1].nextElementSibling.tagName === 'P') setText(h3s[1].nextElementSibling, pick(SEO_COMMON.example));
+    if(h3s[2]) setText(h3s[2], pick(SEO_COMMON.related));
+    if(h3s[3]) setText(h3s[3], pick(SEO_COMMON.faq));
+    panel.querySelectorAll('.related-links a').forEach(function(a){
+      const linkSlug = slugFromHref(a.getAttribute('href') || '');
+      if(TOOL_META[linkSlug]) setText(a, pick(TOOL_META[linkSlug].title) + ' →');
+    });
+    if(details[0]){ setText(details[0].querySelector('summary'), pick(SEO_COMMON.q1)); setText(details[0].querySelector('p'), pick(SEO_COMMON.a1)); }
+    if(details[1]){ setText(details[1].querySelector('summary'), pick(SEO_COMMON.q2)); setText(details[1].querySelector('p'), pick(SEO_COMMON.a2)); }
+    if(details[2]){ setText(details[2].querySelector('summary'), pick(SEO_COMMON.q3)); setText(details[2].querySelector('p'), pick(SEO_COMMON.a3)); }
+    if(note) setText(note, pick(SEO_COMMON.note));
+  }
+
+  function patchToolsHub(){
+    if(!isToolsHub()) return;
+    localizeRelatedLinks(document);
+  }
+
+  function patchStaticLinkTitles(){
+    localizeRelatedLinks(document);
+  }
+
+  function patchAll(){
+    patchHome();
+    patchAbout();
+    patchFaq();
+    patchToolSitemap();
+    patchToolsHub();
+    patchGenericToolSeo();
+    patchStaticLinkTitles();
+  }
+
+  ready(function(){
+    setTimeout(patchAll, 0);
+    window.addEventListener('load', function(){ setTimeout(patchAll, 0); }, {once:true});
+    if(window.ToolI18n && typeof window.ToolI18n.onChange === 'function'){
+      window.ToolI18n.onChange(function(){ setTimeout(patchAll, 0); });
+    } else {
+      document.addEventListener('toollab:languagechange', function(){ setTimeout(patchAll, 0); });
+    }
+  });
+})();
