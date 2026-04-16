@@ -390,6 +390,8 @@ const KEYWORD_SINGLE = new Set([
   'AS','BY','IN','EXISTS','NOT','NULL','LIKE','BETWEEN','IS','DESC','ASC','DISTINCT','TOP','OVER','PARTITION'
 ]);
 const FUNCTION_NAMES = new Set(['COUNT','SUM','MIN','MAX','AVG','ISNULL','COALESCE','CONCAT','DATEDIFF','DATEADD','CAST','CONVERT','UPPER','LOWER','LTRIM','RTRIM','SUBSTRING','ROUND','FORMAT','REPLACE','ABS','LEN']);
+const PARAM_SIGILS = new Set(['@', ':', '$']);
+const STRING_PREFIX_MARKERS = new Set(['N']);
 const KEYWORD_PATTERNS = [...KEYWORD_MULTI, ...KEYWORD_SINGLE].sort((a, b) => {
   const splitA = a.split(' ').length;
   const splitB = b.split(' ').length;
@@ -480,6 +482,10 @@ function normalizeKeyword(keyword) {
   return keyword;
 }
 
+function isWordLikeType(type) {
+  return ['word', 'ident', 'number', 'string', 'param'].includes(type);
+}
+
 function tokenizeSql(sql) {
   const tokens = [];
   let i = 0;
@@ -544,11 +550,52 @@ function tokenizeSql(sql) {
       continue;
     }
 
+    if (PARAM_SIGILS.has(ch)) {
+      let j = i + 1;
+      if (ch === '$') {
+        while (j < sql.length && /[0-9]/.test(sql[j])) j++;
+        if (j === i + 1) {
+          while (j < sql.length && /[A-Za-z0-9_$#]/.test(sql[j])) j++;
+        }
+      } else {
+        while (j < sql.length && /[A-Za-z0-9_$#]/.test(sql[j])) j++;
+      }
+      if (j > i + 1) {
+        tokens.push({ type: 'param', value: sql.slice(i, j) });
+        i = j;
+        continue;
+      }
+    }
+
     if (/[A-Za-z_#]/.test(ch)) {
+      if (STRING_PREFIX_MARKERS.has(ch.toUpperCase()) && sql[i + 1] === '\'') {
+        let j = i + 2;
+        while (j < sql.length) {
+          if (sql[j] === '\'') {
+            if (sql[j + 1] === '\'') {
+              j += 2;
+              continue;
+            }
+            j += 1;
+            break;
+          }
+          j += 1;
+        }
+        tokens.push({ type: 'string', value: sql.slice(i, j) });
+        i = j;
+        continue;
+      }
+
       let j = i + 1;
       while (j < sql.length && /[A-Za-z0-9_$#]/.test(sql[j])) j++;
       tokens.push({ type: 'word', value: sql.slice(i, j) });
       i = j;
+      continue;
+    }
+
+    if (ch === '?') {
+      tokens.push({ type: 'param', value: '?' });
+      i += 1;
       continue;
     }
 
@@ -614,6 +661,7 @@ function formatSql(sql) {
   let clauseParen = 0;
   let mode = null;
   let prev = null;
+  let betweenPending = false;
   const parenStack = [];
 
   const currentIndentLevel = () => {
@@ -645,16 +693,20 @@ function formatSql(sql) {
       const operators = ['=', '>', '<', '>=', '<=', '<>', '!=', '+', '-', '*', '/', '%'];
 
       if (!['(', '.', ''].includes(prevValue) && ![')', ',', '.', ';'].includes(text)) {
-        if (prevValue === ')' && ['word', 'ident', 'number', 'string'].includes(type)) {
+        if (prevValue === ')' && isWordLikeType(type)) {
           needSpace = true;
         } else if (text === '(') {
           needSpace = prevType === 'word' && ['IN', 'EXISTS', 'VALUES', 'OVER'].includes(prevValue.toUpperCase());
         } else if (operators.includes(prevValue) || operators.includes(text)) {
           needSpace = true;
-        } else if (['word', 'ident', 'number', 'string'].includes(prevType) && ['word', 'ident', 'number', 'string'].includes(type)) {
+        } else if (isWordLikeType(prevType) && isWordLikeType(type)) {
           needSpace = true;
         } else if (prevType === 'comment' || type === 'comment') {
           needSpace = true;
+        }
+
+        if (prevType === 'word' && type === 'string' && STRING_PREFIX_MARKERS.has(prevValue.toUpperCase())) {
+          needSpace = false;
         }
       }
     }
@@ -672,6 +724,7 @@ function formatSql(sql) {
     const match = matchKeyword(tokens, i);
 
     if (token.type === 'comment') {
+      betweenPending = false;
       newLine(parenDepth + (mode === 'from' || mode === 'on' ? 1 : 0));
       append(token.value, 'comment');
       newLine(parenDepth + (mode === 'from' || mode === 'on' ? 1 : 0));
@@ -776,10 +829,26 @@ function formatSql(sql) {
         continue;
       }
 
+      if (upperPhrase === 'AND' && betweenPending) {
+        append(normalizeKeyword(upperPhrase), 'word');
+        append(' ', 'space');
+        betweenPending = false;
+        i = match.endIndex;
+        continue;
+      }
+
       if (['AND', 'OR'].includes(upperPhrase) && parenDepth <= clauseParen && ['where', 'on'].includes(mode)) {
         newLine(parenDepth + (mode === 'where' ? 1 : 2));
         append(normalizeKeyword(upperPhrase), 'word');
         append(' ', 'space');
+        betweenPending = false;
+        i = match.endIndex;
+        continue;
+      }
+
+      if (upperPhrase === 'BETWEEN') {
+        append(normalizeKeyword(upperPhrase), 'word');
+        betweenPending = true;
         i = match.endIndex;
         continue;
       }
@@ -816,11 +885,13 @@ function formatSql(sql) {
       }
 
       append(normalizeKeyword(upperPhrase), 'word');
+      if (upperPhrase !== 'BETWEEN') betweenPending = false;
       i = match.endIndex;
       continue;
     }
 
     if (token.value === '(') {
+      if (betweenPending) betweenPending = false;
       const nextToken = tokens[i + 1];
       const isSubquery = !!(nextToken && nextToken.type === 'word' && ['SELECT', 'WITH'].includes(nextToken.value.toUpperCase()));
       append('(', 'sym');
@@ -833,6 +904,7 @@ function formatSql(sql) {
     }
 
     if (token.value === ')') {
+      if (betweenPending) betweenPending = false;
       const info = parenStack.length ? parenStack.pop() : { kind: 'normal', closeIndent: Math.max(parenDepth - 1, 0) };
       parenDepth = Math.max(0, parenDepth - 1);
       if (info.kind === 'subquery') {
@@ -843,6 +915,7 @@ function formatSql(sql) {
     }
 
     if (token.value === ',') {
+      if (betweenPending) betweenPending = false;
       append(',', 'sym');
       if (parenDepth <= clauseParen && ['select', 'group', 'order', 'set', 'values'].includes(mode)) {
         newLine(parenDepth + 1);
@@ -853,6 +926,7 @@ function formatSql(sql) {
     }
 
     if (token.value === ';') {
+      if (betweenPending) betweenPending = false;
       append(';', 'sym');
       continue;
     }
@@ -900,16 +974,20 @@ function minifySql(sql) {
       let needSpace = false;
 
       if (!['(', '.', ''].includes(prev.value) && ![')', ',', '.', ';'].includes(current.value)) {
-        if (prev.value === ')' && ['word', 'ident', 'number', 'string'].includes(current.type)) {
+        if (prev.value === ')' && isWordLikeType(current.type)) {
           needSpace = true;
         } else if (current.value === '(') {
           needSpace = prev.type === 'word' && ['IN', 'EXISTS', 'VALUES', 'OVER'].includes(prev.value.toUpperCase());
         } else if (operators.includes(prev.value) || operators.includes(current.value)) {
           needSpace = true;
-        } else if (['word', 'ident', 'number', 'string'].includes(prev.type) && ['word', 'ident', 'number', 'string'].includes(current.type)) {
+        } else if (isWordLikeType(prev.type) && isWordLikeType(current.type)) {
           needSpace = true;
         } else if (prev.type === 'comment' || current.type === 'comment') {
           needSpace = true;
+        }
+
+        if (prev.type === 'word' && current.type === 'string' && STRING_PREFIX_MARKERS.has(prev.value.toUpperCase())) {
+          needSpace = false;
         }
       }
 
